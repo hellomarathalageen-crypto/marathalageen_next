@@ -246,7 +246,7 @@ export default function PreRegisterPage() {
               <div className="lg:col-span-2 space-y-10">
                 <div>
                   <h2 className="text-3xl font-bold text-[#002D72] mb-8 tracking-tight text-center lg:text-left">Why Should I Pre-Register?</h2>
-                  <ul className="space-y-6">
+                  <ul className="space-y-6 max-w-[280px] sm:max-w-sm mx-auto lg:max-w-none lg:mx-0">
                     {[
                       { title: "Complimentary Premium Membership", subtitle: "(Worth ₹2,999)" },
                       { title: "Priority Profile Verification", subtitle: "" },
@@ -464,7 +464,7 @@ export default function PreRegisterPage() {
                 <div className="w-40 h-40 shrink-0 rounded-2xl overflow-hidden border-4 border-white shadow-lg bg-gray-200">
                   <img src="/founder.jpg" alt="Founder" className="w-full h-full object-cover object-top" />
                 </div>
-                <div className="relative">
+                <div className="relative text-center sm:text-left">
                   <h3 className="text-2xl font-extrabold text-[#002D72] mb-5 tracking-tight">Meet The <span className="text-[#D52367]">Founder</span></h3>
                   <div className="relative z-10">
                     <p className="text-[15px] text-gray-700 leading-relaxed mb-4 italic">
@@ -479,7 +479,7 @@ export default function PreRegisterPage() {
               </div>
 
               {/* Community Presence */}
-              <div className="bg-[#002D72] rounded-2xl p-8 text-white flex flex-col justify-center">
+              <div className="bg-[#002D72] rounded-2xl p-8 text-white flex flex-col justify-center text-center sm:text-left">
                 <h3 className="text-xl font-bold mb-4">Our Community Presence</h3>
                 <p className="text-sm text-blue-100 mb-6">We are proudly connecting Maratha families across Karnataka.</p>
                 
@@ -501,12 +501,12 @@ export default function PreRegisterPage() {
         <section className="py-12">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="bg-[#D52367] rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-[#D52367]/20">
-              <div className="flex items-center gap-6">
-                <div className="bg-white p-4 rounded-xl shadow-inner text-[#D52367]">
+              <div className="flex flex-col md:flex-row items-center text-center md:text-left gap-4 md:gap-6">
+                <div className="bg-white p-4 rounded-xl shadow-inner text-[#D52367] shrink-0">
                   <Bell className="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-1">Be the first to know when registrations open!</h3>
+                  <h3 className="text-2xl font-bold text-white mb-2 leading-tight">Be the first to know when registrations open!</h3>
                   <p className="text-pink-100 text-sm">Get notified about launch date, offers and updates.</p>
                 </div>
               </div>
