@@ -349,7 +349,7 @@ export default function PreRegisterPage() {
             
             <div className="flex flex-col md:flex-row justify-between items-start max-w-5xl mx-auto relative">
               {/* Connecting Line */}
-              <div className="hidden md:block absolute top-[40px] left-[10%] right-[10%] h-[2px] bg-[#fce4ee] z-0 border-t-2 border-dashed border-[#D52367]/30"></div>
+              <div className="hidden md:block absolute top-[39px] left-[10%] right-[10%] border-t-2 border-dashed border-white/30 z-0"></div>
               
               {[
                 { step: 1, title: "Pre-Register Today", desc: "Fill in basic details to reserve your profile." },
@@ -359,7 +359,7 @@ export default function PreRegisterPage() {
                 { step: 5, title: "Start Connecting", desc: "Express interest and find your perfect match." },
               ].map((item, idx) => (
                 <div key={idx} className="relative z-10 flex flex-col items-center text-center w-full md:w-[18%] mb-8 md:mb-0 px-2">
-                  <div className="w-20 h-20 bg-white/10 rounded-full border border-white/20 flex items-center justify-center shadow-sm mb-4 relative">
+                  <div className="w-20 h-20 bg-[#0a3579] rounded-full border border-white/20 flex items-center justify-center shadow-lg mb-4 relative">
                     <div className="absolute -bottom-2 w-6 h-6 bg-[#D52367] rounded-full text-white text-xs font-bold flex items-center justify-center border-2 border-[#002D72]">
                       {item.step}
                     </div>
