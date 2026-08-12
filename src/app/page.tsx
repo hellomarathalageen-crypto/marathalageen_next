@@ -27,7 +27,7 @@ export default function PreRegisterPage() {
           </div>
           
           <div className="flex items-center gap-3">
-            <Button className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-md px-4 py-2 text-sm md:px-6 md:py-5 md:text-base font-bold shadow-md">
+            <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-md px-4 py-2 text-sm md:px-6 md:py-5 md:text-base font-bold shadow-md">
               Pre-Register Now
             </Button>
           </div>
@@ -80,7 +80,7 @@ export default function PreRegisterPage() {
               </div>
 
               {/* CTA */}
-              <button className="w-full bg-[#D52367] hover:bg-[#b01d55] active:scale-[0.98] text-white font-bold text-base h-14 rounded-xl shadow-2xl shadow-[#D52367]/50 transition-all duration-150">
+              <button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#D52367] hover:bg-[#b01d55] active:scale-[0.98] text-white font-bold text-base h-14 rounded-xl shadow-2xl shadow-[#D52367]/50 transition-all duration-150">
                 Pre-Register Your Family — It's Free!
               </button>
               <p className="text-blue-200/80 text-xs text-center mt-2.5">🔒 Get Premium Membership Worth ₹2,999 FREE</p>
@@ -157,7 +157,7 @@ export default function PreRegisterPage() {
 
                 {/* CTAs */}
                 <div className="flex items-center gap-4">
-                  <Button className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-xl px-8 h-14 font-bold text-base shadow-lg shadow-[#D52367]/30 hover:scale-105 transition-transform">
+                  <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-xl px-8 h-14 font-bold text-base shadow-lg shadow-[#D52367]/30 hover:scale-105 transition-transform">
                     Pre-Register Your Family
                   </Button>
                   <Button variant="ghost" className="text-[#002D72] hover:text-[#D52367] font-semibold h-14 px-5 rounded-xl border border-gray-200 hover:border-[#D52367] transition-colors">
