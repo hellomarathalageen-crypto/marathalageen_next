@@ -1,21 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { 
   CheckCircle2, Bell, Heart, ShieldCheck, 
   User, Users, UserPlus, PlayCircle,
-  MapPin, Phone, Mail, MessageCircle, Menu, X
+  MapPin, Phone, Mail, MessageCircle
 } from "lucide-react";
 
 export default function PreRegisterPage() {
   const brandPink = "#D52367";
   const brandBlue = "#002D72";
   const lightPinkBg = "#fdf5f8";
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-[#D52367]/20 selection:text-[#D52367]">
@@ -28,57 +26,12 @@ export default function PreRegisterPage() {
             </Link>
           </div>
           
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-[#002D72]">
-            <Link href="#home" className="hover:text-[#D52367] border-b-2 border-[#D52367] pb-1">Home</Link>
-            <Link href="#about" className="hover:text-[#D52367] border-b-2 border-transparent pb-1 transition-colors">About Us</Link>
-            <Link href="#why-us" className="hover:text-[#D52367] border-b-2 border-transparent pb-1 transition-colors">Why Us</Link>
-            <Link href="#how-it-works" className="hover:text-[#D52367] border-b-2 border-transparent pb-1 transition-colors">How It Works</Link>
-            <Link href="#faqs" className="hover:text-[#D52367] border-b-2 border-transparent pb-1 transition-colors">FAQs</Link>
-            <Link href="#contact" className="hover:text-[#D52367] border-b-2 border-transparent pb-1 transition-colors">Contact Us</Link>
-          </nav>
-          
           <div className="flex items-center gap-3">
-            <div className="hidden md:block">
-              <Button className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-md px-6 py-5 font-bold shadow-md">
-                Pre-Register Now
-              </Button>
-            </div>
-            {/* Hamburger - mobile only */}
-            <button
-              className="lg:hidden p-2 rounded-full bg-white/90 backdrop-blur-sm text-[#002D72] shadow-sm hover:bg-white transition-colors"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Slide-Down Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-100 px-4 py-4 flex flex-col gap-1 shadow-lg">
-            {[
-              { href: "#home", label: "Home" },
-              { href: "#about", label: "About Us" },
-              { href: "#why-us", label: "Why Us" },
-              { href: "#how-it-works", label: "How It Works" },
-              { href: "#faqs", label: "FAQs" },
-              { href: "#contact", label: "Contact Us" },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-[#002D72] font-semibold text-base py-3 px-2 border-b border-gray-50 hover:text-[#D52367] transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Button className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-md w-full h-12 font-bold mt-3">
+            <Button className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-md px-4 py-2 text-sm md:px-6 md:py-5 md:text-base font-bold shadow-md">
               Pre-Register Now
             </Button>
           </div>
-        )}
+        </div>
       </header>
 
       <main>
