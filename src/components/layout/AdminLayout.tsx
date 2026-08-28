@@ -93,15 +93,15 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const pathname = usePathname();
 
   const Sidebar = () => (
-    <aside className="w-60 shrink-0 bg-[#0E2F63] min-h-screen flex flex-col overflow-y-auto">
+    <aside className="w-60 shrink-0 bg-[#2A3773] min-h-screen flex flex-col overflow-y-auto">
       {/* Logo */}
       <div className="px-5 py-5 border-b border-white/10 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-[#F34883]/20 flex items-center justify-center">
-          <Heart className="w-5 h-5 text-[#F34883]" fill="currentColor" />
+        <div className="w-9 h-9 rounded-xl bg-[#DB1866]/20 flex items-center justify-center">
+          <Heart className="w-5 h-5 text-[#DB1866]" fill="currentColor" />
         </div>
         <div>
-          <p className="text-sm font-bold text-white font-serif leading-none">Maratha</p>
-          <p className="text-[10px] text-[#F34883] font-semibold leading-none tracking-wide mt-0.5">MATRIMONY ADMIN</p>
+          <p className="text-sm font-bold text-white font-sans leading-none">Maratha</p>
+          <p className="text-[10px] text-[#DB1866] font-semibold leading-none tracking-wide mt-0.5">MATRIMONY ADMIN</p>
         </div>
       </div>
 
@@ -122,7 +122,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   href={href}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                     active
-                      ? "bg-[#F34883] text-white shadow-lg shadow-[#F34883]/20"
+                      ? "bg-[#DB1866] text-white shadow-lg shadow-[#DB1866]/20"
                       : "text-blue-100 hover:bg-white/10 hover:text-white"
                   }`}
                 >
@@ -137,10 +137,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
       {/* Help & Logout */}
       <div className="px-3 pb-4 pt-3 border-t border-white/10 space-y-1">
-        <div className="bg-[#F34883]/10 rounded-xl p-3 mb-3">
+        <div className="bg-[#DB1866]/10 rounded-xl p-3 mb-3">
           <p className="text-xs font-bold text-white mb-1">Need Help?</p>
           <p className="text-[11px] text-blue-200 mb-2">Our support team is here to help you.</p>
-          <button className="w-full text-xs font-semibold text-[#F34883] border border-[#F34883]/40 rounded-lg py-1.5 hover:bg-[#F34883]/10 transition-colors">
+          <button className="w-full text-xs font-semibold text-[#DB1866] border border-[#DB1866]/40 rounded-lg py-1.5 hover:bg-[#DB1866]/10 transition-colors">
             Contact Support
           </button>
         </div>
@@ -190,7 +190,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               <input
                 type="text"
                 placeholder="Search by ID, name, email, phone..."
-                className="pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm w-72 focus:outline-none focus:border-[#F34883] focus:ring-2 focus:ring-[#F34883]/20 transition-all"
+                className="pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm w-72 focus:outline-none focus:border-[#DB1866] focus:ring-2 focus:ring-[#DB1866]/20 transition-all"
               />
             </div>
           </div>
@@ -199,11 +199,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             {/* Notifications */}
             <button className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors">
               <Bell className="w-5 h-5 text-gray-600" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#F34883]" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#DB1866]" />
             </button>
             {/* Admin Avatar */}
             <div className="flex items-center gap-2 cursor-pointer">
-              <div className="w-8 h-8 rounded-full bg-[#173F73] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-[#2A3773] flex items-center justify-center">
                 <span className="text-white text-xs font-bold">A</span>
               </div>
               <div className="hidden sm:block">

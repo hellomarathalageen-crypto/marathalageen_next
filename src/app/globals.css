@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-poppins);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -50,9 +50,9 @@
 
 :root {
   /* Brand Colors */
-  --brand-pink: #F34883;
-  --brand-navy: #173F73;
-  --brand-navy-dark: #0E2F63;
+  --brand-pink: #DB1866;
+  --brand-navy: #2A3773;
+  --brand-navy-dark: #2A3773;
   --brand-soft-pink: #FFF1F5;
   --brand-text-dark: #23344D;
 
@@ -63,36 +63,36 @@
   --card-foreground: #23344D;
   --popover: #FFFFFF;
   --popover-foreground: #23344D;
-  --primary: #F34883;
+  --primary: #DB1866;
   --primary-foreground: #FFFFFF;
-  --secondary: #173F73;
+  --secondary: #2A3773;
   --secondary-foreground: #FFFFFF;
   --muted: #FFE4EF;
-  --muted-foreground: #173F73;
+  --muted-foreground: #2A3773;
   --accent: #FFE4EF;
   --accent-foreground: #23344D;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #FADADF;
   --input: #FADADF;
-  --ring: #F34883;
+  --ring: #DB1866;
   --radius: 0.75rem;
 
   /* Chart colors */
-  --chart-1: #173F73;
-  --chart-2: #F34883;
-  --chart-3: #0E2F63;
+  --chart-1: #2A3773;
+  --chart-2: #DB1866;
+  --chart-3: #2A3773;
   --chart-4: #FFE4EF;
   --chart-5: #23344D;
 
   /* Sidebar (for admin) */
-  --sidebar: #0E2F63;
+  --sidebar: #2A3773;
   --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #F34883;
+  --sidebar-primary: #DB1866;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #173F73;
+  --sidebar-accent: #2A3773;
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: #1a3d6e;
-  --sidebar-ring: #F34883;
+  --sidebar-ring: #DB1866;
 }
 
 .dark {
@@ -106,13 +106,13 @@
   --primary-foreground: #FFFDFB;
   --secondary: #153E7A;
   --secondary-foreground: #FFFDFB;
-  --muted: #0E2F63;
+  --muted: #2A3773;
   --muted-foreground: #FCE8EF;
-  --accent: #0E2F63;
+  --accent: #2A3773;
   --accent-foreground: #FFFDFB;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: #0E2F63;
-  --input: #0E2F63;
+  --border: #2A3773;
+  --input: #2A3773;
   --ring: #F45B8A;
 }
 
@@ -127,13 +127,13 @@
     @apply font-sans;
   }
   h1, h2, h3 {
-    @apply font-serif;
+    @apply font-sans;
   }
 }
 
 @layer utilities {
-  .font-serif {
-    font-family: var(--font-serif), Georgia, serif;
+  .font-sans {
+    font-family: var(--font-poppins), sans-serif;
   }
   /* Smooth scrolling */
   html {
@@ -147,7 +147,7 @@
     background: #FFF1F5;
   }
   ::-webkit-scrollbar-thumb {
-    background: #F34883;
+    background: #DB1866;
     border-radius: 3px;
   }
 }

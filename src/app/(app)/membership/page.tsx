@@ -26,7 +26,7 @@ const plans = [
     cta: "Get Started",
     href: "/signup",
     style: "border-[#FADADF]",
-    ctaStyle: "border border-[#FADADF] text-[#173F73] hover:bg-[#FFF1F5]",
+    ctaStyle: "border border-[#FADADF] text-[#2A3773] hover:bg-[#FFF1F5]",
     checkColor: "text-gray-400",
     popular: false,
   },
@@ -47,9 +47,9 @@ const plans = [
     ],
     cta: "Choose Premium",
     href: "/payment?plan=premium",
-    style: "border-[#173F73] shadow-2xl shadow-[#173F73]/15",
-    ctaStyle: "bg-[#F34883] text-white hover:bg-[#d93870] shadow-lg shadow-[#F34883]/30",
-    checkColor: "text-[#F34883]",
+    style: "border-[#2A3773] shadow-2xl shadow-[#2A3773]/15",
+    ctaStyle: "bg-[#DB1866] text-white hover:bg-[#B81456] shadow-lg shadow-[#DB1866]/30",
+    checkColor: "text-[#DB1866]",
     popular: true,
   },
   {
@@ -70,8 +70,8 @@ const plans = [
     cta: "Choose Premium Plus",
     href: "/payment?plan=premium-plus",
     style: "border-[#FADADF]",
-    ctaStyle: "bg-[#173F73] text-white hover:bg-[#0E2F63]",
-    checkColor: "text-[#173F73]",
+    ctaStyle: "bg-[#2A3773] text-white hover:bg-[#2A3773]",
+    checkColor: "text-[#2A3773]",
     popular: false,
   },
 ];
@@ -116,19 +116,19 @@ export default function MembershipPage() {
       <section className="bg-white py-16 border-b border-[#FADADF] relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute right-0 top-0 w-96 h-96 opacity-[0.05]">
-            <svg viewBox="0 0 400 400" fill="none"><path d="M200 0C200 0 300 150 400 200C300 250 200 400 200 400C200 400 100 250 0 200C100 150 200 0 200 0Z" fill="#F34883" /></svg>
+            <svg viewBox="0 0 400 400" fill="none"><path d="M200 0C200 0 300 150 400 200C300 250 200 400 200 400C200 400 100 250 0 200C100 150 200 0 200 0Z" fill="#DB1866" /></svg>
           </div>
           <div className="absolute left-0 bottom-0 w-64 h-64 opacity-[0.05]">
-            <svg viewBox="0 0 300 300" fill="none"><path d="M150 0C150 0 250 100 300 150C250 200 150 300 150 300C150 300 50 200 0 150C50 100 150 0 150 0Z" fill="#173F73" /></svg>
+            <svg viewBox="0 0 300 300" fill="none"><path d="M150 0C150 0 250 100 300 150C250 200 150 300 150 300C150 300 50 200 0 150C50 100 150 0 150 0Z" fill="#2A3773" /></svg>
           </div>
         </div>
         <div className="container mx-auto max-w-4xl px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="h-px w-16 bg-[#F34883]/40" />
-            <Crown className="w-5 h-5 text-[#F34883]" />
-            <div className="h-px w-16 bg-[#F34883]/40" />
+            <div className="h-px w-16 bg-[#DB1866]/40" />
+            <Crown className="w-5 h-5 text-[#DB1866]" />
+            <div className="h-px w-16 bg-[#DB1866]/40" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold font-serif text-[#173F73] mb-4">Premium Memberships</h1>
+          <h1 className="text-4xl md:text-5xl font-bold font-sans text-[#2A3773] mb-4">Premium Memberships</h1>
           <p className="text-gray-500 text-base max-w-xl mx-auto leading-relaxed">
             Choose the plan that helps you connect with the one who completes your world.
           </p>
@@ -146,7 +146,7 @@ export default function MembershipPage() {
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-0 right-0 flex justify-center">
-                    <span className="bg-[#173F73] text-white text-[11px] font-bold px-5 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-1.5">
+                    <span className="bg-[#2A3773] text-white text-[11px] font-bold px-5 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-1.5">
                       <Star className="w-3 h-3" fill="currentColor" /> Most Popular
                     </span>
                   </div>
@@ -158,13 +158,13 @@ export default function MembershipPage() {
                     {plan.icon}
                   </div>
                   <div>
-                    <h3 className={`text-lg font-bold ${plan.popular ? "text-[#F34883]" : "text-[#173F73]"}`}>{plan.name}</h3>
+                    <h3 className={`text-lg font-bold ${plan.popular ? "text-[#DB1866]" : "text-[#2A3773]"}`}>{plan.name}</h3>
                     <p className="text-xs text-gray-500">{plan.tagline}</p>
                   </div>
                 </div>
 
                 <div className="mb-6">
-                  <span className="text-4xl font-black text-[#173F73]">{plan.price}</span>
+                  <span className="text-4xl font-black text-[#2A3773]">{plan.price}</span>
                   <span className="text-sm text-gray-400 ml-1">/ {plan.period}</span>
                 </div>
 
@@ -199,11 +199,11 @@ export default function MembershipPage() {
       <section className="py-16 bg-white" id="stories">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold font-serif text-[#173F73] mb-2">Success Stories</h2>
+            <h2 className="text-3xl font-bold font-sans text-[#2A3773] mb-2">Success Stories</h2>
             <div className="flex items-center justify-center gap-2 mb-3">
-              <div className="h-px w-12 bg-[#F34883]/40" />
-              <Heart className="w-4 h-4 text-[#F34883]" fill="currentColor" />
-              <div className="h-px w-12 bg-[#F34883]/40" />
+              <div className="h-px w-12 bg-[#DB1866]/40" />
+              <Heart className="w-4 h-4 text-[#DB1866]" fill="currentColor" />
+              <div className="h-px w-12 bg-[#DB1866]/40" />
             </div>
             <p className="text-gray-500 text-sm">Real people. Real stories. Real happiness.</p>
           </div>
@@ -218,9 +218,9 @@ export default function MembershipPage() {
                     className="w-20 h-20 rounded-xl object-cover object-top shrink-0"
                   />
                   <div>
-                    <p className="text-[#F34883] text-3xl font-serif leading-none mb-1">"</p>
+                    <p className="text-[#DB1866] text-3xl font-sans leading-none mb-1">"</p>
                     <p className="text-sm text-gray-600 italic leading-relaxed">{story.quote}</p>
-                    <p className="mt-3 font-bold text-[#173F73] text-sm">— {story.names}</p>
+                    <p className="mt-3 font-bold text-[#2A3773] text-sm">— {story.names}</p>
                     <p className="text-xs text-gray-400">{story.city}</p>
                   </div>
                 </div>
@@ -230,12 +230,12 @@ export default function MembershipPage() {
 
           {/* Quote banner */}
           <div className="text-center py-10 border-t border-[#FADADF]">
-            <p className="text-xl md:text-2xl font-serif italic text-[#173F73] mb-6">
+            <p className="text-xl md:text-2xl font-sans italic text-[#2A3773] mb-6">
               "Two hearts. One journey. A lifetime of togetherness."
             </p>
             <Link
               href="/success-stories#submit"
-              className="inline-flex items-center gap-2 bg-[#F34883] hover:bg-[#d93870] text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-[#F34883]/30 transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-[#DB1866] hover:bg-[#B81456] text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-[#DB1866]/30 transition-all hover:-translate-y-0.5"
             >
               <Users className="w-5 h-5" /> Share Your Success Story
             </Link>
@@ -246,11 +246,11 @@ export default function MembershipPage() {
       {/* FAQ */}
       <section className="py-16 bg-[#FFF1F5]">
         <div className="container mx-auto max-w-3xl px-4">
-          <h2 className="text-2xl font-bold font-serif text-[#173F73] mb-8 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold font-sans text-[#2A3773] mb-8 text-center">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {faqs.map((faq, i) => (
               <div key={i} className="bg-white rounded-xl border border-[#FADADF] p-5">
-                <p className="font-semibold text-[#173F73] mb-2">{faq.q}</p>
+                <p className="font-semibold text-[#2A3773] mb-2">{faq.q}</p>
                 <p className="text-sm text-gray-500 leading-relaxed">{faq.a}</p>
               </div>
             ))}

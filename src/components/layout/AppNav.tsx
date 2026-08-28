@@ -1,143 +1,137 @@
 "use client";
 
 import Link from "next/link";
+import { User, Menu, X, LogOut, LayoutDashboard } from "lucide-react";
 import { useState } from "react";
-import {
-  Heart,
-  Search,
-  Bell,
-  Menu,
-  X,
-  ChevronDown,
-  UserPlus,
-  LogIn,
-} from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 
 const navLinks = [
-  { label: "Home", href: "/home" },
-  { label: "Search", href: "/search" },
-  { label: "Matches", href: "/matches" },
-  { label: "Success Stories", href: "/success-stories" },
-  { label: "About Us", href: "/about" },
+  { href: "/home", label: "Home" },
+  { href: "/search", label: "Search" },
+  { href: "/matches", label: "Matches" },
+  { href: "/dashboard/interests", label: "Inbox" },
+  { href: "/success-stories", label: "Success Stories" },
+  { href: "/about", label: "About Us" },
 ];
 
-interface AppNavProps {
-  /** Pass `true` when user is logged in to show dashboard nav */
-  isLoggedIn?: boolean;
-  activePath?: string;
-}
-
-export default function AppNav({ isLoggedIn = false, activePath = "" }: AppNavProps) {
+export default function AppNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const { data: session } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-[#FADADF] shadow-sm">
-      <div className="container mx-auto max-w-7xl px-4 md:px-8 h-16 flex items-center justify-between">
+    <header className="absolute top-0 z-50 w-full bg-transparent">
+      <div className="container mx-auto max-w-7xl px-4 md:px-8 h-20 flex items-center justify-between">
+        
         {/* Logo */}
-        <Link href="/home" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-9 h-9 rounded-xl bg-[#FFF1F5] border border-[#FADADF] flex items-center justify-center">
-            <Heart className="w-5 h-5 text-[#F34883]" fill="currentColor" />
-          </div>
-          <div className="leading-tight">
-            <p className="text-[15px] font-bold text-[#173F73] font-serif leading-none">Maratha</p>
-            <p className="text-[11px] font-semibold text-[#F34883] leading-none tracking-wide">Matrimony</p>
-          </div>
+        <Link href="/home" className="flex items-center gap-2.5 shrink-0 pl-2 w-[180px] lg:w-[240px]">
+          <img src="/logo.png" alt="Maratha Lageen Logo" className="h-12 md:h-16 w-auto object-contain scale-150 origin-left" />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-semibold transition-colors pb-0.5 ${
-                activePath === link.href
-                  ? "text-[#F34883] border-b-2 border-[#F34883]"
-                  : "text-[#23344D] hover:text-[#F34883]"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-8">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link 
+                key={link.href} 
+                href={link.href} 
+                className={`text-sm font-bold transition-colors relative ${isActive ? 'text-[#DB1866]' : 'text-[#2A3773] hover:text-[#DB1866]'}`}
+              >
+                {link.label}
+                {isActive && (
+                  <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-[#DB1866] rounded-full" />
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-3">
-          {isLoggedIn ? (
+        {/* Actions */}
+        <div className="hidden lg:flex items-center gap-4 shrink-0">
+          {session ? (
             <>
-              <button className="hidden sm:flex w-9 h-9 items-center justify-center rounded-full hover:bg-[#FFF1F5] transition-colors relative">
-                <Bell className="w-5 h-5 text-[#173F73]" />
-                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#F34883]" />
+              <Link 
+                href="/dashboard" 
+                className="flex items-center gap-2 text-sm font-bold text-white bg-[#2A3773] border border-[#2A3773] rounded-full px-6 py-2.5 hover:bg-[#1f295c] transition-all shadow-md shrink-0"
+              >
+                <LayoutDashboard className="w-4 h-4" /> Dashboard
+              </Link>
+              <button 
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="flex items-center gap-2 text-sm font-bold text-[#2A3773] bg-[#FFF1F5] rounded-full px-6 py-2.5 hover:bg-[#FFE4EF] transition-all shrink-0"
+              >
+                <LogOut className="w-4 h-4" /> Logout
               </button>
-              <div className="w-9 h-9 rounded-full bg-[#FFE4EF] overflow-hidden border-2 border-[#F34883] cursor-pointer">
-                <img src="https://i.pravatar.cc/40?img=5" alt="Profile" className="w-full h-full object-cover" />
-              </div>
             </>
           ) : (
             <>
-              <Link
-                href="/login"
-                className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#173F73] hover:text-[#F34883] transition-colors border border-[#FADADF] rounded-lg px-4 py-2 bg-white hover:bg-[#FFF1F5]"
+              <Link 
+                href="/login" 
+                className="text-sm font-bold text-[#2A3773] border border-gray-300 rounded-full px-6 py-2.5 hover:bg-white hover:border-[#2A3773] transition-all"
               >
-                <LogIn className="w-4 h-4" />
                 Login
               </Link>
-              <Link
-                href="/signup"
-                className="flex items-center gap-1.5 text-sm font-bold text-white bg-[#F34883] hover:bg-[#d93870] transition-colors rounded-lg px-4 py-2 shadow-sm shadow-[#F34883]/30"
+              <Link 
+                href="/signup" 
+                className="flex items-center gap-2 text-sm font-bold text-white bg-[#DB1866] rounded-full px-6 py-2.5 hover:bg-[#B81456] shadow-md shadow-[#DB1866]/20 transition-all hover:-translate-y-0.5"
               >
-                <UserPlus className="w-4 h-4" />
-                <span className="hidden sm:inline">Create Profile</span>
-                <span className="sm:hidden">Join</span>
+                <User className="w-4 h-4" /> Create Profile
               </Link>
             </>
           )}
-
-          {/* Mobile Hamburger */}
-          <button
-            className="lg:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-[#FFF1F5] transition-colors"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X className="w-5 h-5 text-[#173F73]" /> : <Menu className="w-5 h-5 text-[#173F73]" />}
-          </button>
         </div>
+
+        {/* Mobile Toggle */}
+        <button 
+          className="lg:hidden p-2 text-[#2A3773]"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
       </div>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-[#FADADF] px-4 py-4 flex flex-col gap-1 shadow-lg">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className={`px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${
-                activePath === link.href
-                  ? "bg-[#FFF1F5] text-[#F34883]"
-                  : "text-[#23344D] hover:bg-[#FFF1F5] hover:text-[#F34883]"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="mt-3 pt-3 border-t border-[#FADADF] flex flex-col gap-2">
-            <Link
-              href="/login"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 py-3 rounded-xl border border-[#FADADF] text-sm font-semibold text-[#173F73]"
-            >
-              <LogIn className="w-4 h-4" /> Login
-            </Link>
-            <Link
-              href="/signup"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 py-3 rounded-xl bg-[#F34883] text-sm font-bold text-white"
-            >
-              <UserPlus className="w-4 h-4" /> Create Profile
-            </Link>
-          </div>
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-[#FADADF] shadow-lg animate-in slide-in-from-top-2">
+          <nav className="flex flex-col p-4">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.href} 
+                href={link.href} 
+                className="py-3 px-4 text-sm font-bold text-[#2A3773] border-b border-gray-50"
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="flex flex-col gap-3 p-4 mt-2">
+              {session ? (
+                <>
+                  <Link href="/dashboard" className="text-center text-sm font-bold text-white bg-[#2A3773] rounded-full py-2.5 shadow-md">
+                    Dashboard
+                  </Link>
+                  <button onClick={() => signOut({ callbackUrl: '/' })} className="flex items-center justify-center gap-2 text-sm font-bold text-[#2A3773] bg-[#FFF1F5] rounded-full py-2.5">
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" className="text-center text-sm font-bold text-[#2A3773] border border-gray-300 rounded-full py-2.5">
+                    Login
+                  </Link>
+                  <Link href="/signup" className="flex items-center justify-center gap-2 text-sm font-bold text-white bg-[#DB1866] rounded-full py-2.5 shadow-md shadow-[#DB1866]/20">
+                    <User className="w-4 h-4" /> Create Profile
+                  </Link>
+                </>
+              )}
+            </div>
+          </nav>
         </div>
       )}
     </header>
   );
 }
+
+

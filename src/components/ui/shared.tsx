@@ -13,8 +13,8 @@ export function VerifiedBadge({ size = "md", showLabel = false }: VerifiedBadgeP
   };
   return (
     <span className="inline-flex items-center gap-1">
-      <CheckCircle2 className={`${sizes[size]} text-[#F34883] shrink-0`} />
-      {showLabel && <span className="text-xs font-semibold text-[#F34883]">Verified</span>}
+      <CheckCircle2 className={`${sizes[size]} text-[#DB1866] shrink-0`} />
+      {showLabel && <span className="text-xs font-semibold text-[#DB1866]">Verified</span>}
     </span>
   );
 }
@@ -36,7 +36,7 @@ export function StatCard({
   change,
   positive = true,
   icon,
-  accentColor = "#F34883",
+  accentColor = "#DB1866",
 }: StatCardProps) {
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-shadow">
@@ -48,7 +48,7 @@ export function StatCard({
           </div>
         )}
       </div>
-      <p className="text-2xl font-black text-[#173F73] mb-1">{value}</p>
+      <p className="text-2xl font-black text-[#2A3773] mb-1">{value}</p>
       {(change || subLabel) && (
         <p className={`text-xs font-semibold ${positive ? "text-green-600" : "text-red-500"}`}>
           {change && <span>{positive ? "↑" : "↓"} {change} </span>}
@@ -76,9 +76,9 @@ export function StepProgress({ steps, currentStep }: StepProgressProps) {
               <div
                 className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all ${
                   isCompleted
-                    ? "bg-[#F34883] border-[#F34883] text-white"
+                    ? "bg-[#DB1866] border-[#DB1866] text-white"
                     : isActive
-                    ? "bg-white border-[#F34883] text-[#F34883]"
+                    ? "bg-white border-[#DB1866] text-[#DB1866]"
                     : "bg-white border-gray-200 text-gray-400"
                 }`}
               >
@@ -86,7 +86,7 @@ export function StepProgress({ steps, currentStep }: StepProgressProps) {
               </div>
               <p
                 className={`text-[10px] font-semibold text-center leading-tight max-w-[60px] ${
-                  isActive ? "text-[#F34883]" : isCompleted ? "text-gray-600" : "text-gray-400"
+                  isActive ? "text-[#DB1866]" : isCompleted ? "text-gray-600" : "text-gray-400"
                 }`}
               >
                 {step}
@@ -95,7 +95,7 @@ export function StepProgress({ steps, currentStep }: StepProgressProps) {
             {idx < steps.length - 1 && (
               <div
                 className={`h-0.5 flex-1 mx-1 transition-all ${
-                  isCompleted ? "bg-[#F34883]" : "bg-gray-200"
+                  isCompleted ? "bg-[#DB1866]" : "bg-gray-200"
                 }`}
               />
             )}
@@ -131,7 +131,7 @@ export function MatchPercent({ percent, size = 72 }: MatchPercentProps) {
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#F34883"
+          stroke="#DB1866"
           strokeWidth={6}
           fill="none"
           strokeDasharray={circumference}
@@ -140,7 +140,7 @@ export function MatchPercent({ percent, size = 72 }: MatchPercentProps) {
         />
       </svg>
       <div className="absolute">
-        <p className="text-base font-black text-[#F34883] leading-none text-center" style={{ marginTop: -size / 2 - 6 }}>
+        <p className="text-base font-black text-[#DB1866] leading-none text-center" style={{ marginTop: -size / 2 - 6 }}>
           {percent}%
         </p>
       </div>

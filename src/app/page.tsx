@@ -11,23 +11,23 @@ import {
 } from "lucide-react";
 
 export default function PreRegisterPage() {
-  const brandPink = "#D52367";
-  const brandBlue = "#002D72";
+  const brandPink = "#DB1866";
+  const brandBlue = "#2A3773";
   const lightPinkBg = "#fdf5f8";
 
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-[#D52367]/20 selection:text-[#D52367]">
+    <div className="min-h-screen bg-white font-sans selection:bg-[#DB1866]/20 selection:text-[#DB1866]">
       {/* Navbar */}
       <header className="absolute lg:sticky top-0 z-50 w-full bg-transparent lg:bg-white lg:border-b lg:border-gray-100 lg:shadow-sm">
         <div className="container mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Link href="#home" className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-xl shadow-sm lg:bg-transparent lg:p-0 lg:shadow-none">
-              <img src="/logo.jpeg" alt="Maratha Lageen Logo" className="h-9 lg:h-12 w-auto object-contain mix-blend-multiply lg:mix-blend-normal" />
+            <Link href="#home" className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-xl shadow-sm lg:bg-transparent lg:p-0 lg:shadow-none pl-2">
+              <img src="/logo.png" alt="Maratha Lageen Logo" className="h-10 lg:h-20 w-auto object-contain scale-150 origin-left mix-blend-multiply lg:mix-blend-normal" />
             </Link>
           </div>
           
           <div className="flex items-center gap-3">
-            <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-md px-4 py-2 text-sm md:px-6 md:py-5 md:text-base font-bold shadow-md">
+            <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-md px-4 py-2 text-sm md:px-6 md:py-5 md:text-base font-bold shadow-md">
               Pre-Register Now
             </Button>
           </div>
@@ -47,18 +47,18 @@ export default function PreRegisterPage() {
               className="absolute inset-0 w-full h-full object-cover object-top"
             />
             {/* Dark gradient overlay — heavily fading to transparent at the top so the image is 100% clear */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#001a4d] via-[#002D72]/95 to-transparent via-65%" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#001a4d] via-[#2A3773]/95 to-transparent via-65%" />
 
             {/* Content sits on top of image, pushed to the bottom */}
             <div className="relative z-10 px-5 pb-8 pt-28 text-white text-center">
               {/* Pulsing launch badge */}
-              <div className="inline-flex items-center gap-2 bg-[#D52367] text-white text-xs font-bold px-3 py-1.5 rounded-full mb-4 shadow-lg animate-pulse">
+              <div className="inline-flex items-center gap-2 bg-[#DB1866] text-white text-xs font-bold px-3 py-1.5 rounded-full mb-4 shadow-lg animate-pulse">
                 <Bell className="w-3 h-3" /> 🎉 Limited Pre-Registration Open!
               </div>
 
-              <h1 className="text-[34px] font-extrabold leading-[1.1] tracking-tight mb-3 drop-shadow-lg">
+              <h1 className="text-[34px] font-medium leading-[1.1] tracking-tight mb-3 drop-shadow-lg">
                 Karnataka's<br/>
-                <span className="text-[#f9a8d4] drop-shadow-md">Exclusive Maratha</span><br/>
+                <span className="text-[#f9a8d4] drop-shadow-md font-semibold">Exclusive Maratha</span><br/>
                 Matrimony Platform
               </h1>
 
@@ -66,21 +66,8 @@ export default function PreRegisterPage() {
                 Trusted by Maratha families across Karnataka — verified profiles, privacy-first, genuine connections.
               </p>
 
-              {/* Trust pills */}
-              <div className="flex flex-wrap justify-center gap-2 mb-5">
-                {[
-                  { icon: <ShieldCheck className="w-3.5 h-3.5" />, text: "Privacy Protected" },
-                  { icon: <CheckCircle2 className="w-3.5 h-3.5" />, text: "Verified Profiles" },
-                  { icon: <Users className="w-3.5 h-3.5" />, text: "Maratha Only" },
-                ].map((pill, i) => (
-                  <span key={i} className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/25">
-                    {pill.icon} {pill.text}
-                  </span>
-                ))}
-              </div>
-
               {/* CTA */}
-              <button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#D52367] hover:bg-[#b01d55] active:scale-[0.98] text-white font-bold text-base h-14 rounded-xl shadow-2xl shadow-[#D52367]/50 transition-all duration-150">
+              <button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#DB1866] hover:bg-[#B81456] active:scale-[0.98] text-white font-bold text-base h-14 rounded-xl shadow-2xl shadow-[#DB1866]/50 transition-all duration-150">
                 Pre-Register Your Family — It's Free!
               </button>
               <p className="text-blue-200/80 text-xs text-center mt-2.5">🔒 Get Premium Membership Worth ₹2,999 FREE</p>
@@ -89,15 +76,15 @@ export default function PreRegisterPage() {
             {/* Trust Badges — 2×2 card strip below hero */}
             <div className="relative z-10 grid grid-cols-2 gap-2.5 px-4 py-4 bg-white border-b border-pink-50">
               {[
-                { icon: <Users className="w-4 h-4 text-[#D52367]" />, label: "Exclusive to", sub: "Maratha Community" },
-                { icon: <ShieldCheck className="w-4 h-4 text-[#D52367]" />, label: "100%", sub: "Privacy Protected" },
-                { icon: <CheckCircle2 className="w-4 h-4 text-[#D52367]" />, label: "Verified", sub: "Profiles at Launch" },
-                { icon: <Heart className="w-4 h-4 text-[#D52367]" fill="currentColor" />, label: "Free Premium", sub: "Worth ₹2,999" },
+                { icon: <Users className="w-4 h-4 text-[#DB1866]" />, label: "Exclusive to", sub: "Maratha Community" },
+                { icon: <ShieldCheck className="w-4 h-4 text-[#DB1866]" />, label: "100%", sub: "Privacy Protected" },
+                { icon: <CheckCircle2 className="w-4 h-4 text-[#DB1866]" />, label: "Verified", sub: "Profiles at Launch" },
+                { icon: <Heart className="w-4 h-4 text-[#DB1866]" fill="currentColor" />, label: "Free Premium", sub: "Worth ₹2,999" },
               ].map((b, i) => (
                 <div key={i} className="flex items-center gap-2 bg-[#fdf5f8] rounded-xl p-3">
                   <div className="bg-white p-1.5 rounded-lg shadow-sm shrink-0">{b.icon}</div>
                   <div>
-                    <p className="text-[11px] font-bold text-[#002D72] leading-tight">{b.label}</p>
+                    <p className="text-[11px] font-bold text-[#2A3773] leading-tight">{b.label}</p>
                     <p className="text-[10px] text-gray-500 leading-tight">{b.sub}</p>
                   </div>
                 </div>
@@ -108,30 +95,26 @@ export default function PreRegisterPage() {
           {/* ── DESKTOP HERO (hidden on mobile) ── */}
           <div className="hidden lg:flex relative h-[calc(100vh-80px)] max-h-[680px] items-center">
             {/* Background Image right side */}
-            <div className="absolute inset-0 left-[38%] z-0">
+            {/* Background Image full width with overlay */}
+            <div className="absolute inset-0 z-0">
               <img
                 src="/hero.jpg"
                 alt="Maratha Couple"
-                className="w-full h-full object-cover object-right"
+                className="w-full h-full object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent w-[45%]"></div>
-              {/* Floating Badge */}
-              <div className="absolute right-[12%] bottom-14 bg-[#D52367] text-white p-5 rounded-2xl flex items-center gap-4 shadow-2xl max-w-[340px]">
-                <ShieldCheck className="w-10 h-10 shrink-0" />
-                <p className="font-semibold text-sm leading-snug">Built for Maratha Families.<br/>Focused on Genuine Connections.</p>
-              </div>
+              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
             </div>
 
             {/* Desktop text content */}
-            <div className="container mx-auto px-8 relative z-10">
-              <div className="max-w-[560px]">
-                <div className="inline-flex items-center gap-2 bg-[#fdf5f8] border border-pink-200 text-[#D52367] text-xs font-bold px-3 py-1.5 rounded-full mb-6">
-                  <Bell className="w-3 h-3" /> Limited Pre-Registration Open — Join Now!
+            <div className="container mx-auto px-8 relative z-10 pt-16 flex flex-col items-center text-center">
+              <div className="max-w-[700px] flex flex-col items-center">
+                <div className="inline-flex items-center gap-2 bg-white border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-2 rounded-full mb-8 shadow-sm">
+                  <Bell className="w-3.5 h-3.5 fill-[#DB1866]" /> Limited Pre-Registration Open — Join Now!
                 </div>
 
-                <h1 className="text-[54px] font-extrabold text-[#002D72] leading-[1.1] mb-5 tracking-tight">
+                <h1 className="text-[54px] font-medium text-[#2A3773] leading-[1.1] mb-6 tracking-tight">
                   Karnataka's Exclusive<br/>
-                  <span className="text-[#D52367]">Maratha Matrimony</span><br/>
+                  <span className="text-[#DB1866] font-semibold">Maratha Matrimony</span><br/>
                   Platform
                 </h1>
 
@@ -139,29 +122,13 @@ export default function PreRegisterPage() {
                   A trusted platform created exclusively for Maratha families across Karnataka — verified profiles, privacy-first registration and genuine connections.
                 </p>
 
-                {/* Trust Badges horizontal desktop */}
-                <div className="flex items-center gap-5 mb-8 bg-white py-3 px-5 rounded-xl shadow-sm border border-pink-50 w-fit">
-                  {[
-                    { icon: <Users className="w-5 h-5 text-[#D52367]" />, text: "Exclusive to\nMaratha Community" },
-                    { icon: <ShieldCheck className="w-5 h-5 text-[#D52367]" />, text: "100%\nPrivacy Protected" },
-                    { icon: <CheckCircle2 className="w-5 h-5 text-[#D52367]" />, text: "Verified Profiles\nat Launch" },
-                    { icon: <Heart className="w-5 h-5 text-[#D52367]" fill="currentColor" />, text: "Free Premium\nWorth ₹2,999" },
-                  ].map((b, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      {i > 0 && <div className="w-px h-8 bg-gray-200 mr-3" />}
-                      <div className="bg-[#fdf5f8] p-2 rounded-lg">{b.icon}</div>
-                      <span className="text-[12px] font-semibold text-[#002D72] whitespace-pre-line leading-tight">{b.text}</span>
-                    </div>
-                  ))}
-                </div>
-
                 {/* CTAs */}
-                <div className="flex items-center gap-4">
-                  <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#D52367] hover:bg-[#b01d55] text-white rounded-xl px-8 h-14 font-bold text-base shadow-lg shadow-[#D52367]/30 hover:scale-105 transition-transform">
+                <div className="flex items-center gap-4 justify-center w-full">
+                  <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-xl px-8 h-14 font-bold text-base shadow-lg shadow-[#DB1866]/30 hover:scale-105 transition-transform">
                     Pre-Register Your Family
                   </Button>
-                  <Button variant="ghost" className="text-[#002D72] hover:text-[#D52367] font-semibold h-14 px-5 rounded-xl border border-gray-200 hover:border-[#D52367] transition-colors">
-                    <PlayCircle className="w-5 h-5 mr-2 text-[#D52367]" /> Learn More
+                  <Button variant="ghost" className="text-[#2A3773] hover:text-[#DB1866] font-semibold h-14 px-5 rounded-xl border border-gray-200 hover:border-[#DB1866] transition-colors">
+                    <PlayCircle className="w-5 h-5 mr-2 text-[#DB1866]" /> Learn More
                   </Button>
                 </div>
               </div>
@@ -172,7 +139,7 @@ export default function PreRegisterPage() {
         {/* Who Can Pre-Register? */}
         <section className="bg-[#fdf5f8] py-16">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-[#002D72] mb-12 tracking-tight">Who Can Pre-Register?</h2>
+            <h2 className="text-3xl font-bold text-[#2A3773] mb-12 tracking-tight">Who Can Pre-Register?</h2>
             
             <div className="flex justify-center flex-wrap gap-4 md:gap-8 max-w-4xl mx-auto">
               {[
@@ -183,7 +150,7 @@ export default function PreRegisterPage() {
               ].map((item, idx) => (
                 <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center justify-center w-40 md:w-48 aspect-square hover:shadow-md transition-shadow cursor-pointer">
                   <img src={item.icon} alt={item.label} className="w-20 h-20 object-contain mb-3" />
-                  <span className="font-bold text-[#002D72] text-sm text-center whitespace-pre-line leading-snug">{item.label}</span>
+                  <span className="font-bold text-[#2A3773] text-sm text-center whitespace-pre-line leading-snug">{item.label}</span>
                 </div>
               ))}
             </div>
@@ -198,7 +165,7 @@ export default function PreRegisterPage() {
               {/* Left: Why Should I Pre-Register? */}
               <div className="lg:col-span-2 space-y-10">
                 <div>
-                  <h2 className="text-3xl font-bold text-[#002D72] mb-8 tracking-tight text-center lg:text-left">Why Should I Pre-Register?</h2>
+                  <h2 className="text-3xl font-bold text-[#2A3773] mb-8 tracking-tight text-center lg:text-left">Why Should I Pre-Register?</h2>
                   <ul className="space-y-6 max-w-[280px] sm:max-w-sm mx-auto lg:max-w-none lg:mx-0">
                     {[
                       { title: "Complimentary Premium Membership", subtitle: "(Worth ₹2,999)" },
@@ -209,11 +176,11 @@ export default function PreRegisterPage() {
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-4">
                         <div className="bg-[#fdf5f8] p-2 rounded-md shrink-0">
-                          <CheckCircle2 className="w-5 h-5 text-[#D52367]" />
+                          <CheckCircle2 className="w-5 h-5 text-[#DB1866]" />
                         </div>
                         <div>
-                          <p className="font-bold text-[#002D72] leading-tight mt-0.5">{item.title}</p>
-                          {item.subtitle && <p className="text-[#D52367] text-sm font-semibold">{item.subtitle}</p>}
+                          <p className="font-bold text-[#2A3773] leading-tight mt-0.5">{item.title}</p>
+                          {item.subtitle && <p className="text-[#DB1866] text-sm font-semibold">{item.subtitle}</p>}
                         </div>
                       </li>
                     ))}
@@ -233,12 +200,12 @@ export default function PreRegisterPage() {
               {/* Right: Registration Form Card */}
               <div className="lg:col-span-3">
                 <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100 p-8 md:p-10">
-                  <h3 className="text-2xl font-bold text-[#D52367] text-center mb-8">Pre-Register Your Family</h3>
+                  <h3 className="text-2xl font-bold text-[#DB1866] text-center mb-8">Pre-Register Your Family</h3>
                   
                   {/* Stepper */}
                   <div className="flex justify-between items-center mb-10 text-xs font-bold text-gray-400">
-                    <div className="flex flex-col items-center gap-2 text-[#D52367]">
-                      <div className="w-8 h-8 rounded-full bg-[#D52367] text-white flex items-center justify-center">1</div>
+                    <div className="flex flex-col items-center gap-2 text-[#DB1866]">
+                      <div className="w-8 h-8 rounded-full bg-[#DB1866] text-white flex items-center justify-center">1</div>
                       <span>Basic Details</span>
                     </div>
                     <div className="h-px bg-gray-200 flex-1 mx-2 mt-[-20px]"></div>
@@ -262,7 +229,7 @@ export default function PreRegisterPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       <div className="space-y-1.5">
                         <Label className="text-xs font-bold text-gray-600">I am registering as *</Label>
-                        <select className="w-full h-12 px-3 border border-gray-200 rounded-md bg-gray-50 focus:border-[#D52367] focus:ring-1 focus:ring-[#D52367] outline-none text-sm">
+                        <select className="w-full h-12 px-3 border border-gray-200 rounded-md bg-gray-50 focus:border-[#DB1866] focus:ring-1 focus:ring-[#DB1866] outline-none text-sm">
                           <option>Select</option>
                           <option>Self</option>
                           <option>Son</option>
@@ -278,7 +245,7 @@ export default function PreRegisterPage() {
                       
                       <div className="space-y-1.5">
                         <Label className="text-xs font-bold text-gray-600">Gender *</Label>
-                        <select className="w-full h-12 px-3 border border-gray-200 rounded-md bg-gray-50 focus:border-[#D52367] focus:ring-1 focus:ring-[#D52367] outline-none text-sm">
+                        <select className="w-full h-12 px-3 border border-gray-200 rounded-md bg-gray-50 focus:border-[#DB1866] focus:ring-1 focus:ring-[#DB1866] outline-none text-sm">
                           <option>Select</option>
                           <option>Male</option>
                           <option>Female</option>
@@ -288,7 +255,7 @@ export default function PreRegisterPage() {
                         <Label className="text-xs font-bold text-gray-600">Mobile Number *</Label>
                         <div className="flex gap-2">
                           <Input placeholder="Enter mobile number" className="h-12 bg-gray-50 flex-1" />
-                          <Button type="button" className="h-12 bg-[#D52367] hover:bg-[#b01d55] text-white rounded-md px-4 shrink-0">Send OTP</Button>
+                          <Button type="button" className="h-12 bg-[#DB1866] hover:bg-[#B81456] text-white rounded-md px-4 shrink-0">Send OTP</Button>
                         </div>
                       </div>
 
@@ -316,7 +283,7 @@ export default function PreRegisterPage() {
                       </div>
                       <div className="space-y-1.5">
                         <Label className="text-xs font-bold text-gray-600">District *</Label>
-                        <select className="w-full h-12 px-3 border border-gray-200 rounded-md bg-gray-50 focus:border-[#D52367] focus:ring-1 focus:ring-[#D52367] outline-none text-sm">
+                        <select className="w-full h-12 px-3 border border-gray-200 rounded-md bg-gray-50 focus:border-[#DB1866] focus:ring-1 focus:ring-[#DB1866] outline-none text-sm">
                           <option>Select district</option>
                           <option>Bengaluru</option>
                           <option>Belagavi</option>
@@ -327,7 +294,7 @@ export default function PreRegisterPage() {
                     </div>
                     
                     <div className="pt-6">
-                      <Button className="w-full bg-[#D52367] hover:bg-[#b01d55] text-white rounded-md h-14 font-bold text-lg">
+                      <Button className="w-full bg-[#DB1866] hover:bg-[#B81456] text-white rounded-md h-14 font-bold text-lg">
                         Save & Continue &gt;
                       </Button>
                       <p className="text-center text-xs text-gray-500 mt-4 flex items-center justify-center gap-1">
@@ -343,7 +310,7 @@ export default function PreRegisterPage() {
         </section>
 
         {/* How It Works */}
-        <section className="bg-[#002D72] py-16" id="how-it-works">
+        <section className="bg-[#2A3773] py-16" id="how-it-works">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-white text-center mb-16 tracking-tight">How It Works?</h2>
             
@@ -359,8 +326,8 @@ export default function PreRegisterPage() {
                 { step: 5, title: "Start Connecting", desc: "Express interest and find your perfect match." },
               ].map((item, idx) => (
                 <div key={idx} className="relative z-10 flex flex-col items-center text-center w-full md:w-[18%] mb-8 md:mb-0 px-2">
-                  <div className="w-20 h-20 bg-[#0a3579] rounded-full border border-white/20 flex items-center justify-center shadow-lg mb-4 relative">
-                    <div className="absolute -bottom-2 w-6 h-6 bg-[#D52367] rounded-full text-white text-xs font-bold flex items-center justify-center border-2 border-[#002D72]">
+                  <div className="w-20 h-20 bg-[#2A3773] rounded-full border border-white/20 flex items-center justify-center shadow-lg mb-4 relative">
+                    <div className="absolute -bottom-2 w-6 h-6 bg-[#DB1866] rounded-full text-white text-xs font-bold flex items-center justify-center border-2 border-[#2A3773]">
                       {item.step}
                     </div>
                     {/* Placeholder icons based on step */}
@@ -383,8 +350,8 @@ export default function PreRegisterPage() {
         {/* Why Choose Maratha Lageen? */}
         <section className="bg-[#fdf5f8] py-20" id="why-us">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-[#002D72] mb-16 tracking-tight">
-              Why Choose <span className="text-[#D52367]">Maratha Lageen?</span>
+            <h2 className="text-3xl font-bold text-[#2A3773] mb-16 tracking-tight">
+              Why Choose <span className="text-[#DB1866]">Maratha Lageen?</span>
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
@@ -395,10 +362,10 @@ export default function PreRegisterPage() {
                 { icon: Phone, title: "Trusted Support", desc: "Our team is here to support you throughout your journey." }
               ].map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center">
-                  <div className="text-[#D52367] mb-4">
+                  <div className="text-[#DB1866] mb-4">
                     <item.icon className="w-12 h-12" />
                   </div>
-                  <h4 className="font-bold text-[#002D72] mb-3">{item.title}</h4>
+                  <h4 className="font-bold text-[#2A3773] mb-3">{item.title}</h4>
                   <p className="text-sm text-gray-600 leading-relaxed px-4">{item.desc}</p>
                 </div>
               ))}
@@ -413,12 +380,12 @@ export default function PreRegisterPage() {
               
               {/* Founder */}
               <div className="bg-gray-50 rounded-2xl p-8 flex flex-col sm:flex-row items-center sm:items-start gap-8 border border-gray-100 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#D52367] to-[#002D72]"></div>
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#DB1866] to-[#2A3773]"></div>
                 <div className="w-40 h-40 shrink-0 rounded-2xl overflow-hidden border-4 border-white shadow-lg bg-gray-200">
                   <img src="/founder.jpg" alt="Founder" className="w-full h-full object-cover object-top" />
                 </div>
                 <div className="relative text-center sm:text-left">
-                  <h3 className="text-2xl font-extrabold text-[#002D72] mb-5 tracking-tight">Meet The <span className="text-[#D52367]">Founder</span></h3>
+                  <h3 className="text-2xl font-semibold text-[#2A3773] mb-5 tracking-tight">Meet The <span className="text-[#DB1866]">Founder</span></h3>
                   <div className="relative z-10">
                     <p className="text-[15px] text-gray-700 leading-relaxed mb-4 italic">
                       "At Maratha Lageen, our mission is simple - to bring Maratha families of Karnataka onto a trusted platform built on values, transparency and respect."
@@ -426,13 +393,13 @@ export default function PreRegisterPage() {
                     <p className="text-[15px] text-gray-700 leading-relaxed mb-5 italic">
                       "We understand the importance of this decision in your life and we are committed to providing a safe and reliable space to help you find the right match."
                     </p>
-                    <p className="font-bold text-[#002D72] text-lg">— Founder</p>
+                    <p className="font-bold text-[#2A3773] text-lg">— Founder</p>
                   </div>
                 </div>
               </div>
 
               {/* Community Presence */}
-              <div className="bg-[#002D72] rounded-2xl p-8 text-white flex flex-col justify-center text-center sm:text-left">
+              <div className="bg-[#2A3773] rounded-2xl p-8 text-white flex flex-col justify-center text-center sm:text-left">
                 <h3 className="text-xl font-bold mb-4">Our Community Presence</h3>
                 <p className="text-sm text-blue-100 mb-6">We are proudly connecting Maratha families across Karnataka.</p>
                 
@@ -453,9 +420,9 @@ export default function PreRegisterPage() {
         {/* WhatsApp Banner */}
         <section className="py-12">
           <div className="container mx-auto px-4 max-w-5xl">
-            <div className="bg-[#D52367] rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-[#D52367]/20">
+            <div className="bg-[#DB1866] rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-[#DB1866]/20">
               <div className="flex flex-col md:flex-row items-center text-center md:text-left gap-4 md:gap-6">
-                <div className="bg-white p-4 rounded-xl shadow-inner text-[#D52367] shrink-0">
+                <div className="bg-white p-4 rounded-xl shadow-inner text-[#DB1866] shrink-0">
                   <Bell className="w-8 h-8" />
                 </div>
                 <div>
@@ -463,7 +430,7 @@ export default function PreRegisterPage() {
                   <p className="text-pink-100 text-sm">Get notified about launch date, offers and updates.</p>
                 </div>
               </div>
-              <Button className="bg-white text-[#D52367] hover:bg-gray-50 rounded-md px-8 py-6 font-bold shadow-md w-full md:w-auto flex items-center gap-2">
+              <Button className="bg-white text-[#DB1866] hover:bg-gray-50 rounded-md px-8 py-6 font-bold shadow-md w-full md:w-auto flex items-center gap-2">
                 <MessageCircle className="w-5 h-5 text-green-500" /> Notify Me on WhatsApp
               </Button>
             </div>
@@ -473,7 +440,7 @@ export default function PreRegisterPage() {
         {/* FAQs */}
         <section className="py-16 bg-gray-50 border-t border-gray-100" id="faqs">
           <div className="container mx-auto px-4 max-w-4xl text-center">
-            <h2 className="text-3xl font-bold text-[#002D72] mb-10 tracking-tight">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-bold text-[#2A3773] mb-10 tracking-tight">Frequently Asked Questions</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               {[
@@ -495,13 +462,13 @@ export default function PreRegisterPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#002D72] pt-16 pb-8 border-t-[8px] border-[#D52367]">
+      <footer className="bg-[#2A3773] pt-16 pb-8 border-t-[8px] border-[#DB1866]">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-12 mb-12">
             
             <div className="flex flex-col items-center md:items-start max-w-xs">
               <Link href="#home" className="inline-block mb-6">
-                <img src="/logo.jpeg" alt="Maratha Lageen Logo" className="h-12 w-auto object-contain bg-white rounded-lg p-2" />
+                <img src="/logo.png" alt="Maratha Lageen Logo" className="h-20 w-auto object-contain bg-white rounded-lg p-2 scale-125" />
               </Link>
               <p className="text-sm text-blue-200 leading-relaxed">
                 Karnataka's exclusive Maratha matrimony platform. Built on trust, privacy and genuine connections.
@@ -522,15 +489,15 @@ export default function PreRegisterPage() {
               <h4 className="font-bold text-white mb-6 text-sm tracking-wider uppercase">Contact</h4>
               <ul className="space-y-4 text-sm text-blue-200 flex flex-col items-center">
                 <li className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-[#D52367]" />
+                  <Phone className="w-4 h-4 text-[#DB1866]" />
                   <span>+91 98765 43210</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-[#D52367]" />
+                  <Mail className="w-4 h-4 text-[#DB1866]" />
                   <span>info@marathalageen.com</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#D52367]" />
+                  <MapPin className="w-4 h-4 text-[#DB1866]" />
                   <span>Bengaluru, Karnataka</span>
                 </li>
               </ul>
@@ -539,16 +506,16 @@ export default function PreRegisterPage() {
             <div className="flex flex-col items-center">
               <h4 className="font-bold text-white mb-6 text-sm tracking-wider uppercase">Follow Us</h4>
               <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D52367] text-white flex items-center justify-center transition-all">
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#DB1866] text-white flex items-center justify-center transition-all">
                   <svg xmlns="http://www.w3.org/2007/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D52367] text-white flex items-center justify-center transition-all">
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#DB1866] text-white flex items-center justify-center transition-all">
                   <svg xmlns="http://www.w3.org/2007/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D52367] text-white flex items-center justify-center transition-all">
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#DB1866] text-white flex items-center justify-center transition-all">
                   <svg xmlns="http://www.w3.org/2007/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D52367] text-white flex items-center justify-center transition-all">
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#DB1866] text-white flex items-center justify-center transition-all">
                   <svg xmlns="http://www.w3.org/2007/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                 </a>
               </div>
@@ -557,7 +524,7 @@ export default function PreRegisterPage() {
           
           <div className="border-t border-white/10 pt-6 flex flex-col items-center justify-center text-xs text-blue-300 space-y-2">
             <p className="flex items-center gap-1.5 text-sm">
-              Made with <Heart className="w-4 h-4 text-[#D52367]" fill="currentColor" /> for Maratha Families
+              Made with <Heart className="w-4 h-4 text-[#DB1866]" fill="currentColor" /> for Maratha Families
             </p>
             <p>© {new Date().getFullYear()} Maratha Lageen. All Rights Reserved.</p>
           </div>

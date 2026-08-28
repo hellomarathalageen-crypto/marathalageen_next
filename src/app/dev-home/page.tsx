@@ -34,7 +34,7 @@ export default function LandingPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20">
               <Heart className="h-5 w-5 text-white" fill="currentColor" />
             </div>
-            <span className="text-2xl font-bold font-serif text-secondary tracking-tight">
+            <span className="text-2xl font-bold font-sans text-secondary tracking-tight">
               Matrimony
             </span>
           </div>
@@ -83,7 +83,7 @@ export default function LandingPage() {
                   <span className="text-sm font-semibold text-primary tracking-wide uppercase">Premium Matchmaking</span>
                 </motion.div>
                 
-                <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-bold font-serif text-secondary leading-[1.1] mb-8">
+                <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-bold font-sans text-secondary leading-[1.1] mb-8">
                   Where Trust <br />
                   <span className="relative">
                     Meets Togetherness
@@ -225,7 +225,7 @@ export default function LandingPage() {
         <section className="py-24 bg-white relative">
           <div className="container mx-auto max-w-7xl px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-secondary mb-4">Why choose us?</h2>
+              <h2 className="text-3xl md:text-4xl font-sans font-bold text-secondary mb-4">Why choose us?</h2>
               <p className="text-foreground/60 text-lg max-w-2xl mx-auto">We prioritize your safety and preferences to deliver a matching experience unlike any other.</p>
             </div>
             
@@ -256,7 +256,7 @@ export default function LandingPage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm">
               <Heart className="h-6 w-6 text-primary" fill="currentColor" />
             </div>
-             <span className="text-3xl font-bold font-serif">Matrimony</span>
+             <span className="text-3xl font-bold font-sans">Matrimony</span>
           </div>
           <p className="text-white/60 max-w-md mx-auto mb-10 font-medium">
             Building lifelong connections in a secure, exclusive, and warm environment.
