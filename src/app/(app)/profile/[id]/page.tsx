@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import ProfileView from "./ProfileView";
+import { ProfileView } from "@/components/ui/shared";
 
 export default async function ProfileDetailPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;

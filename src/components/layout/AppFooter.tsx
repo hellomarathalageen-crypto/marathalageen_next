@@ -137,7 +137,7 @@ export default function AppFooter() {
           <p className="flex items-center gap-1.5">
             Made with <Heart className="w-3.5 h-3.5 text-[#DB1866]" fill="currentColor" /> for Maratha Families
           </p>
-          <p>Â© {new Date().getFullYear()} Maratha Matrimony. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Maratha Matrimony. All rights reserved.</p>
         </div>
       </div>
     </footer>

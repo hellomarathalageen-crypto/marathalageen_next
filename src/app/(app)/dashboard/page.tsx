@@ -1,4 +1,4 @@
-﻿import { getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import { prisma } from "@/lib/prisma";
 import { ProfileCard } from "@/components/ui/ProfileCard";
 import { redirect } from "next/navigation";
@@ -59,18 +59,24 @@ export default async function DashboardPage() {
     <div className="min-h-screen bg-gray-50 pt-24 pb-12">
       <div className="container mx-auto max-w-7xl px-4 md:px-8">
         
-        <div className="mb-8 bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-between">
+        <div className="mb-8 bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h1 className="text-3xl font-bold font-sans text-[#2A3773]">Welcome back, {currentUser.name}!</h1>
             <p className="text-gray-500 mt-1">Here is a quick overview of your profile activity.</p>
           </div>
-          <div className="hidden md:flex gap-4">
-            <div className="bg-[#FFF1F5] text-[#DB1866] px-4 py-2 rounded-xl flex items-center gap-2 font-bold">
-              <Star className="w-5 h-5" /> 12 Profile Views
-            </div>
-            <div className="bg-indigo-50 text-indigo-600 px-4 py-2 rounded-xl flex items-center gap-2 font-bold">
-              <Users className="w-5 h-5" /> 5 New Matches
-            </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <a 
+              href="/dashboard/preferences" 
+              className="bg-[#FFF1F5] hover:bg-[#FADADF] text-[#DB1866] border border-[#FADADF] px-4 py-2.5 rounded-xl flex items-center gap-2 font-bold text-sm transition-colors"
+            >
+              Partner Preferences
+            </a>
+            <a 
+              href="/dashboard/interests" 
+              className="bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-100 px-4 py-2.5 rounded-xl flex items-center gap-2 font-bold text-sm transition-colors"
+            >
+              <Users className="w-4 h-4" /> Inbox & Interests
+            </a>
           </div>
         </div>
 
