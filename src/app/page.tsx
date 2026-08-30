@@ -10,7 +10,7 @@ import {
   User, Users, UserPlus, PlayCircle,
   MapPin, Phone, Mail, MessageCircle,
   Sparkles, ArrowRight, ArrowLeft, Lock, BadgeCheck, Camera, Check,
-  Share2, Copy, Share, ExternalLink
+  Share2, Copy, Share, ExternalLink, X
 } from "lucide-react";
 
 export default function PreRegisterPage() {
@@ -20,6 +20,7 @@ export default function PreRegisterPage() {
   const [loading, setLoading] = useState(false);
   const [shareCategory, setShareCategory] = useState<"family" | "friends" | "status">("family");
   const [copiedToast, setCopiedToast] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -70,14 +71,14 @@ export default function PreRegisterPage() {
   };
 
   const getShareMessage = () => {
-    const candidate = formData.fullName ? `of ${formData.fullName}` : "of our family member";
+    const candidate = formData.fullName ? `of ${formData.fullName}` : "";
     const siteUrl = "https://marathalageen.com";
     if (shareCategory === "family") {
-      return `🚩 *जय जिजाऊ, जय शिवराय!* 🙏\n\nI have pre-registered the matrimonial profile ${candidate} on *Karnataka's Exclusive Maratha Matrimony* platform.\n\n✨ *Pre-Registration Perks:* Get *₹2,999 Lifetime Premium Membership completely FREE* before public launch.\n\n👉 Pre-register your family's bride/groom profile here:\n${siteUrl}`;
+      return `🚩 *जय जिजाऊ, जय शिवराय!* 🙏\n\nMaratha community families in Karnataka can now register ${candidate ? `profiles like ${candidate}` : "bride and groom profiles"} on *Karnataka's Exclusive Maratha Matrimony* platform.\n\n✨ *Launch Privilege:* Get *₹2,999 Lifetime VIP Premium Membership completely FREE* during pre-registration.\n\n👉 Pre-register your family's profile here:\n${siteUrl}`;
     } else if (shareCategory === "friends") {
       return `💍 Hey! Check out *Maratha Matrimony* — Karnataka's exclusive matrimonial network for the Maratha community.\n\n🌟 Early bird pre-registration is open with *Free ₹2,999 Lifetime VIP Access*.\n\nRegister in 2 minutes here:\n${siteUrl}`;
     } else {
-      return `✨ Pre-registered on Maratha Matrimony! Exclusive for Karnataka Maratha community families. 🚩 Claim your Free ₹2,999 Lifetime VIP Pass here: ${siteUrl}`;
+      return `✨ Pre-register on Maratha Matrimony! Exclusive for Karnataka Maratha community families. 🚩 Claim your Free ₹2,999 Lifetime VIP Pass here: ${siteUrl}`;
     }
   };
 
@@ -183,6 +184,12 @@ export default function PreRegisterPage() {
 
           {/* CTA */}
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowShareModal(true)}
+              className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold transition-all shadow-sm hover:scale-105"
+            >
+              <Share2 className="w-3.5 h-3.5 text-[#DB1866]" /> Share Platform
+            </button>
             <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-5 py-2.5 text-sm md:px-7 md:py-5 md:text-base font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105">
               Pre-Register Now
             </Button>
@@ -1343,6 +1350,130 @@ export default function PreRegisterPage() {
           </div>
         </section>
       </main>
+
+      {/* ──────────── FLOATING COMMUNITY SHARE PILL ──────────── */}
+      <div className="fixed bottom-6 right-6 z-40 flex items-center gap-2">
+        <button
+          onClick={() => setShowShareModal(true)}
+          className="group flex items-center gap-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold px-4 md:px-5 py-3 rounded-full shadow-2xl shadow-emerald-600/40 hover:scale-105 transition-all text-xs md:text-sm border-2 border-white/30 backdrop-blur-md"
+        >
+          <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+            <MessageCircle className="w-4 h-4 text-white" />
+          </div>
+          <span className="font-sans">Share on WhatsApp</span>
+          <span className="bg-amber-400 text-black text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm">
+            Free VIP
+          </span>
+        </button>
+      </div>
+
+      {/* ──────────── GLOBAL SHARE PLATFORM MODAL ──────────── */}
+      {showShareModal && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-gradient-to-br from-[#1B2554] via-[#2A3773] to-[#121A3D] rounded-3xl max-w-lg w-full p-6 md:p-8 text-white shadow-2xl border border-white/20 relative overflow-hidden space-y-6">
+            
+            {/* Ambient Glows */}
+            <div className="absolute -right-16 -top-16 w-48 h-48 bg-[#DB1866]/30 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -left-16 -bottom-16 w-48 h-48 bg-emerald-500/25 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Modal Header */}
+            <div className="relative z-10 flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#DB1866] flex items-center justify-center shadow-md">
+                  <Heart className="w-5 h-5 text-white" fill="currentColor" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold tracking-wide">Share Maratha Matrimony</h3>
+                  <p className="text-[11px] text-pink-300 font-semibold uppercase tracking-wider">Karnataka Community Network</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowShareModal(false)}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Persona Selection Tabs */}
+            <div className="relative z-10 space-y-2">
+              <p className="text-xs font-bold text-blue-200 flex items-center gap-1.5">
+                <Users className="w-4 h-4 text-pink-400" /> Choose Invitation Style:
+              </p>
+              <div className="grid grid-cols-3 gap-2 bg-black/30 p-1.5 rounded-xl border border-white/10 text-xs font-bold">
+                <button 
+                  type="button" 
+                  onClick={() => setShareCategory("family")}
+                  className={`py-2 px-1 rounded-lg transition-all text-center ${shareCategory === "family" ? 'bg-[#DB1866] text-white shadow-md scale-105' : 'text-blue-200 hover:text-white'}`}
+                >
+                  👨‍👩‍👧 Family Group
+                </button>
+                <button 
+                  type="button" 
+                  onClick={() => setShareCategory("friends")}
+                  className={`py-2 px-1 rounded-lg transition-all text-center ${shareCategory === "friends" ? 'bg-[#DB1866] text-white shadow-md scale-105' : 'text-blue-200 hover:text-white'}`}
+                >
+                  👫 Friends
+                </button>
+                <button 
+                  type="button" 
+                  onClick={() => setShareCategory("status")}
+                  className={`py-2 px-1 rounded-lg transition-all text-center ${shareCategory === "status" ? 'bg-[#DB1866] text-white shadow-md scale-105' : 'text-blue-200 hover:text-white'}`}
+                >
+                  📱 Status
+                </button>
+              </div>
+            </div>
+
+            {/* Message Preview Box */}
+            <div className="relative z-10 bg-black/40 p-4 rounded-2xl border border-white/15 text-xs text-blue-100 font-sans leading-relaxed">
+              <p className="whitespace-pre-line">{getShareMessage()}</p>
+            </div>
+
+            {/* Primary Action Buttons */}
+            <div className="relative z-10 space-y-3">
+              <a 
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(getShareMessage())}`}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full h-12 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30 text-sm transition-all hover:scale-[1.02]"
+              >
+                <MessageCircle className="w-5 h-5" /> Share Directly to WhatsApp
+              </a>
+
+              <div className="grid grid-cols-2 gap-3">
+                <button 
+                  type="button"
+                  onClick={handleCopyShare}
+                  className="h-11 bg-white/15 hover:bg-white/25 border border-white/20 text-white font-bold rounded-xl flex items-center justify-center gap-2 text-xs transition-all active:scale-95"
+                >
+                  {copiedToast ? (
+                    <span className="text-emerald-300 font-bold flex items-center gap-1">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" /> Copied! 🎉
+                    </span>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" /> Copy Message & Link
+                    </>
+                  )}
+                </button>
+
+                <button 
+                  type="button"
+                  onClick={handleNativeShare}
+                  className="h-11 bg-white/15 hover:bg-white/25 border border-white/20 text-white font-bold rounded-xl flex items-center justify-center gap-2 text-xs transition-all"
+                >
+                  <Share2 className="w-3.5 h-3.5 text-pink-400" /> Share via Apps
+                </button>
+              </div>
+            </div>
+
+            <p className="relative z-10 text-[11px] text-blue-300/80 text-center">
+              🚩 Official Maratha Community Network • Free ₹2,999 Lifetime VIP Access
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
