@@ -9,7 +9,8 @@ import {
   CheckCircle2, Bell, Heart, ShieldCheck, 
   User, Users, UserPlus, PlayCircle,
   MapPin, Phone, Mail, MessageCircle,
-  Sparkles, ArrowRight, ArrowLeft, Lock, BadgeCheck, Camera, Check
+  Sparkles, ArrowRight, ArrowLeft, Lock, BadgeCheck, Camera, Check,
+  Share2, Copy, Share, ExternalLink
 } from "lucide-react";
 
 export default function PreRegisterPage() {
@@ -17,6 +18,8 @@ export default function PreRegisterPage() {
   const [otpSent, setOtpSent] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [shareCategory, setShareCategory] = useState<"family" | "friends" | "status">("family");
+  const [copiedToast, setCopiedToast] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -64,6 +67,40 @@ export default function PreRegisterPage() {
   const removePhoto = () => {
     setPhotoPreview(null);
     setFormData(prev => ({ ...prev, photoUrl: "" }));
+  };
+
+  const getShareMessage = () => {
+    const candidate = formData.fullName ? `of ${formData.fullName}` : "of our family member";
+    const siteUrl = "https://marathalageen.com";
+    if (shareCategory === "family") {
+      return `🚩 *जय जिजाऊ, जय शिवराय!* 🙏\n\nI have pre-registered the matrimonial profile ${candidate} on *Karnataka's Exclusive Maratha Matrimony* platform.\n\n✨ *Pre-Registration Perks:* Get *₹2,999 Lifetime Premium Membership completely FREE* before public launch.\n\n👉 Pre-register your family's bride/groom profile here:\n${siteUrl}`;
+    } else if (shareCategory === "friends") {
+      return `💍 Hey! Check out *Maratha Matrimony* — Karnataka's exclusive matrimonial network for the Maratha community.\n\n🌟 Early bird pre-registration is open with *Free ₹2,999 Lifetime VIP Access*.\n\nRegister in 2 minutes here:\n${siteUrl}`;
+    } else {
+      return `✨ Pre-registered on Maratha Matrimony! Exclusive for Karnataka Maratha community families. 🚩 Claim your Free ₹2,999 Lifetime VIP Pass here: ${siteUrl}`;
+    }
+  };
+
+  const handleCopyShare = () => {
+    navigator.clipboard.writeText(getShareMessage());
+    setCopiedToast(true);
+    setTimeout(() => setCopiedToast(false), 2500);
+  };
+
+  const handleNativeShare = async () => {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({
+          title: "Maratha Matrimony - VIP Early Access",
+          text: getShareMessage(),
+          url: "https://marathalageen.com",
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      handleCopyShare();
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -498,80 +535,164 @@ export default function PreRegisterPage() {
                 <div className="bg-white rounded-3xl shadow-xl shadow-[#2A3773]/5 border border-gray-100 p-6 md:p-10">
                   
                   {isSubmitted ? (
-                    <div className="text-center py-8 md:py-12 animate-in zoom-in-95 duration-500 space-y-8">
+                    <div className="text-center py-6 md:py-10 animate-in zoom-in-95 duration-500 space-y-8 max-w-2xl mx-auto">
                       {/* Top Celebration Badge */}
                       <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold px-4 py-2 rounded-full shadow-sm">
-                        <Sparkles className="w-4 h-4 text-emerald-600" /> Pre-Registration Confirmed • Free Premium Reserved
+                        <Sparkles className="w-4 h-4 text-emerald-600 animate-spin" style={{ animationDuration: '3s' }} /> Pre-Registration Confirmed • Free Lifetime Premium Reserved
                       </div>
 
                       {/* Joyful Icon & Heading */}
                       <div>
-                        <div className="w-20 h-20 bg-gradient-to-tr from-emerald-600 to-teal-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl shadow-emerald-600/30">
+                        <div className="w-20 h-20 bg-gradient-to-tr from-emerald-600 to-teal-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl shadow-emerald-600/30 ring-8 ring-emerald-50">
                           <Check className="w-10 h-10 stroke-[3]" />
                         </div>
                         <h3 className="text-2xl md:text-4xl font-bold font-sans text-[#2A3773] mb-3">
                           Application Received with Respect & Care! 🙏
                         </h3>
-                        <p className="text-gray-600 max-w-lg mx-auto text-sm md:text-base leading-relaxed">
-                          Dhanyawad! We are honored to welcome your family to <strong>Maratha Matrimony</strong>. Your profile has been registered and prioritized for Karnataka's grand launch.
+                        <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-lg mx-auto">
+                          Dhanyawad! We are honored to welcome your family to <strong>Maratha Matrimony</strong>. Your VIP status is locked in for Karnataka's grand community launch.
                         </p>
                       </div>
 
-                      {/* Profile Application Summary Card */}
-                      <div className="bg-gradient-to-br from-[#FFF8FA] to-[#FFF1F5] p-6 md:p-8 rounded-3xl max-w-lg mx-auto text-left border border-[#FADADF] shadow-sm relative overflow-hidden">
-                        <div className="absolute top-0 right-0 bg-[#DB1866] text-white text-[10px] uppercase font-bold px-3 py-1 rounded-bl-xl tracking-wider">
-                          VIP Early Access
-                        </div>
-                        
-                        <div className="flex items-center gap-4 mb-4 pb-4 border-b border-pink-200/60">
-                          {photoPreview ? (
-                            <img 
-                              src={photoPreview} 
-                              alt="Candidate" 
-                              className="w-14 h-14 rounded-2xl object-cover border-2 border-white shadow-md shrink-0" 
-                            />
-                          ) : (
-                            <div className="w-14 h-14 rounded-2xl bg-pink-100 text-[#DB1866] flex items-center justify-center font-bold text-lg border-2 border-white shadow-sm shrink-0">
-                              {(formData.fullName || "C").charAt(0).toUpperCase()}
+                      {/* ──────────── GOD-LEVEL VIP DIGITAL PASS CARD ──────────── */}
+                      <div className="bg-gradient-to-br from-[#1B2554] via-[#2A3773] to-[#121A3D] rounded-3xl p-6 md:p-8 text-white text-left shadow-2xl relative overflow-hidden border border-white/15 space-y-6">
+                        {/* Ambient Glow Orbs */}
+                        <div className="absolute -right-16 -top-16 w-52 h-52 bg-[#DB1866]/30 rounded-full blur-3xl pointer-events-none" />
+                        <div className="absolute -left-16 -bottom-16 w-52 h-52 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+
+                        {/* Pass Header */}
+                        <div className="relative z-10 flex items-center justify-between border-b border-white/10 pb-4">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-9 h-9 rounded-xl bg-[#DB1866] flex items-center justify-center shadow-md">
+                              <Heart className="w-5 h-5 text-white" fill="currentColor" />
                             </div>
-                          )}
-                          <div>
-                            <p className="text-xs text-[#DB1866] font-bold uppercase tracking-wider flex items-center gap-1.5">
-                              <BadgeCheck className="w-4 h-4" /> Registration Summary
-                            </p>
-                            <p className="text-base font-bold text-[#2A3773] mt-0.5">{formData.fullName || "Candidate"}</p>
+                            <div>
+                              <p className="text-sm font-bold tracking-wide font-sans">MARATHA MATRIMONY</p>
+                              <p className="text-[10px] text-pink-300 font-semibold tracking-wider uppercase">Karnataka Exclusive Platform</p>
+                            </div>
                           </div>
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          <div>
-                            <p className="text-xs text-gray-400 font-bold uppercase">Candidate Name</p>
-                            <p className="font-bold text-[#2A3773] text-base mt-0.5">{formData.fullName || "Candidate"}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs text-gray-400 font-bold uppercase">Profile Created By</p>
-                            <p className="font-bold text-[#2A3773] text-base mt-0.5">{formData.registeringFor}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs text-gray-400 font-bold uppercase">Primary Contact</p>
-                            <p className="font-bold text-[#2A3773] text-sm mt-0.5">{formData.mobile || "Provided"}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs text-gray-400 font-bold uppercase">Location</p>
-                            <p className="font-bold text-[#2A3773] text-sm mt-0.5">{formData.city || "Karnataka"}, {formData.district}</p>
+                          <div className="bg-gradient-to-r from-amber-400 to-amber-500 text-black text-[10px] font-extrabold uppercase px-3 py-1 rounded-full shadow-md tracking-wider flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 fill-black" /> VIP PASS
                           </div>
                         </div>
 
-                        <div className="mt-4 pt-4 border-t border-pink-200/60 flex items-center justify-between text-xs text-gray-600">
-                          <span>Membership Privilege:</span>
-                          <span className="font-bold text-emerald-700 bg-emerald-100/80 px-2.5 py-1 rounded-md">
-                            ₹2,999 Premium Free for Life
-                          </span>
+                        {/* Candidate Info Badge */}
+                        <div className="relative z-10 flex items-center gap-4 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15">
+                          {photoPreview ? (
+                            <img src={photoPreview} alt="Candidate" className="w-16 h-16 rounded-2xl object-cover border-2 border-white/40 shadow-md shrink-0" />
+                          ) : (
+                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#DB1866] to-pink-500 text-white flex items-center justify-center font-bold text-2xl border-2 border-white/30 shrink-0 shadow-inner">
+                              {(formData.fullName || "C").charAt(0).toUpperCase()}
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <h4 className="text-lg font-bold text-white truncate">{formData.fullName || "Candidate"}</h4>
+                              <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0 border border-emerald-500/30">
+                                <Check className="w-3 h-3 stroke-[3]" /> VIP Early Access
+                              </span>
+                            </div>
+                            <p className="text-xs text-blue-200 mt-0.5">{formData.city || "Karnataka"}, {formData.district} • Managed by {formData.registeringFor}</p>
+                            <p className="text-[11px] font-mono text-amber-300 font-bold mt-1 tracking-wider">Pass ID: MM-2026-VIP-{formData.mobile ? formData.mobile.slice(-4) : "8821"}</p>
+                          </div>
+                        </div>
+
+                        {/* VIP Perks Grid */}
+                        <div className="relative z-10 grid grid-cols-3 gap-2.5 text-xs">
+                          <div className="bg-white/5 p-3 rounded-xl border border-white/10 text-center">
+                            <p className="text-pink-300 font-bold text-[13px]">₹2,999 Premium</p>
+                            <p className="text-[10px] text-gray-300 mt-0.5">Free for Life</p>
+                          </div>
+                          <div className="bg-white/5 p-3 rounded-xl border border-white/10 text-center">
+                            <p className="text-emerald-300 font-bold text-[13px]">Priority Review</p>
+                            <p className="text-[10px] text-gray-300 mt-0.5">Verified in 24h</p>
+                          </div>
+                          <div className="bg-white/5 p-3 rounded-xl border border-white/10 text-center">
+                            <p className="text-amber-300 font-bold text-[13px]">Direct Connect</p>
+                            <p className="text-[10px] text-gray-300 mt-0.5">Zero Limits</p>
+                          </div>
+                        </div>
+
+                        {/* ──────────── MULTI-AUDIENCE VIRAL SHARING ENGINE ──────────── */}
+                        <div className="relative z-10 space-y-3 pt-2 border-t border-white/10">
+                          <div className="flex items-center justify-between">
+                            <p className="text-xs font-bold text-blue-100 flex items-center gap-1.5">
+                              <Share2 className="w-4 h-4 text-pink-400" /> Share with Family & Community:
+                            </p>
+                            <span className="text-[10px] text-amber-300 font-bold tracking-wide">1-Click Viral Invite</span>
+                          </div>
+
+                          {/* Persona Selection Tabs */}
+                          <div className="grid grid-cols-3 gap-2 bg-black/30 p-1.5 rounded-xl border border-white/10 text-xs font-bold">
+                            <button 
+                              type="button" 
+                              onClick={() => setShareCategory("family")}
+                              className={`py-2 px-2 rounded-lg transition-all text-center ${shareCategory === "family" ? 'bg-[#DB1866] text-white shadow-md scale-105' : 'text-blue-200 hover:text-white'}`}
+                            >
+                              👨‍👩‍👧 Family Group
+                            </button>
+                            <button 
+                              type="button" 
+                              onClick={() => setShareCategory("friends")}
+                              className={`py-2 px-2 rounded-lg transition-all text-center ${shareCategory === "friends" ? 'bg-[#DB1866] text-white shadow-md scale-105' : 'text-blue-200 hover:text-white'}`}
+                            >
+                              👫 Friends
+                            </button>
+                            <button 
+                              type="button" 
+                              onClick={() => setShareCategory("status")}
+                              className={`py-2 px-2 rounded-lg transition-all text-center ${shareCategory === "status" ? 'bg-[#DB1866] text-white shadow-md scale-105' : 'text-blue-200 hover:text-white'}`}
+                            >
+                              📱 WhatsApp Status
+                            </button>
+                          </div>
+
+                          {/* Formatted Message Preview */}
+                          <div className="bg-black/40 p-3.5 rounded-xl border border-white/10 text-xs text-gray-200 font-sans leading-relaxed">
+                            <p className="whitespace-pre-line text-blue-100">{getShareMessage()}</p>
+                          </div>
+
+                          {/* Primary Share Action Buttons */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                            <a 
+                              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(getShareMessage())}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="h-12 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30 text-sm transition-all hover:scale-[1.02]"
+                            >
+                              <MessageCircle className="w-5 h-5" /> Share on WhatsApp
+                            </a>
+
+                            <button 
+                              type="button"
+                              onClick={handleCopyShare}
+                              className="h-12 bg-white/15 hover:bg-white/25 border border-white/20 text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm transition-all active:scale-95"
+                            >
+                              {copiedToast ? (
+                                <span className="text-emerald-300 font-bold flex items-center gap-1.5">
+                                  <Check className="w-4 h-4 stroke-[3]" /> Copied to Clipboard! 🎉
+                                </span>
+                              ) : (
+                                <>
+                                  <Copy className="w-4 h-4" /> Copy Invitation Message
+                                </>
+                              )}
+                            </button>
+                          </div>
+
+                          {/* Native Device Share Sheet Trigger */}
+                          <button
+                            type="button"
+                            onClick={handleNativeShare}
+                            className="w-full text-center text-xs text-blue-300 hover:text-white font-semibold flex items-center justify-center gap-1 pt-1 underline"
+                          >
+                            <Share2 className="w-3.5 h-3.5" /> Share via other apps (Instagram, Telegram, SMS)
+                          </button>
                         </div>
                       </div>
 
                       {/* What Happens Next Roadmap */}
-                      <div className="max-w-lg mx-auto text-left bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                      <div className="text-left bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
                         <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider">What Happens Next?</h4>
                         <div className="space-y-3 text-sm">
                           <div className="flex items-start gap-3">
@@ -589,8 +710,8 @@ export default function PreRegisterPage() {
                         </div>
                       </div>
 
-                      {/* Action Buttons */}
-                      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 max-w-lg mx-auto">
+                      {/* Secondary Bottom Navigation Buttons */}
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                         <a 
                           href={`https://wa.me/919844295369?text=Hello%20Maratha%20Matrimony,%20I%20have%20pre-registered%20the%20profile%20of%20${encodeURIComponent(formData.fullName || "my family member")}`} 
                           target="_blank" 

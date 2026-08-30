@@ -156,7 +156,8 @@ import {
   Heart, Send, MessageCircle, Bookmark, ShieldCheck, 
   MapPin, Briefcase, GraduationCap, Calendar, 
   User, ChevronLeft, ChevronRight, X,
-  Clock, Award, Sparkles, Phone, Mail, Eye, BadgeCheck
+  Clock, Award, Sparkles, Phone, Mail, Eye, BadgeCheck,
+  Share2, Copy, Check, ExternalLink
 } from "lucide-react";
 
 export interface ProfileViewProps {
@@ -199,6 +200,8 @@ export interface ProfileViewProps {
 export function ProfileView({ initialData }: ProfileViewProps) {
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   const [showLightbox, setShowLightbox] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [copiedBiodata, setCopiedBiodata] = useState(false);
   const [activeTab, setActiveTab] = useState<"overview" | "family" | "horoscope" | "preferences">("overview");
   
   // Interest & Actions State
@@ -206,6 +209,33 @@ export function ProfileView({ initialData }: ProfileViewProps) {
   const [interestId, setInterestId] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState(false);
   const [isShortlisted, setIsShortlisted] = useState(false);
+
+  const getBiodataText = () => {
+    const url = typeof window !== "undefined" ? window.location.href : `https://marathalageen.com/profile/${initialData.id}`;
+    return `🚩 *MARATHA MATRIMONY — VERIFIED BIODATA* 🚩\n\n👤 *Candidate:* ${initialData.name}\n🎂 *Age & Height:* ${initialData.age} Yrs, ${initialData.height}\n🕊️ *Community:* ${initialData.community || "Maratha"} (Manglik: ${initialData.manglik || "Non-Manglik"})\n🎓 *Education:* ${initialData.education || "Graduate"}\n💼 *Profession:* ${initialData.profession || "Private Professional"}${initialData.income ? ` (${initialData.income})` : ""}\n📍 *Location:* ${initialData.city}, ${initialData.state}\n🏠 *Family:* ${initialData.familyType || "Nuclear Family"} (Father: ${initialData.fatherStatus || "Employed"}, Mother: ${initialData.motherStatus || "Homemaker"})\n\n🔒 *View Complete Verified Profile & Photos:* \n${url}`;
+  };
+
+  const handleCopyBiodata = () => {
+    navigator.clipboard.writeText(getBiodataText());
+    setCopiedBiodata(true);
+    setTimeout(() => setCopiedBiodata(false), 2500);
+  };
+
+  const handleNativeShare = async () => {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({
+          title: `${initialData.name} - Maratha Matrimony Biodata`,
+          text: getBiodataText(),
+          url: typeof window !== "undefined" ? window.location.href : `https://marathalageen.com/profile/${initialData.id}`,
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      handleCopyBiodata();
+    }
+  };
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -382,6 +412,14 @@ export function ProfileView({ initialData }: ProfileViewProps) {
                 </button>
               </div>
 
+              {/* Share Biodata Action */}
+              <button 
+                onClick={() => setShowShareModal(true)}
+                className="w-full flex items-center justify-center gap-2 border border-[#FADADF] hover:border-[#DB1866] bg-[#FFF8FA] hover:bg-[#FFF1F5] text-[#2A3773] hover:text-[#DB1866] font-bold py-3 rounded-2xl transition-all text-sm shadow-sm hover:scale-[1.01]"
+              >
+                <Share2 className="w-4 h-4 text-[#DB1866]" /> Share Biodata (WhatsApp)
+              </button>
+
               {/* Contact Gating Banner */}
               <div className="mt-4 pt-4 border-t border-gray-100">
                 <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
@@ -416,9 +454,17 @@ export function ProfileView({ initialData }: ProfileViewProps) {
                     <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-[#DB1866]" /> {initialData.city}, {initialData.state}</span>
                   </p>
                 </div>
-                <div className="bg-[#FFF1F5] px-4 py-2 rounded-2xl border border-[#FADADF] text-center shrink-0">
-                  <p className="text-[10px] uppercase tracking-wider font-bold text-[#DB1866]">Community</p>
-                  <p className="text-sm font-bold text-[#2A3773]">{initialData.community}</p>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setShowShareModal(true)}
+                    className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-white border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold transition-all shadow-sm"
+                  >
+                    <Share2 className="w-3.5 h-3.5 text-[#DB1866]" /> Share
+                  </button>
+                  <div className="bg-[#FFF1F5] px-4 py-2 rounded-2xl border border-[#FADADF] text-center shrink-0">
+                    <p className="text-[10px] uppercase tracking-wider font-bold text-[#DB1866]">Community</p>
+                    <p className="font-bold text-[#2A3773] text-sm">{initialData.community || "Maratha"}</p>
+                  </div>
                 </div>
               </div>
 
@@ -619,6 +665,89 @@ export function ProfileView({ initialData }: ProfileViewProps) {
                 </button>
               </>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* ──────────── GOD-LEVEL BIODATA SHARE MODAL ──────────── */}
+      {showShareModal && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl border border-[#FADADF] relative overflow-hidden space-y-6">
+            
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-2xl bg-[#FFF1F5] text-[#DB1866] flex items-center justify-center font-bold">
+                  <Share2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-[#2A3773]">Share Matrimonial Biodata</h3>
+                  <p className="text-xs text-gray-500">Forward verified details to family & WhatsApp groups</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowShareModal(false)}
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Formatted Biodata Preview Card */}
+            <div className="bg-gradient-to-br from-[#FFF8FA] to-[#FFF1F5] p-5 rounded-2xl border border-[#FADADF] text-xs text-gray-700 font-mono space-y-2 relative">
+              <div className="absolute top-3 right-3 bg-[#DB1866] text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                Biodata Format
+              </div>
+              <p className="font-bold text-[#2A3773] text-sm font-sans mb-2">🚩 MARATHA MATRIMONY VERIFIED PROFILE</p>
+              <div className="space-y-1.5 font-sans text-xs">
+                <p>👤 <strong>Candidate:</strong> {initialData.name} ({initialData.age} Yrs, {initialData.height})</p>
+                <p>🎓 <strong>Education:</strong> {initialData.education}</p>
+                <p>💼 <strong>Profession:</strong> {initialData.profession}{initialData.income ? ` (${initialData.income})` : ""}</p>
+                <p>📍 <strong>Location:</strong> {initialData.city}, {initialData.state}</p>
+                <p>🕊️ <strong>Community:</strong> {initialData.community || "Maratha"} (Manglik: {initialData.manglik || "Non-Manglik"})</p>
+                <p>🏠 <strong>Family:</strong> {initialData.familyType || "Nuclear Family"} (Father: {initialData.fatherStatus || "Employed"})</p>
+              </div>
+            </div>
+
+            {/* Sharing Actions */}
+            <div className="space-y-3">
+              <a 
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(getBiodataText())}`}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full h-12 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 text-sm transition-all hover:scale-[1.01]"
+              >
+                <MessageCircle className="w-5 h-5" /> Share Directly to WhatsApp
+              </a>
+
+              <div className="grid grid-cols-2 gap-3">
+                <button 
+                  onClick={handleCopyBiodata}
+                  className="h-11 bg-white hover:bg-gray-50 border border-gray-200 text-[#2A3773] font-bold rounded-xl flex items-center justify-center gap-2 text-xs transition-all"
+                >
+                  {copiedBiodata ? (
+                    <span className="text-emerald-600 font-bold flex items-center gap-1">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" /> Copied! 🎉
+                    </span>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" /> Copy Biodata Text
+                    </>
+                  )}
+                </button>
+
+                <button 
+                  onClick={handleNativeShare}
+                  className="h-11 bg-white hover:bg-gray-50 border border-gray-200 text-[#2A3773] font-bold rounded-xl flex items-center justify-center gap-2 text-xs transition-all"
+                >
+                  <Share2 className="w-3.5 h-3.5 text-[#DB1866]" /> Share via Apps
+                </button>
+              </div>
+            </div>
+
+            <p className="text-[11px] text-gray-400 text-center">
+              🔒 Contact numbers & exact address remain private until mutual connection.
+            </p>
           </div>
         </div>
       )}
