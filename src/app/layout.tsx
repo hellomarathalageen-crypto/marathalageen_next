@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: "Maratha Matrimony (मराठा लागीन) | Karnataka's #1 Trusted Community Matchmaking",
     template: "%s | Maratha Matrimony",
   },
-  description: "🚩 Jai Jijau, Jai Shivray! Karnataka's most trusted Maratha Matrimony platform. Pre-register now to claim ₹2,999 Lifetime Free VIP Premium access.",
+  description: "🚩 Jai Jijau, Jai Shivray! Karnataka's most trusted Maratha Matrimony platform. Pre-register now to claim ₹4,999 Free VIP Premium access.",
   keywords: [
     "Maratha Matrimony",
     "Karnataka Maratha Matrimony",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Maratha Matrimony (मराठा लागीन) | Karnataka's #1 Trusted Community Matchmaking",
-    description: "🚩 Jai Jijau, Jai Shivray! Join Karnataka's exclusive Maratha Matrimony network. Claim ₹2,999 Lifetime VIP Premium completely Free during pre-registration.",
+    description: "🚩 Jai Jijau, Jai Shivray! Join Karnataka's exclusive Maratha Matrimony network. Claim ₹4,999 VIP Premium completely Free during pre-registration.",
     url: "https://marathalageen.com",
     siteName: "Maratha Matrimony",
     locale: "en_IN",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Maratha Matrimony (मराठा लागीन) | Karnataka",
-    description: "Karnataka's #1 Exclusive Maratha Matrimony platform. Claim ₹2,999 Lifetime VIP Free Premium.",
+    description: "Karnataka's #1 Exclusive Maratha Matrimony platform. Claim ₹4,999 VIP Free Premium.",
   },
   robots: {
     index: true,

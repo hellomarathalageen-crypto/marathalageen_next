@@ -75,11 +75,11 @@ export default function PreRegisterPage() {
     const candidate = formData.fullName ? `of ${formData.fullName}` : "";
     const siteUrl = "https://marathalageen.com";
     if (shareCategory === "family") {
-      return `🚩 *जय जिजाऊ, जय शिवराय!* 🙏\n\nMaratha community families in Karnataka can now register ${candidate ? `profiles like ${candidate}` : "bride and groom profiles"} on *Karnataka's Exclusive Maratha Matrimony* platform.\n\n✨ *Launch Privilege:* Get *₹2,999 Lifetime VIP Premium Membership completely FREE* during pre-registration.\n\n👉 Pre-register your family's profile here:\n${siteUrl}`;
+      return `🚩 *जय जिजाऊ, जय शिवराय!* 🙏\n\nMaratha community families in Karnataka can now register ${candidate ? `profiles like ${candidate}` : "bride and groom profiles"} on *Karnataka's Exclusive Maratha Matrimony* platform.\n\n✨ *Launch Privilege:* Get *₹4,999 VIP Premium Membership completely FREE* during pre-registration.\n\n👉 Pre-register your family's profile here:\n${siteUrl}`;
     } else if (shareCategory === "friends") {
-      return `💍 Hey! Check out *Maratha Matrimony* — Karnataka's exclusive matrimonial network for the Maratha community.\n\n🌟 Early bird pre-registration is open with *Free ₹2,999 Lifetime VIP Access*.\n\nRegister in 2 minutes here:\n${siteUrl}`;
+      return `💍 Hey! Check out *Maratha Matrimony* — Karnataka's exclusive matrimonial network for the Maratha community.\n\n🌟 Early bird pre-registration is open with *Free ₹4,999 VIP Access*.\n\nRegister in 2 minutes here:\n${siteUrl}`;
     } else {
-      return `✨ Pre-register on Maratha Matrimony! Exclusive for Karnataka Maratha community families. 🚩 Claim your Free ₹2,999 Lifetime VIP Pass here: ${siteUrl}`;
+      return `✨ Pre-register on Maratha Matrimony! Exclusive for Karnataka Maratha community families. 🚩 Claim your Free ₹4,999 VIP Pass here: ${siteUrl}`;
     }
   };
 
@@ -280,7 +280,7 @@ export default function PreRegisterPage() {
                 >
                   Pre-Register Your Family — It&apos;s Free!
                 </button>
-                <p className="text-blue-200/90 text-[11px] text-center mt-2 font-medium">🔒 Get Premium Membership Worth ₹2,999 FREE</p>
+                <p className="text-blue-200/90 text-[11px] text-center mt-2 font-medium">🔒 Get Premium Membership Worth ₹4,999 FREE</p>
               </div>
             </div>
 
@@ -290,7 +290,7 @@ export default function PreRegisterPage() {
                 { icon: <Users className="w-4 h-4 text-[#DB1866]" />, label: "Exclusive to", sub: "Maratha Community" },
                 { icon: <ShieldCheck className="w-4 h-4 text-[#DB1866]" />, label: "100%", sub: "Privacy Protected" },
                 { icon: <CheckCircle2 className="w-4 h-4 text-[#DB1866]" />, label: "Verified", sub: "Profiles at Launch" },
-                { icon: <Heart className="w-4 h-4 text-[#DB1866]" fill="currentColor" />, label: "Free Premium", sub: "Worth ₹2,999" },
+                { icon: <Heart className="w-4 h-4 text-[#DB1866]" fill="currentColor" />, label: "Free Premium", sub: "Worth ₹4,999" },
               ].map((b, i) => (
                 <div key={i} className="flex flex-col items-center justify-center text-center bg-[#fdf5f8] rounded-xl p-3 border border-pink-100/40">
                   <div className="bg-white p-1.5 rounded-lg shadow-sm mb-1 text-[#DB1866]">{b.icon}</div>
@@ -309,7 +309,7 @@ export default function PreRegisterPage() {
                 {/* Left Col: Text Content */}
                 <div className="col-span-7 space-y-6 pr-4">
                   <div className="inline-flex items-center gap-2 bg-white border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-2 rounded-full shadow-sm">
-                    <Bell className="w-3.5 h-3.5 fill-[#DB1866]" /> 🎉 Limited Pre-Registration Open — Free Premium Worth ₹2,999
+                    <Bell className="w-3.5 h-3.5 fill-[#DB1866]" /> 🎉 Limited Pre-Registration Open — Free Premium Worth ₹4,999
                   </div>
 
                   <h1 className="text-[46px] xl:text-[50px] font-semibold text-[#2A3773] leading-[1.16] tracking-tight">
@@ -554,7 +554,7 @@ export default function PreRegisterPage() {
 
                   <ul className="space-y-4">
                     {[
-                      { title: "Complimentary Premium Membership", subtitle: "(Worth ₹2,999 Free for Life)" },
+                      { title: "Complimentary Premium Membership", subtitle: "(Worth ₹4,999 Free with Pre-Registration)" },
                       { title: "Priority Profile Verification", subtitle: "Instant review by our team" },
                       { title: "Early Access to Verified Profiles", subtitle: "Be the first to explore curated matches" },
                       { title: "First Choice Advantage", subtitle: "Direct connect without contact view limits" },
@@ -596,7 +596,7 @@ export default function PreRegisterPage() {
                     <div className="text-center py-6 md:py-10 animate-in zoom-in-95 duration-500 space-y-8 max-w-2xl mx-auto">
                       {/* Top Celebration Badge */}
                       <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold px-4 py-2 rounded-full shadow-sm">
-                        <Sparkles className="w-4 h-4 text-emerald-600 animate-spin" style={{ animationDuration: '3s' }} /> Pre-Registration Confirmed • Free Lifetime Premium Reserved
+                        <Sparkles className="w-4 h-4 text-emerald-600 animate-spin" style={{ animationDuration: '3s' }} /> Pre-Registration Confirmed • Free VIP Premium Reserved
                       </div>
 
                       {/* Joyful Icon & Heading */}
@@ -658,8 +658,8 @@ export default function PreRegisterPage() {
                         {/* VIP Perks Grid */}
                         <div className="relative z-10 grid grid-cols-3 gap-2.5 text-xs">
                           <div className="bg-white/5 p-3 rounded-xl border border-white/10 text-center">
-                            <p className="text-pink-300 font-bold text-[13px]">₹2,999 Premium</p>
-                            <p className="text-[10px] text-gray-300 mt-0.5">Free for Life</p>
+                            <p className="text-pink-300 font-bold text-[13px]">₹4,999 Premium</p>
+                            <p className="text-[10px] text-gray-300 mt-0.5">Free at Launch</p>
                           </div>
                           <div className="bg-white/5 p-3 rounded-xl border border-white/10 text-center">
                             <p className="text-emerald-300 font-bold text-[13px]">Priority Review</p>
@@ -1389,7 +1389,7 @@ export default function PreRegisterPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               {[
                 { q: "Is this platform only for Maratha community?", a: "Yes, Maratha Lageen is Karnataka's dedicated platform created exclusively for the Maratha community." },
-                { q: "Is there any registration fee today?", a: "No, pre-registration is 100% free and comes with a Complimentary Premium Membership worth ₹2,999." },
+                { q: "Is there any registration fee today?", a: "No, pre-registration is 100% free and comes with a Complimentary Premium Membership worth ₹4,999." },
                 { q: "Will my details be visible to everyone?", a: "No. Your data is secured with us. Details are shown strictly to intended, verified members." },
                 { q: "When will the platform launch?", a: "We are currently completing pre-registrations and will launch shortly with thousands of verified profiles." }
               ].map((faq, i) => (
@@ -1521,7 +1521,7 @@ export default function PreRegisterPage() {
             </div>
 
             <p className="relative z-10 text-[11px] text-blue-300/80 text-center">
-              🚩 Official Maratha Community Network • Free ₹2,999 Lifetime VIP Access
+              🚩 Official Maratha Community Network • Free ₹4,999 VIP Premium Access
             </p>
           </div>
         </div>

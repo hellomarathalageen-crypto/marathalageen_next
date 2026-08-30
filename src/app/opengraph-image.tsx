@@ -117,7 +117,7 @@ export default async function Image() {
             border: "2px solid rgba(255,255,255,0.3)",
           }}
         >
-          <span>🎁 PRE-REGISTER: ₹2,999 Lifetime Premium Free</span>
+          <span>🎁 PRE-REGISTER: ₹4,999 Premium Membership Free</span>
         </div>
 
         {/* Bottom Details */}
