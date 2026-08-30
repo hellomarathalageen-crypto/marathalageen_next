@@ -88,11 +88,8 @@ interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
-export default function AdminLayout({ children }: AdminLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const pathname = usePathname();
-
-  const Sidebar = () => (
+function AdminSidebar({ pathname }: { pathname: string }) {
+  return (
     <aside className="w-60 shrink-0 bg-[#2A3773] min-h-screen flex flex-col overflow-y-auto">
       {/* Logo */}
       <div className="px-5 py-5 border-b border-white/10 flex items-center gap-3">
@@ -151,19 +148,24 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </div>
     </aside>
   );
+}
+
+export default function AdminLayout({ children }: AdminLayoutProps) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <div className="flex min-h-screen bg-[#F8F9FC]">
       {/* Desktop Sidebar */}
       <div className="hidden lg:block">
-        <Sidebar />
+        <AdminSidebar pathname={pathname} />
       </div>
 
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <div className="w-60">
-            <Sidebar />
+            <AdminSidebar pathname={pathname} />
           </div>
           <div
             className="flex-1 bg-black/50 backdrop-blur-sm"
