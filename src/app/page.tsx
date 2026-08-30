@@ -250,7 +250,7 @@ export default function PreRegisterPage() {
         <section className="bg-[#FFF8FA] overflow-hidden" id="home">
 
           {/* ── MOBILE HERO (hidden on lg) ── */}
-          <div className="lg:hidden relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
+          <div className="lg:hidden relative min-h-[100svh] flex flex-col justify-end items-center overflow-hidden text-center">
             <img
               src="/hero.jpg"
               alt="Maratha Couple"
@@ -258,25 +258,25 @@ export default function PreRegisterPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#001a4d] via-[#2A3773]/95 to-transparent via-65%" />
 
-            <div className="relative z-10 px-4 pb-8 pt-24 text-white flex flex-col items-center justify-end text-center w-full max-w-sm mx-auto">
-              <div className="inline-flex items-center justify-center gap-1.5 bg-[#DB1866] text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 shadow-lg animate-pulse">
+            <div className="relative z-10 px-4 pb-8 pt-24 text-white flex flex-col items-center justify-center text-center w-full max-w-sm mx-auto">
+              <div className="inline-flex items-center justify-center gap-1.5 bg-[#DB1866] text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full mb-3 shadow-lg animate-pulse mx-auto">
                 <Bell className="w-3.5 h-3.5" /> 🎉 Limited Pre-Registration Open!
               </div>
 
-              <h1 className="text-[26px] sm:text-[30px] font-bold leading-[1.2] tracking-tight mb-3 drop-shadow-lg text-center w-full">
-                Karnataka&apos;s<br/>
-                <span className="text-[#f9a8d4] drop-shadow-md">Exclusive Maratha</span><br/>
-                Matrimony Platform
+              <h1 className="text-[28px] sm:text-[32px] font-bold leading-[1.2] tracking-tight mb-3 drop-shadow-lg text-center w-full mx-auto">
+                Karnataka&apos;s Exclusive<br/>
+                <span className="text-[#f9a8d4] drop-shadow-md">Maratha Matrimony</span><br/>
+                Platform
               </h1>
 
-              <p className="text-blue-50 text-[13px] leading-relaxed mb-5 drop-shadow-md font-normal text-center max-w-xs mx-auto">
+              <p className="text-blue-50 text-[13px] sm:text-[14px] leading-relaxed mb-5 drop-shadow-md font-normal text-center max-w-[290px] mx-auto">
                 Trusted by Maratha families across Karnataka — verified profiles, privacy-first, genuine connections.
               </p>
 
-              <div className="w-full">
+              <div className="w-full max-w-xs mx-auto flex flex-col items-center justify-center text-center">
                 <button 
                   onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} 
-                  className="w-full bg-[#DB1866] hover:bg-[#B81456] active:scale-[0.98] text-white font-bold text-sm sm:text-base h-13 py-3.5 rounded-xl shadow-2xl shadow-[#DB1866]/50 transition-all duration-150"
+                  className="w-full bg-[#DB1866] hover:bg-[#B81456] active:scale-[0.98] text-white font-bold text-sm sm:text-base h-13 py-3.5 rounded-xl shadow-2xl shadow-[#DB1866]/50 transition-all duration-150 text-center"
                 >
                   Pre-Register Your Family — It&apos;s Free!
                 </button>
@@ -285,19 +285,17 @@ export default function PreRegisterPage() {
             </div>
 
             {/* Trust Badges — 2×2 card strip below hero */}
-            <div className="relative z-10 grid grid-cols-2 gap-2.5 px-4 py-4 bg-white border-b border-pink-50">
+            <div className="relative z-10 grid grid-cols-2 gap-2.5 px-4 py-4 bg-white border-b border-pink-50 w-full max-w-md mx-auto">
               {[
                 { icon: <Users className="w-4 h-4 text-[#DB1866]" />, label: "Exclusive to", sub: "Maratha Community" },
                 { icon: <ShieldCheck className="w-4 h-4 text-[#DB1866]" />, label: "100%", sub: "Privacy Protected" },
                 { icon: <CheckCircle2 className="w-4 h-4 text-[#DB1866]" />, label: "Verified", sub: "Profiles at Launch" },
                 { icon: <Heart className="w-4 h-4 text-[#DB1866]" fill="currentColor" />, label: "Free Premium", sub: "Worth ₹2,999" },
               ].map((b, i) => (
-                <div key={i} className="flex items-center gap-2 bg-[#fdf5f8] rounded-xl p-3">
-                  <div className="bg-white p-1.5 rounded-lg shadow-sm shrink-0">{b.icon}</div>
-                  <div>
-                    <p className="text-[11px] font-bold text-[#2A3773] leading-tight">{b.label}</p>
-                    <p className="text-[10px] text-gray-500 leading-tight">{b.sub}</p>
-                  </div>
+                <div key={i} className="flex flex-col items-center justify-center text-center bg-[#fdf5f8] rounded-xl p-3 border border-pink-100/40">
+                  <div className="bg-white p-1.5 rounded-lg shadow-sm mb-1 text-[#DB1866]">{b.icon}</div>
+                  <p className="text-[11px] font-bold text-[#2A3773] leading-tight text-center">{b.label}</p>
+                  <p className="text-[10px] text-gray-500 leading-tight text-center">{b.sub}</p>
                 </div>
               ))}
             </div>
