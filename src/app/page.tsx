@@ -151,14 +151,14 @@ export default function PreRegisterPage() {
     <div className="min-h-screen bg-white font-sans selection:bg-[#DB1866]/20 selection:text-[#DB1866]">
       {/* Navbar */}
       <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="container mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+        <div className="container mx-auto px-3 sm:px-4 md:px-8 h-18 sm:h-20 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <Link href="#home" className="flex items-center gap-2 pl-2">
+            <Link href="#home" className="flex items-center gap-2 pl-1 sm:pl-2">
               <img 
                 src="/logo.png" 
                 alt="Maratha Lageen Logo" 
-                className="h-12 md:h-16 lg:h-20 w-auto object-contain scale-125 lg:scale-150 origin-left transition-transform" 
+                className="h-14 sm:h-16 lg:h-20 w-auto object-contain scale-150 sm:scale-150 lg:scale-160 origin-left transition-transform" 
               />
             </Link>
           </div>
@@ -184,23 +184,26 @@ export default function PreRegisterPage() {
           </nav>
 
           {/* CTA & Mobile Toggle */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <button
               onClick={() => setShowShareModal(true)}
-              className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold transition-all shadow-sm hover:scale-105"
+              className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold transition-all shadow-sm hover:scale-105"
             >
               <Share2 className="w-3.5 h-3.5 text-[#DB1866]" /> Share Platform
             </button>
-            <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-4 py-2 text-xs sm:text-sm md:px-7 md:py-5 md:text-base font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105">
+            <Button 
+              onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} 
+              className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-3.5 py-1.5 text-xs sm:text-sm h-8 sm:h-9 md:h-11 md:px-6 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105"
+            >
               Pre-Register
             </Button>
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-[#2A3773] hover:text-[#DB1866] rounded-xl transition-colors"
+              className="lg:hidden p-1.5 text-[#2A3773] hover:text-[#DB1866] rounded-xl transition-colors"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -255,25 +258,30 @@ export default function PreRegisterPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#001a4d] via-[#2A3773]/95 to-transparent via-65%" />
 
-            <div className="relative z-10 px-5 pb-8 pt-28 text-white text-center">
-              <div className="inline-flex items-center gap-2 bg-[#DB1866] text-white text-xs font-bold px-3.5 py-1.5 rounded-full mb-4 shadow-lg animate-pulse">
+            <div className="relative z-10 px-4 pb-8 pt-24 text-white flex flex-col items-center justify-end text-center w-full max-w-sm mx-auto">
+              <div className="inline-flex items-center justify-center gap-1.5 bg-[#DB1866] text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 shadow-lg animate-pulse">
                 <Bell className="w-3.5 h-3.5" /> 🎉 Limited Pre-Registration Open!
               </div>
 
-              <h1 className="text-[32px] font-semibold leading-[1.15] tracking-tight mb-3 drop-shadow-lg">
-                Karnataka's<br/>
-                <span className="text-[#f9a8d4] drop-shadow-md font-bold">Exclusive Maratha</span><br/>
+              <h1 className="text-[26px] sm:text-[30px] font-bold leading-[1.2] tracking-tight mb-3 drop-shadow-lg text-center w-full">
+                Karnataka&apos;s<br/>
+                <span className="text-[#f9a8d4] drop-shadow-md">Exclusive Maratha</span><br/>
                 Matrimony Platform
               </h1>
 
-              <p className="text-blue-50 text-[14px] leading-relaxed mb-5 drop-shadow-md font-normal">
+              <p className="text-blue-50 text-[13px] leading-relaxed mb-5 drop-shadow-md font-normal text-center max-w-xs mx-auto">
                 Trusted by Maratha families across Karnataka — verified profiles, privacy-first, genuine connections.
               </p>
 
-              <button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#DB1866] hover:bg-[#B81456] active:scale-[0.98] text-white font-bold text-base h-14 rounded-xl shadow-2xl shadow-[#DB1866]/50 transition-all duration-150">
-                Pre-Register Your Family — It's Free!
-              </button>
-              <p className="text-blue-200/80 text-xs text-center mt-2.5">🔒 Get Premium Membership Worth ₹2,999 FREE</p>
+              <div className="w-full">
+                <button 
+                  onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} 
+                  className="w-full bg-[#DB1866] hover:bg-[#B81456] active:scale-[0.98] text-white font-bold text-sm sm:text-base h-13 py-3.5 rounded-xl shadow-2xl shadow-[#DB1866]/50 transition-all duration-150"
+                >
+                  Pre-Register Your Family — It&apos;s Free!
+                </button>
+                <p className="text-blue-200/90 text-[11px] text-center mt-2 font-medium">🔒 Get Premium Membership Worth ₹2,999 FREE</p>
+              </div>
             </div>
 
             {/* Trust Badges — 2×2 card strip below hero */}
