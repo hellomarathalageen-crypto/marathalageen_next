@@ -10,7 +10,7 @@ import {
   User, Users, UserPlus, PlayCircle,
   MapPin, Phone, Mail, MessageCircle,
   Sparkles, ArrowRight, ArrowLeft, Lock, BadgeCheck, Camera, Check,
-  Share2, Copy, Share, ExternalLink, X
+  Share2, Copy, Share, ExternalLink, X, Menu
 } from "lucide-react";
 
 export default function PreRegisterPage() {
@@ -21,6 +21,7 @@ export default function PreRegisterPage() {
   const [shareCategory, setShareCategory] = useState<"family" | "friends" | "status">("family");
   const [copiedToast, setCopiedToast] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -182,19 +183,63 @@ export default function PreRegisterPage() {
             ))}
           </nav>
 
-          {/* CTA */}
-          <div className="flex items-center gap-3">
+          {/* CTA & Mobile Toggle */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => setShowShareModal(true)}
               className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold transition-all shadow-sm hover:scale-105"
             >
               <Share2 className="w-3.5 h-3.5 text-[#DB1866]" /> Share Platform
             </button>
-            <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-5 py-2.5 text-sm md:px-7 md:py-5 md:text-base font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105">
-              Pre-Register Now
+            <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-4 py-2 text-xs sm:text-sm md:px-7 md:py-5 md:text-base font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105">
+              Pre-Register
             </Button>
+            {/* Mobile Hamburger Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-[#2A3773] hover:text-[#DB1866] rounded-xl transition-colors"
+              aria-label="Toggle Navigation Menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-b border-[#FADADF] shadow-xl animate-in slide-in-from-top-2 duration-200">
+            <nav className="flex flex-col p-4 divide-y divide-gray-50 text-sm font-bold text-[#2A3773]">
+              {[
+                { href: "#home", label: "Home" },
+                { href: "#who-can-register", label: "Who Can Register" },
+                { href: "#why-we-exist", label: "Why We Exist" },
+                { href: "/success-stories", label: "Success Stories" },
+                { href: "/about", label: "About Us" },
+                { href: "/contact", label: "Contact" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-3 px-3 hover:text-[#DB1866] hover:bg-pink-50/50 rounded-xl transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="pt-4 mt-2 flex flex-col gap-2">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setShowShareModal(true);
+                  }}
+                  className="w-full py-3 bg-[#FFF1F5] text-[#DB1866] rounded-xl font-bold text-xs flex items-center justify-center gap-2 border border-[#FADADF]"
+                >
+                  <Share2 className="w-4 h-4" /> Share Maratha Matrimony on WhatsApp
+                </button>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main>
@@ -746,25 +791,25 @@ export default function PreRegisterPage() {
                         <p className="text-gray-500 text-sm mt-1">100% Free • Zero Hidden Charges • Privacy Guaranteed</p>
                       </div>
                       
-                      {/* Stepper Header — 100% Centered & Balanced */}
-                      <div className="relative mb-10 max-w-xl mx-auto px-2">
+                      {/* Stepper Header — 100% Centered & Responsive */}
+                      <div className="relative mb-8 md:mb-10 max-w-xl mx-auto px-1 sm:px-2">
                         {/* Background Connecting Track */}
-                        <div className="absolute top-4 left-8 right-8 h-1 bg-gray-100 -translate-y-1/2 z-0 rounded-full" />
+                        <div className="absolute top-3.5 sm:top-4 left-6 sm:left-8 right-6 sm:right-8 h-1 bg-gray-100 -translate-y-1/2 z-0 rounded-full" />
                         {/* Active Progress Bar Fill */}
                         <div 
-                          className="absolute top-4 left-8 h-1 bg-[#DB1866] -translate-y-1/2 z-0 rounded-full transition-all duration-300"
+                          className="absolute top-3.5 sm:top-4 left-6 sm:left-8 h-1 bg-[#DB1866] -translate-y-1/2 z-0 rounded-full transition-all duration-300"
                           style={{ 
-                            width: currentStep === 1 ? '0%' : currentStep === 2 ? '33.33%' : currentStep === 3 ? '66.66%' : 'calc(100% - 4rem)' 
+                            width: currentStep === 1 ? '0%' : currentStep === 2 ? '33.33%' : currentStep === 3 ? '66.66%' : 'calc(100% - 3rem)' 
                           }}
                         />
 
                         {/* Step Nodes */}
                         <div className="relative z-10 flex justify-between items-start">
                           {[
-                            { num: 1, label: "Basic Details" },
-                            { num: 2, label: "Personal Details" },
-                            { num: 3, label: "Preferences" },
-                            { num: 4, label: "Upload & Submit" }
+                            { num: 1, label: "Basic", fullLabel: "Basic Details" },
+                            { num: 2, label: "Personal", fullLabel: "Personal Details" },
+                            { num: 3, label: "Preferences", fullLabel: "Preferences" },
+                            { num: 4, label: "Submit", fullLabel: "Upload & Submit" }
                           ].map((s) => {
                             const isActive = currentStep === s.num;
                             const isCompleted = currentStep > s.num;
@@ -775,19 +820,20 @@ export default function PreRegisterPage() {
                                 className={`flex flex-col items-center text-center ${isCompleted ? 'cursor-pointer' : ''}`}
                                 style={{ width: '25%' }}
                               >
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                                <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                                   isActive 
                                     ? 'bg-[#DB1866] text-white shadow-md shadow-[#DB1866]/30 ring-4 ring-[#FFF1F5] scale-110' 
                                     : isCompleted
                                     ? 'bg-emerald-600 text-white shadow-sm'
                                     : 'bg-white border-2 border-gray-200 text-gray-400'
                                 }`}>
-                                  {isCompleted ? <Check className="w-4 h-4 stroke-[3]" /> : s.num}
+                                  {isCompleted ? <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[3]" /> : s.num}
                                 </div>
-                                <span className={`text-[11px] font-bold mt-2 leading-tight px-1 transition-colors ${
+                                <span className={`text-[10px] sm:text-[11px] font-bold mt-1.5 sm:mt-2 leading-tight px-0.5 transition-colors ${
                                   isActive ? 'text-[#DB1866]' : isCompleted ? 'text-[#2A3773]' : 'text-gray-400'
                                 }`}>
-                                  {s.label}
+                                  <span className="sm:hidden">{s.label}</span>
+                                  <span className="hidden sm:inline">{s.fullLabel}</span>
                                 </span>
                               </div>
                             );
