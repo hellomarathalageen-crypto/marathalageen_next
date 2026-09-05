@@ -262,9 +262,20 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
     loadLiveMessages();
   }, [activeContact?.userId, currentUserId]);
 
-  // Auto-scroll to latest message
+  const chatScrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Keep window strictly at top on mount
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
+  // Auto-scroll the inner chat container ONLY (never scrolls the window/page)
+  useEffect(() => {
+    if (chatScrollContainerRef.current) {
+      chatScrollContainerRef.current.scrollTop = chatScrollContainerRef.current.scrollHeight;
+    }
   }, [messages, isTyping]);
 
   // Handle Send Message
@@ -361,10 +372,10 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
   });
 
   return (
-    <div className="w-full bg-[#FAFAFA] min-h-[calc(100vh-4.5rem)] flex items-center justify-center p-2 sm:p-4 md:p-6 font-sans">
+    <div className="w-full bg-[#FAFAFA] h-[calc(100dvh-4.5rem)] sm:h-[calc(100dvh-5rem)] flex items-center justify-center p-0 sm:p-3 md:p-4 font-sans overflow-hidden">
       
       {/* ── Main Instagram Container ── */}
-      <div className="w-full max-w-7xl h-[calc(100vh-6rem)] min-h-[620px] bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row relative">
+      <div className="w-full max-w-7xl h-full bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row relative">
         
         {/* ════════════════ LEFT SIDEBAR: THREADS / INBOX ════════════════ */}
         <div className={`w-full md:w-80 lg:w-[380px] border-r border-gray-100 flex flex-col bg-white shrink-0 ${
@@ -583,7 +594,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
           </div>
 
           {/* ── Conversation Stream ── */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-[#FFFDFB]/40">
+          <div ref={chatScrollContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-[#FFFDFB]/40">
             
             {/* Top Profile Intro (Instagram Style) */}
             <div className="flex flex-col items-center justify-center py-6 text-center space-y-2 border-b border-gray-100/80 mb-4">
