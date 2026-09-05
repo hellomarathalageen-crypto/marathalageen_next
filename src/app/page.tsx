@@ -22,6 +22,7 @@ export default function PreRegisterPage() {
   const [copiedToast, setCopiedToast] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isPlayingVideo, setIsPlayingVideo] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -35,6 +36,7 @@ export default function PreRegisterPage() {
     district: "",
     // Personal Details (Step 2)
     dob: "",
+    birthTime: "",
     age: "",
     height: "",
     maritalStatus: "Never Married",
@@ -72,14 +74,14 @@ export default function PreRegisterPage() {
   };
 
   const getShareMessage = () => {
-    const candidate = formData.fullName ? `of ${formData.fullName}` : "";
+    const candidate = formData.fullName ? `(${formData.fullName})` : "";
     const siteUrl = "https://marathalageen.com";
     if (shareCategory === "family") {
-      return `🚩 *जय जिजाऊ, जय शिवराय!* 🙏\n\nMaratha community families in Karnataka can now register ${candidate ? `profiles like ${candidate}` : "bride and groom profiles"} on *Karnataka's Exclusive Maratha Matrimony* platform.\n\n✨ *Launch Privilege:* Get *₹4,999 VIP Premium Membership completely FREE* during pre-registration.\n\n👉 Pre-register your family's profile here:\n${siteUrl}`;
+      return `🚩 *ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ!* 🙏\n\nಕರ್ನಾಟಕದ ಸಮಸ್ತ ಕ್ಷತ್ರಿಯ ಮರಾಠ ಬಾಂಧವರಿಗಾಗಿ ವಿಶೇಷ ವೈವಾಹಿಕ ವೇದಿಕೆ — *ಮರಾಠ ಲಗ್ನ (Maratha Lageen)*.\n\n✨ ನಮ್ಮ ಕುಟುಂಬದ ವಿವಾಹ ಅಪೇಕ್ಷಿತರ ${candidate ? `${candidate} ಅವರ ` : ""}ಪ್ರೊಫೈಲ್ ನೋಂದಾಯಿಸಿ. ಈಗ ನೋಂದಾಯಿಸಿಕೊಳ್ಳುವ ಮೊದಲ 5,000 ಕುಟುಂಬಗಳಿಗೆ *₹4,999 VIP ಮೆಂಬರ್‌ಶಿಪ್ ಸಂಪೂರ್ಣ ಉಚಿತ!*\n\n👉 ಉಚಿತವಾಗಿ ನೋಂದಾಯಿಸಲು ಭೇಟಿ ನೀಡಿ:\n${siteUrl}`;
     } else if (shareCategory === "friends") {
-      return `💍 Hey! Check out *Maratha Matrimony* — Karnataka's exclusive matrimonial network for the Maratha community.\n\n🌟 Early bird pre-registration is open with *Free ₹4,999 VIP Access*.\n\nRegister in 2 minutes here:\n${siteUrl}`;
+      return `🚩 *ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ!* ✨\n\nಕರ್ನಾಟಕದ ಮರಾಠ ಸಮಾಜದ ಏಕೈಕ ವಿಶ್ವಾಸಾರ್ಹ ಮ್ಯಾಟ್ರಿಮೋನಿ ವೇದಿಕೆ *Maratha Lageen*.\n\n🌟 Early Bird Privilege: ₹4,999 ಮೌಲ್ಯದ VIP ಪ್ರವೇಶ ಉಚಿತವಾಗಿ ಪಡೆಯಿರಿ!\n\nಈಗಲೇ ನೋಂದಾಯಿಸಿ:\n${siteUrl}`;
     } else {
-      return `✨ Pre-register on Maratha Matrimony! Exclusive for Karnataka Maratha community families. 🚩 Claim your Free ₹4,999 VIP Pass here: ${siteUrl}`;
+      return `🚩 *ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ!* ಕರ್ನಾಟಕದ ಕ್ಷತ್ರಿಯ ಮರಾಠ ಸಮಾಜದ ನಂಬಿಕಾರ್ಹ ಮ್ಯಾಟ್ರಿಮೋನಿ ಪೋರ್ಟಲ್. ಉಚಿತ ₹4,999 VIP ಪಾಸ್ ಪಡೆಯಲು ಕ್ಲಿಕ್ ಮಾಡಿ: ${siteUrl}`;
     }
   };
 
@@ -158,7 +160,7 @@ export default function PreRegisterPage() {
               <img 
                 src="/logo.png" 
                 alt="Maratha Lageen Logo" 
-                className="h-14 sm:h-16 lg:h-20 w-auto object-contain scale-150 sm:scale-150 lg:scale-160 origin-left transition-transform" 
+                className="h-11 sm:h-12 lg:h-14 w-auto object-contain transition-transform" 
               />
             </Link>
           </div>
@@ -391,6 +393,84 @@ export default function PreRegisterPage() {
 
               </div>
             </div>
+          </div>
+        </section>
+
+        
+        {/* ──────────── ITEM 5: HORIZONTAL MARATHA WEDDING & HERITAGE VIDEO SHOWCASE ──────────── */}
+        <section className="py-14 sm:py-18 bg-gradient-to-b from-white via-[#FFF8FA] to-[#fdf5f8] border-b border-pink-100/60" id="heritage-video">
+          <div className="container mx-auto px-4 max-w-5xl text-center">
+            
+            <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#DB1866]" /> 
+              <span>ಪವಿತ್ರ ಮರಾಠ ಸಂಸ್ಕೃತಿ • Sacred Maratha Heritage</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2A3773] tracking-tight mb-3">
+              Maratha Wedding Traditions &amp; Lineage
+            </h2>
+            <p className="text-gray-600 text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
+              Experience the sacred vows, royal rituals, and timeless gotra values that unite Kshatriya Maratha families across Karnataka.
+            </p>
+
+            {/* 16:9 Cinematic Video Card */}
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-black/90 aspect-video max-w-4xl mx-auto group">
+              <img
+                src="/hero.jpg"
+                alt="Maratha Wedding Rituals"
+                className={`w-full h-full object-cover object-center transition-all duration-700 ${isPlayingVideo ? "opacity-20 scale-105 filter blur-xs" : "opacity-85 group-hover:scale-102"}`}
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
+
+              {!isPlayingVideo ? (
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-white cursor-pointer" onClick={() => setIsPlayingVideo(true)}>
+                  <button 
+                    aria-label="Play Maratha Wedding Video"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#DB1866] hover:bg-[#B81456] text-white flex items-center justify-center shadow-2xl shadow-[#DB1866]/60 transition-transform duration-300 hover:scale-110 active:scale-95 mb-4 group-hover:ring-8 group-hover:ring-[#DB1866]/30"
+                  >
+                    <PlayCircle className="w-10 h-10 sm:w-12 sm:h-12" />
+                  </button>
+                  <p className="text-base sm:text-lg font-bold drop-shadow-md">Watch Cultural Wedding Showcase</p>
+                  <p className="text-xs sm:text-sm text-pink-200 mt-1 font-medium flex items-center gap-2">
+                    <span>96 Kuli Traditions</span> • <span>Sakharpuda</span> • <span>Mangalashtak</span> • <span>Saptapadi</span>
+                  </p>
+                </div>
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                  <div className="relative w-full h-full flex flex-col items-center justify-center">
+                    <div className="w-full h-full rounded-2xl bg-black flex flex-col items-center justify-center text-white p-6 text-center">
+                      <div className="w-16 h-16 rounded-full bg-[#DB1866]/20 border border-[#DB1866] flex items-center justify-center mb-4">
+                        <PlayCircle className="w-8 h-8 text-[#DB1866]" />
+                      </div>
+                      <h4 className="text-lg font-bold mb-2">Maratha Traditional Wedding Documentary</h4>
+                      <p className="text-xs text-gray-300 max-w-md mb-4">Ready to embed your official Maratha wedding video MP4 / YouTube URL anytime.</p>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setIsPlayingVideo(false); }}
+                        className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full text-xs font-bold backdrop-blur-md transition-colors"
+                      >
+                        Back to Preview
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+                <span className="bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full text-[11px] font-semibold text-white/90 border border-white/20">
+                  🚩 Authentic 96 Kuli Culture
+                </span>
+                <span className="bg-[#DB1866]/80 backdrop-blur-md px-3 py-1.5 rounded-full text-[11px] font-bold text-white shadow-xs">
+                  Karnataka Samaj Exclusive
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500 max-w-xl mx-auto">
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Optimized in <strong>16:9 cinematic horizontal</strong> below hero for best UX and video playback.</span>
+            </div>
+
           </div>
         </section>
 
@@ -863,8 +943,7 @@ export default function PreRegisterPage() {
                                   required
                                 >
                                   <option value="Self">Self (Bride / Groom)</option>
-                                  <option value="Son">Son</option>
-                                  <option value="Daughter">Daughter</option>
+                                  <option value="Parents">Parents</option>
                                   <option value="Brother">Brother</option>
                                   <option value="Sister">Sister</option>
                                   <option value="Relative">Guardian / Relative</option>
@@ -935,40 +1014,52 @@ export default function PreRegisterPage() {
                                 />
                               </div>
 
-                              <div className="space-y-1.5">
-                                <Label className="text-xs font-bold text-[#2A3773]">City / Town *</Label>
-                                <Input 
-                                  name="city" 
-                                  value={formData.city} 
-                                  onChange={handleChange} 
-                                  placeholder="e.g. Belagavi, Bengaluru" 
-                                  className="h-12 bg-gray-50 rounded-xl font-medium" 
-                                  required 
-                                />
-                              </div>
-
-                              <div className="space-y-1.5">
-                                <Label className="text-xs font-bold text-[#2A3773]">District in Karnataka *</Label>
-                                <select 
-                                  name="district" 
-                                  value={formData.district} 
-                                  onChange={handleChange} 
-                                  className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
-                                  required
-                                >
-                                  <option value="">Select district</option>
-                                  <option value="Bengaluru Urban">Bengaluru Urban</option>
-                                  <option value="Belagavi">Belagavi</option>
-                                  <option value="Hubballi-Dharwad">Hubballi - Dharwad</option>
-                                  <option value="Vijayapura">Vijayapura</option>
-                                  <option value="Kalaburagi">Kalaburagi</option>
-                                  <option value="Shivamogga">Shivamogga</option>
-                                  <option value="Mysuru">Mysuru</option>
-                                  <option value="Bagalkot">Bagalkot</option>
-                                  <option value="Uttara Kannada">Uttara Kannada</option>
-                                  <option value="Other">Other District</option>
-                                </select>
-                              </div>
+                              <div className="space-y-1.5 md:col-span-2">
+                                  <Label className="text-xs font-bold text-[#2A3773]">District in Karnataka (All 31 Districts) *</Label>
+                                  <select 
+                                    name="district" 
+                                    value={formData.district} 
+                                    onChange={(e) => {
+                                      handleChange(e);
+                                      setFormData(prev => ({ ...prev, city: e.target.value, district: e.target.value }));
+                                    }} 
+                                    className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
+                                    required
+                                  >
+                                    <option value="">Select District</option>
+                                    <option value="Bagalkote">Bagalkote</option>
+                                    <option value="Ballari">Ballari (Bellary)</option>
+                                    <option value="Belagavi">Belagavi (Belgaum)</option>
+                                    <option value="Bengaluru Rural">Bengaluru Rural</option>
+                                    <option value="Bengaluru Urban">Bengaluru Urban</option>
+                                    <option value="Bidar">Bidar</option>
+                                    <option value="Chamarajanagar">Chamarajanagar</option>
+                                    <option value="Chikkaballapura">Chikkaballapura</option>
+                                    <option value="Chikkamagaluru">Chikkamagaluru</option>
+                                    <option value="Chitradurga">Chitradurga</option>
+                                    <option value="Dakshina Kannada">Dakshina Kannada (Mangaluru)</option>
+                                    <option value="Davanagere">Davanagere</option>
+                                    <option value="Dharwad">Dharwad (Hubballi)</option>
+                                    <option value="Gadag">Gadag</option>
+                                    <option value="Hassan">Hassan</option>
+                                    <option value="Haveri">Haveri</option>
+                                    <option value="Kalaburagi">Kalaburagi (Gulbarga)</option>
+                                    <option value="Kodagu">Kodagu (Coorg)</option>
+                                    <option value="Kolar">Kolar</option>
+                                    <option value="Koppal">Koppal</option>
+                                    <option value="Mandya">Mandya</option>
+                                    <option value="Mysuru">Mysuru (Mysore)</option>
+                                    <option value="Raichur">Raichur</option>
+                                    <option value="Ramanagara">Ramanagara</option>
+                                    <option value="Shivamogga">Shivamogga (Shimoga)</option>
+                                    <option value="Tumakuru">Tumakuru (Tumkur)</option>
+                                    <option value="Udupi">Udupi</option>
+                                    <option value="Uttara Kannada">Uttara Kannada (Karwar)</option>
+                                    <option value="Vijayanagara">Vijayanagara (Hospet)</option>
+                                    <option value="Vijayapura">Vijayapura (Bijapur)</option>
+                                    <option value="Yadgir">Yadgir</option>
+                                  </select>
+                                </div>
                             </div>
                           </div>
                         )}
@@ -976,11 +1067,7 @@ export default function PreRegisterPage() {
                         {/* ──────────── STEP 2: PERSONAL DETAILS (CLIENT FEEDBACK 2: DOB & AGE PLACED HERE) ──────────── */}
                         {currentStep === 2 && (
                           <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
-                            <div className="p-4 bg-[#FFF1F5] rounded-2xl border border-[#FADADF] mb-4">
-                              <p className="text-xs text-[#DB1866] font-bold">
-                                🎂 Step 2: Personal Details — As requested, Date of Birth & Age are recorded here.
-                              </p>
-                            </div>
+                            
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                               <div className="space-y-1.5">
@@ -989,6 +1076,18 @@ export default function PreRegisterPage() {
                                   type="date" 
                                   name="dob" 
                                   value={formData.dob} 
+                                  onChange={handleChange} 
+                                  className="h-12 bg-gray-50 rounded-xl font-medium" 
+                                  required 
+                                />
+                              </div>
+
+                              <div className="space-y-1.5">
+                                <Label className="text-xs font-bold text-[#2A3773]">Time of Birth *</Label>
+                                <Input 
+                                  type="time" 
+                                  name="birthTime" 
+                                  value={formData.birthTime} 
                                   onChange={handleChange} 
                                   className="h-12 bg-gray-50 rounded-xl font-medium" 
                                   required 
@@ -1018,14 +1117,31 @@ export default function PreRegisterPage() {
                                   required
                                 >
                                   <option value="">Select Height</option>
+                                  <option value="Less than 4'5&quot;">Less than 4'5" (135 cm)</option>
+                                  <option value="4'6&quot;">4'6" (137 cm)</option>
+                                  <option value="4'7&quot;">4'7" (140 cm)</option>
+                                  <option value="4'8&quot;">4'8" (142 cm)</option>
+                                  <option value="4'9&quot;">4'9" (145 cm)</option>
+                                  <option value="4'10&quot;">4'10" (147 cm)</option>
+                                  <option value="4'11&quot;">4'11" (150 cm)</option>
                                   <option value="5'0&quot;">5'0" (152 cm)</option>
+                                  <option value="5'1&quot;">5'1" (155 cm)</option>
                                   <option value="5'2&quot;">5'2" (157 cm)</option>
+                                  <option value="5'3&quot;">5'3" (160 cm)</option>
                                   <option value="5'4&quot;">5'4" (162 cm)</option>
+                                  <option value="5'5&quot;">5'5" (165 cm)</option>
                                   <option value="5'6&quot;">5'6" (167 cm)</option>
+                                  <option value="5'7&quot;">5'7" (170 cm)</option>
                                   <option value="5'8&quot;">5'8" (172 cm)</option>
+                                  <option value="5'9&quot;">5'9" (175 cm)</option>
                                   <option value="5'10&quot;">5'10" (177 cm)</option>
+                                  <option value="5'11&quot;">5'11" (180 cm)</option>
                                   <option value="6'0&quot;">6'0" (182 cm)</option>
-                                  <option value="6'2&quot;+">6'2"+ (188 cm)</option>
+                                  <option value="6'1&quot;">6'1" (185 cm)</option>
+                                  <option value="6'2&quot;">6'2" (188 cm)</option>
+                                  <option value="6'3&quot;">6'3" (190 cm)</option>
+                                  <option value="6'4&quot;">6'4" (193 cm)</option>
+                                  <option value="Above 6'5&quot;">Above 6'5" (196 cm+)</option>
                                 </select>
                               </div>
 
@@ -1055,14 +1171,17 @@ export default function PreRegisterPage() {
                                   required
                                 >
                                   <option value="">Select Education</option>
-                                  <option value="B.E / B.Tech">B.E / B.Tech / Engineering</option>
-                                  <option value="MBA / Post Graduate">MBA / Post Graduate</option>
-                                  <option value="MBBS / Medical / MD">MBBS / Medical / MD</option>
-                                  <option value="Bachelors (B.Com / B.Sc / B.A)">Bachelors (B.Com / B.Sc / B.A)</option>
-                                  <option value="Masters (M.Com / M.Sc / M.A)">Masters (M.Com / M.Sc / M.A)</option>
-                                  <option value="CA / CS / Finance">CA / CS / Finance</option>
+                                  <option value="SSLC / 10th">SSLC / 10th Standard</option>
+                                  <option value="PUC / 12th">PUC / 12th Standard</option>
                                   <option value="Diploma / Polytechnic">Diploma / Polytechnic</option>
+                                  <option value="B.E / B.Tech">B.E / B.Tech / Engineering</option>
+                                  <option value="Bachelors (B.Com / B.Sc / B.A / BCA / BBA)">Bachelors (B.Com / B.Sc / B.A / BCA / BBA)</option>
+                                  <option value="Masters (M.Com / M.Sc / M.A / MCA / M.Tech)">Masters (M.Com / M.Sc / M.A / MCA / M.Tech)</option>
+                                  <option value="MBA / Post Graduate">MBA / Post Graduate</option>
+                                  <option value="MBBS / Medical / MD / Dental">MBBS / Medical / MD / Dental</option>
+                                  <option value="CA / CS / Finance">CA / CS / Finance</option>
                                   <option value="Doctorate / Ph.D">Doctorate / Ph.D</option>
+                                  <option value="Others">Others</option>
                                 </select>
                               </div>
 
@@ -1088,13 +1207,14 @@ export default function PreRegisterPage() {
                                   required
                                 >
                                   <option value="">Select Annual Income</option>
-                                  <option value="Below 3 Lakhs">Below ₹3 Lakhs</option>
-                                  <option value="3 - 6 Lakhs">₹3 - ₹6 Lakhs</option>
-                                  <option value="6 - 10 Lakhs">₹6 - ₹10 Lakhs</option>
-                                  <option value="10 - 15 Lakhs">₹10 - ₹15 Lakhs</option>
-                                  <option value="15 - 25 Lakhs">₹15 - ₹25 Lakhs</option>
-                                  <option value="25 - 50 Lakhs">₹25 - ₹50 Lakhs</option>
-                                  <option value="50 Lakhs+">₹50 Lakhs+</option>
+                                  <option value="Less than 3 Lakhs">Less than ₹3 Lakhs</option>
+                                  <option value="3 to 5 Lakhs">₹3 to ₹5 Lakhs</option>
+                                  <option value="5 to 7 Lakhs">₹5 to ₹7 Lakhs</option>
+                                  <option value="8 to 10 Lakhs">₹8 to ₹10 Lakhs</option>
+                                  <option value="11 to 15 Lakhs">₹11 to ₹15 Lakhs</option>
+                                  <option value="16 to 20 Lakhs">₹16 to ₹20 Lakhs</option>
+                                  <option value="21 to 25 Lakhs">₹21 to ₹25 Lakhs</option>
+                                  <option value="Above 25 Lakhs">Above ₹25 Lakhs</option>
                                 </select>
                               </div>
                             </div>

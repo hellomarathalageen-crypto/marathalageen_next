@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
+import fs from "fs";
+import path from "path";
 
-export const alt = "Maratha Matrimony - Karnataka's #1 Exclusive Matchmaking";
+export const alt = "Maratha Matrimony (ಮರಾಠ ಲಗ್ನ) - Official Logo";
 export const size = {
   width: 1200,
   height: 630,
@@ -8,6 +10,17 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
+  let logoBase64 = "";
+  try {
+    const logoPath = path.join(process.cwd(), "public", "logo.png");
+    if (fs.existsSync(logoPath)) {
+      const buffer = fs.readFileSync(logoPath);
+      logoBase64 = `data:image/png;base64,${buffer.toString("base64")}`;
+    }
+  } catch {
+    // Fallback if filesystem is unavailable
+  }
+
   return new ImageResponse(
     (
       <div
@@ -18,126 +31,117 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#1B2554",
-          backgroundImage: "linear-gradient(135deg, #161F48 0%, #2A3773 50%, #101736 100%)",
-          color: "white",
-          padding: "50px 70px",
+          backgroundColor: "#FFFFFF",
+          backgroundImage: "radial-gradient(circle at 50% 30%, #FFF5F8 0%, #FFFFFF 70%)",
+          padding: "40px 60px",
           position: "relative",
           fontFamily: "sans-serif",
         }}
       >
-        {/* Glow Spheres */}
+        {/* Subtle decorative border */}
         <div
           style={{
             position: "absolute",
-            top: "-80px",
-            right: "-80px",
-            width: "450px",
-            height: "450px",
-            borderRadius: "50%",
-            backgroundColor: "#DB1866",
-            opacity: 0.35,
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-80px",
-            left: "-80px",
-            width: "450px",
-            height: "450px",
-            borderRadius: "50%",
-            backgroundColor: "#10B981",
-            opacity: 0.25,
+            inset: "20px",
+            border: "2px solid #FADADF",
+            borderRadius: "28px",
           }}
         />
 
-        {/* Top Community Badge */}
+        {/* Top Community Kannada Greeting Badge */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            backgroundColor: "#FFF1F5",
+            border: "1.5px solid #DB1866",
+            padding: "8px 26px",
+            borderRadius: "50px",
+            marginBottom: "28px",
+          }}
+        >
+          <span style={{ fontSize: "20px" }}>🚩</span>
+          <span style={{ fontSize: "19px", fontWeight: 800, color: "#DB1866", letterSpacing: "1px" }}>
+            ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ! • KARNATAKA MARATHA SAMAJ
+          </span>
+        </div>
+
+        {/* Centered High-Resolution Maratha Lageen Logo */}
+        {logoBase64 ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={logoBase64}
+            alt="Maratha Lageen Logo"
+            width={620}
+            height={218}
+            style={{
+              objectFit: "contain",
+              marginBottom: "20px",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              fontSize: "60px",
+              fontWeight: 900,
+              color: "#2A3773",
+              marginBottom: "20px",
+            }}
+          >
+            Maratha Matrimony <span style={{ color: "#DB1866" }}>ಮರಾಠ ಲಗ್ನ</span>
+          </div>
+        )}
+
+        {/* Subtitle / Tagline */}
+        <div
+          style={{
+            fontSize: "24px",
+            color: "#2A3773",
+            fontWeight: 700,
+            textAlign: "center",
+            marginBottom: "28px",
+          }}
+        >
+          Karnataka&apos;s Exclusive Maratha Community Matchmaking Platform
+        </div>
+
+        {/* VIP Launch Privilege Banner */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             gap: "12px",
-            backgroundColor: "rgba(219, 24, 102, 0.25)",
-            border: "2px solid #DB1866",
-            padding: "10px 28px",
+            backgroundColor: "#2A3773",
+            color: "#FFFFFF",
+            padding: "14px 36px",
             borderRadius: "50px",
-            marginBottom: "24px",
-          }}
-        >
-          <span style={{ fontSize: "24px" }}>🚩</span>
-          <span style={{ fontSize: "20px", fontWeight: 800, color: "#FFF", letterSpacing: "1.5px" }}>
-            JAI JIJAU, JAI SHIVRAY • KARNATAKA MARATHA SAMAJ
-          </span>
-        </div>
-
-        {/* Platform Title */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            fontSize: "64px",
-            fontWeight: 900,
-            color: "#FFFFFF",
-            letterSpacing: "-1px",
-            textAlign: "center",
-            marginBottom: "14px",
-          }}
-        >
-          Maratha Matrimony <span style={{ color: "#DB1866", marginLeft: "16px" }}>मराठा लागीन</span>
-        </div>
-
-        {/* Subtitle */}
-        <div
-          style={{
-            fontSize: "26px",
-            color: "#93C5FD",
-            fontWeight: 600,
-            textAlign: "center",
-            maxWidth: "950px",
-            marginBottom: "36px",
-          }}
-        >
-          Karnataka's Most Trusted & Verified Community Matchmaking Platform
-        </div>
-
-        {/* VIP Offer Card */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "14px",
-            backgroundColor: "#10B981",
-            color: "#FFFFFF",
-            padding: "16px 40px",
-            borderRadius: "24px",
-            fontSize: "24px",
+            fontSize: "20px",
             fontWeight: 800,
-            boxShadow: "0 20px 40px rgba(16, 185, 129, 0.35)",
-            border: "2px solid rgba(255,255,255,0.3)",
+            boxShadow: "0 10px 25px rgba(42, 55, 115, 0.2)",
           }}
         >
-          <span>🎁 PRE-REGISTER: ₹4,999 Premium Membership Free</span>
+          <span>🎁 PRE-REGISTER NOW: ₹4,999 VIP Membership FREE</span>
         </div>
 
-        {/* Bottom Details */}
+        {/* Bottom Verification Footer */}
         <div
           style={{
             position: "absolute",
-            bottom: "30px",
+            bottom: "34px",
             display: "flex",
             alignItems: "center",
-            gap: "28px",
-            fontSize: "18px",
-            color: "#CBD5E1",
+            gap: "24px",
+            fontSize: "16px",
+            color: "#64748B",
             fontWeight: 600,
           }}
         >
           <span>🌐 marathalageen.com</span>
           <span>•</span>
-          <span>🛡️ 100% Verified Profiles</span>
+          <span>🛡️ 100% ID Verified</span>
           <span>•</span>
-          <span>📍 Belagavi • Hubballi • Bengaluru • Dharwad</span>
+          <span>📍 Belagavi • Bengaluru • Dharwad • Hubballi</span>
         </div>
       </div>
     ),

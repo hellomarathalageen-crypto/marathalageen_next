@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { NextAuthProvider } from "@/components/providers/NextAuthProvider";
+import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -9,13 +10,28 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#121A3D",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://marathalageen.com"),
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   title: {
     default: "Maratha Matrimony (मराठा लागीन) | Karnataka's #1 Trusted Community Matchmaking",
     template: "%s | Maratha Matrimony",
   },
-  description: "🚩 Jai Jijau, Jai Shivray! Karnataka's most trusted Maratha Matrimony platform. Pre-register now to claim ₹4,999 Free VIP Premium access.",
+  description: "🚩 ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ! Karnataka's most trusted Maratha Matrimony platform. Pre-register now to claim ₹4,999 Free VIP Premium access.",
   keywords: [
     "Maratha Matrimony",
     "Karnataka Maratha Matrimony",
@@ -39,7 +55,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Maratha Matrimony (मराठा लागीन) | Karnataka's #1 Trusted Community Matchmaking",
-    description: "🚩 Jai Jijau, Jai Shivray! Join Karnataka's exclusive Maratha Matrimony network. Claim ₹4,999 VIP Premium completely Free during pre-registration.",
+    description: "🚩 ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ! Join Karnataka's exclusive Maratha Matrimony network. Claim ₹4,999 VIP Premium completely Free during pre-registration.",
     url: "https://marathalageen.com",
     siteName: "Maratha Matrimony",
     locale: "en_IN",
@@ -68,6 +84,7 @@ export default function RootLayout({
       >
         <NextAuthProvider>
           {children}
+          <PWAInstallPrompt />
         </NextAuthProvider>
       </body>
     </html>
