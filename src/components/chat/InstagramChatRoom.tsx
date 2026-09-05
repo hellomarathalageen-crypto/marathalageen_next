@@ -246,7 +246,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
 
     setMessages(seedMessages);
 
-    // Fetch live messages from API and poll every 2 seconds for real-time bidirectional chat
+    // Fetch live messages and live typing status every 1.5 seconds
     async function loadLiveMessages() {
       try {
         const res = await fetch(`/api/chat?userId=${activeContact.userId}`);
@@ -264,17 +264,50 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
             });
           }
         }
+
+        // Live check: is the other person currently typing?
+        const typingRes = await fetch(`/api/chat/typing?userId=${activeContact.userId}`);
+        if (typingRes.ok) {
+          const typingData = await typingRes.json();
+          setIsTyping(Boolean(typingData.isTyping));
+        }
       } catch (e) {
         console.error("Chat fetch error:", e);
       }
     }
 
     loadLiveMessages();
-    const pollInterval = setInterval(loadLiveMessages, 2000);
+    const pollInterval = setInterval(loadLiveMessages, 1500);
     return () => clearInterval(pollInterval);
   }, [activeContact?.userId, currentUserId]);
 
   const chatScrollContainerRef = useRef<HTMLDivElement>(null);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Broadcast typing status to the server for real-time sync
+  const notifyTyping = (typingState: boolean) => {
+    if (!activeContact?.userId) return;
+    try {
+      fetch("/api/chat/typing", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ receiverId: activeContact.userId, isTyping: typingState })
+      });
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleInputChange = (val: string) => {
+    setInputText(val);
+
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+    notifyTyping(true);
+
+    typingTimeoutRef.current = setTimeout(() => {
+      notifyTyping(false);
+    }, 2500);
+  };
 
   // Keep window strictly at top on mount and prevent outer page scrollbar
   useEffect(() => {
@@ -306,6 +339,8 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
     setInputText("");
     setShowEmojiPicker(false);
     playPopSound("send");
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+    notifyTyping(false);
 
     const newMsg: MessageItem = {
       id: `local-${Date.now()}`,
@@ -545,7 +580,11 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
                   )}
                 </div>
                 <p className="text-[10px] sm:text-[11px] text-gray-400 font-medium leading-none mt-0.5 flex items-center gap-1 truncate">
-                  <span>{activeContact.online ? "Active now" : activeContact.lastSeen || "Offline"}</span>
+                  {isTyping ? (
+                    <span className="text-[#DB1866] font-bold animate-pulse">typing...</span>
+                  ) : (
+                    <span>{activeContact.online ? "Active now" : activeContact.lastSeen || "Offline"}</span>
+                  )}
                   <span>•</span>
                   <span className="text-[#DB1866] font-semibold">{activeContact.community}</span>
                 </p>
@@ -756,7 +795,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
                 ref={inputRef}
                 type="text"
                 value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
+                onChange={(e) => handleInputChange(e.target.value)}
                 placeholder={`Message ${activeContact.name}...`}
                 className="flex-1 min-w-0 bg-transparent py-1.5 text-xs sm:text-sm text-[#1B2559] outline-none font-medium placeholder:text-gray-400"
               />
