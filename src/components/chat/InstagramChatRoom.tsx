@@ -479,7 +479,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
                   >
                     {/* Avatar with Story / Online Ring */}
                     <div className="relative shrink-0">
-                      <div className="w-13 h-13 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 via-[#DB1866] to-purple-600">
+                      <div className="w-12 h-12 rounded-full p-0.5 border-2 border-[#DB1866]/30">
                         <img
                           src={contact.photoUrl}
                           alt={contact.name}
@@ -628,7 +628,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
             
             {/* Top Profile Intro (Instagram Style) */}
             <div className="flex flex-col items-center justify-center py-3 sm:py-5 text-center space-y-1.5 border-b border-gray-100/80 mb-3 shrink-0">
-              <div className="w-20 h-20 rounded-full p-1 bg-gradient-to-tr from-amber-400 via-[#DB1866] to-purple-600 shadow-md">
+              <div className="w-20 h-20 rounded-full p-0.5 border-2 border-[#DB1866] shadow-sm">
                 <img
                   src={activeContact.photoUrl}
                   alt={activeContact.name}
@@ -691,7 +691,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
                       <div
                         className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm leading-relaxed select-text transition-all ${
                           isMe
-                            ? "bg-gradient-to-tr from-[#DB1866] via-[#E11D48] to-[#4F46E5] text-white rounded-br-xs shadow-xs"
+                            ? "bg-[#DB1866] text-white rounded-br-xs shadow-xs"
                             : "bg-[#EFEFEF] text-gray-900 rounded-bl-xs"
                         }`}
                       >
@@ -879,7 +879,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
               </div>
 
               {/* Kundali 36 Gunas Card */}
-              <div className="bg-gradient-to-br from-[#FFF5F8] to-indigo-50/50 p-4 rounded-2xl border border-pink-100 space-y-2">
+              <div className="bg-[#FFF5F8] p-4 rounded-2xl border border-[#FADADF] space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-[#1B2559] flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5 text-[#DB1866]" /> 36 Gunas Compatibility
