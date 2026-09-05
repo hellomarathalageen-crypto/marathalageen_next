@@ -151,3 +151,23 @@
     border-radius: 3px;
   }
 }
+
+/* Print optimizations for Biodata & PDF export */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 6mm 8mm;
+  }
+
+  html, body {
+    background: #FFFFFF !important;
+    color: #121A3D !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force hide any scrollbars or fixed sticky artifacts */
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+}

@@ -53,7 +53,7 @@ model User {
   password      String?   // Added for credentials login
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  role          String    @default("USER")
+  role          String    @default("USER") // USER, ADMIN
 
   accounts      Account[]
   sessions      Session[]
@@ -64,6 +64,9 @@ model User {
   receivedInterests Interest[] @relation("ReceivedInterests")
   messages          Message[]  @relation("SentMessages")
   receivedMessages  Message[]  @relation("ReceivedMessages")
+
+  shortlists        Shortlist[]
+  subscriptions     Subscription[]
 }
 
 // -----------------------------------------------------------------------------
@@ -75,7 +78,7 @@ model Profile {
   userId          String   @unique
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  profileCreatedBy String?
+  profileCreatedBy String? // Self, Parents, Sibling, Relative
   gender           String?
   firstName        String
   lastName         String
@@ -84,23 +87,63 @@ model Profile {
   maritalStatus    String?
 
   height           String?
+  weight           String?
   city             String?
   state            String?
   country          String?
 
-  religion         String?
-  community        String?
+  // Cultural / Lineage
+  religion         String?  @default("Hindu")
+  community        String?  // Maratha, 96 Kuli Maratha, Kunbi Maratha, Deshastha Maratha
   subCommunity     String?
   gotra            String?
+  devak            String?  // देवक (e.g. Kalamb, Panchpallav, Suryakant, Garud)
+  kuldaivat        String?  // कुलदैवत (e.g. Khandoba Jejuri, Bhavani Tuljapur, Mahalaxmi Kolhapur)
+  nativePlace      String?  // मूळ गाव / District
+  mamaGotra        String?  // मामाचे कुल
 
+  // Horoscope / Kundali
+  rashi            String?  // Mesh, Vrishabh, Mithun, etc.
+  nakshatra        String?  // Ashwini, Bharani, Rohini, etc.
+  charan           String?  // 1, 2, 3, 4
+  gan              String?  // Deva, Manushya, Rakshasa
+  nadi             String?  // Aadi, Madhya, Antya
+  manglik          String?  @default("Non-Manglik") // Non-Manglik, Manglik, Anshik Manglik
+  birthTime        String?
+  birthPlace       String?
+
+  // Education & Career
   education        String?
+  college          String?
   profession       String?
+  company          String?
   annualIncome     String?
 
-  isVerified       Boolean  @default(false)
-  profileCompleteness Int   @default(20)
+  // Lifestyle & Habits
+  diet             String?  @default("Non-Veg") // Vegetarian, Non-Veg, Eggetarian
+  drinking         String?  @default("No")
+  smoking          String?  @default("No")
+  about            String?  @db.Text
+  motherTongue     String?  @default("Marathi")
+
+  // Family Background
+  familyType       String?  @default("Nuclear") // Nuclear, Joint
+  familyValues     String?  @default("Moderate") // Traditional, Moderate, Liberal
+  fatherOccupation String?
+  motherOccupation String?
+  brothersCount    Int?     @default(0)
+  brothersMarried  Int?     @default(0)
+  sistersCount     Int?     @default(0)
+  sistersMarried   Int?     @default(0)
+
+  // Trust, Verification & Privacy
+  isVerified          Boolean  @default(false)
+  profileCompleteness Int      @default(20)
+  photoPrivacy        String   @default("all") // all, members, request
+  phonePrivacy        String   @default("premium") // premium, request
   
   photos           Photo[]
+  shortlistedBy    Shortlist[]
   
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
@@ -113,6 +156,18 @@ model Photo {
   profileId String
   profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+}
+
+model Shortlist {
+  id              String   @id @default(cuid())
+  userId          String
+  targetProfileId String
+  createdAt       DateTime @default(now())
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  targetProfile   Profile  @relation(fields: [targetProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetProfileId])
 }
 
 model PartnerPreference {
@@ -130,6 +185,8 @@ model PartnerPreference {
   education       String?
   profession      String?
   city            String?
+  diet            String?
+  manglik         String?
 
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -164,3 +221,16 @@ model Message {
   createdAt   DateTime @default(now())
 }
 
+model Subscription {
+  id          String   @id @default(cuid())
+  userId      String
+  plan        String   @default("FREE") // FREE, PREMIUM, PREMIUM_PLUS
+  status      String   @default("ACTIVE") // ACTIVE, EXPIRED, CANCELLED
+  amount      Float    @default(0)
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

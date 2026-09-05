@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -39,10 +39,9 @@ export default function SignupPage() {
       });
 
       if (loginRes?.error) {
-        setError("Account created, but auto-login failed.");
+        window.location.href = "/login";
       } else {
-        router.push("/onboarding");
-        router.refresh();
+        window.location.href = "/dashboard";
       }
     } catch (err: any) {
       setError(err.message);

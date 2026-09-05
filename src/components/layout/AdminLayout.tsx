@@ -92,14 +92,15 @@ function AdminSidebar({ pathname }: { pathname: string }) {
   return (
     <aside className="w-60 shrink-0 bg-[#2A3773] min-h-screen flex flex-col overflow-y-auto">
       {/* Logo */}
-      <div className="px-5 py-5 border-b border-white/10 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-[#DB1866]/20 flex items-center justify-center">
-          <Heart className="w-5 h-5 text-[#DB1866]" fill="currentColor" />
-        </div>
-        <div>
-          <p className="text-sm font-bold text-white font-sans leading-none">Maratha</p>
-          <p className="text-[10px] text-[#DB1866] font-semibold leading-none tracking-wide mt-0.5">MATRIMONY ADMIN</p>
-        </div>
+      <div className="px-5 py-5 border-b border-white/10 flex items-center justify-between">
+        <Link href="/admin/dashboard" className="inline-block">
+          <img 
+            src="/logo.png" 
+            alt="Maratha Matrimony Admin" 
+            className="h-10 w-auto object-contain bg-white/95 px-2.5 py-1 rounded-xl shadow-sm" 
+          />
+        </Link>
+        <span className="text-[9px] font-bold bg-[#DB1866] text-white px-2 py-0.5 rounded-full uppercase tracking-wider">Admin</span>
       </div>
 
       {/* Nav */}

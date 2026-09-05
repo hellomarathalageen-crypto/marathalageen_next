@@ -1,76 +1,105 @@
 import Link from "next/link";
-import { Heart, ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShieldCheck, Crown, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-white flex">
-      {/* Left Column: Image / Branding */}
-      <div className="hidden lg:flex flex-col justify-between w-[45%] bg-[#2A3773] relative overflow-hidden p-10 text-white">
-        {/* Background Image with Overlay */}
+    <div className="min-h-screen bg-[#FFFDFB] flex">
+      {/* Left Column: Premium Maratha Branding (Desktop only) */}
+      <div className="hidden lg:flex flex-col justify-between w-[45%] bg-[#1B2559] relative overflow-hidden p-10 text-white">
+        
+        {/* Background Image with Rich Royal Overlay */}
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&h=1400&fit=crop" 
-            alt="Maratha Matrimony" 
-            className="w-full h-full object-cover"
+            src="/hero.jpg" 
+            alt="Maratha Matrimony Couple" 
+            className="w-full h-full object-cover object-top filter saturate-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#2A3773]/90 via-[#2A3773]/70 to-[#2A3773]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1B2559]/90 via-[#1B2559]/80 to-[#1B2559]/95" />
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-            <Heart className="w-5 h-5 text-[#DB1866]" fill="currentColor" />
-          </div>
-          <div>
-            <p className="text-xl font-bold font-sans leading-none">Maratha</p>
-            <p className="text-xs text-[#DB1866] font-semibold tracking-wide">Matrimony</p>
-          </div>
+        {/* Brand Logo in Snug, Elegant Container */}
+        <div className="relative z-10">
+          <Link href="/home" className="inline-block group">
+            <div className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-xl inline-flex items-center shadow-md border border-white/20 transition-transform group-hover:scale-105">
+              <img 
+                src="/logo.png" 
+                alt="Maratha Lageen Logo" 
+                className="h-9 sm:h-10 w-auto object-contain" 
+              />
+            </div>
+          </Link>
         </div>
 
-        <div className="relative z-10 mb-10">
-          <h1 className="text-4xl font-bold font-sans mb-4 leading-tight">
-            Find Your Perfect <br />
-            <span className="text-[#DB1866]">Maratha Partner.</span>
+        {/* Stately Copy & Trust Metrics */}
+        <div className="relative z-10 mb-6 space-y-6">
+          <div className="inline-flex items-center gap-2 bg-[#DB1866] text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-md">
+            <Crown className="w-3.5 h-3.5 fill-amber-300 text-amber-300" /> #1 Trusted Maratha Community Network
+          </div>
+
+          <h1 className="text-3xl xl:text-4xl font-sans font-extrabold leading-[1.18] tracking-tight">
+            Honoring Sacred Lineage, <br />
+            <span className="text-[#f9a8d4]">Connecting Destined Souls.</span>
           </h1>
-          <p className="text-blue-100 text-lg max-w-sm leading-relaxed">
-            Join the most trusted matchmaking platform built exclusively for the Maratha community.
+
+          <p className="text-blue-100 text-sm leading-relaxed max-w-md font-medium">
+            Karnataka &amp; Maharashtra&apos;s premier matrimonial platform for 96 Kuli Maratha families. Featuring authentic Devak, Gotra, and 36 Gunas Kundali matching.
           </p>
           
-          <div className="mt-8 flex gap-4">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
-              <p className="text-2xl font-bold text-white mb-1">10k+</p>
-              <p className="text-xs text-blue-200">Verified Profiles</p>
+          {/* Trust Stat Boxes */}
+          <div className="grid grid-cols-2 gap-3.5 pt-2">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15">
+              <div className="flex items-center gap-1.5 text-amber-300 mb-1">
+                <ShieldCheck className="w-4 h-4" />
+                <span className="text-xl font-sans font-bold text-white">1,000+</span>
+              </div>
+              <p className="text-xs text-blue-200 font-medium">Govt ID Verified Profiles</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
-              <p className="text-2xl font-bold text-white mb-1">100%</p>
-              <p className="text-xs text-blue-200">Privacy Control</p>
+            
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15">
+              <div className="flex items-center gap-1.5 text-pink-300 mb-1">
+                <Sparkles className="w-4 h-4" />
+                <span className="text-xl font-sans font-bold text-white">100%</span>
+              </div>
+              <p className="text-xs text-blue-200 font-medium">Photo &amp; Contact Shield</p>
             </div>
           </div>
+
+          <div className="flex items-center gap-2 text-xs text-blue-200/90 pt-1">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>Over 5,000+ Maratha families trust Maratha Lageen</span>
+          </div>
         </div>
+
       </div>
 
       {/* Right Column: Form Area */}
       <div className="flex-1 flex flex-col min-h-screen">
-        <div className="p-6 md:p-8 flex justify-between items-center lg:justify-end">
-          {/* Mobile Logo */}
-          <Link href="/home" className="lg:hidden flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#FFF1F5] flex items-center justify-center border border-[#FADADF]">
-              <Heart className="w-4 h-4 text-[#DB1866]" fill="currentColor" />
-            </div>
-            <div>
-              <p className="text-sm font-bold font-sans text-[#2A3773] leading-none">Maratha</p>
-              <p className="text-[10px] text-[#DB1866] font-semibold tracking-wide">Matrimony</p>
-            </div>
+        
+        {/* Header Bar */}
+        <div className="p-6 md:p-8 flex justify-between items-center">
+          
+          {/* Mobile Logo from landing page (hidden on desktop to avoid duplicate logo) */}
+          <Link href="/home" className="lg:hidden flex items-center gap-2 pl-1">
+            <img 
+              src="/logo.png" 
+              alt="Maratha Lageen Logo" 
+              className="h-10 sm:h-11 w-auto object-contain transition-transform" 
+            />
           </Link>
           
-          <Link href="/home" className="text-sm font-semibold text-gray-500 hover:text-[#2A3773] flex items-center gap-1.5 transition-colors">
-            <ArrowLeft className="w-4 h-4" /> Back to Home
+          <Link 
+            href="/home" 
+            className="text-xs sm:text-sm font-sans font-bold text-[#1B2559] hover:text-[#DB1866] flex items-center gap-1.5 transition-colors ml-auto bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-full border border-gray-200"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
         </div>
         
-        <div className="flex-1 flex flex-col justify-center max-w-[480px] w-full mx-auto px-6 pb-20">
+        {/* Form Container */}
+        <div className="flex-1 flex flex-col justify-center max-w-[460px] w-full mx-auto px-6 pb-16">
           {children}
         </div>
+
       </div>
     </div>
   );

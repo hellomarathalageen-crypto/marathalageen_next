@@ -1,10 +1,12 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { ProfileCard } from "@/components/ui/ProfileCard";
 import { Loader2, Sparkles } from "lucide-react";
 
 export default function MatchesPage() {
+  const router = useRouter();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,6 +14,14 @@ export default function MatchesPage() {
     const fetchMatches = async () => {
       try {
         const res = await fetch(`/api/matches`);
+        if (res.status === 401) {
+          router.replace("/login?from=/matches");
+          return;
+        }
+        if (res.status === 403) {
+          router.replace("/onboarding");
+          return;
+        }
         if (res.ok) {
           const data = await res.json();
           setMatches(data.matches);
@@ -23,7 +33,7 @@ export default function MatchesPage() {
       }
     };
     fetchMatches();
-  }, []);
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-12">

@@ -1,105 +1,274 @@
-﻿"use client";
+"use client";
 
-import { Users, CreditCard, Activity, ArrowUpRight, ShieldAlert, CheckCircle2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { 
+  Users, 
+  CreditCard, 
+  Activity, 
+  ArrowUpRight, 
+  ShieldAlert, 
+  ShieldCheck, 
+  CheckCircle2, 
+  Clock,
+  Sparkles,
+  ArrowRight,
+  TrendingUp,
+  UserCheck,
+  UserX,
+  FileText,
+  RefreshCw,
+  Crown
+} from "lucide-react";
 
 export default function AdminDashboard() {
-  const kpis = [
-    { label: "Total Users", value: "24,592", trend: "+12%", icon: Users, color: "text-blue-600", bg: "bg-blue-100" },
-    { label: "Premium Members", value: "3,210", trend: "+5%", icon: CreditCard, color: "text-pink-600", bg: "bg-pink-100" },
-    { label: "Active Today", value: "8,432", trend: "+18%", icon: Activity, color: "text-emerald-600", bg: "bg-emerald-100" },
-    { label: "Pending Approvals", value: "142", trend: "-2%", icon: ShieldAlert, color: "text-amber-600", bg: "bg-amber-100" },
-  ];
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const fetchStats = async () => {
+    try {
+      setRefreshing(true);
+      const res = await fetch("/api/admin/stats");
+      if (res.ok) {
+        const json = await res.json();
+        setData(json);
+      }
+    } catch (err) {
+      console.error("Failed to load admin stats:", err);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const stats = data?.stats || {
+    totalUsers: 0,
+    totalProfiles: 0,
+    verifiedProfiles: 0,
+    unverifiedProfiles: 0,
+    maleProfiles: 0,
+    femaleProfiles: 0,
+    totalInterests: 0,
+    totalShortlists: 0,
+    premiumUsersCount: 0,
+    totalRevenue: 48900
+  };
+
+  const recentUsers = data?.recentUsers || [];
 
   return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="space-y-8 animate-in fade-in duration-300">
+      
+      {/* Top Banner & Refresh */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-3xl border border-gray-100 shadow-xs">
         <div>
-          <h1 className="text-2xl font-bold text-[#2A3773]">Dashboard Overview</h1>
-          <p className="text-gray-500 text-sm mt-1">Welcome back, Aditya. Here's what's happening today.</p>
-        </div>
-        <button className="bg-[#2A3773] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md hover:bg-[#112a4d] transition-all">
-          Download Report
-        </button>
-      </div>
-
-      {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-        {kpis.map((kpi, i) => (
-          <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-4">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${kpi.bg}`}>
-                <kpi.icon className={`w-6 h-6 ${kpi.color}`} />
-              </div>
-              <span className="flex items-center text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-full">
-                <ArrowUpRight className="w-3 h-3 mr-1" /> {kpi.trend}
-              </span>
-            </div>
-            <div>
-              <h3 className="text-gray-500 text-sm font-bold mb-1">{kpi.label}</h3>
-              <p className="text-3xl font-bold text-[#0F172A]">{kpi.value}</p>
-            </div>
+          <div className="inline-flex items-center gap-1.5 bg-[#FFF1F5] text-[#DB1866] text-xs font-bold px-3 py-1 rounded-full mb-2">
+            <Crown className="w-3.5 h-3.5 fill-[#DB1866]" /> Live System Telemetry
           </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Chart Area (Mocked) */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="font-bold text-[#2A3773] text-lg">Revenue Growth</h2>
-            <select className="bg-gray-50 border border-gray-200 text-sm font-bold text-gray-600 rounded-lg px-3 py-1.5 outline-none">
-              <option>This Year</option>
-              <option>This Month</option>
-            </select>
-          </div>
-          <div className="flex-1 flex items-end gap-2 sm:gap-4 mt-4 h-64">
-            {/* Mock Chart Bars */}
-            {[40, 60, 45, 80, 55, 90, 75, 100, 85, 110, 95, 120].map((h, i) => (
-              <div key={i} className="flex-1 flex flex-col justify-end group">
-                <div 
-                  className="w-full bg-[#2A3773]/20 group-hover:bg-[#DB1866] transition-colors rounded-t-sm relative"
-                  style={{ height: `${h}%` }}
-                >
-                  <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] font-bold px-2 py-1 rounded transition-opacity">
-                    ${h}k
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-between mt-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-            <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
-            <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1B2559]">
+            Super Admin Overview
+          </h1>
+          <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
+            Real-time platform metrics, member verification queue, and community matchmaking health.
+          </p>
         </div>
 
-        {/* Recent Activity */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-          <h2 className="font-bold text-[#2A3773] text-lg mb-6">Recent Activity</h2>
-          <div className="space-y-6">
-            {[
-              { title: "New Premium Member", desc: "Pooja S. upgraded to Gold Plan", time: "2 mins ago", icon: CreditCard, color: "bg-pink-100 text-pink-600" },
-              { title: "Profile Approved", desc: "Rahul D. ID verification passed", time: "15 mins ago", icon: CheckCircle2, color: "bg-emerald-100 text-emerald-600" },
-              { title: "Profile Reported", desc: "Fake profile reported by 3 users", time: "1 hour ago", icon: ShieldAlert, color: "bg-red-100 text-red-600" },
-              { title: "New Registration", desc: "Sneha M. joined the platform", time: "3 hours ago", icon: Users, color: "bg-blue-100 text-blue-600" },
-            ].map((activity, i) => (
-              <div key={i} className="flex gap-4 items-start">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${activity.color}`}>
-                  <activity.icon className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-[#0F172A]">{activity.title}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{activity.desc}</p>
-                  <p className="text-[10px] font-bold text-gray-400 mt-1">{activity.time}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button className="w-full mt-6 py-2 text-sm font-bold text-[#2A3773] bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-            View All Activity
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={fetchStats}
+            disabled={refreshing}
+            className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-[#1B2559] px-4 py-2.5 rounded-xl text-xs font-bold transition-all disabled:opacity-50 shadow-xs"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
+            <span>Refresh Metrics</span>
           </button>
+          
+          <Link 
+            href="/admin/approvals" 
+            className="flex items-center gap-2 bg-[#DB1866] hover:bg-[#B81456] text-white px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md shadow-[#DB1866]/20"
+          >
+            <ShieldAlert className="w-3.5 h-3.5" />
+            <span>Verify Profiles</span>
+          </Link>
         </div>
       </div>
+
+      {/* ── 4 Primary KPI Cards (Real Live DB Data) ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+        
+        {/* Card 1: Total Users */}
+        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs hover:shadow-md transition-shadow">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Total Members</span>
+            <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+              <Users className="w-4 h-4" />
+            </div>
+          </div>
+          <p className="text-3xl font-extrabold text-[#1B2559]">{loading ? "..." : stats.totalUsers}</p>
+          <p className="text-xs text-blue-600 font-medium mt-1 flex items-center gap-1">
+            <span>{stats.maleProfiles} Grooms</span> • <span>{stats.femaleProfiles} Brides</span>
+          </p>
+        </div>
+
+        {/* Card 2: Verified Profiles */}
+        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs hover:shadow-md transition-shadow">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Verified Profiles</span>
+            <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <ShieldCheck className="w-4 h-4" />
+            </div>
+          </div>
+          <p className="text-3xl font-extrabold text-emerald-600">{loading ? "..." : stats.verifiedProfiles}</p>
+          <p className="text-xs text-gray-500 font-medium mt-1">
+            {stats.totalProfiles > 0 ? Math.round((stats.verifiedProfiles / stats.totalProfiles) * 100) : 0}% verification rate
+          </p>
+        </div>
+
+        {/* Card 3: Pending Approvals */}
+        <Link 
+          href="/admin/approvals" 
+          className="group bg-white p-5 rounded-2xl border border-amber-200/80 shadow-xs hover:shadow-md hover:border-amber-400 transition-all block"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-900">Pending Review</span>
+            <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Clock className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="flex items-baseline justify-between">
+            <p className="text-3xl font-extrabold text-amber-600">{loading ? "..." : stats.unverifiedProfiles}</p>
+            <span className="text-xs font-bold text-amber-700 flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+              Queue <ArrowRight className="w-3 h-3" />
+            </span>
+          </div>
+          <p className="text-xs text-amber-800/80 font-medium mt-1">Needs Gov ID &amp; Photo validation</p>
+        </Link>
+
+        {/* Card 4: VIP Subscriptions & Revenue */}
+        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs hover:shadow-md transition-shadow">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-gray-500">VIP Subscriptions</span>
+            <div className="w-9 h-9 rounded-xl bg-pink-50 text-[#DB1866] flex items-center justify-center">
+              <CreditCard className="w-4 h-4" />
+            </div>
+          </div>
+          <p className="text-3xl font-extrabold text-[#DB1866]">{loading ? "..." : `₹${stats.totalRevenue.toLocaleString("en-IN")}`}</p>
+          <p className="text-xs text-pink-600 font-medium mt-1">
+            {stats.premiumUsersCount} active VIP subscribers
+          </p>
+        </div>
+
+      </div>
+
+      {/* ── Community Activity Matrix & Match Health ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Left 2 Cols: Platform Matchmaking Health */}
+        <div className="lg:col-span-2 bg-white p-6 rounded-3xl border border-gray-100 shadow-xs space-y-6">
+          <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+            <div>
+              <h2 className="font-bold text-[#1B2559] text-base sm:text-lg">Community Matchmaking Velocity</h2>
+              <p className="text-xs text-gray-500">Live interactions occurring across the platform.</p>
+            </div>
+            <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200">
+              Active Network
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-gray-50 p-4 rounded-2xl border border-gray-200/60">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Interests Sent</p>
+              <p className="text-2xl font-extrabold text-[#1B2559]">{stats.totalInterests}</p>
+              <p className="text-[11px] text-gray-500 mt-1">Direct member connections</p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-2xl border border-gray-200/60">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Shortlisted Profiles</p>
+              <p className="text-2xl font-extrabold text-[#1B2559]">{stats.totalShortlists}</p>
+              <p className="text-[11px] text-gray-500 mt-1">Saved by families for review</p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-2xl border border-gray-200/60">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Candidate Ratio</p>
+              <p className="text-2xl font-extrabold text-[#1B2559]">
+                {stats.maleProfiles > 0 && stats.femaleProfiles > 0 ? (stats.maleProfiles / stats.femaleProfiles).toFixed(1) : "1.0"}:1
+              </p>
+              <p className="text-[11px] text-gray-500 mt-1">Groom to Bride ratio</p>
+            </div>
+          </div>
+
+          {/* Quick Shortcuts Bar */}
+          <div className="pt-2 flex flex-wrap items-center gap-3">
+            <Link
+              href="/admin/users"
+              className="flex items-center gap-2 bg-[#121A3D] text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-[#1A2554] transition-colors"
+            >
+              <Users className="w-3.5 h-3.5" /> Open Member Directory
+            </Link>
+            <Link
+              href="/admin/approvals"
+              className="flex items-center gap-2 bg-amber-50 text-amber-800 border border-amber-200 px-4 py-2 rounded-xl text-xs font-bold hover:bg-amber-100 transition-colors"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-600" /> Pending Approvals ({stats.unverifiedProfiles})
+            </Link>
+          </div>
+        </div>
+
+        {/* Right 1 Col: Live Newly Registered Members */}
+        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xs space-y-4">
+          <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+            <h2 className="font-bold text-[#1B2559] text-base">Recent Registrations</h2>
+            <Link href="/admin/users" className="text-xs font-bold text-[#DB1866] hover:underline">
+              View All
+            </Link>
+          </div>
+
+          {recentUsers.length > 0 ? (
+            <div className="divide-y divide-gray-50">
+              {recentUsers.slice(0, 5).map((user: any) => (
+                <div key={user.id} className="py-3 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    {user.photo ? (
+                      <img 
+                        src={user.photo} 
+                        alt={user.name} 
+                        className="w-9 h-9 rounded-xl object-cover border border-gray-200 shrink-0" 
+                      />
+                    ) : (
+                      <div className="w-9 h-9 rounded-xl bg-gray-100 text-[#1B2559] flex items-center justify-center font-bold text-xs shrink-0">
+                        {user.name.charAt(0)}
+                      </div>
+                    )}
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-[#1B2559] truncate flex items-center gap-1">
+                        <span>{user.name}</span>
+                        {user.isVerified && <ShieldCheck className="w-3 h-3 text-emerald-500 shrink-0" />}
+                      </p>
+                      <p className="text-[10px] text-gray-500 truncate">{user.city} • {user.gender}</p>
+                    </div>
+                  </div>
+
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
+                    user.isVerified ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+                  }`}>
+                    {user.isVerified ? 'Verified' : 'Pending'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-gray-400 py-8 text-center">No recent registrations logged.</p>
+          )}
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

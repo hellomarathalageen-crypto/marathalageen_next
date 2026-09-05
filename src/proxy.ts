@@ -1,15 +1,16 @@
-﻿import { withAuth } from "next-auth/middleware";
+import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
     const isAuth = !!token;
-    const isAuthPage = req.nextUrl.pathname.startsWith("/login") || req.nextUrl.pathname.startsWith("/signup");
-    const isAdminPage = req.nextUrl.pathname.startsWith("/admin");
-    const isOnboardingPage = req.nextUrl.pathname.startsWith("/onboarding");
-    const isDashboardPage = req.nextUrl.pathname.startsWith("/dashboard");
+    const pathname = req.nextUrl.pathname;
+    const isAuthPage = pathname.startsWith("/login") || pathname.startsWith("/signup");
+    const isAdminPage = pathname.startsWith("/admin");
+    const isOnboardingPage = pathname.startsWith("/onboarding");
 
+    // Redirect already authenticated users away from login/signup
     if (isAuthPage) {
       if (isAuth) {
         return NextResponse.redirect(new URL("/dashboard", req.url));
@@ -17,6 +18,7 @@ export default withAuth(
       return null;
     }
 
+    // Require authentication for all matched protected routes
     if (!isAuth) {
       let from = req.nextUrl.pathname;
       if (req.nextUrl.search) {
@@ -32,17 +34,36 @@ export default withAuth(
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
+    // If user already has completed profile, redirect away from /onboarding
+    if (isOnboardingPage && token?.hasProfile === true) {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+
+    // Require completed profile setup: If logged in but profile not setup, redirect to onboarding
+    // (Admins are exempt from requiring a candidate profile)
+    const isAdmin = token?.role === "ADMIN";
+    if (!isOnboardingPage && !isAdmin && !token?.hasProfile) {
+      return NextResponse.redirect(new URL("/onboarding", req.url));
+    }
+
     return null;
   },
   {
     callbacks: {
-      authorized: ({ token }) => true, // We handle authorized logic in the middleware function above
+      authorized: () => true, // Handled inside middleware function
     },
   }
 );
 
 export const config = {
   matcher: [
+    "/biodata/:path*",
+    "/matches/:path*",
+    "/shortlist/:path*",
+    "/inbox/:path*",
+    "/messages/:path*",
+    "/interests/:path*",
+    "/profile/:path*",
     "/dashboard/:path*",
     "/admin/:path*",
     "/onboarding/:path*",

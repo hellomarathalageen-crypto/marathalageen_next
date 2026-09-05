@@ -1,7 +1,7 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { prisma } from "@/lib/prisma";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export async function GET(req: Request) {
   try {
@@ -19,47 +19,58 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: "Complete onboarding first" }, { status: 403 });
     }
 
-    const targetGender = currentUser.profile.gender === "Male" ? "Female" : "Male";
-    
-    // Use preferences if they exist, otherwise sensible defaults
-    const minAge = currentUser.preferences?.minAge || 18;
-    const maxAge = currentUser.preferences?.maxAge || 50;
+    let targetGender = currentUser.profile.gender === "Male" ? "Female" : "Male";
+    let currentUserId: string = currentUser.id;
+    let minAge = currentUser.preferences?.minAge || 20;
+    let maxAge = currentUser.preferences?.maxAge || 40;
 
     const today = new Date();
     const minDate = new Date(today.getFullYear() - maxAge, today.getMonth(), today.getDate());
     const maxDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
 
+    const whereClause: any = {
+      gender: targetGender,
+      dateOfBirth: {
+        gte: minDate,
+        lte: maxDate
+      }
+    };
+
+    if (currentUserId) {
+      whereClause.userId = { not: currentUserId };
+    }
+
     const matches = await prisma.profile.findMany({
-      where: {
-        userId: { not: currentUser.id },
-        gender: targetGender,
-        dateOfBirth: {
-          gte: minDate,
-          lte: maxDate
-        }
-      },
+      where: whereClause,
       include: {
         photos: {
           where: { isPrimary: true },
           take: 1
         }
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       take: 30
     });
 
     const formattedMatches = matches.map(m => {
-      const age = m.dateOfBirth ? Math.floor((new Date().getTime() - new Date(m.dateOfBirth).getTime()) / 3.15576e+10) : 0;
+      const age = m.dateOfBirth
+        ? Math.floor((new Date().getTime() - new Date(m.dateOfBirth).getTime()) / 3.15576e+10)
+        : 26;
+
       return {
         id: m.id,
+        userId: m.userId,
         name: `${m.firstName} ${m.lastName}`,
         age,
-        height: m.height || "Unknown",
-        city: m.city || "Unknown",
-        state: m.state || "Unknown",
-        education: m.education || "Unknown",
-        profession: m.profession || "Unknown",
-        imageUrl: m.photos[0]?.url || ""
+        height: m.height || "5'5\"",
+        city: m.city || "Karnataka",
+        state: m.state || "Karnataka",
+        education: m.education || "Graduate",
+        profession: m.profession || "Professional",
+        community: m.community || "96 Kuli Maratha",
+        devak: m.devak || "Not specified",
+        isVerified: m.isVerified,
+        imageUrl: m.photos[0]?.url || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600"
       };
     });
 

@@ -1,134 +1,422 @@
-﻿"use client";
+"use client";
 
-import { useState } from "react";
-import { Search, Filter, MoreVertical, ShieldCheck, Ban, Edit, Mail, Eye } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { 
+  Search, 
+  ShieldCheck, 
+  ShieldAlert, 
+  Trash2, 
+  Eye, 
+  Check, 
+  X, 
+  RefreshCw, 
+  Crown,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  MapPin,
+  Briefcase,
+  GraduationCap
+} from "lucide-react";
 
-const MOCK_USERS = [
-  { id: "USR-001", name: "Rahul Deshmukh", email: "rahul.d@example.com", joined: "2024-03-12", status: "Active", plan: "Premium", verified: true },
-  { id: "USR-002", name: "Sneha Patil", email: "sneha.p@example.com", joined: "2024-03-14", status: "Active", plan: "Free", verified: true },
-  { id: "USR-003", name: "Karan Shinde", email: "karan.s@example.com", joined: "2024-03-15", status: "Pending", plan: "Free", verified: false },
-  { id: "USR-004", name: "Pooja Kadam", email: "pooja.k@example.com", joined: "2024-03-15", status: "Suspended", plan: "Free", verified: false },
-  { id: "USR-005", name: "Amit Pawar", email: "amit.p@example.com", joined: "2024-03-16", status: "Active", plan: "Gold", verified: true },
-];
+export default function AdminUsersPage() {
+  const [users, setUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("all"); // all, verified, pending, admin
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  
+  // Selected user for quick preview modal
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
 
-export default function AdminUsers() {
-  const [activeTab, setActiveTab] = useState("All Users");
+  const fetchUsers = useCallback(async () => {
+    try {
+      setLoading(true);
+      const params = new URLSearchParams({
+        search,
+        filter,
+        page: page.toString(),
+        limit: "15"
+      });
+      const res = await fetch(`/api/admin/users?${params.toString()}`);
+      if (res.ok) {
+        const data = await res.json();
+        setUsers(data.users || []);
+        setTotalPages(data.totalPages || 1);
+        setTotalCount(data.totalCount || 0);
+      }
+    } catch (err) {
+      console.error("Failed to load users:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [search, filter, page]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  // Toggle user verification
+  const handleToggleVerification = async (userId: string, currentStatus: boolean) => {
+    try {
+      setActionLoading(userId);
+      const res = await fetch("/api/admin/users", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, isVerified: !currentStatus })
+      });
+      if (res.ok) {
+        setUsers(prev => prev.map(u => u.id === userId ? { ...u, isVerified: !currentStatus } : u));
+        if (selectedUser?.id === userId) {
+          setSelectedUser((prev: any) => ({ ...prev, isVerified: !currentStatus }));
+        }
+      }
+    } catch (err) {
+      console.error("Failed to toggle verification:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  // Delete user
+  const handleDeleteUser = async (userId: string, name: string) => {
+    if (!window.confirm(`Are you sure you want to permanently delete ${name}? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      setActionLoading(userId);
+      const res = await fetch(`/api/admin/users?userId=${userId}`, { method: "DELETE" });
+      if (res.ok) {
+        setUsers(prev => prev.filter(u => u.id !== userId));
+        setTotalCount(prev => prev - 1);
+        if (selectedUser?.id === userId) setSelectedUser(null);
+      } else {
+        const data = await res.json();
+        alert(data.error || "Failed to delete user");
+      }
+    } catch (err) {
+      console.error("Failed to delete user:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  };
 
   return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="space-y-6 animate-in fade-in duration-300">
+      
+      {/* Header Bar */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-3xl border border-gray-100 shadow-xs">
         <div>
-          <h1 className="text-2xl font-bold text-[#2A3773]">User Management</h1>
-          <p className="text-gray-500 text-sm mt-1">Manage and monitor all registered members.</p>
+          <div className="inline-flex items-center gap-1.5 bg-[#FFF1F5] text-[#DB1866] text-xs font-bold px-3 py-1 rounded-full mb-2">
+            <Crown className="w-3.5 h-3.5 fill-[#DB1866]" /> Member Management
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1B2559]">
+            Registered Members
+          </h1>
+          <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
+            Total of {totalCount} members registered in the database. Manage verification and roles.
+          </p>
         </div>
-        <button className="bg-[#DB1866] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md hover:bg-[#B81456] transition-all">
-          + Add User Manually
+
+        <button 
+          onClick={fetchUsers} 
+          className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-[#1B2559] px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-xs"
+        >
+          <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+          <span>Refresh List</span>
         </button>
       </div>
 
-      {/* Filters & Tabs */}
-      <div className="bg-white p-2 rounded-xl border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between gap-4">
-        <div className="flex gap-1 bg-gray-50 p-1 rounded-lg">
-          {["All Users", "Premium", "Pending Verification", "Suspended"].map(tab => (
-            <button 
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-1.5 text-sm font-bold rounded-md transition-colors ${
-                activeTab === tab ? 'bg-white text-[#2A3773] shadow-sm' : 'text-gray-500 hover:text-[#2A3773]'
+      {/* Filter Tabs & Search Bar */}
+      <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs flex flex-col md:flex-row justify-between gap-4 items-center">
+        
+        {/* Filter Pills */}
+        <div className="flex flex-wrap gap-1.5 w-full md:w-auto">
+          {[
+            { id: "all", label: "All Members" },
+            { id: "verified", label: "Verified Only" },
+            { id: "pending", label: "Pending Verification" },
+            { id: "admin", label: "Administrators" }
+          ].map(t => (
+            <button
+              key={t.id}
+              onClick={() => { setFilter(t.id); setPage(1); }}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                filter === t.id 
+                  ? 'bg-[#121A3D] text-white shadow-sm' 
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
-              {tab}
+              {t.label}
             </button>
           ))}
         </div>
-        
-        <div className="flex items-center gap-2 px-2">
-          <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 focus-within:border-[#2A3773] transition-colors">
-            <Search className="w-4 h-4 text-gray-400" />
-            <input 
-              type="text" 
-              placeholder="Search users..." 
-              className="bg-transparent border-none outline-none text-sm w-48 font-medium"
-            />
-          </div>
-          <button className="p-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-500 hover:text-[#2A3773] hover:bg-gray-100 transition-colors">
-            <Filter className="w-4 h-4" />
-          </button>
+
+        {/* Search Input */}
+        <div className="relative w-full md:w-72">
+          <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+            placeholder="Search name, email, city..."
+            className="w-full h-10 pl-10 pr-4 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#DB1866] focus:bg-white transition-all font-medium text-[#1B2559]"
+          />
         </div>
+
       </div>
 
-      {/* Data Table */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      {/* Members Data Table */}
+      <div className="bg-white rounded-3xl border border-gray-100 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-gray-50/50 border-b border-gray-100">
-                <th className="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">User</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">Status</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">Plan</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">Joined Date</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider text-right">Actions</th>
+              <tr className="bg-gray-50/80 border-b border-gray-100 text-[11px] font-bold uppercase tracking-wider text-gray-500">
+                <th className="py-3.5 px-6">Member Profile</th>
+                <th className="py-3.5 px-4">Gender &amp; Location</th>
+                <th className="py-3.5 px-4">Profession &amp; Education</th>
+                <th className="py-3.5 px-4">Plan / Role</th>
+                <th className="py-3.5 px-4 text-center">Status</th>
+                <th className="py-3.5 px-6 text-right">Quick Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
-              {MOCK_USERS.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50/50 transition-colors group">
-                  <td className="py-4 px-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gray-200 to-gray-300 flex items-center justify-center font-bold text-white">
-                        {user.name.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-1.5">
-                          <p className="font-bold text-[#0F172A] text-sm">{user.name}</p>
-                          {user.verified && <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />}
-                        </div>
-                        <p className="text-xs text-gray-500">{user.email}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6">
-                    <span className={`px-2.5 py-1 text-[11px] font-bold rounded-full uppercase tracking-wider ${
-                      user.status === 'Active' ? 'bg-emerald-100 text-emerald-700' :
-                      user.status === 'Pending' ? 'bg-amber-100 text-amber-700' :
-                      'bg-red-100 text-red-700'
-                    }`}>
-                      {user.status}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6">
-                    <span className={`text-sm font-bold ${user.plan !== 'Free' ? 'text-[#DB1866]' : 'text-gray-500'}`}>
-                      {user.plan}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 font-medium">
-                    {user.joined}
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-1.5 text-gray-400 hover:text-blue-600 bg-blue-50 rounded-md transition-colors"><Eye className="w-4 h-4" /></button>
-                      <button className="p-1.5 text-gray-400 hover:text-emerald-600 bg-emerald-50 rounded-md transition-colors"><Edit className="w-4 h-4" /></button>
-                      <button className="p-1.5 text-gray-400 hover:text-red-600 bg-red-50 rounded-md transition-colors"><Ban className="w-4 h-4" /></button>
-                    </div>
+            
+            <tbody className="divide-y divide-gray-50 text-xs">
+              {loading ? (
+                <tr>
+                  <td colSpan={6} className="py-16 text-center text-gray-400 font-medium">
+                    <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-[#DB1866]" />
+                    <span>Loading real database profiles...</span>
                   </td>
                 </tr>
-              ))}
+              ) : users.length > 0 ? (
+                users.map((user) => (
+                  <tr key={user.id} className="hover:bg-[#FFFDF9] transition-colors group">
+                    
+                    {/* User Info */}
+                    <td className="py-4 px-6">
+                      <div className="flex items-center gap-3">
+                        {user.photo ? (
+                          <img 
+                            src={user.photo} 
+                            alt={user.name} 
+                            className="w-10 h-10 rounded-xl object-cover border border-gray-200 shrink-0" 
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded-xl bg-gray-100 text-[#1B2559] flex items-center justify-center font-bold text-sm shrink-0">
+                            {user.name.charAt(0)}
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <p className="font-bold text-[#1B2559] text-sm truncate flex items-center gap-1.5">
+                            <span>{user.name}</span>
+                            {user.isVerified && (
+                              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                            )}
+                          </p>
+                          <p className="text-[11px] text-gray-500 truncate font-mono">{user.email}</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* Gender & Location */}
+                    <td className="py-4 px-4 text-gray-600">
+                      <p className="font-bold text-[#1B2559]">{user.gender}</p>
+                      <p className="text-[11px] text-gray-500 flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-gray-400" /> {user.city}
+                      </p>
+                    </td>
+
+                    {/* Profession & Education */}
+                    <td className="py-4 px-4 text-gray-600">
+                      <p className="font-bold text-[#1B2559] truncate max-w-[160px]">{user.profession}</p>
+                      <p className="text-[11px] text-gray-500 truncate max-w-[160px]">{user.education}</p>
+                    </td>
+
+                    {/* Plan / Role */}
+                    <td className="py-4 px-4">
+                      {user.role === "ADMIN" ? (
+                        <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-300">
+                          SUPER ADMIN
+                        </span>
+                      ) : (
+                        <span className="bg-pink-50 text-[#DB1866] text-[10px] font-bold px-2 py-0.5 rounded-full border border-pink-200">
+                          {user.plan || "FREE MEMBER"}
+                        </span>
+                      )}
+                    </td>
+
+                    {/* Status Toggle */}
+                    <td className="py-4 px-4 text-center">
+                      <button
+                        onClick={() => handleToggleVerification(user.id, user.isVerified)}
+                        disabled={actionLoading === user.id}
+                        className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full border transition-all ${
+                          user.isVerified 
+                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-red-50 hover:text-red-700 hover:border-red-200' 
+                            : 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200'
+                        }`}
+                      >
+                        {user.isVerified ? (
+                          <>
+                            <Check className="w-3 h-3" /> Verified
+                          </>
+                        ) : (
+                          <>
+                            <ShieldAlert className="w-3 h-3" /> Unverified
+                          </>
+                        )}
+                      </button>
+                    </td>
+
+                    {/* Actions */}
+                    <td className="py-4 px-6 text-right">
+                      <div className="flex items-center justify-end gap-1.5">
+                        <button
+                          onClick={() => setSelectedUser(user)}
+                          title="Preview full profile"
+                          className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                        </button>
+                        
+                        {user.role !== "ADMIN" && (
+                          <button
+                            onClick={() => handleDeleteUser(user.id, user.name)}
+                            disabled={actionLoading === user.id}
+                            title="Delete user"
+                            className="p-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 transition-colors"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    </td>
+
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6} className="py-12 text-center text-gray-400">
+                    No members found matching your search criteria.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
-        
-        {/* Pagination */}
-        <div className="p-4 border-t border-gray-100 flex items-center justify-between">
-          <p className="text-sm text-gray-500">Showing <span className="font-bold text-[#0F172A]">1</span> to <span className="font-bold text-[#0F172A]">5</span> of <span className="font-bold text-[#0F172A]">24,592</span> entries</p>
-          <div className="flex gap-1">
-            <button className="px-3 py-1 border border-gray-200 rounded-md text-sm font-bold text-gray-400 cursor-not-allowed">Prev</button>
-            <button className="px-3 py-1 bg-[#2A3773] rounded-md text-sm font-bold text-white">1</button>
-            <button className="px-3 py-1 hover:bg-gray-50 rounded-md text-sm font-bold text-gray-600">2</button>
-            <button className="px-3 py-1 hover:bg-gray-50 rounded-md text-sm font-bold text-gray-600">3</button>
-            <button className="px-3 py-1 border border-gray-200 rounded-md text-sm font-bold text-[#2A3773] hover:bg-gray-50">Next</button>
+
+        {/* Pagination Bar */}
+        <div className="p-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+          <p>
+            Showing Page <span className="font-bold text-[#1B2559]">{page}</span> of{" "}
+            <span className="font-bold text-[#1B2559]">{totalPages}</span>
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+              disabled={page <= 1}
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-40 transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+              disabled={page >= totalPages}
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-40 transition-colors"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
+
       </div>
+
+      {/* ── User Quick Biodata Preview Modal ── */}
+      {selectedUser && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 text-[#1B2559] shadow-2xl border border-gray-100 space-y-5 relative">
+            <button 
+              onClick={() => setSelectedUser(null)}
+              className="absolute right-5 top-5 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-3.5 border-b border-gray-100 pb-4">
+              {selectedUser.photo ? (
+                <img 
+                  src={selectedUser.photo} 
+                  alt={selectedUser.name} 
+                  className="w-14 h-14 rounded-2xl object-cover border border-gray-200"
+                />
+              ) : (
+                <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center font-bold text-xl text-[#1B2559]">
+                  {selectedUser.name.charAt(0)}
+                </div>
+              )}
+              <div>
+                <h3 className="font-extrabold text-lg">{selectedUser.name}</h3>
+                <p className="text-xs text-gray-500 font-mono">{selectedUser.email}</p>
+                <span className={`inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                  selectedUser.isVerified ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+                }`}>
+                  {selectedUser.isVerified ? 'ID Verified ✅' : 'Pending Verification ⚠️'}
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div className="bg-gray-50 p-3 rounded-xl">
+                <span className="text-gray-400 block mb-0.5 text-[10px] font-bold uppercase">Gender</span>
+                <span className="font-bold">{selectedUser.gender}</span>
+              </div>
+              <div className="bg-gray-50 p-3 rounded-xl">
+                <span className="text-gray-400 block mb-0.5 text-[10px] font-bold uppercase">Location</span>
+                <span className="font-bold">{selectedUser.city}</span>
+              </div>
+              <div className="bg-gray-50 p-3 rounded-xl">
+                <span className="text-gray-400 block mb-0.5 text-[10px] font-bold uppercase">Education</span>
+                <span className="font-bold truncate block">{selectedUser.education}</span>
+              </div>
+              <div className="bg-gray-50 p-3 rounded-xl">
+                <span className="text-gray-400 block mb-0.5 text-[10px] font-bold uppercase">Profession</span>
+                <span className="font-bold truncate block">{selectedUser.profession}</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2 pt-2 border-t border-gray-100">
+              <button
+                onClick={() => handleToggleVerification(selectedUser.id, selectedUser.isVerified)}
+                className={`flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-colors ${
+                  selectedUser.isVerified 
+                    ? 'bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-200' 
+                    : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                }`}
+              >
+                {selectedUser.isVerified ? "Revoke Verification" : "Mark as Verified"}
+              </button>
+              
+              {selectedUser.profileId && (
+                <a
+                  href={`/profile/${selectedUser.profileId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-4 py-2.5 rounded-xl font-bold text-xs bg-gray-100 hover:bg-gray-200 text-[#1B2559] flex items-center gap-1.5 transition-colors"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" /> View Public Profile
+                </a>
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
