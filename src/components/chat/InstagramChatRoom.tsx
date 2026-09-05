@@ -265,10 +265,18 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
 
   const chatScrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Keep window strictly at top on mount
+  // Keep window strictly at top on mount and prevent outer page scrollbar
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
+      const prevOverflow = document.body.style.overflow;
+      const prevHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prevOverflow;
+        document.documentElement.style.overflow = prevHtmlOverflow;
+      };
     }
   }, []);
 
@@ -373,10 +381,10 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
   });
 
   return (
-    <div className="w-full bg-[#FAFAFA] h-[calc(100dvh-4.5rem)] sm:h-[calc(100dvh-5rem)] flex items-center justify-center p-0 sm:p-3 md:p-4 font-sans overflow-hidden">
+    <div className="w-full h-full flex-1 min-h-0 bg-[#F8F9FA] flex items-center justify-center p-1.5 sm:p-2.5 md:p-3 lg:p-4 font-sans overflow-hidden box-border">
       
       {/* ── Main Instagram Container ── */}
-      <div className="w-full max-w-7xl h-full bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row relative">
+      <div className="w-full max-w-7xl h-full max-h-full bg-white rounded-2xl md:rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row relative min-w-0 min-h-0">
         
         {/* ════════════════ LEFT SIDEBAR: THREADS / INBOX ════════════════ */}
         <div className={`w-full md:w-80 lg:w-[380px] border-r border-gray-100 flex flex-col bg-white shrink-0 ${
@@ -436,7 +444,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
           </div>
 
           {/* Thread Rows */}
-          <div className="flex-1 overflow-y-auto divide-y divide-gray-50">
+          <div className="flex-1 min-h-0 overflow-y-auto divide-y divide-gray-50">
             {filteredContacts.length > 0 ? (
               filteredContacts.map((contact) => {
                 const isSelected = activeContact.userId === contact.userId;
@@ -522,19 +530,19 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
         <div className={`flex-1 flex flex-col bg-white ${!activeContactId && "hidden md:flex"}`}>
           
           {/* Top Instagram Action Bar */}
-          <div className="h-16 px-4 md:px-6 border-b border-gray-100 flex items-center justify-between shrink-0 bg-white/95 backdrop-blur-md z-10">
-            <div className="flex items-center gap-3">
+          <div className="h-14 sm:h-16 px-3 sm:px-4 md:px-6 border-b border-gray-100 flex items-center justify-between shrink-0 bg-white/95 backdrop-blur-md z-10 w-full min-w-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1 mr-2">
               {/* Mobile Back Button */}
               <button
                 onClick={() => router.push("/dashboard/chat")}
-                className="md:hidden p-1.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                className="md:hidden p-1.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors shrink-0"
                 aria-label="Back to threads"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
 
               {/* Avatar + Status */}
-              <div className="relative cursor-pointer" onClick={() => setShowInfoDrawer(true)}>
+              <div className="relative cursor-pointer shrink-0" onClick={() => setShowInfoDrawer(true)}>
                 <img
                   src={activeContact.photoUrl}
                   alt={activeContact.name}
@@ -545,16 +553,16 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
                 )}
               </div>
 
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <h3 className="text-sm font-extrabold text-[#1B2559] leading-tight hover:text-[#DB1866] cursor-pointer transition-colors" onClick={() => setShowInfoDrawer(true)}>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <h3 className="text-xs sm:text-sm font-extrabold text-[#1B2559] leading-tight hover:text-[#DB1866] cursor-pointer transition-colors truncate" onClick={() => setShowInfoDrawer(true)}>
                     {activeContact.name}
                   </h3>
                   {activeContact.verified && (
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                   )}
                 </div>
-                <p className="text-[11px] text-gray-400 font-medium leading-none mt-0.5 flex items-center gap-1">
+                <p className="text-[10px] sm:text-[11px] text-gray-400 font-medium leading-none mt-0.5 flex items-center gap-1 truncate">
                   <span>{activeContact.online ? "Active now" : activeContact.lastSeen || "Offline"}</span>
                   <span>•</span>
                   <span className="text-[#DB1866] font-semibold">{activeContact.community}</span>
@@ -563,7 +571,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
             </div>
 
             {/* Instagram Header Call & Info Icons */}
-            <div className="flex items-center gap-1 sm:gap-2">
+            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
               <button
                 onClick={() => setShowCallModal("audio")}
                 className="p-2 text-gray-600 hover:text-[#DB1866] hover:bg-[#FFF5F8] rounded-full transition-colors"
@@ -595,10 +603,10 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
           </div>
 
           {/* ── Conversation Stream ── */}
-          <div ref={chatScrollContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-[#FFFDFB]/40">
+          <div ref={chatScrollContainerRef} className="flex-1 min-h-0 min-w-0 overflow-y-auto p-3 sm:p-5 space-y-3 bg-[#FFFDFB]/40">
             
             {/* Top Profile Intro (Instagram Style) */}
-            <div className="flex flex-col items-center justify-center py-6 text-center space-y-2 border-b border-gray-100/80 mb-4">
+            <div className="flex flex-col items-center justify-center py-3 sm:py-5 text-center space-y-1.5 border-b border-gray-100/80 mb-3 shrink-0">
               <div className="w-20 h-20 rounded-full p-1 bg-gradient-to-tr from-amber-400 via-[#DB1866] to-purple-600 shadow-md">
                 <img
                   src={activeContact.photoUrl}
@@ -646,10 +654,10 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
               return (
                 <div
                   key={msg.id}
-                  className={`flex flex-col ${isMe ? "items-end" : "items-start"} group relative`}
+                  className={`flex flex-col ${isMe ? "items-end" : "items-start"} group relative w-full`}
                   onDoubleClick={() => toggleLikeMessage(msg.id)}
                 >
-                  <div className="flex items-end gap-2 max-w-[82%] sm:max-w-[70%]">
+                  <div className="flex items-end gap-2 max-w-[85%] sm:max-w-[75%] min-w-0">
                     {!isMe && (
                       <img
                         src={activeContact.photoUrl}
@@ -658,7 +666,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
                       />
                     )}
 
-                    <div className="relative group/bubble">
+                    <div className="relative group/bubble min-w-0">
                       <div
                         className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm leading-relaxed select-text transition-all ${
                           isMe
@@ -711,7 +719,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
           </div>
 
           {/* ── Quick Cultural Starters Bar (Instagram One-Tap Chips) ── */}
-          <div className="px-4 py-2 border-t border-gray-100 bg-white flex gap-2 overflow-x-auto no-scrollbar shrink-0">
+          <div className="px-3 sm:px-4 py-2 border-t border-gray-100 bg-white flex gap-2 overflow-x-auto no-scrollbar shrink-0 w-full max-w-full">
             {DEFAULT_ICEBREAKERS.map((ice, i) => (
               <button
                 key={i}
@@ -743,13 +751,13 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
           )}
 
           {/* ── Bottom Input Capsule (Instagram Direct Style) ── */}
-          <div className="p-3 sm:p-4 bg-white border-t border-gray-100 shrink-0">
+          <div className="p-2.5 sm:p-3.5 bg-white border-t border-gray-100 shrink-0 w-full max-w-full">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="flex items-center gap-2 bg-gray-100/90 focus-within:bg-white border border-gray-200 focus-within:border-[#DB1866] rounded-full px-4 py-1.5 transition-all shadow-xs"
+              className="flex items-center gap-2 bg-gray-100/90 focus-within:bg-white border border-gray-200 focus-within:border-[#DB1866] rounded-full px-3 sm:px-4 py-1.5 transition-all shadow-xs w-full"
             >
               {/* Emoji Button */}
               <button
@@ -768,7 +776,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder={`Message ${activeContact.name}...`}
-                className="flex-1 bg-transparent py-2 text-xs sm:text-sm text-[#1B2559] outline-none font-medium placeholder:text-gray-400"
+                className="flex-1 min-w-0 bg-transparent py-1.5 text-xs sm:text-sm text-[#1B2559] outline-none font-medium placeholder:text-gray-400"
               />
 
               {/* Action Buttons: Heart when empty, Send when typed (Instagram style!) */}
