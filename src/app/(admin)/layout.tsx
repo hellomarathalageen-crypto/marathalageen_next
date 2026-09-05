@@ -1,37 +1,86 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import { 
   LayoutDashboard, 
   Users, 
   ShieldCheck, 
+  CreditCard,
   Settings, 
   Bell, 
   Search,
-  Menu,
-  X,
-  LogOut,
-  ChevronDown
+  Menu, 
+  X, 
+  LogOut, 
+  ArrowLeft,
+  ExternalLink,
+  Crown,
+  Sparkles,
+  ShieldAlert,
+  Megaphone,
+  Download
 } from "lucide-react";
 
 const sidebarLinks = [
-  { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/dashboard", label: "Dashboard Overview", icon: LayoutDashboard },
   { href: "/admin/users", label: "User Management", icon: Users },
   { href: "/admin/approvals", label: "Profile Approvals", icon: ShieldCheck },
+  { href: "/admin/matchmaker", label: "Assisted Matchmaker", icon: Sparkles },
+  { href: "/admin/moderation", label: "Safety & Moderation", icon: ShieldAlert },
+  { href: "/admin/broadcast", label: "Platform Broadcasts", icon: Megaphone },
+  { href: "/admin/payments", label: "VIP & Payments", icon: CreditCard },
+  { href: "/admin/export", label: "Melava Data Exports", icon: Download },
+  { href: "/admin/settings", label: "Platform Settings", icon: Settings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => { setMounted(true); }, []);
-  if (!mounted) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (status === "loading") return;
+
+    if (status === "unauthenticated" || !session?.user) {
+      router.replace(`/login?from=${encodeURIComponent(pathname)}`);
+      return;
+    }
+
+    if ((session.user as any)?.role !== "ADMIN") {
+      router.replace("/home?error=unauthorized_admin");
+      return;
+    }
+  }, [status, session, router, pathname]);
+
+  if (!mounted || status === "loading" || (session?.user as any)?.role !== "ADMIN") {
+    return (
+      <div className="min-h-screen bg-[#121A3D] flex flex-col items-center justify-center text-white p-6 text-center font-sans">
+        <div className="w-16 h-16 rounded-3xl bg-white/10 flex items-center justify-center mb-4 text-[#DB1866] animate-pulse border border-white/20">
+          <ShieldCheck className="w-8 h-8" />
+        </div>
+        <h2 className="text-xl font-extrabold text-white">Verifying Admin Access...</h2>
+        <p className="text-xs text-blue-200 mt-1.5 max-w-sm">
+          Checking cryptographic session tokens and administrator privileges.
+        </p>
+      </div>
+    );
+  }
+
+  const adminName = session?.user?.name || "Super Admin";
+  const adminEmail = session?.user?.email || "admin@marathalageen.com";
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex text-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFC] flex text-[#0F172A] font-sans">
+      
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div 
@@ -40,111 +89,137 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         />
       )}
 
-      {/* Sidebar */}
+      {/* ── Super Admin Sidebar ── */}
       <aside className={`
-        fixed lg:sticky top-0 left-0 h-screen w-72 bg-[#2A3773] text-white z-50
+        fixed lg:sticky top-0 left-0 h-screen w-72 bg-[#121A3D] text-white z-50
         transform transition-transform duration-300 ease-in-out flex flex-col shadow-2xl
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
+        
         {/* Logo Area */}
         <div className="h-20 flex items-center px-6 border-b border-white/10 shrink-0 justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 relative flex items-center justify-center text-[#DB1866] bg-white rounded-xl shadow-lg">
-              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="6" className="w-6 h-6">
-                <path d="M50 10 L60 35 L85 25 L70 45 L95 60 L70 65 L80 90 L55 75 L40 95 L40 70 L15 80 L35 60 L10 40 L35 40 L25 15 L45 35 Z" strokeLinejoin="round" />
-              </svg>
+          <Link href="/admin/dashboard" className="flex items-center gap-3">
+            <div className="bg-white px-3 py-1.5 rounded-xl shadow-md">
+              <img 
+                src="/logo.png" 
+                alt="Maratha Lageen Logo" 
+                className="h-9 w-auto object-contain" 
+              />
             </div>
             <div className="flex flex-col">
-              <span className="text-[18px] font-bold font-sans leading-tight">Maratha</span>
-              <span className="text-[12px] text-white/70 tracking-widest uppercase font-bold">Admin Pro</span>
+              <span className="text-[14px] font-bold leading-tight text-white flex items-center gap-1">
+                <Crown className="w-3 h-3 text-amber-400 fill-amber-400" /> Admin Suite
+              </span>
+              <span className="text-[10px] text-pink-300 tracking-widest uppercase font-bold">Control Center</span>
             </div>
-          </div>
+          </Link>
           <button className="lg:hidden text-white/70 hover:text-white" onClick={() => setSidebarOpen(false)}>
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
-          <div className="text-xs font-bold text-white/40 uppercase tracking-wider mb-4 px-3">Menu</div>
+        {/* Navigation Menu */}
+        <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-1.5">
+          <div className="text-[11px] font-bold text-white/40 uppercase tracking-widest mb-3 px-3">
+            Core Modules
+          </div>
           {sidebarLinks.map((link) => {
-            const isActive = pathname.startsWith(link.href);
+            const isActive = pathname === link.href || (link.href !== "/admin/dashboard" && pathname.startsWith(link.href));
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-3 px-3 py-3 rounded-xl font-bold transition-all duration-200 group relative overflow-hidden ${
+                onClick={() => setSidebarOpen(false)}
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-xl font-bold text-xs transition-all group relative overflow-hidden ${
                   isActive 
-                    ? 'text-[#DB1866] bg-white shadow-md' 
-                    : 'text-white/70 hover:text-white hover:bg-white/10'
+                    ? 'text-white bg-[#DB1866] shadow-lg shadow-[#DB1866]/30' 
+                    : 'text-blue-200 hover:text-white hover:bg-white/10'
                 }`}
               >
-                {isActive && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DB1866] rounded-r-full" />}
-                <link.icon className={`w-5 h-5 ${isActive ? 'text-[#DB1866]' : 'text-white/70 group-hover:text-white'}`} />
-                {link.label}
+                <link.icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-blue-300 group-hover:text-white'}`} />
+                <span className="truncate">{link.label}</span>
               </Link>
             );
           })}
+
+          <div className="pt-6 text-[11px] font-bold text-white/40 uppercase tracking-widest mb-3 px-3">
+            Quick Navigation
+          </div>
+          <Link
+            href="/home"
+            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-blue-200 hover:text-white hover:bg-white/10 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 text-blue-300" />
+            <span>Return to Web App</span>
+          </Link>
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-blue-200 hover:text-white hover:bg-white/10 transition-colors"
+          >
+            <ExternalLink className="w-4 h-4 text-blue-300" />
+            <span>Member Dashboard</span>
+          </Link>
         </nav>
 
-        {/* Bottom Profile */}
-        <div className="p-4 shrink-0 border-t border-white/10">
-          <div className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition-colors border border-white/5">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#DB1866] to-[#FF7E9F] flex items-center justify-center font-bold text-white shadow-inner">
-              AK
+        {/* Admin Profile & Logout */}
+        <div className="p-4 shrink-0 border-t border-white/10 space-y-2">
+          <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5 border border-white/5">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#DB1866] to-pink-400 flex items-center justify-center font-bold text-white text-xs shadow-inner">
+              SA
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold truncate">Aditya K.</p>
-              <p className="text-xs text-white/50 truncate">Super Admin</p>
+              <p className="text-xs font-bold truncate text-white">{adminName}</p>
+              <p className="text-[10px] text-pink-300 truncate font-mono">{adminEmail}</p>
             </div>
-            <LogOut className="w-4 h-4 text-white/50 hover:text-white transition-colors" />
           </div>
+
+          <button
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            className="w-full flex items-center justify-center gap-2 py-2 rounded-xl bg-white/10 hover:bg-red-500/20 text-blue-200 hover:text-red-400 text-xs font-bold transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Logout of Admin
+          </button>
         </div>
       </aside>
 
-      {/* Main Content Area */}
+      {/* ── Main Admin Content Surface ── */}
       <main className="flex-1 flex flex-col min-w-0">
         
         {/* Top Header */}
-        <header className="h-20 bg-white/80 backdrop-blur-xl border-b border-gray-200 sticky top-0 z-30 flex items-center justify-between px-4 lg:px-8 shadow-sm">
-          <div className="flex items-center gap-4">
+        <header className="h-18 bg-white/90 backdrop-blur-xl border-b border-gray-200 sticky top-0 z-30 flex items-center justify-between px-4 lg:px-8 shadow-xs">
+          <div className="flex items-center gap-3">
             <button 
-              className="lg:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
               onClick={() => setSidebarOpen(true)}
+              aria-label="Open sidebar"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             </button>
-            <div className="hidden md:flex items-center gap-2 bg-gray-100/80 px-4 py-2.5 rounded-full border border-gray-200 focus-within:border-[#2A3773] focus-within:bg-white transition-all w-80 shadow-inner">
-              <Search className="w-4 h-4 text-gray-400" />
-              <input 
-                type="text" 
-                placeholder="Search users, IDs, or transactions..." 
-                className="bg-transparent border-none outline-none text-sm w-full font-medium placeholder:text-gray-400 text-gray-700"
-              />
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-bold text-gray-600">Production Node: Connected</span>
             </div>
           </div>
           
-          <div className="flex items-center gap-4 lg:gap-6">
-            <button className="relative p-2 text-gray-400 hover:text-[#2A3773] transition-colors rounded-full hover:bg-gray-100">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-[#DB1866] rounded-full border-2 border-white"></span>
-            </button>
-            <div className="h-8 w-px bg-gray-200 hidden md:block"></div>
-            <div className="flex items-center gap-3 cursor-pointer group">
-              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" className="w-9 h-9 rounded-full ring-2 ring-transparent group-hover:ring-[#2A3773] transition-all object-cover shadow-sm" alt="Admin" />
-              <div className="hidden md:block text-sm">
-                <p className="font-bold text-[#2A3773]">Aditya K.</p>
-              </div>
-              <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#2A3773] transition-colors" />
+          <div className="flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-2 bg-[#FFF1F5] text-[#DB1866] text-xs font-bold px-3 py-1.5 rounded-full border border-[#FADADF]">
+              <ShieldCheck className="w-3.5 h-3.5" /> Super Admin Authenticated
             </div>
+            <Link
+              href="/home"
+              className="text-xs font-bold text-gray-600 hover:text-[#DB1866] bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" /> Live Site
+            </Link>
           </div>
         </header>
 
-        {/* Page Content */}
+        {/* Child Pages */}
         <div className="flex-1 p-4 lg:p-8 overflow-x-hidden">
           {children}
         </div>
       </main>
+
     </div>
   );
 }
