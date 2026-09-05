@@ -381,14 +381,14 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
   });
 
   return (
-    <div className="w-full h-full flex-1 min-h-0 bg-[#F8F9FA] flex items-center justify-center p-1.5 sm:p-2.5 md:p-3 lg:p-4 font-sans overflow-hidden box-border">
+    <div className="w-full h-[calc(100vh-5.1rem)] max-h-[calc(100vh-5.1rem)] flex items-center justify-center p-1.5 sm:p-2 md:p-2.5 lg:p-3 font-sans overflow-hidden box-border bg-[#F8F9FA]">
       
       {/* ── Main Instagram Container ── */}
       <div className="w-full max-w-7xl h-full max-h-full bg-white rounded-2xl md:rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row relative min-w-0 min-h-0">
         
         {/* ════════════════ LEFT SIDEBAR: THREADS / INBOX ════════════════ */}
-        <div className={`w-full md:w-80 lg:w-[380px] border-r border-gray-100 flex flex-col bg-white shrink-0 ${
-          activeContactId && "hidden md:flex"
+        <div className={`w-full md:w-72 lg:w-80 xl:w-[340px] border-r border-gray-100 flex flex-col bg-white shrink-0 h-full min-h-0 overflow-hidden ${
+          activeContactId ? "hidden md:flex" : "flex"
         }`}>
           
           {/* Top User Header */}
@@ -527,7 +527,9 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
         </div>
 
         {/* ════════════════ RIGHT MAIN: INSTAGRAM CHAT ROOM ════════════════ */}
-        <div className={`flex-1 flex flex-col bg-white ${!activeContactId && "hidden md:flex"}`}>
+        <div className={`flex-1 min-w-0 min-h-0 h-full flex flex-col bg-white overflow-hidden ${
+          !activeContactId ? "hidden md:flex" : "flex"
+        }`}>
           
           {/* Top Instagram Action Bar */}
           <div className="h-14 sm:h-16 px-3 sm:px-4 md:px-6 border-b border-gray-100 flex items-center justify-between shrink-0 bg-white/95 backdrop-blur-md z-10 w-full min-w-0">
