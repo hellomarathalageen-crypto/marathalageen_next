@@ -89,7 +89,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
   const [contacts, setContacts] = useState<ChatContact[]>([
     {
       id: "cm1-priya",
-      userId: "user_priya_patil",
+      userId: "f1666400-0363-4a96-9ff8-8d3cc226c0c9",
       name: "Priya Patil",
       photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400",
       verified: true,
@@ -141,7 +141,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
     },
   ]);
 
-  const [activeContactId, setActiveContactId] = useState<string>(initialUserId || "user_priya_patil");
+  const [activeContactId, setActiveContactId] = useState<string>(initialUserId || "f1666400-0363-4a96-9ff8-8d3cc226c0c9");
   const [messages, setMessages] = useState<MessageItem[]>([]);
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -192,7 +192,8 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
             // Merge API contacts with defaults ensuring no duplicate userId
             setContacts(prev => {
               const existingIds = new Set(apiContacts.map(c => c.userId));
-              const nonDuplicates = prev.filter(c => !existingIds.has(c.userId));
+              const existingNames = new Set(apiContacts.map(c => c.name.toLowerCase().trim()));
+              const nonDuplicates = prev.filter(c => !existingIds.has(c.userId) && !existingNames.has(c.name.toLowerCase().trim()));
               return [...apiContacts, ...nonDuplicates];
             });
 
