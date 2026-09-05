@@ -246,21 +246,32 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
 
     setMessages(seedMessages);
 
-    // Fetch live messages from API if available
+    // Fetch live messages from API and poll every 2 seconds for real-time bidirectional chat
     async function loadLiveMessages() {
       try {
         const res = await fetch(`/api/chat?userId=${activeContact.userId}`);
         if (res.ok) {
           const data = await res.json();
           if (data.messages && data.messages.length > 0) {
-            setMessages(data.messages);
+            setMessages(prev => {
+              if (prev.length > 0 && data.messages.length > prev.length) {
+                const lastMsg = data.messages[data.messages.length - 1];
+                if (lastMsg && lastMsg.senderId !== currentUserId) {
+                  playPopSound("receive");
+                }
+              }
+              return data.messages;
+            });
           }
         }
       } catch (e) {
         console.error("Chat fetch error:", e);
       }
     }
+
     loadLiveMessages();
+    const pollInterval = setInterval(loadLiveMessages, 2000);
+    return () => clearInterval(pollInterval);
   }, [activeContact?.userId, currentUserId]);
 
   const chatScrollContainerRef = useRef<HTMLDivElement>(null);
@@ -326,39 +337,8 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
       console.error("API send failed:", e);
     }
 
-    // Realistic Candidate Interactive Auto-Reply (Instagram-style)
-    setTimeout(() => {
-      setIsTyping(true);
-    }, 1200);
-
-    setTimeout(() => {
-      setIsTyping(false);
-      playPopSound("receive");
-
-      const replies = [
-        `🚩 Thank you for your warm message! I shared this with my parents in ${activeContact.location.split(",")[0]}. They are very pleased.`,
-        `That sounds wonderful! Our Gotra is ${activeContact.gotra}. We would be glad to arrange a family phone conversation this weekend.`,
-        `I appreciate your response! Let me share our verified horoscope details for 36 Gunas matching.`,
-        `Auspicious! Our elders will call your family contact number tomorrow evening around 6 PM.`
-      ];
-      const replyContent = replies[Math.floor(Math.random() * replies.length)];
-
-      const replyMsg: MessageItem = {
-        id: `reply-${Date.now()}`,
-        senderId: activeContact.userId,
-        receiverId: currentUserId,
-        content: replyContent,
-        createdAt: new Date().toISOString(),
-        isRead: true,
-      };
-
-      setMessages(prev => [...prev, replyMsg]);
-      setContacts(prev => prev.map(c => 
-        c.userId === activeContact.userId 
-          ? { ...c, lastMessage: replyContent, lastMessageTime: "Now", unreadCount: 0 }
-          : c
-      ));
-    }, 3200);
+    // Real-time chat: The message is saved directly to PostgreSQL DB.
+    // Live polling automatically syncs messages across both users in real-time.
   };
 
   // Toggle Heart Reaction on Message (Instagram Double Tap)
