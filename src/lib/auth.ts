@@ -17,23 +17,28 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
-        const cleanEmail = credentials.email.trim().toLowerCase();
-        let user = await prisma.user.findUnique({
-          where: { email: cleanEmail }
-        });
-        if (!user) {
-          user = await prisma.user.findFirst({
-            where: { email: { equals: cleanEmail, mode: 'insensitive' } }
+        try {
+          const cleanEmail = credentials.email.trim().toLowerCase();
+          let user = await prisma.user.findUnique({
+            where: { email: cleanEmail }
           });
-        }
-        if (!user || !user.password) {
+          if (!user) {
+            user = await prisma.user.findFirst({
+              where: { email: { equals: cleanEmail, mode: "insensitive" } }
+            });
+          }
+          if (!user || !user.password) {
+            return null;
+          }
+          const passwordsMatch = await bcrypt.compare(credentials.password, user.password);
+          if (!passwordsMatch) {
+            return null;
+          }
+          return user;
+        } catch (err) {
+          console.error("Auth authorize error:", err);
           return null;
         }
-        const passwordsMatch = await bcrypt.compare(credentials.password, user.password);
-        if (!passwordsMatch) {
-          return null;
-        }
-        return user;
       }
     })
   ],

@@ -2,11 +2,9 @@ import { PrismaClient } from "@prisma/client";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 
-function getEffectiveConnectionString(): string {
-  let url = process.env.DATABASE_URL || "";
+function sanitizeDatabaseUrl(rawUrl?: string): string {
+  let url = rawUrl || process.env.DATABASE_URL || "";
   
-  // If the URL is the direct IPv6 Supabase host (which fails on Vercel AWS Lambda serverless runtime),
-  // automatically transform it into the IPv4 Supabase connection pooler host!
   if (url.includes("db.nhyoklrxsllmgweswyck.supabase.co")) {
     url = url
       .replace("db.nhyoklrxsllmgweswyck.supabase.co:6543", "aws-0-ap-southeast-1.pooler.supabase.com:6543")
@@ -15,10 +13,16 @@ function getEffectiveConnectionString(): string {
       .replace("postgres:", "postgres.nhyoklrxsllmgweswyck:");
   }
 
+  // Ensure pgbouncer is configured for transaction pooler
+  if (url.includes("pooler.supabase.com:6543") && !url.includes("pgbouncer=true")) {
+    url += (url.includes("?") ? "&" : "?") + "pgbouncer=true";
+  }
+
   return url;
 }
 
-const connectionString = getEffectiveConnectionString();
+const connectionString = sanitizeDatabaseUrl();
+process.env.DATABASE_URL = connectionString;
 
 const pool = new Pool({
   connectionString,
@@ -36,6 +40,6 @@ const globalForPrisma = globalThis as unknown as {
 
 export const prisma =
   globalForPrisma.prisma ??
-  new PrismaClient({ adapter, log: ["query"] });
+  new PrismaClient({ adapter, log: ["query", "error", "warn"] });
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
