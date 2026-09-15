@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        allow: ["/", "/llms.txt", "/llms-full.txt"],
         disallow: [
           "/admin",
           "/admin/*",
@@ -16,6 +16,25 @@ export default function robots(): MetadataRoute.Robots {
           "/api/*",
           "/onboarding",
           "/dev-home",
+        ],
+      },
+      {
+        userAgent: [
+          "GPTBot",
+          "ChatGPT-User",
+          "PerplexityBot",
+          "ClaudeBot",
+          "Claude-Web",
+          "Google-Extended",
+          "Applebot-Extended",
+          "Amazonbot",
+          "cohere-ai",
+        ],
+        allow: ["/", "/llms.txt", "/llms-full.txt", "/about", "/contact", "/success-stories"],
+        disallow: [
+          "/admin/*",
+          "/dashboard/*",
+          "/api/*",
         ],
       },
       {

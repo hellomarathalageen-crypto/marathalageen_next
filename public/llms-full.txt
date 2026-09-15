@@ -1,0 +1,53 @@
+# Maratha Matrimony (मराठा लागीन / Maratha Lageen) — Full Platform Documentation
+
+URL: https://marathalageen.com
+Platform Type: Matrimonial Matchmaking & Vedic Kundali Portal
+Primary Community: Maratha Samaj (96 Kuli Maratha, Kunbi Maratha, Deshastha Maratha, Kshatriya Maratha)
+Target Geography: Karnataka (Belagavi, Bengaluru, Hubballi-Dharwad, Uttara Kannada, Bagalkote, Vijayapura, Bidar, Kalaburagi, Shivamogga, etc.) and Maharashtra.
+
+---
+
+## 1. About Maratha Lageen
+Maratha Lageen (Maratha Matrimony) is founded to solve the fragmentation of Maratha family matrimonial searches across Karnataka and adjacent Maharashtra regions. It combines modern secure web technologies with sacred Vedic matrimonial customs (Devak, Gotra, 36 Gunas Milan, and family background validation).
+
+---
+
+## 2. Maratha Sub-Castes Supported
+1. **96 Kuli Maratha (९६ कुळी मराठा)**: The historic royal clans representing ancient Maratha aristocracy and martial heritage.
+2. **Kunbi Maratha (कुणबी मराठा)**: Respected agricultural and industrious community with deep cultural traditions.
+3. **Deshastha Maratha (देशस्थ मराठा)**: Families of the Deccan plateau regions with rich cultural traditions.
+4. **Kshatriya Maratha (क्षत्रिय मराठा)**: Warrior lineage families across Karnataka and Maharashtra borders.
+5. **Maratha (All / Other)**: Inclusive matching for all verified Maratha families.
+
+---
+
+## 3. Cultural Lineage & Matching Rules
+- **Devak (देवक)**: Traditional clan totems/deities (e.g. Kalamb, Panchpallav, Suryakant, Garud). The platform ensures respected Devak alignment.
+- **Gotra Exclusions**: Strict avoidance of Sagotra marriage (सगोत्र विवाह टाळणे) where required by family traditions.
+- **Kuldaivat (कुलदैवत)**: Tracking of ancestral family deities (e.g. Khandoba Jejuri, Bhavani Tuljapur, Mahalaxmi Kolhapur).
+- **Mama Gotra (मामाचे कुल)**: Maternal lineage recording for comprehensive family vetting.
+
+---
+
+## 4. Astrological / Vedic Kundali Parameters
+- **Rashis (12 Zodiac Signs)**: Mesha (Aries), Vrishabha (Taurus), Mithuna (Gemini), Karka (Cancer), Simha (Leo), Kanya (Virgo), Tula (Libra), Vrishchika (Scorpio), Dhanu (Sagittarius), Makara (Capricorn), Kumbha (Aquarius), Meena (Pisces).
+- **Nakshatras (27 Vedic Stars)**: 1. Ashwini to 27. Revati with Charan (1, 2, 3, 4) and Gan (Deva, Manushya, Rakshasa).
+- **Nadi Matching**: Aadi, Madhya, and Antya Nadi calculation to eliminate Nadi Dosha.
+- **Manglik Dosha**: Non-Manglik, Anshik Manglik, and Manglik classification with specialized compatibility filters.
+
+---
+
+## 5. Privacy, Trust & Safety
+- **Phone Number Masking**: Candidate phone numbers and emails are never displayed publicly to internet scrapers.
+- **Photo Privacy Shields**: Photos can be restricted to verified members or unlocked only upon mutual parent/candidate request.
+- **Family / Guardian Accounts**: Allows parents, brothers, and sisters to manage the candidate profile with full transparency.
+- **Govt ID & Verification**: Aadhaar and biodata verification badges ensure genuine, authentic matrimonial intent.
+
+---
+
+## 6. Official Contact & Support
+- **Website**: https://marathalageen.com
+- **Customer Care Helpline**: +91-8861962026
+- **WhatsApp Support**: https://wa.me/918861962026
+- **Email**: support@marathalageen.com / contact@marathalageen.com
+- **Locations**: Bengaluru (Karnataka) & Belagavi (Karnataka)

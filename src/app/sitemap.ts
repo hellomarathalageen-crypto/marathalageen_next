@@ -67,5 +67,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  routes.push(
+    {
+      url: `${baseUrl}/llms.txt`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.80,
+    },
+    {
+      url: `${baseUrl}/llms-full.txt`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.70,
+    }
+  );
+
   return routes;
 }
