@@ -292,7 +292,7 @@ export default function HomePage() {
                       src={`https://images.unsplash.com/photo-${img}?auto=format&fit=crop&q=80&w=100`}
                       alt="Member"
                       className="w-7 h-7 rounded-full border-2 border-white object-cover shadow-xs"
-                      onError={(e) => { (e.target as HTMLImageElement).src = "/hero.jpg"; }}
+                      onError={(e) => { (e.target as HTMLImageElement).src = "/hero.webp"; }}
                     />
                   ))}
                 </div>
@@ -310,7 +310,7 @@ export default function HomePage() {
               <div className="relative w-full max-w-[460px] bg-white rounded-3xl p-3 shadow-2xl border-2 border-[#E3B873]/50 ring-4 ring-pink-50/50">
                 <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-gray-100">
                   <img
-                    src="/hero.jpg"
+                    src="/hero.webp"
                     alt="Royal Maratha Bride & Groom"
                     className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
                   />

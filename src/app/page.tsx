@@ -1,5 +1,7 @@
 "use client";
 
+import { compressImage } from "@/lib/image-compression";
+
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -65,22 +67,39 @@ export default function PreRegisterPage() {
   const [emailNotice, setEmailNotice] = useState(false);
 
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [compressingPhoto, setCompressingPhoto] = useState(false);
+  const [compressionStats, setCompressionStats] = useState<{ savedPercent: number; compressedSize: number } | null>(null);
 
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        setPhotoPreview(result);
-        setFormData(prev => ({ ...prev, photoUrl: result }));
-      };
-      reader.readAsDataURL(file);
+      setCompressingPhoto(true);
+      try {
+        const compressed = await compressImage(file, { maxWidth: 1200, maxHeight: 1200, quality: 0.82 });
+        setPhotoPreview(compressed.dataUrl);
+        setFormData(prev => ({ ...prev, photoUrl: compressed.dataUrl }));
+        setCompressionStats({
+          savedPercent: compressed.savedPercent,
+          compressedSize: Math.round(compressed.compressedSize / 1024),
+        });
+      } catch (err) {
+        console.warn("Client image compression fallback:", err);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const result = reader.result as string;
+          setPhotoPreview(result);
+          setFormData(prev => ({ ...prev, photoUrl: result }));
+        };
+        reader.readAsDataURL(file);
+      } finally {
+        setCompressingPhoto(false);
+      }
     }
   };
 
   const removePhoto = () => {
     setPhotoPreview(null);
+    setCompressionStats(null);
     setFormData(prev => ({ ...prev, photoUrl: "" }));
   };
 
@@ -293,7 +312,7 @@ export default function PreRegisterPage() {
           {/* ── MOBILE HERO (hidden on lg) ── */}
           <div className="lg:hidden relative min-h-[100svh] flex flex-col justify-end items-center overflow-hidden text-center">
             <img
-              src="/hero.jpg"
+              src="/hero.webp"
               alt="Maratha Couple"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />
@@ -410,7 +429,7 @@ export default function PreRegisterPage() {
                 <div className="col-span-5 relative h-full min-h-[560px] flex items-center justify-center">
                   <div className="relative w-full h-[540px] rounded-3xl overflow-hidden shadow-2xl">
                     <img 
-                      src="/hero.jpg" 
+                      src="/hero.webp" 
                       alt="Maratha Couple" 
                       className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105" 
                     />
@@ -455,7 +474,7 @@ export default function PreRegisterPage() {
             {/* 16:9 Cinematic Video Card */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-black/90 aspect-video max-w-4xl mx-auto group">
               <img
-                src="/hero.jpg"
+                src="/hero.webp"
                 alt="Maratha Wedding Rituals"
                 className={`w-full h-full object-cover object-center transition-all duration-700 ${isPlayingVideo ? "opacity-20 scale-105 filter blur-xs" : "opacity-85 group-hover:scale-102"}`}
               />
@@ -692,7 +711,7 @@ export default function PreRegisterPage() {
                 {/* Family Photo Card */}
                 <div className="rounded-3xl overflow-hidden aspect-video bg-gray-100 shadow-md border-4 border-white relative">
                   <img 
-                    src="/family.png" 
+                    src="/family.webp" 
                     alt="Happy Maratha Family" 
                     className="w-full h-full object-cover"
                   />
@@ -1497,6 +1516,11 @@ export default function PreRegisterPage() {
                                     <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full flex items-center gap-1">
                                       <Check className="w-3.5 h-3.5 stroke-[3]" /> Photo Attached
                                     </span>
+                                    {compressionStats && (
+                                      <span className="text-[11px] font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-full">
+                                        ⚡ Auto-Optimized {compressionStats.savedPercent}% ({compressionStats.compressedSize} KB)
+                                      </span>
+                                    )}
                                     <button 
                                       type="button" 
                                       onClick={removePhoto} 
@@ -1645,7 +1669,7 @@ export default function PreRegisterPage() {
               <div className="bg-gray-50 rounded-3xl p-8 flex flex-col sm:flex-row items-center sm:items-start gap-8 border border-gray-100 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#DB1866] to-[#2A3773]"></div>
                 <div className="w-36 h-36 shrink-0 rounded-2xl overflow-hidden border-4 border-white shadow-lg bg-gray-200">
-                  <img src="/founder.jpg" alt="Founder" className="w-full h-full object-cover object-top" />
+                  <img src="/founder.webp" alt="Founder" className="w-full h-full object-cover object-top" />
                 </div>
                 <div className="relative text-center sm:text-left">
                   <h3 className="text-2xl font-semibold text-[#2A3773] mb-4 tracking-tight">Meet The <span className="text-[#DB1866]">Founder</span></h3>

@@ -170,7 +170,7 @@ export function ProfileCard({
             src={imageUrl}
             alt={name}
             onError={(e) => {
-              (e.target as HTMLImageElement).src = "/hero.jpg";
+              (e.target as HTMLImageElement).src = "/hero.webp";
             }}
             className={`w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ${
               photoPrivacy === "request" ? "filter blur-md scale-105" : ""

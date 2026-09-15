@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         {/* Background Image with Rich Royal Overlay */}
         <div className="absolute inset-0">
           <img 
-            src="/hero.jpg" 
+            src="/hero.webp" 
             alt="Maratha Matrimony Couple" 
             className="w-full h-full object-cover object-top filter saturate-110"
           />

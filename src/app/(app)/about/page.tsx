@@ -58,7 +58,7 @@ export default function AboutPage() {
 
         {/* Founder Quote */}
         <div className="bg-[#2A3773] text-white rounded-3xl p-8 md:p-10 shadow-xl mb-8 flex flex-col md:flex-row items-center gap-8">
-          <img src="/founder.jpg" alt="Founder" className="w-32 h-32 rounded-2xl object-cover border-4 border-white/20 shrink-0" />
+          <img src="/founder.webp" alt="Founder" className="w-32 h-32 rounded-2xl object-cover border-4 border-white/20 shrink-0" />
           <div>
             <p className="text-pink-200 text-lg italic mb-4 leading-relaxed">
               "At Maratha Lageen, our mission is simple - to bring Maratha families of Karnataka onto a trusted platform built on values, transparency and respect."
