@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Maratha Lageen - 96 Kuli Matrimony',
+    name: 'Maratha Lageen - Maratha Matrimony',
     short_name: 'MarathaLageen',
-    description: 'Karnataka & Maharashtra 96 Kuli Maratha Community Matrimonial Network',
+    description: 'Karnataka & Maharashtra Maratha Community Matrimonial Network',
     start_url: '/home',
     display: 'standalone',
     background_color: '#FFFDFB',

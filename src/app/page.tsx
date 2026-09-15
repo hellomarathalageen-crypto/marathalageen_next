@@ -24,10 +24,12 @@ export default function PreRegisterPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
 
-  // Form State
-  const [formData, setFormData] = useState({
+  // Form Initial State Definition
+  const initialFormState = {
     registeringFor: "Self",
     fullName: "",
+    surname: "",
+    caste: "96 Kuli Maratha",
     gender: "",
     mobile: "",
     whatsapp: "",
@@ -36,7 +38,12 @@ export default function PreRegisterPage() {
     district: "",
     // Personal Details (Step 2)
     dob: "",
-    birthTime: "",
+    birthHour: "12",
+    birthMinute: "00",
+    birthAmPm: "AM",
+    birthTime: "12:00 AM",
+    nakshatra: "",
+    rashi: "",
     age: "",
     height: "",
     maritalStatus: "Never Married",
@@ -47,11 +54,15 @@ export default function PreRegisterPage() {
     prefAgeMin: "21",
     prefAgeMax: "30",
     prefSubCaste: "Any",
-    prefLocation: "Karnataka",
+    prefEducation: "Any Education",
     // Photo (Step 4)
     photoUrl: "",
     agreeTerms: true,
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormState);
+  const [priorityPass, setPriorityPass] = useState("ML-2026-VIP");
+  const [emailNotice, setEmailNotice] = useState(false);
 
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
@@ -142,11 +153,39 @@ export default function PreRegisterPage() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    // Simulate server action
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/preregister", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data?.priorityPass) {
+        setPriorityPass(data.priorityPass);
+      }
+      if (data?.emailSent) {
+        setEmailNotice(true);
+      }
+    } catch (err) {
+      console.warn("Pre-registration submission network fallback:", err);
+    } finally {
       setLoading(false);
       setIsSubmitted(true);
-    }, 1200);
+    }
+  };
+
+  const handleRegisterAnother = () => {
+    setFormData(initialFormState);
+    setPhotoPreview(null);
+    setIsSubmitted(false);
+    setEmailNotice(false);
+    setCurrentStep(1);
+    try {
+      localStorage.removeItem("maratha_prereg_draft");
+      sessionStorage.removeItem("maratha_prereg_draft");
+    } catch (e) {}
+    const elem = document.getElementById("pre-register");
+    if (elem) elem.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -466,10 +505,7 @@ export default function PreRegisterPage() {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500 max-w-xl mx-auto">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span>Optimized in <strong>16:9 cinematic horizontal</strong> below hero for best UX and video playback.</span>
-            </div>
+
 
           </div>
         </section>
@@ -730,8 +766,25 @@ export default function PreRegisterPage() {
                                 <Check className="w-3 h-3 stroke-[3]" /> VIP Early Access
                               </span>
                             </div>
-                            <p className="text-xs text-blue-200 mt-0.5">{formData.city || "Karnataka"}, {formData.district} • Managed by {formData.registeringFor}</p>
-                            <p className="text-[11px] font-mono text-amber-300 font-bold mt-1 tracking-wider">Pass ID: MM-2026-VIP-{formData.mobile ? formData.mobile.slice(-4) : "8821"}</p>
+                            <p className="text-xs text-blue-200 mt-0.5 font-medium">
+                              {formData.caste} • {formData.district}, Karnataka • Managed by {formData.registeringFor}
+                            </p>
+                            <p className="text-[11px] text-pink-200 mt-0.5 font-medium">
+                              {formData.rashi ? 'Rashi: ' + formData.rashi + ' • ' : ''}{formData.nakshatra ? 'Nakshatra: ' + formData.nakshatra + ' • ' : ''}Birth Time: {formData.birthTime}
+                            </p>
+                            <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                              <span className="text-[11px] font-mono text-amber-300 font-bold tracking-wider bg-black/30 px-2 py-0.5 rounded">
+                                Pass ID: {priorityPass}
+                              </span>
+                              <span className={'text-[10px] px-2 py-0.5 rounded-full font-bold ' + (formData.photoUrl ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-white/10 text-gray-300')}>
+                                Photo: {formData.photoUrl ? 'Attached ✓' : 'Skipped (Add later)'}
+                              </span>
+                            </div>
+                            {emailNotice && (
+                              <p className="text-[11px] text-emerald-300 bg-emerald-950/40 border border-emerald-500/30 px-3 py-1.5 rounded-lg mt-2">
+                                ✓ VIP Confirmation dispatch active for {formData.email}
+                              </p>
+                            )}
                           </div>
                         </div>
 
@@ -859,12 +912,9 @@ export default function PreRegisterPage() {
                           <MessageCircle className="w-4 h-4" /> Message Support on WhatsApp
                         </a>
                         <Button 
-                          onClick={() => {
-                            setIsSubmitted(false);
-                            setCurrentStep(1);
-                          }} 
+                          onClick={handleRegisterAnother} 
                           variant="outline"
-                          className="w-full sm:w-auto h-12 border-gray-300 text-[#2A3773] rounded-xl px-6 font-bold hover:bg-gray-50 text-sm"
+                          className="w-full sm:w-auto h-12 border-gray-300 text-[#2A3773] rounded-xl px-6 font-bold hover:bg-gray-50 text-sm cursor-pointer"
                         >
                           Register Another Profile
                         </Button>
@@ -951,15 +1001,44 @@ export default function PreRegisterPage() {
                               </div>
 
                               <div className="space-y-1.5">
-                                <Label className="text-xs font-bold text-[#2A3773]">Full Name *</Label>
+                                <Label className="text-xs font-bold text-[#2A3773]">Candidate First & Middle Name *</Label>
                                 <Input 
                                   name="fullName" 
                                   value={formData.fullName} 
                                   onChange={handleChange} 
-                                  placeholder="Enter candidate's full name" 
+                                  placeholder="e.g. Rohit Ramesh" 
                                   className="h-12 bg-gray-50 rounded-xl font-medium" 
                                   required 
                                 />
+                              </div>
+
+                              <div className="space-y-1.5">
+                                <Label className="text-xs font-bold text-[#2A3773]">Family Surname (Annav / आडनाव) *</Label>
+                                <Input 
+                                  name="surname" 
+                                  value={formData.surname} 
+                                  onChange={handleChange} 
+                                  placeholder="(e.g., Morey, Jadhav, Ingle, Patil, etc.)" 
+                                  className="h-12 bg-gray-50 rounded-xl font-medium" 
+                                  required 
+                                />
+                              </div>
+
+                              <div className="space-y-1.5">
+                                <Label className="text-xs font-bold text-[#2A3773]">Maratha Caste / Sub-Caste *</Label>
+                                <select 
+                                  name="caste" 
+                                  value={formData.caste} 
+                                  onChange={handleChange} 
+                                  className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
+                                  required
+                                >
+                                  <option value="96 Kuli Maratha">96 Kuli Maratha (९६ कुळी मराठा)</option>
+                                  <option value="Kunbi Maratha">Kunbi Maratha (कुणबी मराठा)</option>
+                                  <option value="Deshastha Maratha">Deshastha Maratha (देशस्थ मराठा)</option>
+                                  <option value="Kshatriya Maratha">Kshatriya Maratha (क्षत्रिय मराठा)</option>
+                                  <option value="Maratha (All / Other)">Maratha (All / Other)</option>
+                                </select>
                               </div>
                               
                               <div className="space-y-1.5">
@@ -1083,15 +1162,128 @@ export default function PreRegisterPage() {
                               </div>
 
                               <div className="space-y-1.5">
-                                <Label className="text-xs font-bold text-[#2A3773]">Time of Birth *</Label>
-                                <Input 
-                                  type="time" 
-                                  name="birthTime" 
-                                  value={formData.birthTime} 
+                                <Label className="text-xs font-bold text-[#2A3773]">Time of Birth (12-Hour AM/PM) *</Label>
+                                <div className="grid grid-cols-3 gap-2">
+                                  <select
+                                    name="birthHour"
+                                    value={formData.birthHour}
+                                    onChange={(e) => {
+                                      const h = e.target.value;
+                                      setFormData(prev => ({
+                                        ...prev,
+                                        birthHour: h,
+                                        birthTime: h + ':' + prev.birthMinute + ' ' + prev.birthAmPm
+                                      }));
+                                    }}
+                                    className="h-12 px-2 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-xs font-bold"
+                                    required
+                                  >
+                                    {Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0')).map(h => (
+                                      <option key={h} value={h}>{h} Hr</option>
+                                    ))}
+                                  </select>
+
+                                  <select
+                                    name="birthMinute"
+                                    value={formData.birthMinute}
+                                    onChange={(e) => {
+                                      const m = e.target.value;
+                                      setFormData(prev => ({
+                                        ...prev,
+                                        birthMinute: m,
+                                        birthTime: prev.birthHour + ':' + m + ' ' + prev.birthAmPm
+                                      }));
+                                    }}
+                                    className="h-12 px-2 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-xs font-bold"
+                                    required
+                                  >
+                                    {['00','05','10','15','20','25','30','35','40','45','50','55'].map(m => (
+                                      <option key={m} value={m}>{m} Min</option>
+                                    ))}
+                                  </select>
+
+                                  <div className="flex rounded-xl overflow-hidden border border-gray-200 p-0.5 bg-gray-50 h-12">
+                                    <button
+                                      type="button"
+                                      onClick={() => setFormData(prev => ({ ...prev, birthAmPm: 'AM', birthTime: prev.birthHour + ':' + prev.birthMinute + ' AM' }))}
+                                      className={'flex-1 flex items-center justify-center font-bold text-xs rounded-lg transition-all ' + (formData.birthAmPm === 'AM' ? 'bg-[#DB1866] text-white shadow-xs' : 'text-gray-600 hover:text-black')}
+                                    >
+                                      AM
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => setFormData(prev => ({ ...prev, birthAmPm: 'PM', birthTime: prev.birthHour + ':' + prev.birthMinute + ' PM' }))}
+                                      className={'flex-1 flex items-center justify-center font-bold text-xs rounded-lg transition-all ' + (formData.birthAmPm === 'PM' ? 'bg-[#DB1866] text-white shadow-xs' : 'text-gray-600 hover:text-black')}
+                                    >
+                                      PM
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="space-y-1.5">
+                                <Label className="text-xs font-bold text-[#2A3773]">Rashi / Moon Sign (रास / राशी)</Label>
+                                <select 
+                                  name="rashi" 
+                                  value={formData.rashi} 
                                   onChange={handleChange} 
-                                  className="h-12 bg-gray-50 rounded-xl font-medium" 
-                                  required 
-                                />
+                                  className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
+                                >
+                                  <option value="">Select Rashi (12 Rashis)</option>
+                                  <option value="Mesha">1. Mesha / Aries (मेष)</option>
+                                  <option value="Vrishabha">2. Vrishabha / Taurus (वृषभ)</option>
+                                  <option value="Mithuna">3. Mithuna / Gemini (मिथुन)</option>
+                                  <option value="Karka">4. Karka / Cancer (कर्क)</option>
+                                  <option value="Simha">5. Simha / Leo (सिंह)</option>
+                                  <option value="Kanya">6. Kanya / Virgo (कन्या)</option>
+                                  <option value="Tula">7. Tula / Libra (तूळ)</option>
+                                  <option value="Vrishchika">8. Vrishchika / Scorpio (वृश्चिक)</option>
+                                  <option value="Dhanu">9. Dhanu / Sagittarius (धनु)</option>
+                                  <option value="Makara">10. Makara / Capricorn (मकर)</option>
+                                  <option value="Kumbha">11. Kumbha / Aquarius (कुंभ)</option>
+                                  <option value="Meena">12. Meena / Pisces (मीन)</option>
+                                  <option value="Don't Know / Not Sure">Don't Know / Not Sure</option>
+                                </select>
+                              </div>
+
+                              <div className="space-y-1.5">
+                                <Label className="text-xs font-bold text-[#2A3773]">Nakshatra / Birth Star (नक्षत्र)</Label>
+                                <select 
+                                  name="nakshatra" 
+                                  value={formData.nakshatra} 
+                                  onChange={handleChange} 
+                                  className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
+                                >
+                                  <option value="">Select Nakshatra (All 27 Stars)</option>
+                                  <option value="Ashwini">1. Ashwini (अश्विनी)</option>
+                                  <option value="Bharani">2. Bharani (भरणी)</option>
+                                  <option value="Krittika">3. Krittika (कृत्तिका)</option>
+                                  <option value="Rohini">4. Rohini (रोहिणी)</option>
+                                  <option value="Mrigashira">5. Mrigashira (मृगशीर्ष)</option>
+                                  <option value="Ardra">6. Ardra (आर्द्रा)</option>
+                                  <option value="Punarvasu">7. Punarvasu (पुनर्वसु)</option>
+                                  <option value="Pushya">8. Pushya (पुष्य)</option>
+                                  <option value="Ashlesha">9. Ashlesha (आश्लेषा)</option>
+                                  <option value="Magha">10. Magha (मघा)</option>
+                                  <option value="Purva Phalguni">11. Purva Phalguni (पूर्वा फाल्गुनी)</option>
+                                  <option value="Uttara Phalguni">12. Uttara Phalguni (उत्तरा फाल्गुनी)</option>
+                                  <option value="Hasta">13. Hasta (हस्त)</option>
+                                  <option value="Chitra">14. Chitra (चित्रा)</option>
+                                  <option value="Swati">15. Swati (स्वाती)</option>
+                                  <option value="Vishakha">16. Vishakha (विशाखा)</option>
+                                  <option value="Anuradha">17. Anuradha (अनुराधा)</option>
+                                  <option value="Jyeshtha">18. Jyeshtha (ज्येष्ठा)</option>
+                                  <option value="Mula">19. Mula (मूळ)</option>
+                                  <option value="Purva Ashadha">20. Purva Ashadha (पूर्वाषाढा)</option>
+                                  <option value="Uttara Ashadha">21. Uttara Ashadha (उत्तराषाढा)</option>
+                                  <option value="Shravana">22. Shravana (श्रवण)</option>
+                                  <option value="Dhanishta">23. Dhanishta (धनिष्ठा)</option>
+                                  <option value="Shatabhisha">24. Shatabhisha (शतभिषा)</option>
+                                  <option value="Purva Bhadrapada">25. Purva Bhadrapada (पूर्वा भाद्रपदा)</option>
+                                  <option value="Uttara Bhadrapada">26. Uttara Bhadrapada (उत्तरा भाद्रपदा)</option>
+                                  <option value="Revati">27. Revati (रेवती)</option>
+                                  <option value="Don't Know / Not Sure">Don't Know / Not Sure</option>
+                                </select>
                               </div>
 
                               <div className="space-y-1.5">
@@ -1270,16 +1462,19 @@ export default function PreRegisterPage() {
                               </div>
 
                               <div className="space-y-1.5 md:col-span-2">
-                                <Label className="text-xs font-bold text-[#2A3773]">Preferred Location</Label>
+                                <Label className="text-xs font-bold text-[#2A3773]">Partner Education Preference</Label>
                                 <select 
-                                  name="prefLocation" 
-                                  value={formData.prefLocation} 
+                                  name="prefEducation" 
+                                  value={formData.prefEducation} 
                                   onChange={handleChange} 
                                   className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
                                 >
-                                  <option value="Karnataka">Karnataka (Any District)</option>
-                                  <option value="Karnataka & Maharashtra">Karnataka & Maharashtra</option>
-                                  <option value="All India & Abroad">All India & Abroad</option>
+                                  <option value="Any Education">Any Education / Degree</option>
+                                  <option value="Graduate / Bachelors">Graduate / Bachelors Degree (B.E, B.Tech, B.Com, B.Sc, BCA, etc.)</option>
+                                  <option value="Post Graduate / Masters">Post Graduate / Masters (M.Tech, MBA, M.Com, MCA, etc.)</option>
+                                  <option value="Professional (CA / Doctor / Engineer)">Professional Degree (Doctor, CA, CS, Engineer, Law)</option>
+                                  <option value="SSLC / PUC">SSLC / PUC / 12th Standard</option>
+                                  <option value="Doctorate / Ph.D">Doctorate / Ph.D</option>
                                 </select>
                               </div>
                             </div>
@@ -1331,6 +1526,15 @@ export default function PreRegisterPage() {
                                 </>
                               )}
                             </div>
+
+                            {!photoPreview && (
+                              <div className="p-3.5 bg-amber-50 border border-amber-200/80 rounded-2xl flex items-center gap-3 text-xs text-amber-900 font-medium">
+                                <span className="text-lg shrink-0">📷</span>
+                                <p className="leading-relaxed">
+                                  <strong>Photo Upload is Optional:</strong> You can submit now without a photo. A traditional avatar is assigned automatically, and you can upload photos later from your dashboard.
+                                </p>
+                              </div>
+                            )}
 
                             <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex items-start gap-3">
                               <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
@@ -1508,10 +1712,14 @@ export default function PreRegisterPage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               {[
-                { q: "Is this platform only for Maratha community?", a: "Yes, Maratha Lageen is Karnataka's dedicated platform created exclusively for the Maratha community." },
-                { q: "Is there any registration fee today?", a: "No, pre-registration is 100% free and comes with a Complimentary Premium Membership worth ₹4,999." },
-                { q: "Will my details be visible to everyone?", a: "No. Your data is secured with us. Details are shown strictly to intended, verified members." },
-                { q: "When will the platform launch?", a: "We are currently completing pre-registrations and will launch shortly with thousands of verified profiles." }
+                { q: "Is this platform exclusively for the Maratha community?", a: "Yes, Maratha Lageen is dedicated solely to Maratha families across Karnataka (including 96 Kuli Maratha, Kunbi Maratha, Deshastha Maratha, and Kshatriya Maratha)." },
+                { q: "Is there any fee or charge to pre-register today?", a: "No, pre-registration is 100% free. The first 5,000 families receive a Complimentary VIP Membership worth ₹4,999 with zero hidden charges." },
+                { q: "Can parents, siblings, or guardians register on behalf of the candidate?", a: "Yes! Parents, brothers, sisters, or legal guardians can register and manage the matrimonial profile with complete family consent." },
+                { q: "How is candidate privacy and photo security safeguarded?", a: "Your contact number is masked and protected. Photos can be kept private upon request, and contact details are only unlocked for verified members with mutual family interest." },
+                { q: "How does the platform match Gotras and Devak?", a: "Our system checks traditional Maratha lineage rules, respecting Devak (देवक) alignment and Gotra exclusions (सगोत्र विवाह टाळणे) to suggest culturally authentic alliances." },
+                { q: "What is included in the Complimentary ₹4,999 VIP Membership?", a: "Early bird VIP access includes direct WhatsApp connects, contact number unlocking, 36 Gunas Vedic Kundali Milan, and priority placement in match recommendations." },
+                { q: "Can I update my photo, education, or horoscope after pre-registering?", a: "Yes, once you log in to your dashboard, you can update your bio, upload additional gallery photos, update horoscope charts, and adjust partner preferences anytime." },
+                { q: "When will the platform officially launch with live matching?", a: "We are concluding our initial Karnataka pre-registration drive and rolling out live matching and direct messaging shortly with thousands of verified profiles." }
               ].map((faq, i) => (
                 <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                   <h4 className="font-bold text-[#2A3773] text-sm mb-2">{faq.q}</h4>

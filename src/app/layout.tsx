@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { NextAuthProvider } from "@/components/providers/NextAuthProvider";
 import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt";
+import GlobalFooter from "@/components/layout/GlobalFooter";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -83,7 +84,10 @@ export default function RootLayout({
         className={`${poppins.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
         <NextAuthProvider>
-          {children}
+          <div className="flex-1 flex flex-col min-h-0">
+            {children}
+          </div>
+          <GlobalFooter />
           <PWAInstallPrompt />
         </NextAuthProvider>
       </body>

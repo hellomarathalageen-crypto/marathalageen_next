@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maratha Matrimony - Complete Platform Test & QA Guide</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      background-color: #ffffff;
+      line-height: 1.55;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    .no-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 10px 10px 10px;
+      page-break-after: always;
+    }
+
+    .cover-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 20px;
+    }
+
+    .cover-logo {
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: #fdf2f8;
+      color: #db1866;
+      border: 1px solid #fbcfe8;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+    }
+
+    .cover-title {
+      font-size: 30pt;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.18;
+      margin: 18px 0 10px 0;
+    }
+
+    .cover-subtitle {
+      font-size: 14pt;
+      color: #64748b;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    .cover-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .cover-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+
+    .cover-card h4 {
+      margin: 0 0 4px 0;
+      font-size: 10pt;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .cover-card p {
+      margin: 0;
+      font-size: 12pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .cover-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5pt;
+      color: #94a3b8;
+    }
+
+    /* Headings */
+    h1 {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 2.5px solid #db1866;
+      padding-bottom: 6px;
+      margin-top: 24px;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-left: 4px solid #db1866;
+      padding-left: 10px;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      font-weight: 600;
+      color: #334155;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0 0 10px 0;
+      color: #334155;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px 0;
+      font-size: 9.5pt;
+    }
+
+    th {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-weight: 700;
+      text-align: left;
+      padding: 9px 10px;
+      border: 1px solid #e2e8f0;
+      border-bottom: 2px solid #cbd5e1;
+    }
+
+    td {
+      padding: 8px 10px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #fafbfc;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      font-size: 8pt;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-primary { background: #fdf2f8; color: #db1866; border: 1px solid #fbcfe8; }
+    .badge-admin { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .badge-success { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+
+    /* Code blocks and Monospace */
+    code, .mono {
+      font-family: Menlo, Monaco, Consolas, monospace;
+      font-size: 8.8pt;
+      background: #f1f5f9;
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: #0f172a;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      font-size: 9.5pt;
+    }
+
+    .callout-info {
+      background-color: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      color: #0c4a6e;
+    }
+
+    .callout-highlight {
+      background-color: #fff1f2;
+      border-left: 4px solid #db1866;
+      color: #881337;
+    }
+
+    .callout-success {
+      background-color: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      color: #14532d;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* Checklists */
+    .step-list {
+      margin: 8px 0 12px 0;
+      padding-left: 0;
+      list-style-type: none;
+    }
+
+    .step-item {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 10px;
+      font-size: 10pt;
+    }
+
+    .step-num {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background: #db1866;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 8pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Test Case Box */
+    .test-case {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .test-case-header {
+      background: #f8fafc;
+      padding: 9px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .test-case-title {
+      font-weight: 700;
+      font-size: 10.5pt;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .test-case-body {
+      padding: 12px 14px;
+      font-size: 9.5pt;
+    }
+
+    .flow-diagram {
+      background: #fdf2f8;
+      border: 1px dashed #f472b6;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: Menlo, Monaco, Consolas, monospace;
+      font-size: 8.5pt;
+      color: #831843;
+      margin: 10px 0;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== COVER PAGE ==================== -->
+  <div class="cover-page">
+    <div class="cover-header">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqgAAADwCAYAAADM+pbvAAAAAXNSR0IArs4c6QAAAHhlWElmTU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAqigAwAEAAAAAQAAAPAAAAAAT7TGaAAAAAlwSFlzAAALEwAACxMBAJqcGAAAQABJREFUeAHtvW+MHGee3/c81SNykPVhZoO9HLXny7S8JCUjOXM29or0OjZbAey74BJwZDhGEsOZ1gtxlVdqidwXyQuzFSCvTK5aCILopCRqvg+8QyRB/iFQ80XuSB2S7TEQnERqo54ku6KDtW8GvgOGo+l68v1VV81UV1dV19+e6u5vgcPuev7+nk91d33r9/xTigcJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkMACEqgtYJsKb9Kla+82v/PdH9b/6S/+8PPCC2eBJEACJEACJEACJEACYwSssTOehBLQRm0pC388SIAESIAESIAESIAESiewUnoNc17BK9daddvoG8qogzlvCs0nARIgARIgARIggbkgQA/qlMtkq5Wmm2Tt8qu36EWdwovRJEACJEACJEACJJCXAAXqNILGNE+SsJv/BAXfkAAJkAAJkAAJkEBZBChQY8i6HtONkyQyFpUHCZAACZAACZAACZBAqQQoUOPwap/3dJSO3fxxvBhHAiRAAiRAAiRAAgUQoECNgCiTo5TC5KjgwW7+IBGekwAJkAAJkAAJkEChBChQI3D6JkeNp2A3/zgPnpEACZAACZAACZBAwQQoUKOA+idHjadhN/84D56RAAmQAAmQAAmQQKEEKFBDcE5MjgqmYTd/kAjPSYAESIAESIAESKAwAhSoYSinCVB284dRYxgJkAAJkAAJkAAJFEKAAjWAsb7ZWseuUduB4OApu/mDRHhOAiRAAiRAAiRAAgURoEANgDx//mTnqEBM4HSalzWQnKckQAIkQAIkQAIkQALJCFCgBjgZZVqBoPBTdvOHc2EoCZAACZAACZAACeQkQIHqA/jKtdsNnJ7uHOXGXfkLv+FLdfKW3fwnKPiGBEiABEiABEiABIojQIHqY2mriZ2jnNj/5B/8PfWt1XO+lO5bdvNPMmEICZAACZAACZAACeQkQIHqAoyaHPXDf+VfVq+88l31w9+ecKwqmUzl5Mt5EZidBEiABEiABEiABEjglAAFqssianLU7/3OX3FSNP76b59S8717YdXa8p3yLQmQAAmQAAmQAAmQQE4CFKguwLDJURe+/S31d/7uD50U8hrWza85WSrnR5DZSYAESIAESIAESGCcAAUqeFz6wY838TLRh/83f/gXx2iFdvMrfYPd/GOYeEICJEACJEACJEACuQhQoAKfrtmhS0v9nX/nb4zBZTf/GA6ekAAJkAAJkAAJkEApBJZeoLqToybGkXqTo/zUo7v5dajA9eflexIgARIgARIgARIggWQEll6gupOc1oK4vMlRwfDfuXo5GCTnV9xhAmFxDCMBEiABEiABEiABEkhBYOkFqjaT3k//5Kggy+03/lYwyDmPGiYQmpiBJEACJEACJEACJEACkQSWWqC+cq1VB5krQTo//EsvBYNOzmVN1NCdpbgm6gkjviEBEiABEiABEiCBPASWWqAOTS107GiUl9QD/Xe3/pr3duw1ai3VsUQ8IQESIAESIAESIAESiCWw1AJVKzUxOerid7/t7BwVR00mS8kwgOARtpZqMA3PSYAESIAESIAESIAE4gksrUC9/OotEacTa5/+7X/z1XhibmxwjVQ3eOOVa7cbiQpgIhIgARIgARIgARIggVACSytQlTXpPRVCN16/FgoqGPjWf/h7wSDn3Dbha6qGJmYgCZAACZAACZAACZDABIGlFKhRa5/+zR9cUt/5zq9NQAoLkHSSfvLQN9zJV5NRDCEBEiABEiABEiABEphKYCkFatTap1E7RUVR/Ld/72polK1WmqERDCQBEiABEiABEiABEphKYCkFqmVbzSCZb62eUzL5Kc3xO7+7GTpZShkTujpAmrKZlgRIgARIgARIgASWlcDSCVTpfjfaXA9e8IgdooLJJs7/g7/9r0+EIWDt0rV3m2ERDCMBEiABEiABEiABEognsHQCNar7fStibdN4fKNJVeJ9DR5hXtpgGp6TAAmQAAmQAAmQAAlMElg6gYru92YQg6x9evWvhk14Cqac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" alt="Maratha Matrimony Logo" class="cover-logo" />
+      <div>
+        <h3 style="margin: 0; color: #db1866; font-size: 14pt; font-weight: 800;">मराठा लागीन</h3>
+        <p style="margin: 0; font-size: 10pt; color: #64748b; font-weight: 500;">Maratha Matrimony Platform</p>
+      </div>
+    </div>
+
+    <div>
+      <span class="cover-badge">Executive QA & Manager Testing Manual</span>
+      <h1 class="cover-title">End-to-End Platform<br/>Testing & User Flows Guide</h1>
+      <p class="cover-subtitle">
+        A complete, step-by-step verification guide covering candidate onboarding, cultural matching, real-time chat sync, printable biodata generation, and the super admin control center.
+      </p>
+
+      <div class="cover-card-grid">
+        <div class="cover-card">
+          <h4>Target Audience</h4>
+          <p>Project Managers, QA Leads & Stakeholders</p>
+        </div>
+        <div class="cover-card">
+          <h4>Release Version</h4>
+          <p>v1.0 Production Ready</p>
+        </div>
+        <div class="cover-card">
+          <h4>Core Modules</h4>
+          <p>10 Distinct Systems (Chat, Admin, KYC, Biodata)</p>
+        </div>
+        <div class="cover-card">
+          <h4>Test Readiness</h4>
+          <p style="color: #16a34a;">Pre-Configured & Verified</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <span>Maratha Matrimony Application Suite</span>
+      <span>Confidential - For Manager Verification</span>
+      <span>September 2026</span>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 1: CREDENTIALS & ACCESS MATRIX ==================== -->
+  <div>
+    <h1>1. Test Environment & Credentials Matrix</h1>
+    <p>
+      This testing guide enables management and QA to verify all critical customer journeys, edge cases, and administrative functions. The database comes pre-seeded with active matched candidate accounts and an elevated Super Admin account.
+    </p>
+
+    <div class="callout callout-info">
+      <div class="callout-title">🌐 Platform Access URLs</div>
+      <div><strong>Local Testing URL:</strong> <span class="mono">http://localhost:3000</span></div>
+      <div><strong>Login Portal:</strong> <span class="mono">http://localhost:3000/login</span></div>
+      <div><strong>Admin Direct:</strong> <span class="mono">http://localhost:3000/admin/dashboard</span></div>
+    </div>
+
+    <h2>Pre-Configured Test Accounts</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Role / Persona</th>
+          <th>Login Email</th>
+          <th>Password</th>
+          <th>Profile & Attributes</th>
+          <th>Direct Route</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-admin">Super Admin</span></td>
+          <td><span class="mono">admin@marathalageen.com</span></td>
+          <td><span class="mono">Admin@123</span></td>
+          <td>Platform Owner, Moderation, Approvals & Financial Control</td>
+          <td><span class="mono">/admin/dashboard</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-primary">Groom Candidate</span></td>
+          <td><span class="mono">demo@maratha.com</span></td>
+          <td><span class="mono">Demo@123</span></td>
+          <td>Rohit Patil • 28 Yrs • Pune • 96 Kuli Maratha • Software Engineer</td>
+          <td><span class="mono">/dashboard</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-primary">Bride Candidate</span></td>
+          <td><span class="mono">priya.test@maratha.com</span></td>
+          <td><span class="mono">Demo@123</span></td>
+          <td>Priya Patil • 26 Yrs • Mumbai • 96 Kuli Maratha • HR Professional</td>
+          <td><span class="mono">/dashboard</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-highlight">
+      <div class="callout-title">⚡ 1-Click Login Shortcuts on the Login Screen</div>
+      The <span class="mono">/login</span> page includes built-in quick test buttons right under the password field:
+      <br/>
+      • Click <strong>"👑 Super Admin"</strong> to automatically populate Super Admin credentials.
+      <br/>
+      • Click <strong>"👨 Groom Demo"</strong> to automatically populate Rohit Patil's credentials.
+      <br/>
+      • Click <strong>"👩 Bride Demo"</strong> to automatically populate Priya Patil's credentials.
+    </div>
+
+    <div class="callout callout-success">
+      <div class="callout-title">💡 Side-by-Side Real-Time Testing Recommendation</div>
+      To observe live bidirectional messaging, typing indicators, and mutual notifications:
+      <br/>
+      1. Open <strong>Window 1 (Normal Chrome)</strong>: Log in as <strong>Rohit Patil</strong> (<span class="mono">demo@maratha.com</span>).
+      <br/>
+      2. Open <strong>Window 2 (Incognito Chrome)</strong>: Log in as <strong>Priya Patil</strong> (<span class="mono">priya.test@maratha.com</span>).
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== SECTION 2: END-TO-END FLOW ARCHITECTURE ==================== -->
+  <div>
+    <h1>2. Master Route Map & User Journey Architecture</h1>
+    <p>
+      The platform consists of two distinct ecosystems: the <strong>Candidate Portal</strong> (focused on cultural matchmaking, biodata, and verified communication) and the <strong>Super Admin Console</strong> (focused on moderation, approvals, and metrics).
+    </p>
+
+    <div class="flow-diagram">
+      [Candidate] ➔ /signup ➔ 5-Step /onboarding ➔ /dashboard (Matches) ➔ /interests ➔ /dashboard/chat
+      <br/>
+      [Admin] ➔ /login ➔ (Auto-redirect) ➔ /admin/dashboard ➔ [Users | Approvals | Moderation | Payments]
+    </div>
+
+    <h2>Master Route Directory</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>URL Route</th>
+          <th>Access Level</th>
+          <th>Core Functionality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Auth</strong></td>
+          <td><span class="mono">/signup</span></td>
+          <td>Public</td>
+          <td>Account registration (Name, Email, Password, Gender, Profile Creator)</td>
+        </tr>
+        <tr>
+          <td><strong>Auth</strong></td>
+          <td><span class="mono">/login</span></td>
+          <td>Public</td>
+          <td>Secure NextAuth sign-in with 1-click test chips</td>
+        </tr>
+        <tr>
+          <td><strong>Onboarding</strong></td>
+          <td><span class="mono">/onboarding</span></td>
+          <td>Candidate Only</td>
+          <td>5-step cultural profile setup (Devak, Gotra, Kundali, Career)</td>
+        </tr>
+        <tr>
+          <td><strong>Discovery</strong></td>
+          <td><span class="mono">/dashboard</span></td>
+          <td>Candidate</td>
+          <td>Member dashboard, daily recommendations & activity counters</td>
+        </tr>
+        <tr>
+          <td><strong>Discovery</strong></td>
+          <td><span class="mono">/matches</span></td>
+          <td>Candidate</td>
+          <td>Algorithmic partner matching & compatibility scoring</td>
+        </tr>
+        <tr>
+          <td><strong>Discovery</strong></td>
+          <td><span class="mono">/search</span></td>
+          <td>Candidate</td>
+          <td>Advanced multi-attribute search (Sub-caste, Gotra, City, Manglik)</td>
+        </tr>
+        <tr>
+          <td><strong>Astrology</strong></td>
+          <td><span class="mono">/kundali</span></td>
+          <td>Candidate</td>
+          <td>Ashtakoot 36 Guna Milan horoscope calculator</td>
+        </tr>
+        <tr>
+          <td><strong>Biodata</strong></td>
+          <td><span class="mono">/biodata</span></td>
+          <td>Candidate</td>
+          <td>Traditional Maharashtrian printable biodata with PDF/Print layout</td>
+        </tr>
+        <tr>
+          <td><strong>Connections</strong></td>
+          <td><span class="mono">/interests</span></td>
+          <td>Candidate</td>
+          <td>Manage sent, received, accepted, and declined connection requests</td>
+        </tr>
+        <tr>
+          <td><strong>Chat</strong></td>
+          <td><span class="mono">/dashboard/chat</span></td>
+          <td>Candidate</td>
+          <td>Real-time chat with live typing indicator & PostgreSQL persistence</td>
+        </tr>
+        <tr>
+          <td><strong>Subscription</strong></td>
+          <td><span class="mono">/membership</span></td>
+          <td>Candidate</td>
+          <td>Pricing tiers (Free, Premium, Premium Plus) & contact unlocking</td>
+        </tr>
+        <tr>
+          <td><strong>Admin Core</strong></td>
+          <td><span class="mono">/admin/dashboard</span></td>
+          <td>Super Admin</td>
+          <td>Executive overview, KPI metrics, active subscribers & pending tasks</td>
+        </tr>
+        <tr>
+          <td><strong>Admin Members</strong></td>
+          <td><span class="mono">/admin/users</span></td>
+          <td>Super Admin</td>
+          <td>User directory, role elevation (<span class="mono">USER</span> ↔ <span class="mono">ADMIN</span>), ban/activate</td>
+        </tr>
+        <tr>
+          <td><strong>Admin KYC</strong></td>
+          <td><span class="mono">/admin/approvals</span></td>
+          <td>Super Admin</td>
+          <td>Government ID verification queue & trust badge management</td>
+        </tr>
+        <tr>
+          <td><strong>Admin Safety</strong></td>
+          <td><span class="mono">/admin/moderation</span></td>
+          <td>Super Admin</td>
+          <td>Reported abuse tickets, content moderation & image audit</td>
+        </tr>
+        <tr>
+          <td><strong>Admin Revenue</strong></td>
+          <td><span class="mono">/admin/payments</span></td>
+          <td>Super Admin</td>
+          <td>Transaction ledger, active subscriptions & financial tracking</td>
+        </tr>
+        <tr>
+          <td><strong>Admin Tools</strong></td>
+          <td><span class="mono">/admin/broadcast</span></td>
+          <td>Super Admin</td>
+          <td>Push platform-wide announcements to all logged-in members</td>
+        </tr>
+        <tr>
+          <td><strong>Admin Export</strong></td>
+          <td><span class="mono">/admin/export</span></td>
+          <td>Super Admin</td>
+          <td>One-click CSV/Excel export of member dossiers and financial records</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== SECTION 3: CANDIDATE FLOW TEST CASES ==================== -->
+  <div>
+    <h1>3. Step-by-Step Test Scenarios: Candidate Portal</h1>
+
+    <!-- Test Scenario 1 -->
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 1: Candidate Registration & 5-Step Cultural Onboarding</h3>
+        <span class="badge badge-primary">Flow #1</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Verify that a new visitor can register and complete the mandatory 5-step cultural profile setup before gaining access to the dashboard.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            Navigate to <span class="mono">http://localhost:3000/signup</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            Enter candidate name, unique email (e.g. <span class="mono">test.groom@maratha.com</span>), password (<span class="mono">Demo@123</span>), gender (Male/Female), and "Profile Created By" (Self/Parents).
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            Submit the form. Observe that the middleware automatically enforces redirection to <span class="mono">/onboarding</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">4</span>
+            <strong>Step 1 (Personal):</strong> Select Marital Status (Never Married), Height (5ft 10in), Weight (72kg), Current City (Pune), State (Maharashtra).
+          </li>
+          <li class="step-item">
+            <span class="step-num">5</span>
+            <strong>Step 2 (Cultural Lineage):</strong> Select Maratha Sub-caste (<strong>96 Kuli Maratha</strong>), Gotra (e.g. <strong>Kashyap</strong>), Devak (<strong>Panchpallav</strong>), Kuldaivat (<strong>Bhavani Tuljapur</strong>), Native Place (Satara).
+          </li>
+          <li class="step-item">
+            <span class="step-num">6</span>
+            <strong>Step 3 (Kundali / पत्रिका):</strong> Select Rashi (Mesh), Nakshatra (Ashwini), Charan (1), Gan (Deva), Manglik Status (Non-Manglik), and Birth Time/Place.
+          </li>
+          <li class="step-item">
+            <span class="step-num">7</span>
+            <strong>Step 4 (Education & Career):</strong> Select Degree (B.E. Computer Science), Profession (Software Engineer), Income Bracket (₹15-20 LPA), Diet (Non-Veg).
+          </li>
+          <li class="step-item">
+            <span class="step-num">8</span>
+            <strong>Step 5 (Family & Photo):</strong> Select Family Type (Nuclear), Father Occupation, Mother Occupation, and upload candidate photo.
+          </li>
+          <li class="step-item">
+            <span class="step-num">9</span>
+            Click "Complete Profile". Verify immediate redirect to <span class="mono">/dashboard</span> with welcome banner and profile completeness meter updated.
+          </li>
+        </ul>
+        <div class="callout callout-success">
+          <strong>Pass Criteria:</strong> All 5 steps validate successfully, user record is populated in PostgreSQL with all lineage/horoscope fields, and user can now browse matches.
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Scenario 2 -->
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 2: Search, Filters & Smart Match Discovery</h3>
+        <span class="badge badge-primary">Flow #2</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Verify that candidates can find compatible matches using cultural and geographical filters.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            Log in as <strong>Rohit Patil</strong> (<span class="mono">demo@maratha.com</span> / <span class="mono">Demo@123</span>).
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            Navigate to <span class="mono">/matches</span>. Verify daily curated matches display with compatibility score badges (e.g. 92% Match).
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            Navigate to <span class="mono">/search</span>. Test the following filters:
+            <br/>
+            • <strong>Sub-caste:</strong> Select "96 Kuli Maratha".
+            <br/>
+            • <strong>City:</strong> Filter by "Mumbai" or "Pune".
+            <br/>
+            • <strong>Manglik Status:</strong> Select "Non-Manglik".
+          </li>
+          <li class="step-item">
+            <span class="step-num">4</span>
+            Verify results reload dynamically. Click on <strong>Priya Patil's</strong> profile card to open the complete candidate dossier at <span class="mono">/profile/[id]</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">5</span>
+            Inspect the candidate dossier tabs: About Me, Kundali & Horoscope, Lineage (Devak, Gotra, Kuldaivat), Family Background, and Lifestyle.
+          </li>
+        </ul>
+        <div class="callout callout-success">
+          <strong>Pass Criteria:</strong> Profile displays all cultural fields accurately and respects photo privacy settings.
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Scenario 3 -->
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 3: Traditional Printable Biodata Generator</h3>
+        <span class="badge badge-primary">Flow #3</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Validate the creation, preview, and printing of a traditional Maharashtrian Biodata.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            While logged in as Rohit or Priya, navigate to <span class="mono">http://localhost:3000/biodata</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            Verify the traditional layout renders:
+            <br/>
+            • Header with <strong>श्री गणेशाय नमः</strong> and auspicious emblem.
+            <br/>
+            • Candidate photo with royal border frame.
+            <br/>
+            • <strong>वैयक्तिक माहिती (Personal Info):</strong> Full Name, DOB, Time, Place, Height, Blood Group.
+            <br/>
+            • <strong>कुल व देवक माहिती (Lineage):</strong> जात (Maratha), उपजात (96 Kuli), गोत्र (Kashyap), देवक (Panchpallav), कुलदैवत (Bhavani Tuljapur), मूळ गाव.
+            <br/>
+            • <strong>पत्रिका / कुंडली (Horoscope):</strong> रास, नक्षत्र, चरण, गण, नाडी, मंगळ.
+            <br/>
+            • <strong>कौटुंबिक माहिती (Family):</strong> Father/Mother details, Siblings, Mama Gotra, Relatives.
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            Click the <strong>"Print / Save as PDF"</strong> button. Verify print preview opens cleanly without web navigation artifacts or sidebar interference.
+          </li>
+        </ul>
+        <div class="callout callout-success">
+          <strong>Pass Criteria:</strong> Formatted cleanly for single/two-page A4 printing with zero CSS overflow or clipping.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== SECTION 4: REAL-TIME CHAT TEST FLOW ==================== -->
+  <div>
+    <h1>4. Real-Time Chat & Bidirectional Sync Testing</h1>
+    <p>
+      The chat engine has been upgraded to a production-grade, 100% database-backed engine. All simulated client-side mock timers and auto-replies have been removed. Messages and typing indicators sync bidirectionally in real time.
+    </p>
+
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 4: Live Chat & Real-Time Bidirectional Typing Indicator</h3>
+        <span class="badge badge-primary">Flow #4</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Validate simultaneous real-time communication between two active members across independent sessions.</p>
+
+        <div class="callout callout-highlight">
+          <strong>Required Setup:</strong>
+          <br/>
+          • <strong>Window 1 (Regular Browser):</strong> Log in as <strong>Rohit Patil</strong> (<span class="mono">demo@maratha.com</span> / <span class="mono">Demo@123</span>).
+          <br/>
+          • <strong>Window 2 (Incognito Window):</strong> Log in as <strong>Priya Patil</strong> (<span class="mono">priya.test@maratha.com</span> / <span class="mono">Demo@123</span>).
+        </div>
+
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            In both windows, navigate to <span class="mono">http://localhost:3000/dashboard/chat</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            In <strong>Window 1 (Rohit)</strong>, click on <strong>Priya Patil</strong> in the active conversations sidebar.
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            In <strong>Window 2 (Priya)</strong>, click on <strong>Rohit Patil</strong> in the active conversations sidebar.
+          </li>
+          <li class="step-item">
+            <span class="step-num">4</span>
+            <strong>Test Typing Indicator (Rohit ➔ Priya):</strong>
+            <br/>
+            In Window 1, begin typing a message in the input box (do not press send yet).
+            <br/>
+            Look at <strong>Window 2 (Priya's screen)</strong>:
+            <br/>
+            • The header immediately displays a pulsing status: <span style="color: #db1866; font-weight: 700;">"Rohit is typing..."</span>.
+            <br/>
+            • An animated 3-dot message bubble appears at the bottom of the message thread.
+            <br/>
+            Clear the input in Window 1 — verify that the indicator disappears in Window 2 within 2 seconds.
+          </li>
+          <li class="step-item">
+            <span class="step-num">5</span>
+            <strong>Test Live Message Delivery (Rohit ➔ Priya):</strong>
+            <br/>
+            In Window 1, send: <em>"Namaskar Priya, had a chance to look at your biodata. Would love to discuss further."</em>
+            <br/>
+            Observe Window 2: Within 1.5 seconds, the new message renders on Priya's screen on the left in clean white bubble style with timestamp.
+          </li>
+          <li class="step-item">
+            <span class="step-num">6</span>
+            <strong>Test Reverse Live Reply (Priya ➔ Rohit):</strong>
+            <br/>
+            In Window 2 (Priya), type and send: <em>"Namaskar Rohit! Yes, our families' Devak and Gotra align well. Let's arrange a call."</em>
+            <br/>
+            Observe Window 1 (Rohit): Message appears instantly.
+          </li>
+          <li class="step-item">
+            <span class="step-num">7</span>
+            <strong>Verify No Fake Auto-Replies:</strong>
+            <br/>
+            Notice that neither side triggers simulated bot replies or pre-canned dummy timers. Every message is authentic and directly committed to the PostgreSQL <span class="mono">Message</span> table.
+          </li>
+          <li class="step-item">
+            <span class="step-num">8</span>
+            <strong>Verify Responsive UI Layout:</strong>
+            <br/>
+            Resize the browser window to compact laptop sizes (e.g. 1024×665).
+            <br/>
+            Verify that the input box, send button, and chat messages stay 100% visible inside the viewport without page truncation or horizontal clipping.
+          </li>
+        </ul>
+
+        <div class="callout callout-success">
+          <strong>Pass Criteria:</strong>
+          <br/>
+          ✓ Messages persist across page refreshes (stored in PostgreSQL).
+          <br/>
+          ✓ Typing indicator works bidirectionally with automatic timeout.
+          <br/>
+          ✓ No horizontal or vertical clipping on compact viewports.
+          <br/>
+          ✓ Clean Maratha Matrimony crimson/pink brand styling (<span class="mono">#DB1866</span>).
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Scenario 5 -->
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 5: Membership Plans & Contact Unlocking</h3>
+        <span class="badge badge-primary">Flow #5</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Verify monetization gates and premium phone number unlocking.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            Navigate to <span class="mono">/membership</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            Compare features across <strong>Free</strong>, <strong>Premium (₹2,499)</strong>, and <strong>Premium Plus (₹4,999)</strong> tiers.
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            Click "Upgrade" on the Premium tier to enter the checkout flow at <span class="mono">/payment</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">4</span>
+            Verify that upon activation, candidate profiles show unblurred contact numbers and direct WhatsApp connect buttons.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== SECTION 5: SUPER ADMIN FLOW TEST CASES ==================== -->
+  <div>
+    <h1>5. Step-by-Step Test Scenarios: Super Admin Console</h1>
+    <p>
+      The Super Admin console provides complete operational control over member accounts, content moderation, KYC verification, revenue tracking, and global broadcasts.
+    </p>
+
+    <!-- Test Scenario 6 -->
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 6: Super Admin Login & Executive Dashboard Overview</h3>
+        <span class="badge badge-admin">Admin Flow #1</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Verify secure administrative access, role enforcement, and platform metrics.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            Navigate to <span class="mono">http://localhost:3000/login</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            Click the quick test chip <strong>"👑 Super Admin"</strong> (fills <span class="mono">admin@marathalageen.com</span> / <span class="mono">Admin@123</span>).
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            Click "Sign In". Verify the system validates the <span class="mono">ADMIN</span> role and automatically routes to <span class="mono">/admin/dashboard</span>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">4</span>
+            <strong>Inspect KPI Cards:</strong>
+            <br/>
+            • <strong>Total Registered Profiles:</strong> Total bride and groom count.
+            <br/>
+            • <strong>Active Subscriptions:</strong> Members on paid tiers.
+            <br/>
+            • <strong>Pending Verifications:</strong> Accounts awaiting document approval.
+            <br/>
+            • <strong>Monthly Revenue:</strong> Total transaction volume.
+          </li>
+          <li class="step-item">
+            <span class="step-num">5</span>
+            <strong>Test Security Guard:</strong> Attempt to visit <span class="mono">/admin/dashboard</span> while logged in as Rohit Patil. Verify that the middleware redirects non-admin users to <span class="mono">/dashboard</span>.
+          </li>
+        </ul>
+        <div class="callout callout-success">
+          <strong>Pass Criteria:</strong> Only authenticated users with <span class="mono">role: "ADMIN"</span> can access any <span class="mono">/admin/*</span> routes.
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Scenario 7 -->
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 7: User Management & Role Elevation</h3>
+        <span class="badge badge-admin">Admin Flow #2</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Verify search, inspection, role modification, and account status management.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            From the admin sidebar, click <strong>"Users"</strong> (<span class="mono">/admin/users</span>).
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            Use the search bar to search by name ("Priya") or email ("priya.test@maratha.com").
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            Test the filter tabs: <strong>All Members</strong>, <strong>Verified Only</strong>, <strong>Pending Verification</strong>, and <strong>Admin Accounts</strong>.
+          </li>
+          <li class="step-item">
+            <span class="step-num">4</span>
+            Click on a member row to inspect their full profile, subscription status, and join date.
+          </li>
+          <li class="step-item">
+            <span class="step-num">5</span>
+            Verify action buttons: Toggle Role (<span class="mono">USER</span> ↔ <span class="mono">ADMIN</span>), Deactivate Account, or Delete Profile.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Test Scenario 8 -->
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 8: Approvals & Government ID Verification Queue</h3>
+        <span class="badge badge-admin">Admin Flow #3</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Verify KYC document review and trust badge assignment.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            Click <strong>"Verification"</strong> (<span class="mono">/admin/approvals</span>).
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            Review the list of candidates who submitted Aadhaar, PAN, or employment credentials.
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            Click <strong>"Approve"</strong> on a pending profile.
+          </li>
+          <li class="step-item">
+            <span class="step-num">4</span>
+            Verify in the database and public profile view that <span class="mono">isVerified</span> updates to <span class="mono">true</span>, displaying the green shield trust badge.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Test Scenario 9 -->
+    <div class="test-case no-break">
+      <div class="test-case-header">
+        <h3 class="test-case-title">Test Scenario 9: Global Broadcasts & Data Export</h3>
+        <span class="badge badge-admin">Admin Flow #4</span>
+      </div>
+      <div class="test-case-body">
+        <p><strong>Goal:</strong> Validate system announcements and analytical reports export.</p>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-num">1</span>
+            Navigate to <strong>"Broadcast"</strong> (<span class="mono">/admin/broadcast</span>).
+          </li>
+          <li class="step-item">
+            <span class="step-num">2</span>
+            Create a new announcement: Title <em>"Pune Vadhu-Var Melawa Announced!"</em>, Message, Banner Type (Info/Warning/Urgent).
+          </li>
+          <li class="step-item">
+            <span class="step-num">3</span>
+            Publish the broadcast. Verify that logged-in candidates see the alert notification on their dashboard banner.
+          </li>
+          <li class="step-item">
+            <span class="step-num">4</span>
+            Navigate to <strong>"Export"</strong> (<span class="mono">/admin/export</span>).
+          </li>
+          <li class="step-item">
+            <span class="step-num">5</span>
+            Click <strong>"Export Member Directory (CSV)"</strong> and <strong>"Export Financial Ledger"</strong>. Verify CSV files download cleanly with full column headers.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== SECTION 6: QA ACCEPTANCE CHECKLIST ==================== -->
+  <div>
+    <h1>6. QA Acceptance Testing Sign-Off Checklist</h1>
+    <p>
+      Your QA tester or manager can print or fill this checklist to record pass/fail verification for each platform feature:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%;">ID</th>
+          <th style="width: 25%;">Module / Feature</th>
+          <th style="width: 42%;">Expected Behavior</th>
+          <th style="width: 12%;">Status</th>
+          <th style="width: 13%;">Sign-off</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="mono">QA-01</span></td>
+          <td><strong>Candidate Registration</strong></td>
+          <td>Account created, redirected to 5-step onboarding wizard.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-02</span></td>
+          <td><strong>Cultural Onboarding</strong></td>
+          <td>Saves Devak, Gotra, Kuldaivat, and Kundali attributes to PostgreSQL.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-03</span></td>
+          <td><strong>Smart Matchmaking</strong></td>
+          <td>Accurate compatibility scoring based on partner preferences.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-04</span></td>
+          <td><strong>Printable Biodata</strong></td>
+          <td>Traditional Maharashtrian layout with Ganesha header & print preview.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-05</span></td>
+          <td><strong>Real-Time Chat Sync</strong></td>
+          <td>Instant 1.5s bidirectional delivery without simulated mock bot replies.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-06</span></td>
+          <td><strong>Typing Indicator</strong></td>
+          <td>Displays "typing..." status and animated 3 dots in real time.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-07</span></td>
+          <td><strong>Chat UI Layout</strong></td>
+          <td>No clipping or horizontal truncation on 1024×665 viewports.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-08</span></td>
+          <td><strong>Brand Color Styling</strong></td>
+          <td>Clean crimson/pink brand palette (<span class="mono">#DB1866</span>) applied consistently.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-09</span></td>
+          <td><strong>Super Admin Login</strong></td>
+          <td>1-click chip fills credentials, routes automatically to <span class="mono">/admin/dashboard</span>.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-10</span></td>
+          <td><strong>Route Protection</strong></td>
+          <td>Non-admin candidates blocked from visiting <span class="mono">/admin/*</span> routes.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-11</span></td>
+          <td><strong>User Administration</strong></td>
+          <td>Admin can search, inspect, ban, and modify candidate roles.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-12</span></td>
+          <td><strong>KYC Approvals</strong></td>
+          <td>Admin can approve documents and toggle green verified badges.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+        <tr>
+          <td><span class="mono">QA-13</span></td>
+          <td><strong>Data Export</strong></td>
+          <td>Member directory and transaction records export cleanly to CSV.</td>
+          <td>[  ] Pass<br/>[  ] Fail</td>
+          <td>__________</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 20px; display: flex; justify-content: space-between;">
+      <div>
+        <p style="margin: 0; font-weight: 700; color: #0f172a;">Tester / QA Lead Name:</p>
+        <p style="margin: 20px 0 0 0; border-bottom: 1px solid #94a3b8; width: 220px;"></p>
+      </div>
+      <div>
+        <p style="margin: 0; font-weight: 700; color: #0f172a;">Project Manager Signature:</p>
+        <p style="margin: 20px 0 0 0; border-bottom: 1px solid #94a3b8; width: 220px;"></p>
+      </div>
+      <div>
+        <p style="margin: 0; font-weight: 700; color: #0f172a;">Date of Sign-off:</p>
+        <p style="margin: 20px 0 0 0; border-bottom: 1px solid #94a3b8; width: 140px;"></p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -14,21 +14,29 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    executeLogin(email, password);
+  };
+
+  // Instant 1-click login helper
+  const [quickLoggingIn, setQuickLoggingIn] = useState<string | null>(null);
+
+  const executeLogin = async (targetEmail: string, targetPass: string) => {
     setError("");
     setLoading(true);
-
     try {
+      const cleanEmail = targetEmail.trim().toLowerCase();
       const res = await signIn("credentials", {
         redirect: false,
-        email: email.trim().toLowerCase(),
-        password,
+        email: cleanEmail,
+        password: targetPass,
       });
 
       if (res?.error) {
         setError("Invalid email or password. Please verify your credentials.");
+        setLoading(false);
+        setQuickLoggingIn(null);
       } else {
-        // Direct admin users straight to super admin dashboard
-        if (email.trim().toLowerCase() === "admin@marathalageen.com") {
+        if (cleanEmail === "admin@marathalageen.com") {
           window.location.href = "/admin/dashboard";
         } else {
           window.location.href = "/dashboard";
@@ -36,16 +44,16 @@ export default function LoginPage() {
       }
     } catch (err) {
       setError("An unexpected network error occurred. Please try again.");
-    } finally {
       setLoading(false);
+      setQuickLoggingIn(null);
     }
   };
 
-  // Quick fill helper for testing
-  const fillCredentials = (userEmail: string, userPass: string) => {
+  const handleQuickLogin = (userEmail: string, userPass: string) => {
     setEmail(userEmail);
     setPassword(userPass);
-    setError("");
+    setQuickLoggingIn(userEmail);
+    executeLogin(userEmail, userPass);
   };
 
   return (
@@ -150,33 +158,65 @@ export default function LoginPage() {
 
       {/* ── Quick Demo / Admin Test Credentials Helper ── */}
       <div className="mt-6 p-3.5 rounded-2xl bg-[#FFFDF9] border border-amber-200/80 space-y-2">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
-          <ShieldCheck className="w-3.5 h-3.5 text-amber-600" /> Quick 1-Click Login Credentials:
+        <p className="text-[11px] font-bold uppercase tracking-wider text-amber-900 flex items-center justify-between">
+          <span className="flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-amber-600" /> Instant 1-Click Login:
+          </span>
+          <span className="text-[10px] font-normal text-amber-700">Click any card to sign in</span>
         </p>
         
-        <div className="grid grid-cols-2 gap-2 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
           {/* Super Admin Quick Button */}
           <button
             type="button"
-            onClick={() => fillCredentials("admin@marathalageen.com", "Admin@123")}
-            className="text-left p-2 rounded-xl bg-white hover:bg-amber-50 border border-amber-200 transition-all group"
+            disabled={loading}
+            onClick={() => handleQuickLogin("admin@marathalageen.com", "Admin@123")}
+            className="text-left p-2.5 rounded-xl bg-white hover:bg-amber-50 border border-amber-300 shadow-2xs transition-all group disabled:opacity-50 hover:scale-[1.02] cursor-pointer"
           >
-            <p className="font-bold text-[#1B2559] flex items-center gap-1 text-[11px]">
-              <Crown className="w-3 h-3 text-amber-500 fill-amber-500" /> Super Admin
+            <p className="font-bold text-[#1B2559] flex items-center justify-between text-[11px]">
+              <span className="flex items-center gap-1">
+                <Crown className="w-3 h-3 text-amber-500 fill-amber-500" /> Super Admin
+              </span>
+              {quickLoggingIn === "admin@marathalageen.com" && (
+                <span className="w-3 h-3 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+              )}
             </p>
-            <p className="text-[10px] text-gray-500 truncate font-mono">admin@marathalageen.com</p>
+            <p className="text-[10px] text-gray-500 truncate font-mono mt-0.5">admin@marathalageen.com</p>
+            <span className="inline-block text-[9px] font-semibold text-amber-700 bg-amber-100 px-1.5 py-0.2 rounded mt-1.5">Control Center</span>
           </button>
 
-          {/* Member Demo Quick Button */}
+          {/* Groom Demo Quick Button */}
           <button
             type="button"
-            onClick={() => fillCredentials("demo@maratha.com", "Demo@123")}
-            className="text-left p-2 rounded-xl bg-white hover:bg-pink-50 border border-pink-200 transition-all group"
+            disabled={loading}
+            onClick={() => handleQuickLogin("demo@maratha.com", "Demo@123")}
+            className="text-left p-2.5 rounded-xl bg-white hover:bg-blue-50 border border-blue-200 shadow-2xs transition-all group disabled:opacity-50 hover:scale-[1.02] cursor-pointer"
           >
-            <p className="font-bold text-[#1B2559] flex items-center gap-1 text-[11px]">
-              👤 Demo Member
+            <p className="font-bold text-[#1B2559] flex items-center justify-between text-[11px]">
+              <span>👨 Groom (Rohit)</span>
+              {quickLoggingIn === "demo@maratha.com" && (
+                <span className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+              )}
             </p>
-            <p className="text-[10px] text-gray-500 truncate font-mono">demo@maratha.com</p>
+            <p className="text-[10px] text-gray-500 truncate font-mono mt-0.5">demo@maratha.com</p>
+            <span className="inline-block text-[9px] font-semibold text-blue-700 bg-blue-100 px-1.5 py-0.2 rounded mt-1.5">Pune • 96 Kuli</span>
+          </button>
+
+          {/* Bride Demo Quick Button */}
+          <button
+            type="button"
+            disabled={loading}
+            onClick={() => handleQuickLogin("priya.test@maratha.com", "Demo@123")}
+            className="text-left p-2.5 rounded-xl bg-white hover:bg-pink-50 border border-pink-200 shadow-2xs transition-all group disabled:opacity-50 hover:scale-[1.02] cursor-pointer"
+          >
+            <p className="font-bold text-[#1B2559] flex items-center justify-between text-[11px]">
+              <span>👰 Bride (Priya)</span>
+              {quickLoggingIn === "priya.test@maratha.com" && (
+                <span className="w-3 h-3 border-2 border-pink-500 border-t-transparent rounded-full animate-spin" />
+              )}
+            </p>
+            <p className="text-[10px] text-gray-500 truncate font-mono mt-0.5">priya.test@maratha.com</p>
+            <span className="inline-block text-[9px] font-semibold text-pink-700 bg-pink-100 px-1.5 py-0.2 rounded mt-1.5">Mumbai • 96 Kuli</span>
           </button>
         </div>
       </div>

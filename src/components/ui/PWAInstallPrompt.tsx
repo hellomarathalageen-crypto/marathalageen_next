@@ -58,7 +58,7 @@ export default function PWAInstallPrompt() {
   if (!isVisible || pathname?.startsWith("/dashboard/chat")) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 max-w-sm w-[calc(100%-2.5rem)] bg-[#121A3D] text-white p-4 rounded-3xl shadow-2xl border border-white/20 animate-in slide-in-from-bottom-5 font-sans">
+    <div className="fixed bottom-5 right-5 z-50 max-w-sm w-[calc(100%-2.5rem)] bg-[#121A3D] text-white p-4 rounded-3xl shadow-2xl border border-white/20 animate-in slide-in-from-bottom-5 font-sans block md:hidden">
       <div className="flex items-start justify-between gap-3">
         <div className="w-10 h-10 rounded-2xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md">
           <img src="/logo.png" alt="Maratha App" className="w-full h-auto object-contain" />
