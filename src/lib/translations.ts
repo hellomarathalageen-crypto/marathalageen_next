@@ -16,16 +16,17 @@ export const translations = {
       "registerFree": "Pre-Register Free"
     },
     "hero": {
-      "communityBadge": "🚩 Karnataka Exclusive Maratha Matrimony",
-      "titleLine1": "Honoring Sacred Lineage,",
-      "titleLine2": "Connecting Destined Souls.",
-      "subtitle": "Karnataka premier matrimonial platform for 96 Kuli Maratha, Kunbi, Deshastha, and Kshatriya Maratha families. Featuring authentic Devak, Gotra, and 36 Gunas Vedic Kundali matching.",
-      "claimVipCta": "Claim ₹4,999 VIP Free Access",
-      "watchVideoCta": "Watch Cultural Showcase",
-      "badge1": "100% Verified Profiles",
-      "badge2": "Photo & Contact Shield",
-      "badge3": "Vedic Kundali Milan",
-      "vipNotice": "First 5,000 Karnataka Maratha Families Receive 1-Year VIP Access 100% Free"
+      "communityBadge": "🎉 Limited Pre-Registration Open — Free Premium Worth ₹4,999",
+      "titleLine1": "Karnataka's Exclusive",
+      "titleLine2": "Maratha Matrimony",
+      "titleLine3": "Platform",
+      "subtitle": "A trusted platform created exclusively for Maratha families across Karnataka — verified profiles, privacy-first registration and genuine connections.",
+      "claimVipCta": "Pre-Register Your Family",
+      "watchVideoCta": "Learn More",
+      "badge1": "100% Maratha",
+      "badge2": "Privacy First",
+      "badge3": "Verified Profiles",
+      "vipNotice": "🔒 Get Premium Membership Worth ₹4,999 FREE"
     },
     "video": {
       "badge": "Sacred Maratha Heritage • ಪವಿತ್ರ ಸಂಸ್ಕೃತಿ",
@@ -307,16 +308,17 @@ export const translations = {
       "registerFree": "ಉಚಿತ ಪೂರ್ವ ನೋಂದಣಿ"
     },
     "hero": {
-      "communityBadge": "🚩 ಕರ್ನಾಟಕದ #1 ವಿಶ್ವಾಸಾರ್ಹ ಕ್ಷತ್ರಿಯ ಮರಾಠ ಮ್ಯಾಟ್ರಿಮೋನಿ",
-      "titleLine1": "ಪವಿತ್ರ ಕುಲ ಗೌರವ,",
-      "titleLine2": "ಸಾರ್ಥಕ ವಿವಾಹ ಬಂಧನ.",
-      "subtitle": "ಕರ್ನಾಟಕದ 96 ಕುಳಿ ಮರಾಠ, ಕುಣಬಿ, ದೇಶಸ್ಥ ಮತ್ತು ಕ್ಷತ್ರಿಯ ಮರಾಠ ಕುಟುಂಬಗಳಿಗಾಗಿ ಅಧಿಕೃತ ವೈವಾಹಿಕ ವೇದಿಕೆ. ದೇವಕ, ಗೋತ್ರ ಮತ್ತು 36 ಗುಣಗಳ ಜಾತಕ ಮಿಲನದೊಂದಿಗೆ ಸೂಕ್ತ ಸಂಬಂಧವನ್ನು ಹುಡುಕಿ.",
-      "claimVipCta": "₹4,999 VIP ಪ್ರವೇಶ ಉಚಿತವಾಗಿ ಪಡೆಯಿರಿ",
-      "watchVideoCta": "ಸಂಸ್ಕೃತಿ ವಿಡಿಯೋ ವೀಕ್ಷಿಸಿ",
-      "badge1": "100% ಪರಿಶೀಲಿಸಿದ ಪ್ರೊಫೈಲ್‌ಗಳು",
-      "badge2": "ಸಂಪೂರ್ಣ ಗೌಪ್ಯತೆ & ಭದ್ರತೆ",
-      "badge3": "36 ಗುಣಗಳ ಜಾತಕ ಹೊಂದಾಣಿಕೆ",
-      "vipNotice": "ಮೊದಲ 5,000 ಕರ್ನಾಟಕದ ಮರಾಠ ಕುಟುಂಬಗಳಿಗೆ 1 ವರ್ಷದ VIP ಸದಸ್ಯತ್ವ ಸಂಪೂರ್ಣ ಉಚಿತ"
+      "communityBadge": "🎉 ಸೀಮಿತ ಪೂರ್ವ-ನೋಂದಣಿ ಮುಕ್ತವಾಗಿದೆ — ₹4,999 ಮೌಲ್ಯದ VIP ಉಚಿತ",
+      "titleLine1": "ಕರ್ನಾಟಕದ ಏಕೈಕ",
+      "titleLine2": "ಮರಾಠ ಮ್ಯಾಟ್ರಿಮೋನಿ",
+      "titleLine3": "ವೇದಿಕೆ",
+      "subtitle": "ಕರ್ನಾಟಕದ ಸಮಸ್ತ ಮರಾಠ ಕುಟುಂಬಗಳಿಗಾಗಿಯೇ ಮೀಸಲಾದ ವಿಶ್ವಾಸಾರ್ಹ ವೇದಿಕೆ — ಪರಿಶೀಲಿಸಿದ ಪ್ರೊಫೈಲ್‌ಗಳು, ಸಂಪೂರ್ಣ ಗೌಪ್ಯತೆ ಮತ್ತು ನೈಜ ಸಂಬಂಧಗಳು.",
+      "claimVipCta": "ಕುಟುಂಬವನ್ನು ನೋಂದಾಯಿಸಿ",
+      "watchVideoCta": "ಹೆಚ್ಚಿನ ಮಾಹಿತಿ",
+      "badge1": "100% ಮರಾಠ",
+      "badge2": "ಗೌಪ್ಯತೆ ಮೊದಲು",
+      "badge3": "ಪರಿಶೀಲಿತ ಪ್ರೊಫೈಲ್",
+      "vipNotice": "🔒 ₹4,999 ಮೌಲ್ಯದ ಪ್ರೀಮಿಯಂ ಸದಸ್ಯತ್ವ ಉಚಿತ"
     },
     "video": {
       "badge": "ಪವಿತ್ರ ಮರಾಠ ಸಂಸ್ಕೃತಿ • Sacred Maratha Heritage",

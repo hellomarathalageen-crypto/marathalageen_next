@@ -383,9 +383,10 @@ export default function PreRegisterPage() {
                 <Bell className="w-3.5 h-3.5" /> {t.hero.communityBadge}
               </div>
 
-              <h1 className="text-[26px] sm:text-[30px] font-bold leading-[1.2] tracking-tight mb-3 drop-shadow-lg text-center w-full mx-auto">
+              <h1 className="text-[28px] sm:text-[32px] font-bold leading-[1.2] tracking-tight mb-3 drop-shadow-lg text-center w-full mx-auto">
                 {t.hero.titleLine1}<br/>
-                <span className="text-[#f9a8d4] drop-shadow-md">{t.hero.titleLine2}</span>
+                <span className="text-[#f9a8d4] drop-shadow-md">{t.hero.titleLine2}</span><br/>
+                {t.hero.titleLine3}
               </h1>
 
               <p className="text-blue-50 text-[13px] sm:text-[14px] leading-relaxed mb-5 drop-shadow-md font-normal text-center max-w-[320px] mx-auto">
@@ -431,9 +432,10 @@ export default function PreRegisterPage() {
                     <Bell className="w-3.5 h-3.5 fill-[#DB1866]" /> {t.hero.communityBadge}
                   </div>
 
-                  <h1 className="text-[40px] xl:text-[46px] font-semibold text-[#2A3773] leading-[1.16] tracking-tight">
+                  <h1 className="text-[44px] xl:text-[50px] font-bold text-[#2A3773] leading-[1.16] tracking-tight">
                     {t.hero.titleLine1}<br/>
-                    <span className="text-[#DB1866] font-bold">{t.hero.titleLine2}</span>
+                    <span className="text-[#DB1866] font-bold">{t.hero.titleLine2}</span><br/>
+                    {t.hero.titleLine3}
                   </h1>
 
                   <p className="text-gray-600 text-base xl:text-lg leading-relaxed max-w-xl font-normal">
