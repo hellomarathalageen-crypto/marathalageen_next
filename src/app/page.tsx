@@ -28,6 +28,16 @@ export default function PreRegisterPage() {
   const [copiedToast, setCopiedToast] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [contactForm, setContactForm] = useState({ name: "", phone: "", district: "", message: "" });
+  const [contactSent, setContactSent] = useState(false);
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const queryText = `Hello Maratha Matrimony Team, I would like assistance with pre-registration.\n\n*Name:* ${contactForm.name}\n*Mobile:* ${contactForm.phone}\n*District:* ${contactForm.district || "Karnataka"}\n*Inquiry:* ${contactForm.message || "Please call me back regarding matrimonial registration."}`;
+    window.open(getWhatsAppLink(queryText), "_blank");
+    setContactSent(true);
+    setTimeout(() => setContactSent(false), 4000);
+  };
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
 
   // Form Initial State Definition
@@ -217,36 +227,35 @@ export default function PreRegisterPage() {
       <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="container mx-auto px-3 sm:px-4 md:px-8 h-18 sm:h-20 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <Link href="#home" className="flex items-center gap-2 pl-1 sm:pl-2">
+          <div className="flex items-center gap-2 mr-3 sm:mr-6 lg:mr-8 shrink-0">
+            <a href="#home" className="flex items-center gap-2 pl-1 sm:pl-2 hover:opacity-90 transition-opacity">
               <img 
                 src="/logo.png" 
                 alt="Maratha Lageen Logo" 
-                className="h-11 sm:h-12 lg:h-14 w-auto object-contain transition-transform" 
+                className="h-10 sm:h-12 lg:h-13 w-auto object-contain transition-transform" 
               />
-            </Link>
+            </a>
           </div>
           
           {/* Desktop Navigation Menu */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+          <nav className="hidden lg:flex items-center gap-3.5 xl:gap-5.5">
             {[
-              { href: "#home", label: t.nav.home },
               { href: "#heritage-video", label: t.nav.heritage },
               { href: "#register", label: t.nav.preRegister },
               { href: "#who-can-register", label: t.nav.whoCanRegister },
               { href: "#why-we-exist", label: t.nav.whyWeExist },
               { href: "#how-it-works", label: t.nav.howItWorks },
+              { href: "#about", label: t.nav.aboutUs },
+              { href: "#contact", label: t.nav.contactUs },
               { href: "#faqs", label: t.nav.faqs },
-              { href: "/about", label: t.nav.aboutUs },
-              { href: "/contact", label: t.nav.contactUs },
             ].map((link) => (
-              <Link 
+              <a 
                 key={link.href} 
                 href={link.href}
-                className="text-xs xl:text-sm font-semibold text-[#2A3773] hover:text-[#DB1866] transition-colors relative py-1"
+                className="text-xs xl:text-sm font-semibold text-[#2A3773] hover:text-[#DB1866] transition-colors relative py-1 whitespace-nowrap cursor-pointer"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -327,18 +336,18 @@ export default function PreRegisterPage() {
                 { href: "#who-can-register", label: t.nav.whoCanRegister },
                 { href: "#why-we-exist", label: t.nav.whyWeExist },
                 { href: "#how-it-works", label: t.nav.howItWorks },
+                { href: "#about", label: t.nav.aboutUs },
+                { href: "#contact", label: t.nav.contactUs },
                 { href: "#faqs", label: t.nav.faqs },
-                { href: "/about", label: t.nav.aboutUs },
-                { href: "/contact", label: t.nav.contactUs },
               ].map((link) => (
-                <Link
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-3 px-3 hover:text-[#DB1866] hover:bg-pink-50/50 rounded-xl transition-colors"
+                  className="py-3 px-3 hover:text-[#DB1866] hover:bg-pink-50/50 rounded-xl transition-colors cursor-pointer"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
               <div className="pt-4 mt-2 flex flex-col gap-2">
                 <button
@@ -1694,72 +1703,320 @@ export default function PreRegisterPage() {
           </div>
         </section>
 
-        {/* Founder & Community Presence */}
-        <section className="py-16 bg-white" id="about">
+        {/* ──────────── DEDICATED ABOUT US SECTION (#about) ──────────── */}
+        <section className="py-20 bg-gradient-to-b from-[#FFF8FA] via-white to-[#FFF8FA] border-t border-b border-pink-100/60" id="about">
           <div className="container mx-auto px-4 max-w-6xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#DB1866]" /> 
+                <span>{t.aboutSection.badge}</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#2A3773] tracking-tight mb-4">
+                {t.aboutSection.title}
+              </h2>
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+                {t.aboutSection.subtitle}
+              </p>
+            </div>
+
+            {/* Core Narrative & Cultural Pillars Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
               
-              {/* Founder */}
-              <div className="bg-gray-50 rounded-3xl p-8 flex flex-col sm:flex-row items-center sm:items-start gap-8 border border-gray-100 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#DB1866] to-[#2A3773]"></div>
-                <div className="w-36 h-36 shrink-0 rounded-2xl overflow-hidden border-4 border-white shadow-lg bg-gray-200">
-                  <img src="/founder.webp" alt="Founder" className="w-full h-full object-cover object-top" />
+              {/* Left Col: Mission & Lineage Cards (7 cols) */}
+              <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+                
+                <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-lg transition-all space-y-4">
+                  <div className="flex items-center gap-3 text-[#DB1866]">
+                    <div className="w-10 h-10 rounded-2xl bg-[#FFF1F5] flex items-center justify-center font-bold">
+                      <Heart className="w-5 h-5 fill-[#DB1866]" />
+                    </div>
+                    <h3 className="text-xl font-bold text-[#2A3773]">
+                      {language === "kn" ? "ಕರ್ನಾಟಕ ಮರಾಠ ಸಮಾಜದ ಏಕೈಕ ವೇದಿಕೆ" : "Uniting Karnataka's Maratha Samaj"}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 text-sm md:text-[15px] leading-relaxed">
+                    {t.aboutSection.desc1}
+                  </p>
+                  <p className="text-gray-600 text-sm md:text-[15px] leading-relaxed">
+                    {t.aboutSection.desc2}
+                  </p>
                 </div>
-                <div className="relative text-center sm:text-left">
-                  <h3 className="text-2xl font-semibold text-[#2A3773] mb-4 tracking-tight">{t.aboutSection.title}</h3>
-                  <div className="relative z-10">
-                    <p className="text-[14px] text-gray-700 leading-relaxed mb-3 italic">
-                      "{t.aboutSection.desc1}"
-                    </p>
-                    <p className="text-[14px] text-gray-700 leading-relaxed mb-4 italic">
-                      "{t.aboutSection.desc2}"
-                    </p>
-                    <p className="font-bold text-[#2A3773] text-base">— {t.aboutSection.founderTitle}</p>
+
+                {/* Cultural Pillars Strip */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="bg-white p-5 rounded-2xl border border-pink-100 text-center shadow-xs">
+                    <div className="w-9 h-9 rounded-xl bg-pink-50 text-[#DB1866] flex items-center justify-center mx-auto mb-2 font-bold">
+                      <ShieldCheck className="w-5 h-5" />
+                    </div>
+                    <p className="text-xs font-bold text-[#2A3773]">{language === "kn" ? "100% ಪರಿಶೀಲನೆ" : "100% Verified"}</p>
+                    <p className="text-[11px] text-gray-500 mt-0.5">{language === "kn" ? "ಕುಟುಂಬ ಗೌರವ" : "Strict Screening"}</p>
+                  </div>
+
+                  <div className="bg-white p-5 rounded-2xl border border-pink-100 text-center shadow-xs">
+                    <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#2A3773] flex items-center justify-center mx-auto mb-2 font-bold">
+                      <Lock className="w-5 h-5" />
+                    </div>
+                    <p className="text-xs font-bold text-[#2A3773]">{language === "kn" ? "ಸಂಪೂರ್ಣ ಗೌಪ್ಯತೆ" : "Privacy Shield"}</p>
+                    <p className="text-[11px] text-gray-500 mt-0.5">{language === "kn" ? "ರಕ್ಷಿತ ಮಾಹಿತಿ" : "Masked Phone & Bio"}</p>
+                  </div>
+
+                  <div className="bg-white p-5 rounded-2xl border border-pink-100 text-center shadow-xs">
+                    <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-2 font-bold">
+                      <Sparkles className="w-5 h-5" />
+                    </div>
+                    <p className="text-xs font-bold text-[#2A3773]">{language === "kn" ? "36 ಗುಣಗಳ ಮಿಲನ" : "36 Gunas Milan"}</p>
+                    <p className="text-[11px] text-gray-500 mt-0.5">{language === "kn" ? "ದೇವಕ & ಗೋತ್ರ ನಿಯಮ" : "Devak Lineage"}</p>
                   </div>
                 </div>
+
               </div>
 
-              {/* Community Presence */}
-              <div className="bg-[#2A3773] rounded-3xl p-8 text-white flex flex-col justify-center text-center sm:text-left">
-                <h3 className="text-xl font-bold mb-3">Our Community Presence</h3>
-                <p className="text-sm text-blue-100 mb-6">Proudly connecting Maratha families across all key districts in Karnataka.</p>
+              {/* Right Col: Founder Card (5 cols) */}
+              <div className="lg:col-span-5 bg-gradient-to-br from-[#1B2554] via-[#2A3773] to-[#121A3D] rounded-3xl p-8 text-white relative overflow-hidden shadow-xl border border-white/10 flex flex-col justify-between">
+                <div className="absolute -right-12 -top-12 w-44 h-44 bg-[#DB1866]/25 rounded-full blur-3xl pointer-events-none" />
                 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                  {["Bengaluru", "Belagavi", "Hubballi", "Dharwad", "Vijayapura", "Mysuru", "Shivamogga", "Mangaluru"].map((city) => (
-                    <div key={city} className="border border-blue-400/30 rounded-xl py-2.5 text-center text-xs font-semibold text-blue-50 bg-white/5">
-                      {city}
+                <div className="relative z-10 space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-20 h-20 shrink-0 rounded-2xl overflow-hidden border-2 border-[#DB1866] shadow-lg bg-gray-200">
+                      <img src="/founder.webp" alt="Founder" className="w-full h-full object-cover object-top" />
                     </div>
-                  ))}
+                    <div>
+                      <p className="text-xs font-bold text-pink-300 uppercase tracking-widest">{t.aboutSection.founderRole}</p>
+                      <h4 className="text-lg font-bold font-sans text-white">{t.aboutSection.founderTitle}</h4>
+                      <p className="text-xs text-blue-200">Karnataka &amp; South India Maratha Samaj</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-white/10 space-y-3">
+                    <p className="text-[13.5px] text-blue-100/90 leading-relaxed italic">
+                      "{t.aboutSection.founderQuote1}"
+                    </p>
+                    <p className="text-[13.5px] text-blue-100/90 leading-relaxed italic">
+                      "{t.aboutSection.founderQuote2}"
+                    </p>
+                  </div>
                 </div>
-                <p className="text-center text-xs italic text-blue-200">...and many more taluks and rural pockets</p>
+
+                <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between">
+                  <span className="text-xs font-semibold text-pink-300">🚩 Jai Bhavani, Jai Shivaji</span>
+                  <a 
+                    href="#register" 
+                    className="text-xs font-bold text-white bg-[#DB1866] hover:bg-[#B81456] px-4 py-2 rounded-full shadow-md transition-all cursor-pointer"
+                  >
+                    {t.nav.registerFree}
+                  </a>
+                </div>
               </div>
 
             </div>
+
+            {/* Regional Network Presence Pill Strip */}
+            <div className="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-sm text-center">
+              <h4 className="text-sm md:text-base font-bold text-[#2A3773] mb-2 uppercase tracking-wide">
+                {t.aboutSection.presenceTitle}
+              </h4>
+              <p className="text-xs text-gray-500 mb-6 max-w-xl mx-auto">
+                {t.aboutSection.presenceSubtitle}
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+                {t.aboutSection.districts.map((city: string) => (
+                  <span key={city} className="bg-[#FFF8FA] border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold px-3.5 py-1.5 rounded-full transition-colors shadow-2xs">
+                    📍 {city}
+                  </span>
+                ))}
+              </div>
+            </div>
+
           </div>
         </section>
 
-        {/* WhatsApp Banner */}
-        <section className="py-12">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <div className="bg-[#DB1866] rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-[#DB1866]/20">
-              <div className="flex flex-col md:flex-row items-center text-center md:text-left gap-4 md:gap-6">
-                <div className="bg-white p-4 rounded-2xl shadow-inner text-[#DB1866] shrink-0">
-                  <Bell className="w-8 h-8" />
+
+        {/* ──────────── DEDICATED CONTACT US SECTION (#contact) ──────────── */}
+        <section className="py-20 bg-white border-b border-gray-100" id="contact">
+          <div className="container mx-auto px-4 max-w-6xl">
+            
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
+                <MessageCircle className="w-3.5 h-3.5 text-[#DB1866]" /> 
+                <span>{t.contactSection.badge}</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#2A3773] tracking-tight mb-4">
+                {t.contactSection.title}
+              </h2>
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+                {t.contactSection.subtitle}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Col: Direct Reach Channels (5 cols) */}
+              <div className="lg:col-span-5 space-y-4">
+                
+                {/* 1. WhatsApp Card */}
+                <div className="bg-gradient-to-br from-emerald-600 to-teal-700 text-white rounded-3xl p-6 shadow-lg shadow-emerald-600/20 relative overflow-hidden">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center">
+                      <MessageCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="bg-emerald-400/30 border border-white/30 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-green-300 animate-ping" /> Online Now
+                    </span>
+                  </div>
+                  <h4 className="text-lg font-bold mb-1">{t.contactSection.whatsappCardTitle}</h4>
+                  <p className="text-xs text-emerald-100 mb-5 leading-relaxed">{t.contactSection.whatsappCardSubtitle}</p>
+                  <a
+                    href={getWhatsAppLink("Hello Maratha Matrimony Support, I would like assistance with pre-registration and matches.")}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full bg-white text-emerald-700 hover:bg-emerald-50 font-bold text-sm py-3 rounded-xl flex items-center justify-center gap-2 shadow-md transition-all hover:scale-102"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-600" /> {t.contactSection.whatsappBtnText}
+                  </a>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-2 leading-tight">Be the first to know when registrations go live!</h3>
-                  <p className="text-pink-100 text-sm">Get notified about launch date, verified matches, and exclusive community events.</p>
+
+                {/* 2. Direct Calling Phone Numbers */}
+                <div className="bg-[#FFF8FA] rounded-3xl p-6 border border-[#FADADF] space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-pink-100 text-[#DB1866] flex items-center justify-center font-bold shrink-0">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-[#2A3773]">{t.contactSection.phoneCardTitle}</h4>
+                      <p className="text-[11px] text-gray-500">{t.contactSection.phoneCardSubtitle}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2 pt-2">
+                    <a 
+                      href="tel:+919844295369" 
+                      className="flex-1 bg-white hover:bg-[#FFF1F5] border border-gray-200 hover:border-[#DB1866] text-[#2A3773] hover:text-[#DB1866] font-bold text-xs py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-[#DB1866]" /> {t.contactSection.phone1}
+                    </a>
+                    <a 
+                      href="tel:+918861962026" 
+                      className="flex-1 bg-white hover:bg-[#FFF1F5] border border-gray-200 hover:border-[#DB1866] text-[#2A3773] hover:text-[#DB1866] font-bold text-xs py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-[#DB1866]" /> {t.contactSection.phone2}
+                    </a>
+                  </div>
+                </div>
+
+                {/* 3. Email Support & Regional Presence */}
+                <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-xs space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-blue-50 text-[#2A3773] flex items-center justify-center font-bold shrink-0 mt-0.5">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-[#2A3773]">{t.contactSection.emailCardTitle}</h4>
+                      <a href={`mailto:${t.contactSection.emailAddress}`} className="text-xs font-semibold text-[#DB1866] hover:underline">
+                        {t.contactSection.emailAddress}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-gray-100 flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-[#2A3773]">{t.contactSection.presenceTitle}</h4>
+                      <p className="text-xs text-gray-500 font-medium mt-0.5">{t.contactSection.locations}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Right Col: Instant Callback / Message Form (7 cols) */}
+              <div className="lg:col-span-7">
+                <div className="bg-[#FFF8FA] rounded-3xl p-6 md:p-8 border border-[#FADADF] shadow-sm">
+                  <div className="mb-6">
+                    <h3 className="text-xl md:text-2xl font-bold text-[#2A3773] mb-1">
+                      {t.contactSection.formTitle}
+                    </h3>
+                    <p className="text-xs md:text-sm text-gray-600">
+                      {t.contactSection.formSubtitle}
+                    </p>
+                  </div>
+
+                  {contactSent && (
+                    <div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                      <span>{language === "kn" ? "ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ, ನಮ್ಮ ತಂಡವು ಶೀಘ್ರದಲ್ಲೇ ಸಂಪರ್ಕಿಸುತ್ತದೆ." : "Thank you! WhatsApp inquiry opened. Our relationship desk is reviewing your request."}</span>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleContactSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <Label className="text-xs font-bold text-[#2A3773]">{t.contactSection.nameLabel}</Label>
+                        <Input
+                          type="text"
+                          required
+                          value={contactForm.name}
+                          onChange={(e) => setContactForm(prev => ({ ...prev, name: e.target.value }))}
+                          placeholder={t.contactSection.namePlaceholder}
+                          className="bg-white border-gray-200 rounded-xl text-xs h-11 focus:ring-[#DB1866] focus:border-[#DB1866]"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <Label className="text-xs font-bold text-[#2A3773]">{t.contactSection.phoneLabel}</Label>
+                        <Input
+                          type="tel"
+                          required
+                          value={contactForm.phone}
+                          onChange={(e) => setContactForm(prev => ({ ...prev, phone: e.target.value }))}
+                          placeholder={t.contactSection.phonePlaceholder}
+                          className="bg-white border-gray-200 rounded-xl text-xs h-11 focus:ring-[#DB1866] focus:border-[#DB1866]"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <Label className="text-xs font-bold text-[#2A3773]">{t.contactSection.districtLabel}</Label>
+                      <Input
+                        type="text"
+                        value={contactForm.district}
+                        onChange={(e) => setContactForm(prev => ({ ...prev, district: e.target.value }))}
+                        placeholder={t.contactSection.districtPlaceholder}
+                        className="bg-white border-gray-200 rounded-xl text-xs h-11 focus:ring-[#DB1866] focus:border-[#DB1866]"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <Label className="text-xs font-bold text-[#2A3773]">{t.contactSection.messageLabel}</Label>
+                      <textarea
+                        rows={3}
+                        value={contactForm.message}
+                        onChange={(e) => setContactForm(prev => ({ ...prev, message: e.target.value }))}
+                        placeholder={t.contactSection.messagePlaceholder}
+                        className="w-full bg-white border border-gray-200 rounded-xl p-3 text-xs focus:ring-[#DB1866] focus:border-[#DB1866] focus:outline-none"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-[#DB1866] hover:bg-[#B81456] text-white font-bold text-sm h-12 rounded-xl shadow-lg shadow-[#DB1866]/30 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01]"
+                    >
+                      <MessageCircle className="w-4 h-4" /> {t.contactSection.submitBtnText}
+                    </button>
+
+                    <p className="text-[11px] text-gray-500 text-center font-medium pt-1">
+                      {t.contactSection.privacyNotice}
+                    </p>
+                  </form>
                 </div>
               </div>
-              <a 
-                href="https://wa.me/919844295369?text=Hello%20Maratha%20Matrimony,%20please%20notify%20me%20when%20registrations%20open" 
-                target="_blank" 
-                rel="noreferrer"
-                className="bg-white text-[#DB1866] hover:bg-gray-50 rounded-2xl px-8 py-4 font-bold shadow-md w-full md:w-auto flex items-center justify-center gap-2 shrink-0 transition-transform hover:scale-105"
-              >
-                <MessageCircle className="w-5 h-5 text-green-500" /> Notify Me on WhatsApp
-              </a>
+
             </div>
+
           </div>
         </section>
 

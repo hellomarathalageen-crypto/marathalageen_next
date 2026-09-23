@@ -11,7 +11,7 @@ const quickLinks = [
   { label: "36 Gunas Kundali Matcher", href: "/kundali" },
   { label: "Printable Royal Biodata", href: "/biodata" },
   { label: "Vadhu-Var Melavas", href: "/events" },
-  { label: "About Maratha Lageen", href: "/about" },
+  { label: "About Maratha Lageen", href: "/#about" },
   { label: "VIP Membership Plans", href: "/membership" },
 ];
 
@@ -34,12 +34,12 @@ const professionLinks = [
 ];
 
 const helpAndPolicies = [
-  { label: "Contact Relationship Team", href: "/contact" },
+  { label: "Contact Relationship Team", href: "/#contact" },
   { label: "Safety Guidelines & Fraud Alerts", href: "/help#safety" },
   { label: "Privacy & Data Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
   { label: "Refund & Cancellation Policy", href: "/refund" },
-  { label: "About Our Community Mission", href: "/about" },
+  { label: "About Our Community Mission", href: "/#about" },
 ];
 
 const socialLinks = [

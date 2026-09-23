@@ -11,8 +11,8 @@ const publicNavLinks = [
   { href: "/", label: "Home" },
   { href: "/#register", label: "Pre-Register" },
   { href: "/search", label: "Search Profiles" },
-  { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#about", label: "About Us" },
+  { href: "/#contact", label: "Contact Us" },
 ];
 
 // Member navigation links shown ONLY when logged in
