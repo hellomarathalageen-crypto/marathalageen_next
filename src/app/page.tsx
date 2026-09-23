@@ -227,21 +227,19 @@ export default function PreRegisterPage() {
       <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="container mx-auto px-3 sm:px-4 md:px-8 h-18 sm:h-20 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2 mr-3 sm:mr-6 lg:mr-8 shrink-0">
-            <a href="#home" className="flex items-center gap-2 pl-1 sm:pl-2 hover:opacity-90 transition-opacity">
+          <div className="flex items-center gap-2 mr-6 lg:mr-10 xl:mr-12 shrink-0">
+            <a href="#home" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
               <img 
                 src="/logo.png" 
                 alt="Maratha Lageen Logo" 
-                className="h-10 sm:h-12 lg:h-13 w-auto object-contain transition-transform" 
+                className="h-11 sm:h-12 lg:h-14 w-auto object-contain transition-transform" 
               />
             </a>
           </div>
           
           {/* Desktop Navigation Menu */}
-          <nav className="hidden lg:flex items-center gap-3.5 xl:gap-5.5">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-8">
             {[
-              { href: "#heritage-video", label: t.nav.heritage },
-              { href: "#register", label: t.nav.preRegister },
               { href: "#who-can-register", label: t.nav.whoCanRegister },
               { href: "#why-we-exist", label: t.nav.whyWeExist },
               { href: "#how-it-works", label: t.nav.howItWorks },
@@ -259,14 +257,14 @@ export default function PreRegisterPage() {
             ))}
           </nav>
 
-          {/* Language Toggle, CTA & Mobile Toggle */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5">
+          {/* Language Toggle & CTA Button */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5">
             {/* Language Switcher Pill */}
             <div className="flex items-center bg-[#FFF1F5] border border-[#FADADF] p-0.5 sm:p-1 rounded-full shadow-xs">
               <button
                 type="button"
                 onClick={() => setLanguage("en")}
-                className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-extrabold transition-all ${language === "en" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
+                className={`px-2.5 sm:px-3 py-1 rounded-full text-xs font-extrabold transition-all cursor-pointer ${language === "en" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
                 title="Switch to English"
               >
                 EN
@@ -274,32 +272,26 @@ export default function PreRegisterPage() {
               <button
                 type="button"
                 onClick={() => setLanguage("kn")}
-                className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-extrabold transition-all ${language === "kn" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
+                className={`px-2.5 sm:px-3 py-1 rounded-full text-xs font-extrabold transition-all cursor-pointer ${language === "kn" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
                 title="ಕನ್ನಡಕ್ಕೆ ಬದಲಾಯಿಸಿ"
               >
                 ಕನ್ನಡ
               </button>
             </div>
 
-            <button
-              onClick={() => setShowShareModal(true)}
-              className="hidden xl:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold transition-all shadow-sm hover:scale-105"
-            >
-              <Share2 className="w-3.5 h-3.5 text-[#DB1866]" /> Share
-            </button>
             <Button 
               onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} 
-              className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-3 sm:px-4 md:px-5 py-1.5 text-xs sm:text-sm h-8 sm:h-9 md:h-10 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105 cursor-pointer"
+              className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-4 sm:px-5 md:px-6 py-2 text-xs sm:text-sm h-9 sm:h-10 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105 cursor-pointer"
             >
               {t.nav.registerFree}
             </Button>
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-1.5 text-[#2A3773] hover:text-[#DB1866] rounded-xl transition-colors"
+              className="lg:hidden p-2 text-[#2A3773] hover:text-[#DB1866] rounded-xl transition-colors cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -330,9 +322,6 @@ export default function PreRegisterPage() {
               </div>
 
               {[
-                { href: "#home", label: t.nav.home },
-                { href: "#heritage-video", label: t.nav.heritage },
-                { href: "#register", label: t.nav.preRegister },
                 { href: "#who-can-register", label: t.nav.whoCanRegister },
                 { href: "#why-we-exist", label: t.nav.whyWeExist },
                 { href: "#how-it-works", label: t.nav.howItWorks },
