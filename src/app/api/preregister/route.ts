@@ -43,13 +43,14 @@ export async function POST(req: Request) {
     let emailSent = false;
     if (email && email.includes("@")) {
       try {
+        const candidateDisplayName = [fullName, surname].filter(Boolean).join(" ");
         const emailResult = await sendMatrimonyAlert({
-          type: "WELCOME_PREMIUM",
+          type: "PRE_REGISTRATION_CONFIRMATION",
           recipientEmail: email,
           recipientPhone: mobile || whatsapp,
-          recipientName: fullName,
+          recipientName: candidateDisplayName,
           actorName: "Maratha Lageen Team",
-          customMessage: `Your pre-registration has been confirmed with Priority Pass ${passNumber}. You have received 1 Year Free VIP Access worth ₹4,999.`
+          customMessage: passNumber
         });
         emailSent = Boolean(emailResult.email);
       } catch (emailErr) {

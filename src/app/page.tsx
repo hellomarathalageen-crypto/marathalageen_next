@@ -1,6 +1,9 @@
 "use client";
 
 import { compressImage } from "@/lib/image-compression";
+import { useLanguage } from "@/context/LanguageContext";
+import { getWhatsAppLink, SUPPORT_CONFIG } from "@/lib/constants";
+import { Globe, Languages } from "lucide-react";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -16,6 +19,7 @@ import {
 } from "lucide-react";
 
 export default function PreRegisterPage() {
+  const { language, setLanguage, t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const [otpSent, setOtpSent] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -224,38 +228,61 @@ export default function PreRegisterPage() {
           </div>
           
           {/* Desktop Navigation Menu */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {[
-              { href: "#home", label: "Home" },
-              { href: "#who-can-register", label: "Who Can Register" },
-              { href: "#why-we-exist", label: "Why We Exist" },
-              { href: "/success-stories", label: "Success Stories" },
-              { href: "/about", label: "About Us" },
-              { href: "/contact", label: "Contact" },
+              { href: "#home", label: t.nav.home },
+              { href: "#heritage-video", label: t.nav.heritage },
+              { href: "#register", label: t.nav.preRegister },
+              { href: "#who-can-register", label: t.nav.whoCanRegister },
+              { href: "#why-we-exist", label: t.nav.whyWeExist },
+              { href: "#how-it-works", label: t.nav.howItWorks },
+              { href: "#faqs", label: t.nav.faqs },
+              { href: "/about", label: t.nav.aboutUs },
+              { href: "/contact", label: t.nav.contactUs },
             ].map((link) => (
               <Link 
                 key={link.href} 
                 href={link.href}
-                className="text-sm font-semibold text-[#2A3773] hover:text-[#DB1866] transition-colors relative py-1"
+                className="text-xs xl:text-sm font-semibold text-[#2A3773] hover:text-[#DB1866] transition-colors relative py-1"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* CTA & Mobile Toggle */}
-          <div className="flex items-center gap-1.5 sm:gap-3">
+          {/* Language Toggle, CTA & Mobile Toggle */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
+            {/* Language Switcher Pill */}
+            <div className="flex items-center bg-[#FFF1F5] border border-[#FADADF] p-0.5 sm:p-1 rounded-full shadow-xs">
+              <button
+                type="button"
+                onClick={() => setLanguage("en")}
+                className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-extrabold transition-all ${language === "en" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
+                title="Switch to English"
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage("kn")}
+                className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-extrabold transition-all ${language === "kn" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
+                title="ಕನ್ನಡಕ್ಕೆ ಬದಲಾಯಿಸಿ"
+              >
+                ಕನ್ನಡ
+              </button>
+            </div>
+
             <button
               onClick={() => setShowShareModal(true)}
-              className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold transition-all shadow-sm hover:scale-105"
+              className="hidden xl:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white border border-[#FADADF] text-[#2A3773] hover:text-[#DB1866] hover:border-[#DB1866] text-xs font-bold transition-all shadow-sm hover:scale-105"
             >
-              <Share2 className="w-3.5 h-3.5 text-[#DB1866]" /> Share Platform
+              <Share2 className="w-3.5 h-3.5 text-[#DB1866]" /> Share
             </button>
             <Button 
               onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} 
-              className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-3.5 py-1.5 text-xs sm:text-sm h-8 sm:h-9 md:h-11 md:px-6 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105"
+              className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-3 sm:px-4 md:px-5 py-1.5 text-xs sm:text-sm h-8 sm:h-9 md:h-10 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105 cursor-pointer"
             >
-              Pre-Register
+              {t.nav.registerFree}
             </Button>
             {/* Mobile Hamburger Toggle */}
             <button
@@ -272,13 +299,37 @@ export default function PreRegisterPage() {
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white border-b border-[#FADADF] shadow-xl animate-in slide-in-from-top-2 duration-200">
             <nav className="flex flex-col p-4 divide-y divide-gray-50 text-sm font-bold text-[#2A3773]">
+              {/* Language Switcher in Mobile Drawer */}
+              <div className="py-2.5 px-3 flex items-center justify-between">
+                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Language / ಭಾಷೆ</span>
+                <div className="flex items-center gap-1 bg-[#FFF1F5] border border-[#FADADF] p-0.5 rounded-full">
+                  <button
+                    type="button"
+                    onClick={() => setLanguage("en")}
+                    className={`px-3 py-1 rounded-full text-xs font-extrabold ${language === "en" ? "bg-[#DB1866] text-white" : "text-[#2A3773]"}`}
+                  >
+                    English
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage("kn")}
+                    className={`px-3 py-1 rounded-full text-xs font-extrabold ${language === "kn" ? "bg-[#DB1866] text-white" : "text-[#2A3773]"}`}
+                  >
+                    ಕನ್ನಡ
+                  </button>
+                </div>
+              </div>
+
               {[
-                { href: "#home", label: "Home" },
-                { href: "#who-can-register", label: "Who Can Register" },
-                { href: "#why-we-exist", label: "Why We Exist" },
-                { href: "/success-stories", label: "Success Stories" },
-                { href: "/about", label: "About Us" },
-                { href: "/contact", label: "Contact" },
+                { href: "#home", label: t.nav.home },
+                { href: "#heritage-video", label: t.nav.heritage },
+                { href: "#register", label: t.nav.preRegister },
+                { href: "#who-can-register", label: t.nav.whoCanRegister },
+                { href: "#why-we-exist", label: t.nav.whyWeExist },
+                { href: "#how-it-works", label: t.nav.howItWorks },
+                { href: "#faqs", label: t.nav.faqs },
+                { href: "/about", label: t.nav.aboutUs },
+                { href: "/contact", label: t.nav.contactUs },
               ].map((link) => (
                 <Link
                   key={link.href}
@@ -320,27 +371,26 @@ export default function PreRegisterPage() {
 
             <div className="relative z-10 px-4 pb-8 pt-24 text-white flex flex-col items-center justify-center text-center w-full max-w-sm mx-auto">
               <div className="inline-flex items-center justify-center gap-1.5 bg-[#DB1866] text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full mb-3 shadow-lg animate-pulse mx-auto">
-                <Bell className="w-3.5 h-3.5" /> 🎉 Limited Pre-Registration Open!
+                <Bell className="w-3.5 h-3.5" /> {t.hero.communityBadge}
               </div>
 
-              <h1 className="text-[28px] sm:text-[32px] font-bold leading-[1.2] tracking-tight mb-3 drop-shadow-lg text-center w-full mx-auto">
-                Karnataka&apos;s Exclusive<br/>
-                <span className="text-[#f9a8d4] drop-shadow-md">Maratha Matrimony</span><br/>
-                Platform
+              <h1 className="text-[26px] sm:text-[30px] font-bold leading-[1.2] tracking-tight mb-3 drop-shadow-lg text-center w-full mx-auto">
+                {t.hero.titleLine1}<br/>
+                <span className="text-[#f9a8d4] drop-shadow-md">{t.hero.titleLine2}</span>
               </h1>
 
-              <p className="text-blue-50 text-[13px] sm:text-[14px] leading-relaxed mb-5 drop-shadow-md font-normal text-center max-w-[290px] mx-auto">
-                Trusted by Maratha families across Karnataka — verified profiles, privacy-first, genuine connections.
+              <p className="text-blue-50 text-[13px] sm:text-[14px] leading-relaxed mb-5 drop-shadow-md font-normal text-center max-w-[320px] mx-auto">
+                {t.hero.subtitle}
               </p>
 
               <div className="w-full max-w-xs mx-auto flex flex-col items-center justify-center text-center">
                 <button 
                   onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} 
-                  className="w-full bg-[#DB1866] hover:bg-[#B81456] active:scale-[0.98] text-white font-bold text-sm sm:text-base h-13 py-3.5 rounded-xl shadow-2xl shadow-[#DB1866]/50 transition-all duration-150 text-center"
+                  className="w-full bg-[#DB1866] hover:bg-[#B81456] active:scale-[0.98] text-white font-bold text-sm sm:text-base h-13 py-3.5 rounded-xl shadow-2xl shadow-[#DB1866]/50 transition-all duration-150 text-center cursor-pointer"
                 >
-                  Pre-Register Your Family — It&apos;s Free!
+                  {t.hero.claimVipCta}
                 </button>
-                <p className="text-blue-200/90 text-[11px] text-center mt-2 font-medium">🔒 Get Premium Membership Worth ₹4,999 FREE</p>
+                <p className="text-blue-200/90 text-[11px] text-center mt-2 font-medium">🔒 {t.hero.vipNotice}</p>
               </div>
             </div>
 
@@ -369,25 +419,24 @@ export default function PreRegisterPage() {
                 {/* Left Col: Text Content */}
                 <div className="col-span-7 space-y-6 pr-4">
                   <div className="inline-flex items-center gap-2 bg-white border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-2 rounded-full shadow-sm">
-                    <Bell className="w-3.5 h-3.5 fill-[#DB1866]" /> 🎉 Limited Pre-Registration Open — Free Premium Worth ₹4,999
+                    <Bell className="w-3.5 h-3.5 fill-[#DB1866]" /> {t.hero.communityBadge}
                   </div>
 
-                  <h1 className="text-[46px] xl:text-[50px] font-semibold text-[#2A3773] leading-[1.16] tracking-tight">
-                    Karnataka's Exclusive<br/>
-                    <span className="text-[#DB1866] font-bold">Maratha Matrimony</span><br/>
-                    Platform
+                  <h1 className="text-[40px] xl:text-[46px] font-semibold text-[#2A3773] leading-[1.16] tracking-tight">
+                    {t.hero.titleLine1}<br/>
+                    <span className="text-[#DB1866] font-bold">{t.hero.titleLine2}</span>
                   </h1>
 
                   <p className="text-gray-600 text-base xl:text-lg leading-relaxed max-w-xl font-normal">
-                    A trusted platform created exclusively for Maratha families across Karnataka — verified profiles, privacy-first registration and genuine connections.
+                    {t.hero.subtitle}
                   </p>
 
                   <div className="flex items-center gap-4 pt-2">
-                    <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-xl px-8 h-14 font-bold text-base shadow-lg shadow-[#DB1866]/30 hover:scale-105 transition-transform">
-                      Pre-Register Your Family
+                    <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-xl px-8 h-14 font-bold text-base shadow-lg shadow-[#DB1866]/30 hover:scale-105 transition-transform cursor-pointer">
+                      {t.hero.claimVipCta}
                     </Button>
-                    <Button onClick={() => document.getElementById('why-we-exist')?.scrollIntoView({ behavior: 'smooth' })} variant="ghost" className="text-[#2A3773] hover:text-[#DB1866] font-semibold h-14 px-5 rounded-xl border border-gray-200 hover:border-[#DB1866] transition-colors">
-                      <PlayCircle className="w-5 h-5 mr-2 text-[#DB1866]" /> Learn More
+                    <Button onClick={() => document.getElementById('heritage-video')?.scrollIntoView({ behavior: 'smooth' })} variant="ghost" className="text-[#2A3773] hover:text-[#DB1866] font-semibold h-14 px-5 rounded-xl border border-gray-200 hover:border-[#DB1866] transition-colors cursor-pointer">
+                      <PlayCircle className="w-5 h-5 mr-2 text-[#DB1866]" /> {t.hero.watchVideoCta}
                     </Button>
                   </div>
 
@@ -461,14 +510,14 @@ export default function PreRegisterPage() {
             
             <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-[#DB1866]" /> 
-              <span>ಪವಿತ್ರ ಮರಾಠ ಸಂಸ್ಕೃತಿ • Sacred Maratha Heritage</span>
+              <span>{t.video.badge}</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2A3773] tracking-tight mb-3">
-              Maratha Wedding Traditions &amp; Lineage
+              {t.video.title}
             </h2>
             <p className="text-gray-600 text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
-              Experience the sacred vows, royal rituals, and timeless gotra values that unite Kshatriya Maratha families across Karnataka.
+              {t.video.subtitle}
             </p>
 
             {/* 16:9 Cinematic Video Card */}
@@ -530,147 +579,9 @@ export default function PreRegisterPage() {
         </section>
 
         {/* ──────────── WHO CAN PRE-REGISTER? (CLIENT FEEDBACK 1) ──────────── */}
-        <section className="bg-[#fdf5f8] py-20" id="who-can-register">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#2A3773] mb-4 tracking-tight">Who Can Pre-Register?</h2>
-            <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto mb-12">
-              Profiles can be created by the candidate or by their caring family members.
-            </p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
-              {[
-                { 
-                  label: "Bride / Groom", 
-                  icon: "/icons/bride.png", 
-                  sub: "Candidate Direct", 
-                  badge: "Self",
-                  customIcon: (
-                    <div className="flex items-center justify-center -space-x-4 mb-2">
-                      <img src="/icons/bride.png" alt="Bride" className="w-16 h-16 object-contain z-10 drop-shadow-sm" />
-                      <img src="/icons/groom.png" alt="Groom" className="w-16 h-16 object-contain drop-shadow-sm" />
-                    </div>
-                  )
-                },
-                { 
-                  label: "Parents", 
-                  icon: "/icons/parents.png", 
-                  sub: "Father / Mother", 
-                  badge: "Family",
-                  customIcon: <img src="/icons/parents.png" alt="Parents" className="w-20 h-20 object-contain mb-2" />
-                },
-                { 
-                  label: "Siblings", 
-                  icon: "/icons/guardian.png", 
-                  sub: "Brother / Sister", 
-                  badge: "Family",
-                  customIcon: (
-                    <div className="w-20 h-20 rounded-2xl bg-[#FFF1F5] flex items-center justify-center mb-2 text-[#DB1866]">
-                      <Users className="w-10 h-10" />
-                    </div>
-                  )
-                },
-                { 
-                  label: "Guardian /\nRelative", 
-                  icon: "/icons/guardian.png", 
-                  sub: "Uncle / Aunt / Caretaker", 
-                  badge: "Guardian",
-                  customIcon: <img src="/icons/guardian.png" alt="Guardian" className="w-20 h-20 object-contain mb-2" />
-                }
-              ].map((item, idx) => (
-                <div 
-                  key={idx} 
-                  onClick={() => {
-                    setFormData(prev => ({ ...prev, registeringFor: item.label.split("/")[0].trim() }));
-                    document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 flex flex-col items-center justify-center aspect-square hover:shadow-xl hover:border-[#DB1866]/30 hover:-translate-y-1 transition-all cursor-pointer group"
-                >
-                  <div className="w-full flex justify-end">
-                    <span className="text-[10px] font-bold text-[#DB1866] bg-[#FFF1F5] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                      {item.badge}
-                    </span>
-                  </div>
-                  {item.customIcon}
-                  <span className="font-bold text-[#2A3773] text-base text-center whitespace-pre-line leading-tight group-hover:text-[#DB1866] transition-colors">
-                    {item.label}
-                  </span>
-                  <span className="text-xs text-gray-400 mt-1">{item.sub}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ──────────── WHY WE EXIST (CLIENT FEEDBACK 4: 4 CARDS) ──────────── */}
-        <section className="bg-white py-20 border-y border-gray-100" id="why-we-exist">
-          <div className="container mx-auto px-4 max-w-6xl text-center">
-            
-            <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-4">
-              <Heart className="w-3.5 h-3.5 fill-[#DB1866]" /> Our Core Purpose
-            </div>
-
-            <h2 className="text-3xl md:text-5xl font-bold text-[#2A3773] mb-4 tracking-tight">
-              Why We Exist
-            </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-16 leading-relaxed">
-              Parents don't need another website.<br className="hidden sm:inline" />
-              <span className="text-[#DB1866] font-semibold">They need peace of mind.</span>
-            </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-              {[
-                { 
-                  icon: ShieldCheck, 
-                  title: "Genuine Profiles", 
-                  desc: "We focus on quality over quantity.",
-                  color: "bg-blue-50 text-[#2A3773]"
-                },
-                { 
-                  icon: Lock, 
-                  title: "Privacy", 
-                  desc: "Your data is secured with us. The details entered is shown to the intended audience.",
-                  color: "bg-pink-50 text-[#DB1866]"
-                },
-                { 
-                  icon: Users, 
-                  title: "Community", 
-                  desc: "Built exclusively for Maratha families in Karnataka.",
-                  color: "bg-indigo-50 text-indigo-600"
-                },
-                { 
-                  icon: BadgeCheck, 
-                  title: "Verification", 
-                  desc: "Every profile goes through verification before becoming active.",
-                  color: "bg-emerald-50 text-emerald-600"
-                }
-              ].map((item, idx) => (
-                <div 
-                  key={idx} 
-                  className="bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-xl hover:border-[#DB1866]/30 transition-all flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${item.color} group-hover:scale-110 transition-transform`}>
-                      <item.icon className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#2A3773] mb-3 group-hover:text-[#DB1866] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                  <div className="mt-6 pt-4 border-t border-gray-50 flex items-center gap-1 text-xs font-bold text-[#DB1866]">
-                    <span>Maratha Trust Guarantee</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* ──────────── REGISTRATION WIZARD (CLIENT FEEDBACK 2: DOB & AGE IN PERSONAL DETAILS) ──────────── */}
-        <section className="bg-[#FFF1F5] py-20" id="register">
+        
+        {/* ──────────── SEGMENT 3: PRE-REGISTRATION FORM ──────────── */}
+        <section className="bg-[#FFF1F5] py-20" id="register" data-section="pre-register">
           <div className="container mx-auto px-4 lg:px-12 max-w-7xl">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               
@@ -678,23 +589,17 @@ export default function PreRegisterPage() {
               <div className="lg:col-span-5 space-y-8">
                 <div>
                   <div className="inline-flex items-center gap-2 bg-white border border-[#FADADF] text-[#DB1866] text-xs font-bold px-3.5 py-1.5 rounded-full mb-4 shadow-sm">
-                    <Sparkles className="w-3.5 h-3.5 fill-[#DB1866]" /> Early Bird Privileges
+                    <Sparkles className="w-3.5 h-3.5 fill-[#DB1866]" /> {t.whyPreRegister.badge}
                   </div>
                   <h2 className="text-3xl md:text-4xl font-bold text-[#2A3773] mb-4 tracking-tight">
-                    Why Should I Pre-Register?
+                    {t.whyPreRegister.title}
                   </h2>
                   <p className="text-gray-600 text-base mb-8">
-                    Join early to unlock exclusive benefits before our grand public launch.
+                    {t.whyPreRegister.subtitle}
                   </p>
 
                   <ul className="space-y-4">
-                    {[
-                      { title: "Complimentary Premium Membership", subtitle: "(Worth ₹4,999 Free with Pre-Registration)" },
-                      { title: "Priority Profile Verification", subtitle: "Instant review by our team" },
-                      { title: "Early Access to Verified Profiles", subtitle: "Be the first to explore curated matches" },
-                      { title: "First Choice Advantage", subtitle: "Direct connect without contact view limits" },
-                      { title: "Dedicated Launch Support", subtitle: "Personalized assistance on WhatsApp" }
-                    ].map((item, idx) => (
+                    {t.whyPreRegister.benefits.map((item, idx) => (
                       <li key={idx} className="flex items-start gap-4 bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-[#FADADF]">
                         <div className="bg-[#FFF1F5] p-2 rounded-xl shrink-0 text-[#DB1866]">
                           <CheckCircle2 className="w-5 h-5" />
@@ -1625,9 +1530,138 @@ export default function PreRegisterPage() {
         </section>
 
         {/* How It Works */}
+        
+        <section className="bg-[#fdf5f8] py-20" id="who-can-register">
+          <div className="container mx-auto px-4 text-center">
+            <div className="inline-flex items-center gap-2 bg-white border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
+              <Users className="w-3.5 h-3.5 text-[#DB1866]" /> {t.whoCanRegister.badge}
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#2A3773] mb-4 tracking-tight">{t.whoCanRegister.title}</h2>
+            <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto mb-12">
+              {t.whoCanRegister.subtitle}
+            </p>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
+              {[
+                { 
+                  label: "Bride / Groom", 
+                  icon: "/icons/bride.png", 
+                  sub: "Candidate Direct", 
+                  badge: "Self",
+                  customIcon: (
+                    <div className="flex items-center justify-center -space-x-4 mb-2">
+                      <img src="/icons/bride.png" alt="Bride" className="w-16 h-16 object-contain z-10 drop-shadow-sm" />
+                      <img src="/icons/groom.png" alt="Groom" className="w-16 h-16 object-contain drop-shadow-sm" />
+                    </div>
+                  )
+                },
+                { 
+                  label: "Parents", 
+                  icon: "/icons/parents.png", 
+                  sub: "Father / Mother", 
+                  badge: "Family",
+                  customIcon: <img src="/icons/parents.png" alt="Parents" className="w-20 h-20 object-contain mb-2" />
+                },
+                { 
+                  label: "Siblings", 
+                  icon: "/icons/guardian.png", 
+                  sub: "Brother / Sister", 
+                  badge: "Family",
+                  customIcon: (
+                    <div className="w-20 h-20 rounded-2xl bg-[#FFF1F5] flex items-center justify-center mb-2 text-[#DB1866]">
+                      <Users className="w-10 h-10" />
+                    </div>
+                  )
+                },
+                { 
+                  label: "Guardian /\nRelative", 
+                  icon: "/icons/guardian.png", 
+                  sub: "Uncle / Aunt / Caretaker", 
+                  badge: "Guardian",
+                  customIcon: <img src="/icons/guardian.png" alt="Guardian" className="w-20 h-20 object-contain mb-2" />
+                }
+              ].map((item, idx) => (
+                <div 
+                  key={idx} 
+                  onClick={() => {
+                    setFormData(prev => ({ ...prev, registeringFor: item.label.split("/")[0].trim() }));
+                    document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 flex flex-col items-center justify-center aspect-square hover:shadow-xl hover:border-[#DB1866]/30 hover:-translate-y-1 transition-all cursor-pointer group"
+                >
+                  <div className="w-full flex justify-end">
+                    <span className="text-[10px] font-bold text-[#DB1866] bg-[#FFF1F5] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                      {item.badge}
+                    </span>
+                  </div>
+                  {item.customIcon}
+                  <span className="font-bold text-[#2A3773] text-base text-center whitespace-pre-line leading-tight group-hover:text-[#DB1866] transition-colors">
+                    {item.label}
+                  </span>
+                  <span className="text-xs text-gray-400 mt-1">{item.sub}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ──────────── WHY WE EXIST (CLIENT FEEDBACK 4: 4 CARDS) ──────────── */}
+        
+        <section className="bg-white py-20 border-y border-gray-100" id="why-we-exist">
+          <div className="container mx-auto px-4 max-w-6xl text-center">
+            
+            <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-4">
+              <Heart className="w-3.5 h-3.5 fill-[#DB1866]" /> {t.whyWeExist.badge}
+            </div>
+
+            <h2 className="text-3xl md:text-5xl font-bold text-[#2A3773] mb-4 tracking-tight">
+              {t.whyWeExist.title}
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-16 leading-relaxed">
+              {t.whyWeExist.subtitle}
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+              {t.whyWeExist.pillars.map((item, idx) => {
+                const icons = [ShieldCheck, Lock, Users, BadgeCheck];
+                const colors = ["bg-blue-50 text-[#2A3773]", "bg-pink-50 text-[#DB1866]", "bg-indigo-50 text-indigo-600", "bg-emerald-50 text-emerald-600"];
+                const IconComponent = icons[idx % icons.length];
+                const color = colors[idx % colors.length];
+                return (
+                <div 
+                  key={idx} 
+                  className="bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-xl hover:border-[#DB1866]/30 transition-all flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${color} group-hover:scale-110 transition-transform`}>
+                      <IconComponent className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold text-[#2A3773] mb-3 group-hover:text-[#DB1866] transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+                );
+              })}
+            </div>
+
+          </div>
+        </section>
+
+        {/* ──────────── REGISTRATION WIZARD (CLIENT FEEDBACK 2: DOB & AGE IN PERSONAL DETAILS) ──────────── */}
+        
         <section className="bg-[#2A3773] py-20" id="how-it-works">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16 tracking-tight">How It Works?</h2>
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-pink-200 text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-pink-300" /> {t.howItWorks.badge}
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white text-center tracking-tight">{t.howItWorks.title}</h2>
+              <p className="text-blue-100 text-sm mt-2 max-w-lg mx-auto">{t.howItWorks.subtitle}</p>
+            </div>
             
             <div className="flex flex-col md:flex-row justify-between items-start max-w-5xl mx-auto relative">
               <div className="hidden md:block absolute top-[39px] left-[10%] right-[10%] border-t-2 border-dashed border-white/30 z-0"></div>
@@ -1672,15 +1706,15 @@ export default function PreRegisterPage() {
                   <img src="/founder.webp" alt="Founder" className="w-full h-full object-cover object-top" />
                 </div>
                 <div className="relative text-center sm:text-left">
-                  <h3 className="text-2xl font-semibold text-[#2A3773] mb-4 tracking-tight">Meet The <span className="text-[#DB1866]">Founder</span></h3>
+                  <h3 className="text-2xl font-semibold text-[#2A3773] mb-4 tracking-tight">{t.aboutSection.title}</h3>
                   <div className="relative z-10">
                     <p className="text-[14px] text-gray-700 leading-relaxed mb-3 italic">
-                      "At Maratha Lageen, our mission is simple - to bring Maratha families of Karnataka onto a trusted platform built on values, transparency and respect."
+                      "{t.aboutSection.desc1}"
                     </p>
                     <p className="text-[14px] text-gray-700 leading-relaxed mb-4 italic">
-                      "We understand the importance of this decision in your life and we are committed to providing a safe and reliable space to help you find the right match."
+                      "{t.aboutSection.desc2}"
                     </p>
-                    <p className="font-bold text-[#2A3773] text-base">— Founder</p>
+                    <p className="font-bold text-[#2A3773] text-base">— {t.aboutSection.founderTitle}</p>
                   </div>
                 </div>
               </div>
@@ -1732,20 +1766,14 @@ export default function PreRegisterPage() {
         {/* FAQs */}
         <section className="py-16 bg-gray-50 border-t border-gray-100" id="faqs">
           <div className="container mx-auto px-4 max-w-4xl text-center">
-            <h2 className="text-3xl font-bold text-[#2A3773] mb-10 tracking-tight">Frequently Asked Questions</h2>
+            <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#DB1866]" /> {t.faqs.badge}
+            </div>
+            <h2 className="text-3xl font-bold text-[#2A3773] mb-10 tracking-tight">{t.faqs.title}</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-              {[
-                { q: "Is this platform exclusively for the Maratha community?", a: "Yes, Maratha Lageen is dedicated solely to Maratha families across Karnataka (including 96 Kuli Maratha, Kunbi Maratha, Deshastha Maratha, and Kshatriya Maratha)." },
-                { q: "Is there any fee or charge to pre-register today?", a: "No, pre-registration is 100% free. The first 5,000 families receive a Complimentary VIP Membership worth ₹4,999 with zero hidden charges." },
-                { q: "Can parents, siblings, or guardians register on behalf of the candidate?", a: "Yes! Parents, brothers, sisters, or legal guardians can register and manage the matrimonial profile with complete family consent." },
-                { q: "How is candidate privacy and photo security safeguarded?", a: "Your contact number is masked and protected. Photos can be kept private upon request, and contact details are only unlocked for verified members with mutual family interest." },
-                { q: "How does the platform match Gotras and Devak?", a: "Our system checks traditional Maratha lineage rules, respecting Devak (देवक) alignment and Gotra exclusions (सगोत्र विवाह टाळणे) to suggest culturally authentic alliances." },
-                { q: "What is included in the Complimentary ₹4,999 VIP Membership?", a: "Early bird VIP access includes direct WhatsApp connects, contact number unlocking, 36 Gunas Vedic Kundali Milan, and priority placement in match recommendations." },
-                { q: "Can I update my photo, education, or horoscope after pre-registering?", a: "Yes, once you log in to your dashboard, you can update your bio, upload additional gallery photos, update horoscope charts, and adjust partner preferences anytime." },
-                { q: "When will the platform officially launch with live matching?", a: "We are concluding our initial Karnataka pre-registration drive and rolling out live matching and direct messaging shortly with thousands of verified profiles." }
-              ].map((faq, i) => (
-                <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+              {t.faqs.items.map((faq, i) => (
+                <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:border-[#DB1866]/30 transition-colors">
                   <h4 className="font-bold text-[#2A3773] text-sm mb-2">{faq.q}</h4>
                   <p className="text-xs text-gray-500 leading-relaxed">{faq.a}</p>
                 </div>

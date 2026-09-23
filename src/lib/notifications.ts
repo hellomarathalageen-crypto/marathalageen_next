@@ -12,7 +12,8 @@ export type NotificationType =
   | "INTEREST_RECEIVED"
   | "INTEREST_ACCEPTED"
   | "CONTACT_UNLOCKED"
-  | "WELCOME_PREMIUM";
+  | "WELCOME_PREMIUM"
+  | "PRE_REGISTRATION_CONFIRMATION";
 
 export interface NotificationPayload {
   type: NotificationType;
@@ -127,6 +128,31 @@ function generateMatrimonyEmailTemplate(payload: NotificationPayload): { subject
       body = `You have successfully unlocked the contact details of <strong>${payload.actorName || "Candidate"}</strong>. You may now call or connect with the family directly.`;
       actionText = "View Contact Details";
       if (payload.actorProfileId) actionUrl = `${appUrl}/profile/${payload.actorProfileId}`;
+      break;
+
+        case "PRE_REGISTRATION_CONFIRMATION":
+      subject = `🚩 Welcome to Maratha Matrimony! VIP Pass: ${payload.customMessage || "ML-2026-VIP"}`;
+      title = "VIP Pre-Registration Confirmed";
+      body = `
+        🚩 <strong>ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ!</strong><br /><br />
+        Dear <strong>${payload.recipientName}</strong>,<br /><br />
+        Congratulations! Your matrimonial profile has been successfully pre-registered on <strong>Maratha Matrimony (Maratha Lageen)</strong>.<br /><br />
+        <div style="background-color: #FFF1F5; border: 2px dashed #DB1866; border-radius: 16px; padding: 20px; text-align: center; margin: 20px 0;">
+          <p style="margin: 0; font-size: 12px; color: #DB1866; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Official VIP Early Access Pass</p>
+          <h2 style="margin: 8px 0; color: #2A3773; font-size: 24px; font-family: monospace; letter-spacing: 2px;">${payload.customMessage || "ML-2026-VIP"}</h2>
+          <p style="margin: 0; font-size: 13px; color: #047857; font-weight: bold;">✓ 1-Year Complimentary VIP Membership Activated (Worth ₹4,999 FREE)</p>
+        </div>
+        <strong>Your VIP Privileges Include:</strong>
+        <ul style="color: #4b5563; font-size: 14px; line-height: 1.8; margin-top: 10px;">
+          <li>🌟 <strong>Direct WhatsApp Connects</strong> with verified Maratha families</li>
+          <li>🛡️ <strong>100% Privacy Protection</strong> with photo & contact shields</li>
+          <li>🔮 <strong>36 Gunas Vedic Kundali Milan</strong> with Devak & Gotra compatibility</li>
+          <li>👑 <strong>Priority Placement</strong> in match recommendations across Karnataka & Maharashtra</li>
+        </ul>
+        Our community relationship team will review your biodata and assist you in finding your destined life partner.
+      `;
+      actionText = "Access Member Portal";
+      actionUrl = `${appUrl}/login`;
       break;
 
     case "WELCOME_PREMIUM":

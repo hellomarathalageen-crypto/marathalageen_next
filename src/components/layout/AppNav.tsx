@@ -11,7 +11,6 @@ const publicNavLinks = [
   { href: "/", label: "Home" },
   { href: "/#register", label: "Pre-Register" },
   { href: "/search", label: "Search Profiles" },
-  { href: "/success-stories", label: "Success Stories" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];

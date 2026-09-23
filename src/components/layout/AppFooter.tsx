@@ -11,7 +11,7 @@ const quickLinks = [
   { label: "36 Gunas Kundali Matcher", href: "/kundali" },
   { label: "Printable Royal Biodata", href: "/biodata" },
   { label: "Vadhu-Var Melavas", href: "/events" },
-  { label: "Success Stories", href: "/success-stories" },
+  { label: "About Maratha Lageen", href: "/about" },
   { label: "VIP Membership Plans", href: "/membership" },
 ];
 
