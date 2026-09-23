@@ -298,14 +298,14 @@ export const translations = {
       "home": "ಮುಖಪುಟ",
       "heritage": "ಸಂಸ್ಕೃತಿ & ವಿಡಿಯೋ",
       "preRegister": "ಪೂರ್ವ ನೋಂದಣಿ",
-      "whoCanRegister": "ಯಾರು ನೋಂದಾಯಿಸಬಹುದು?",
+      "whoCanRegister": "ನೋಂದಣಿ ಅರ್ಹತೆ",
       "whyWeExist": "ನಮ್ಮ ಉದ್ದೇಶ",
       "howItWorks": "ಕಾರ್ಯವಿಧಾನ",
-      "faqs": "ಪ್ರಶ್ನೋತ್ತರಗಳು",
+      "faqs": "ಪ್ರಶ್ನೋತ್ತರ",
       "aboutUs": "ನಮ್ಮ ಬಗ್ಗೆ",
       "contactUs": "ಸಂಪರ್ಕಿಸಿ",
       "login": "ಲಾಗಿನ್",
-      "registerFree": "ಉಚಿತ ಪೂರ್ವ ನೋಂದಣಿ"
+      "registerFree": "ಉಚಿತ ನೋಂದಣಿ"
     },
     "hero": {
       "communityBadge": "🎉 ಸೀಮಿತ ಪೂರ್ವ-ನೋಂದಣಿ ಮುಕ್ತವಾಗಿದೆ — ₹4,999 ಮೌಲ್ಯದ VIP ಉಚಿತ",

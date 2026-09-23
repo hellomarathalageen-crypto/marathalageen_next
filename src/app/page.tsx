@@ -224,21 +224,22 @@ export default function PreRegisterPage() {
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-[#DB1866]/20 selection:text-[#DB1866]">
       {/* Navbar */}
-      <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="container mx-auto px-3 sm:px-4 md:px-8 h-18 sm:h-20 flex items-center justify-between">
+      <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
+          
           {/* Logo */}
-          <div className="flex items-center gap-2 mr-6 lg:mr-10 xl:mr-12 shrink-0">
-            <a href="#home" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
+          <div className="flex items-center shrink-0">
+            <a href="#home" className="flex items-center hover:opacity-90 transition-opacity">
               <img 
                 src="/logo.png" 
                 alt="Maratha Lageen Logo" 
-                className="h-11 sm:h-12 lg:h-14 w-auto object-contain transition-transform" 
+                className="h-10 sm:h-11 lg:h-12 w-auto object-contain transition-transform" 
               />
             </a>
           </div>
           
           {/* Desktop Navigation Menu */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-8">
+          <nav className="hidden lg:flex items-center justify-center gap-3 lg:gap-4 xl:gap-6.5 flex-1 mx-2 lg:mx-4">
             {[
               { href: "#who-can-register", label: t.nav.whoCanRegister },
               { href: "#why-we-exist", label: t.nav.whyWeExist },
@@ -250,7 +251,7 @@ export default function PreRegisterPage() {
               <a 
                 key={link.href} 
                 href={link.href}
-                className="text-xs xl:text-sm font-semibold text-[#2A3773] hover:text-[#DB1866] transition-colors relative py-1 whitespace-nowrap cursor-pointer"
+                className="text-xs lg:text-[13px] xl:text-sm font-semibold text-[#2A3773] hover:text-[#DB1866] transition-colors relative py-1 whitespace-nowrap cursor-pointer tracking-tight"
               >
                 {link.label}
               </a>
@@ -258,13 +259,13 @@ export default function PreRegisterPage() {
           </nav>
 
           {/* Language Toggle & CTA Button */}
-          <div className="flex items-center gap-2.5 sm:gap-3.5">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-auto lg:ml-0">
             {/* Language Switcher Pill */}
-            <div className="flex items-center bg-[#FFF1F5] border border-[#FADADF] p-0.5 sm:p-1 rounded-full shadow-xs">
+            <div className="flex items-center bg-[#FFF1F5] border border-[#FADADF] p-0.5 rounded-full shadow-2xs shrink-0">
               <button
                 type="button"
                 onClick={() => setLanguage("en")}
-                className={`px-2.5 sm:px-3 py-1 rounded-full text-xs font-extrabold transition-all cursor-pointer ${language === "en" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
+                className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold transition-all cursor-pointer ${language === "en" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
                 title="Switch to English"
               >
                 EN
@@ -272,7 +273,7 @@ export default function PreRegisterPage() {
               <button
                 type="button"
                 onClick={() => setLanguage("kn")}
-                className={`px-2.5 sm:px-3 py-1 rounded-full text-xs font-extrabold transition-all cursor-pointer ${language === "kn" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
+                className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold transition-all cursor-pointer ${language === "kn" ? "bg-[#DB1866] text-white shadow-xs" : "text-[#2A3773] hover:text-[#DB1866]"}`}
                 title="ಕನ್ನಡಕ್ಕೆ ಬದಲಾಯಿಸಿ"
               >
                 ಕನ್ನಡ
@@ -281,17 +282,18 @@ export default function PreRegisterPage() {
 
             <Button 
               onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} 
-              className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-4 sm:px-5 md:px-6 py-2 text-xs sm:text-sm h-9 sm:h-10 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105 cursor-pointer"
+              className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-3.5 sm:px-5 py-2 text-xs sm:text-[13px] h-9 sm:h-9.5 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105 cursor-pointer whitespace-nowrap shrink-0"
             >
               {t.nav.registerFree}
             </Button>
+
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-[#2A3773] hover:text-[#DB1866] rounded-xl transition-colors cursor-pointer"
+              className="lg:hidden p-1.5 sm:p-2 text-[#2A3773] hover:text-[#DB1866] rounded-xl transition-colors cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>
@@ -338,17 +340,6 @@ export default function PreRegisterPage() {
                   {link.label}
                 </a>
               ))}
-              <div className="pt-4 mt-2 flex flex-col gap-2">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setShowShareModal(true);
-                  }}
-                  className="w-full py-3 bg-[#FFF1F5] text-[#DB1866] rounded-xl font-bold text-xs flex items-center justify-center gap-2 border border-[#FADADF]"
-                >
-                  <Share2 className="w-4 h-4" /> Share Maratha Matrimony on WhatsApp
-                </button>
-              </div>
             </nav>
           </div>
         )}
