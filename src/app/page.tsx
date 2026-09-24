@@ -222,10 +222,10 @@ export default function PreRegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-[#DB1866]/20 selection:text-[#DB1866]">
+    <div className="min-h-screen bg-white font-sans selection:bg-[#DB1866]/20 selection:text-[#DB1866] w-full max-w-full overflow-x-hidden">
       {/* Navbar */}
-      <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
+      <header className="sticky top-0 z-50 w-full max-w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs overflow-x-hidden">
+        <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Logo */}
           <div className="flex items-center shrink-0">
@@ -282,7 +282,7 @@ export default function PreRegisterPage() {
 
             <Button 
               onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} 
-              className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-3.5 sm:px-5 py-2 text-xs sm:text-[13px] h-9 sm:h-9.5 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105 cursor-pointer whitespace-nowrap shrink-0"
+              className="hidden sm:inline-flex bg-[#DB1866] hover:bg-[#B81456] text-white rounded-full px-3.5 sm:px-5 py-2 text-xs sm:text-[13px] h-9 sm:h-9.5 font-bold shadow-md shadow-[#DB1866]/20 transition-all hover:scale-105 cursor-pointer whitespace-nowrap shrink-0"
             >
               {t.nav.registerFree}
             </Button>
@@ -345,7 +345,7 @@ export default function PreRegisterPage() {
         )}
       </header>
 
-      <main>
+      <main className="w-full max-w-full overflow-x-hidden">
         {/* Hero Section */}
         <section className="bg-[#FFF8FA] overflow-hidden" id="home">
 
@@ -496,7 +496,7 @@ export default function PreRegisterPage() {
 
         
         {/* ──────────── ITEM 5: HORIZONTAL MARATHA WEDDING & HERITAGE VIDEO SHOWCASE ──────────── */}
-        <section className="py-14 sm:py-18 bg-gradient-to-b from-white via-[#FFF8FA] to-[#fdf5f8] border-b border-pink-100/60" id="heritage-video">
+        <section className="py-14 sm:py-18 bg-gradient-to-b from-white via-[#FFF8FA] to-[#fdf5f8] border-b border-pink-100/60 w-full overflow-hidden" id="heritage-video">
           <div className="container mx-auto px-4 max-w-5xl text-center">
             
             <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
@@ -572,7 +572,7 @@ export default function PreRegisterPage() {
         {/* ──────────── WHO CAN PRE-REGISTER? (CLIENT FEEDBACK 1) ──────────── */}
         
         {/* ──────────── SEGMENT 3: PRE-REGISTRATION FORM ──────────── */}
-        <section className="bg-[#FFF1F5] py-20" id="register" data-section="pre-register">
+        <section className="bg-[#FFF1F5] py-20 w-full overflow-hidden" id="register" data-section="pre-register">
           <div className="container mx-auto px-4 lg:px-12 max-w-7xl">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               
@@ -1522,7 +1522,7 @@ export default function PreRegisterPage() {
 
         {/* How It Works */}
         
-        <section className="bg-[#fdf5f8] py-20" id="who-can-register">
+        <section className="bg-[#fdf5f8] py-20 w-full overflow-hidden" id="who-can-register">
           <div className="container mx-auto px-4 text-center">
             <div className="inline-flex items-center gap-2 bg-white border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
               <Users className="w-3.5 h-3.5 text-[#DB1866]" /> {t.whoCanRegister.badge}
@@ -1598,7 +1598,7 @@ export default function PreRegisterPage() {
 
         {/* ──────────── WHY WE EXIST (CLIENT FEEDBACK 4: 4 CARDS) ──────────── */}
         
-        <section className="bg-white py-20 border-y border-gray-100" id="why-we-exist">
+        <section className="bg-white py-20 border-y border-gray-100 w-full overflow-hidden" id="why-we-exist">
           <div className="container mx-auto px-4 max-w-6xl text-center">
             
             <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-4">
@@ -1644,7 +1644,7 @@ export default function PreRegisterPage() {
 
         {/* ──────────── REGISTRATION WIZARD (CLIENT FEEDBACK 2: DOB & AGE IN PERSONAL DETAILS) ──────────── */}
         
-        <section className="bg-[#2A3773] py-20" id="how-it-works">
+        <section className="bg-[#2A3773] py-20 w-full overflow-hidden" id="how-it-works">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-pink-200 text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
@@ -1686,7 +1686,7 @@ export default function PreRegisterPage() {
         </section>
 
         {/* ──────────── DEDICATED ABOUT US SECTION (#about) ──────────── */}
-        <section className="py-20 bg-gradient-to-b from-[#FFF8FA] via-white to-[#FFF8FA] border-t border-b border-pink-100/60" id="about">
+        <section className="py-20 bg-gradient-to-b from-[#FFF8FA] via-white to-[#FFF8FA] border-t border-b border-pink-100/60 w-full overflow-hidden" id="about">
           <div className="container mx-auto px-4 max-w-6xl">
             
             {/* Header */}
@@ -1817,7 +1817,7 @@ export default function PreRegisterPage() {
 
 
         {/* ──────────── DEDICATED CONTACT US SECTION (#contact) ──────────── */}
-        <section className="py-20 bg-white border-b border-gray-100" id="contact">
+        <section className="py-20 bg-white border-b border-gray-100 w-full overflow-hidden" id="contact">
           <div className="container mx-auto px-4 max-w-6xl">
             
             {/* Header */}
@@ -1995,7 +1995,7 @@ export default function PreRegisterPage() {
         </section>
 
         {/* FAQs */}
-        <section className="py-16 bg-gray-50 border-t border-gray-100" id="faqs">
+        <section className="py-16 bg-gray-50 border-t border-gray-100 w-full overflow-hidden" id="faqs">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <div className="inline-flex items-center gap-2 bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] text-xs font-bold px-4 py-1.5 rounded-full mb-3 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-[#DB1866]" /> {t.faqs.badge}

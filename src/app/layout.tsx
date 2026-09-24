@@ -261,7 +261,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="overflow-x-hidden max-w-[100vw]">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -274,7 +274,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${poppins.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col`}
+        className={`${poppins.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden max-w-[100vw] w-full`}
       >
         <NextAuthProvider>
           <LanguageProvider>
