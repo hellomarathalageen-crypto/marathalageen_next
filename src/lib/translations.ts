@@ -4,7 +4,7 @@ export const translations = {
   "en": {
     "nav": {
       "home": "Home",
-      "heritage": "Culture & Video",
+      "heritage": "About Us",
       "preRegister": "Pre-Register",
       "whoCanRegister": "Who Can Register",
       "whyWeExist": "Why We Exist",
@@ -16,7 +16,7 @@ export const translations = {
       "registerFree": "Pre-Register Free"
     },
     "hero": {
-      "communityBadge": "🎉 Limited Pre-Registration Open — Free Premium Worth ₹4,999",
+      "communityBadge": "🎉 Limited Pre-Registration Open — 100% Free Access",
       "titleLine1": "Karnataka's Exclusive",
       "titleLine2": "Maratha Matrimony",
       "titleLine3": "Platform",
@@ -26,27 +26,27 @@ export const translations = {
       "badge1": "100% Maratha",
       "badge2": "Privacy First",
       "badge3": "Verified Profiles",
-      "vipNotice": "🔒 Get Premium Membership Worth ₹4,999 FREE"
+      "vipNotice": "🔒 Early Bird Pre-Registration is 100% Free"
     },
     "video": {
-      "badge": "Sacred Maratha Heritage • ಪವಿತ್ರ ಸಂಸ್ಕೃತಿ",
-      "title": "Maratha Wedding Traditions & Lineage",
-      "subtitle": "Experience the sacred vows, royal pheta rituals, and timeless gotra values that unite Kshatriya Maratha families across Karnataka.",
-      "watchPrompt": "Watch Cultural Wedding Showcase",
+      "badge": "About Maratha Lageen • ನಮ್ಮ ಪರಿಚಯ",
+      "title": "About Maratha Lageen",
+      "subtitle": "Our Story: Dedicated to bringing Maratha families of Karnataka onto a trusted matrimonial platform built on family values, transparency, and cultural respect.",
+      "watchPrompt": "Watch Our Story & Cultural Showcase",
       "tags": [
-        "96 Kuli Traditions",
+        "Kshatriya Maratha Culture",
         "Sakharpuda",
         "Mangalashtak",
         "Saptapadi"
       ],
-      "culturePill": "🚩 Authentic 96 Kuli Culture",
+      "culturePill": "🚩 Authentic Maratha Traditions",
       "samajPill": "Karnataka Samaj Exclusive",
-      "playerNotice": "Maratha Traditional Wedding Documentary • Ready to stream",
+      "playerNotice": "Maratha Matrimony Community Documentary • Ready to stream",
       "backBtn": "Back to Preview"
     },
     "preregister": {
       "title": "Pre-Register Your Profile",
-      "subtitle": "Join early to claim your ₹4,999 VIP Membership with zero fees.",
+      "subtitle": "Join early to reserve priority verification and direct match access with zero fees.",
       "step1": "Basic Details",
       "step2": "Personal & Astrology",
       "step3": "Preferences",
@@ -54,7 +54,7 @@ export const translations = {
       "registeringForLabel": "Profile Created For *",
       "fullNameLabel": "Candidate First & Middle Name *",
       "fullNamePlaceholder": "e.g. Rohit Ramesh",
-      "surnameLabel": "Family Surname (Annav / आडनाव) *",
+      "surnameLabel": "Family Surname (Annav / ಅಡ್ಡಹೆಸರು) *",
       "surnamePlaceholder": "(e.g., Morey, Jadhav, Ingle, Patil, etc.)",
       "casteLabel": "Maratha Caste / Sub-Caste *",
       "genderLabel": "Gender *",
@@ -62,7 +62,7 @@ export const translations = {
       "mobilePlaceholder": "10-digit mobile number",
       "whatsappLabel": "WhatsApp Number *",
       "whatsappPlaceholder": "10-digit WhatsApp number",
-      "emailLabel": "Email Address (For VIP Pass dispatch)",
+      "emailLabel": "Email Address (For Confirmation Pass)",
       "emailPlaceholder": "name@example.com",
       "districtLabel": "Karnataka District (Native/Current) *",
       "districtSelect": "Select Karnataka District",
@@ -97,12 +97,12 @@ export const translations = {
       "termsConsent": "I agree to the Terms of Service & Privacy Policy of Maratha Matrimony and give consent to contact me regarding matrimonial matches.",
       "btnNext": "Continue to Next Step",
       "btnPrev": "Previous Step",
-      "btnSubmit": "Complete VIP Pre-Registration ➔",
-      "btnSubmitting": "Securing Your VIP Pass...",
+      "btnSubmit": "Complete Pre-Registration ➔",
+      "btnSubmitting": "Securing Your Pre-Registration...",
       "successTitle": "Pre-Registration Confirmed!",
-      "successSubtitle": "Congratulations! Your VIP Early Access Pass is officially issued.",
-      "vipPassId": "VIP Priority Pass ID",
-      "passNotice": "Please save your pass ID. Our community matchmakers will connect with you.",
+      "successSubtitle": "Congratulations! Your Early Access Pass is officially issued.",
+      "vipPassId": "Priority Pass ID",
+      "passNotice": "Please save your pass ID. Our community relationship desk will connect with you.",
       "btnRegisterAnother": "Register Another Profile",
       "btnShareWhatsApp": "Share with Maratha Samaj on WhatsApp"
     },
@@ -112,20 +112,20 @@ export const translations = {
       "subtitle": "Join early to unlock exclusive benefits before our grand public launch.",
       "benefits": [
         {
-          "title": "Complimentary VIP Membership",
-          "subtitle": "(Worth ₹4,999 100% Free with Pre-Registration)"
+          "title": "100% Free Pre-Registration",
+          "subtitle": "(Zero Fees & Zero Hidden Charges)"
         },
         {
           "title": "Priority Profile Verification",
           "subtitle": "Quick review by our community verification team"
         },
         {
-          "title": "Early Access to Verified Matches",
-          "subtitle": "Be the first to connect with authentic family profiles"
+          "title": "Early Access to Verified Profiles",
+          "subtitle": "Be the first to explore curated matches across Karnataka"
         },
         {
-          "title": "Direct Contact Unlocks",
-          "subtitle": "Mutual family connect with zero hidden charges"
+          "title": "Direct Family Connect Advantage",
+          "subtitle": "Direct connection without restrictive contact view limits"
         },
         {
           "title": "Dedicated Launch Support",
@@ -136,19 +136,19 @@ export const translations = {
     "whoCanRegister": {
       "badge": "Open For All Families",
       "title": "Who Can Pre-Register?",
-      "subtitle": "Open for all Maratha brides, grooms, and respected family elders.",
+      "subtitle": "Open for all Maratha brides, grooms, and respected family elders across Karnataka.",
       "cards": [
         {
           "title": "Brides (ವಧುಗಳು)",
-          "desc": "Educated, cultured Maratha brides seeking compatible grooms from respected families."
+          "desc": "Educated & cultured Maratha brides seeking genuine life partners."
         },
         {
           "title": "Grooms (ವರಗಳು)",
-          "desc": "Well-settled professionals, businessmen, and agricultural families looking for life partners."
+          "desc": "Professionals, entrepreneurs, and servicemen from respected lineages."
         },
         {
-          "title": "Parents & Guardians",
-          "desc": "Fathers, mothers, and elders registering on behalf of their children with complete family blessing."
+          "title": "Parents & Elders",
+          "desc": "Father, mother, or guardians seeking matches on behalf of their children."
         },
         {
           "title": "Siblings & Relatives",
@@ -165,20 +165,20 @@ export const translations = {
         { "title": "100% Genuine Profiles", "desc": "We focus strictly on quality, family reputation, and authenticity over quantity." },
         { "title": "Strict Privacy Shield", "desc": "Photos and contact details are masked. Information is unlocked only with mutual consent." },
         { "title": "Karnataka Maratha Community", "desc": "Dedicated exclusively to Maratha families in Karnataka with deep cultural reverence." },
-        { "title": "Vedic Kundali & Devak Rules", "desc": "Traditional alignment respecting Devak clans, Gotra rules, and 36 Gunas Vedic Kundali matching." }
+        { "title": "Vedic Kundali & Lineage Rules", "desc": "Traditional alignment respecting Devak clans, Gotra rules, and 36 Gunas Vedic Kundali matching." }
       ],
       "cards": [
         {
-          "title": "Genuine Profiles",
-          "desc": "Strict verification ensures genuine matrimonial intent and authentic family background."
+          "title": "Exclusively for Maratha Community",
+          "desc": "Dedicated exclusively to Maratha families in Karnataka with deep cultural reverence."
         },
         {
-          "title": "Privacy Protection",
-          "desc": "Your contact details and photos remain masked until mutual family interest is accepted."
+          "title": "100% ID Verified & Authentic",
+          "desc": "Every single profile undergoes rigorous mobile and government ID screening before matching."
         },
         {
-          "title": "Community First",
-          "desc": "Dedicated exclusively to Maratha families across Karnataka & Maharashtra border regions."
+          "title": "Complete Privacy Protection",
+          "desc": "Photos and phone numbers remain masked. Data is shared strictly upon mutual family consent."
         },
         {
           "title": "Kundali & Devak Rules",
@@ -193,28 +193,28 @@ export const translations = {
       "step1Title": "1. Pre-Register Online",
       "step1Desc": "Fill candidate details, Devak, horoscope, and preferences in 2 minutes.",
       "step2Title": "2. Profile Verification",
-      "step2Desc": "Our team verifies biodata authenticity and lineage details.",
-      "step3Title": "3. Mutual Family Connect",
-      "step3Desc": "Explore compatible matches, compare 36 Gunas, and connect directly on WhatsApp."
+      "step2Desc": "Our relationship desk reviews biodata and family details for authenticity.",
+      "step3Title": "3. Direct Family Connect",
+      "step3Desc": "Explore compatible matches, match 36 Gunas, and connect directly on WhatsApp."
     },
-                "aboutSection": {
-      "badge": "Sacred 96 Kuli Heritage • ನಮ್ಮ ಪರಂಪರೆ",
+    "aboutSection": {
+      "badge": "Sacred Heritage • ನಮ್ಮ ಪರಂಪರೆ",
       "title": "Preserving Maratha Heritage Across Karnataka",
       "subtitle": "Dedicated to uniting Kshatriya Maratha families with deep cultural reverence, authentic lineage, and modern privacy.",
-      "desc1": "Maratha Matrimony (Maratha Lageen) was founded with a sacred purpose: to bring together Maratha families across Karnataka (Belagavi, Bengaluru, Dharwad, Hubballi, Vijayapura, Bagalkote, Uttara Kannada, Bidar, Kalaburagi) onto a single, trusted, family-centric platform.",
-      "desc2": "We honor the timeless 96 Kuli traditions, Devaks, Gotras, and Vedic astrological values while providing modern technology, strict privacy controls, and 100% verified profiles.",
+      "desc1": "Maratha Matrimony (Maratha Lageen) was founded with a sacred purpose: to bring together Maratha families across Karnataka (Belagavi, Bengaluru, Dharwad, Hubballi, Vijayapura, Bagalkote, Uttara Kannada, Bidar, Kalaburagi, etc.) onto a single, trusted, family-centric platform.",
+      "desc2": "We honor authentic Maratha family values, Gotras, Devaks, and Vedic astrological matching while providing modern technology, strict privacy controls, and 100% verified profiles.",
       "founderTitle": "Founder & Community Organizer",
       "founderRole": "Maratha Matrimony Community Desk",
       "founderQuote1": "At Maratha Lageen, our mission is simple - to bring Maratha families of Karnataka onto a trusted platform built on values, transparency and respect.",
       "founderQuote2": "We understand that marriage is a sacred bond uniting two families for generations. We are committed to providing a safe, authentic space to help you find the right match with peace of mind.",
       "presenceTitle": "Our Karnataka Community Presence",
       "presenceSubtitle": "Connecting Maratha families across all major districts & taluks",
-      "districts": ["Belagavi", "Bengaluru", "Hubballi", "Dharwad", "Vijayapura", "Bagalkote", "Mysuru", "Shivamogga", "Uttara Kannada", "Kalaburagi", "Bidar", "Pune & Maharashtra"]
+      "districts": ["Belagavi", "Bengaluru", "Hubballi", "Dharwad", "Vijayapura", "Bagalkote", "Mysuru", "Shivamogga", "Uttara Kannada", "Kalaburagi", "Bidar", "+ Many More (ಇತ್ಯಾದಿ)"]
     },
     "contactSection": {
       "badge": "24/7 Family Assistance • ಸಂಪರ್ಕ ಕೇಂದ್ರ",
       "title": "Contact Our Relationship Team",
-      "subtitle": "Have questions about pre-registration, astrologer matching, or VIP membership? We are here to guide your family with care and respect.",
+      "subtitle": "Have questions about pre-registration, astrologer matching, or profile assistance? We are here to guide your family with care and respect.",
       "whatsappCardTitle": "Official WhatsApp Desk",
       "whatsappCardSubtitle": "Fastest response for biodata assistance & verification",
       "whatsappBtnText": "Chat on WhatsApp Now",
@@ -225,10 +225,8 @@ export const translations = {
       "callBtnText": "Call Helpline",
       "emailCardTitle": "Official Email Support",
       "emailCardSubtitle": "For partnerships, verification & general inquiries",
-      "emailAddress": "contact@marathalageen.com",
+      "emailAddress": "hello@marathalageen.com",
       "emailBtnText": "Send an Email",
-      "presenceTitle": "Regional Coordination Centers",
-      "locations": "Bengaluru • Belagavi • Hubballi • Dharwad • Pune",
       "formTitle": "Request an Instant Callback",
       "formSubtitle": "Fill details below and our relationship manager will reach out to you directly.",
       "nameLabel": "Your Full Name *",
@@ -243,9 +241,9 @@ export const translations = {
       "privacyNotice": "🔒 Your phone number and information are kept 100% confidential."
     },
     "whatsappCta": {
-      "title": "Have Questions? Connect on WhatsApp",
-      "subtitle": "Our family support team is available to assist you with registration, horoscope queries, and profile setup.",
-      "btnText": "Chat with Support on WhatsApp"
+      "title": "Have questions? Connect on WhatsApp",
+      "subtitle": "Our family support team is always available for pre-registration, horoscope details, and profile assistance.",
+      "btnText": "Get WhatsApp Support"
     },
     "faqs": {
       "badge": "Frequently Asked Questions",
@@ -253,11 +251,11 @@ export const translations = {
       "items": [
         {
           "q": "Is this platform exclusively for the Maratha community?",
-          "a": "Yes, Maratha Lageen is dedicated solely to Maratha families across Karnataka (including 96 Kuli Maratha, Kunbi Maratha, Deshastha Maratha, and Kshatriya Maratha)."
+          "a": "Yes, Maratha Lageen is dedicated solely to Maratha families across Karnataka (including Kshatriya Maratha, Arya Maratha, and all respected community branches)."
         },
         {
           "q": "Is there any fee or charge to pre-register today?",
-          "a": "No, pre-registration is 100% free. The first 5,000 families receive a Complimentary VIP Membership worth ₹4,999 with zero hidden charges."
+          "a": "No, pre-registration is 100% free for all Maratha families across Karnataka with zero hidden charges."
         },
         {
           "q": "Can parents, siblings, or guardians register on behalf of the candidate?",
@@ -265,15 +263,15 @@ export const translations = {
         },
         {
           "q": "How is candidate privacy and photo security safeguarded?",
-          "a": "Your contact number is masked and protected. Photos can be kept private upon request, and contact details are only unlocked for verified members with mutual family interest."
+          "a": "Your contact number is masked and protected. Photos can be kept private upon request, and contact details are only unlocked upon mutual family interest."
         },
         {
           "q": "How does the platform match Gotras and Devak?",
-          "a": "Our system checks traditional Maratha lineage rules, respecting Devak (देवक) alignment and Gotra exclusions (सगोत्र विवाह टाळणे) to suggest culturally authentic alliances."
+          "a": "Our system checks traditional Maratha lineage rules, respecting Devak alignment and Gotra exclusions to suggest culturally authentic alliances."
         },
         {
-          "q": "What is included in the Complimentary ₹4,999 VIP Membership?",
-          "a": "Early bird VIP access includes direct WhatsApp connects, contact number unlocking, 36 Gunas Vedic Kundali Milan, and priority placement in match recommendations."
+          "q": "What is included with Pre-Registration?",
+          "a": "Pre-registered members receive priority profile verification, direct family connect access at launch, and personalized assistance from our relationship desk."
         },
         {
           "q": "Can I update my photo, education, or horoscope after pre-registering?",
@@ -286,8 +284,8 @@ export const translations = {
       ]
     },
     "footer": {
-      "tagline": "Karnataka & Maharashtra Premier Maratha Matrimony Network",
-      "copyright": "All Rights Reserved • Maratha Lageen",
+      "tagline": "🚩 ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ • Jai Bhavani, Jai Shivaji",
+      "copyright": "All Rights Reserved • Maratha Matrimony",
       "contactHeading": "24/7 Helpline Support",
       "linksHeading": "Quick Navigation",
       "legalHeading": "Trust & Legal"
@@ -296,7 +294,7 @@ export const translations = {
   "kn": {
     "nav": {
       "home": "ಮುಖಪುಟ",
-      "heritage": "ಸಂಸ್ಕೃತಿ & ವಿಡಿಯೋ",
+      "heritage": "ನಮ್ಮ ಬಗ್ಗೆ",
       "preRegister": "ಪೂರ್ವ ನೋಂದಣಿ",
       "whoCanRegister": "ನೋಂದಣಿ ಅರ್ಹತೆ",
       "whyWeExist": "ನಮ್ಮ ಉದ್ದೇಶ",
@@ -308,7 +306,7 @@ export const translations = {
       "registerFree": "ಉಚಿತ ನೋಂದಣಿ"
     },
     "hero": {
-      "communityBadge": "🎉 ಸೀಮಿತ ಪೂರ್ವ-ನೋಂದಣಿ ಮುಕ್ತವಾಗಿದೆ — ₹4,999 ಮೌಲ್ಯದ VIP ಉಚಿತ",
+      "communityBadge": "🎉 ಸೀಮಿತ ಪೂರ್ವ-ನೋಂದಣಿ ಮುಕ್ತವಾಗಿದೆ — 100% ಉಚಿತ ಪ್ರವೇಶ",
       "titleLine1": "ಕರ್ನಾಟಕದ ಏಕೈಕ",
       "titleLine2": "ಮರಾಠ ಮ್ಯಾಟ್ರಿಮೋನಿ",
       "titleLine3": "ವೇದಿಕೆ",
@@ -318,106 +316,106 @@ export const translations = {
       "badge1": "100% ಮರಾಠ",
       "badge2": "ಗೌಪ್ಯತೆ ಮೊದಲು",
       "badge3": "ಪರಿಶೀಲಿತ ಪ್ರೊಫೈಲ್",
-      "vipNotice": "🔒 ₹4,999 ಮೌಲ್ಯದ ಪ್ರೀಮಿಯಂ ಸದಸ್ಯತ್ವ ಉಚಿತ"
+      "vipNotice": "🔒 ಆರಂಭಿಕ ಪೂರ್ವ ನೋಂದಣಿ 100% ಉಚಿತವಾಗಿದೆ"
     },
     "video": {
-      "badge": "ಪವಿತ್ರ ಮರಾಠ ಸಂಸ್ಕೃತಿ • Sacred Maratha Heritage",
-      "title": "ಮರಾಠ ವಿವಾಹ ಸಂಪ್ರದಾಯಗಳು ಮತ್ತು ಪರಂಪರೆ",
-      "subtitle": "ಕರ್ನಾಟಕದ ಮರಾಠ ಕುಟುಂಬಗಳನ್ನು ಒಂದುಗೂಡಿಸುವ ಪವಿತ್ರ ವಿಧಿವಿಧಾನಗಳು, ಪೇಟಾ ಸಂಪ್ರದಾಯ ಮತ್ತು ಗೋತ್ರ ಪರಂಪರೆಯನ್ನು ವೀಕ್ಷಿಸಿ.",
-      "watchPrompt": "ಸಾಂಸ್ಕೃತಿಕ ವಿವಾಹ ಸಾಕ್ಷ್ಯಚಿತ್ರ ವೀಕ್ಷಿಸಿ",
+      "badge": "ನಮ್ಮ ಪರಿಚಯ • About Maratha Lageen",
+      "title": "ಮರಾಠ ಲಗ್ನ — ನಮ್ಮ ಪರಿಚಯ",
+      "subtitle": "ನಮ್ಮ ಕಥೆ: ಕರ್ನಾಟಕದ ಸಮಸ್ತ ಮರಾಠ ಕುಟುಂಬಗಳಿಗೆ ನಂಬಿಕೆ, ಪಾರದರ್ಶಕತೆ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಗೌರವದ ವಿಶ್ವಾಸಾರ್ಹ ವೈವಾಹಿಕ ವೇದಿಕೆಯನ್ನು ಒದಗಿಸುವುದು ನಮ್ಮ ಗುರಿ.",
+      "watchPrompt": "ನಮ್ಮ ಪರಿಚಯ & ಸಾಂಸ್ಕೃತಿಕ ವಿಡಿಯೋ ವೀಕ್ಷಿಸಿ",
       "tags": [
-        "96 ಕುಳಿ ಸಂಪ್ರದಾಯ",
-        "ಸಾಖರ್‌ಪುಡಾ",
+        "ಕ್ಷತ್ರಿಯ ಮರಾಠ ಸಂಸ್ಕೃತಿ",
+        "ಸಾಖರಪುಡಾ",
         "ಮಂಗಳಾಷ್ಟಕ",
         "ಸಪ್ತಪದಿ"
       ],
-      "culturePill": "🚩 ಅಧಿಕೃತ 96 ಕುಳಿ ಸಂಸ್ಕೃತಿ",
-      "samajPill": "ಕರ್ನಾಟಕ ಸಮಾಜಕ್ಕೆ ಮಾತ್ರ",
-      "playerNotice": "ಮರಾಠ ಸಾಂಪ್ರದಾಯಿಕ ವಿವಾಹ ಸಾಕ್ಷ್ಯಚಿತ್ರ • ವೀಕ್ಷಣೆಗೆ ಸಿದ್ಧವಾಗಿದೆ",
-      "backBtn": "ಹಿಂತಿರುಗಿ"
+      "culturePill": "🚩 ಅಧಿಕೃತ ಮರಾಠ ಸಂಪ್ರದಾಯ",
+      "samajPill": "ಕರ್ನಾಟಕ ಸಮಾಜಕ್ಕೆ ಮೀಸಲು",
+      "playerNotice": "ಮರಾಠ ಲಗ್ನ ಸಾಕ್ಷ್ಯಚಿತ್ರ • ವೀಕ್ಷಣೆಗೆ ಲಭ್ಯವಿದೆ",
+      "backBtn": "ಹಿಂದಕ್ಕೆ"
     },
     "preregister": {
       "title": "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಪೂರ್ವ-ನೋಂದಾಯಿಸಿ",
-      "subtitle": "ಈಗಲೇ ನೋಂದಾಯಿಸಿ ₹4,999 ಮೌಲ್ಯದ VIP ಸದಸ್ಯತ್ವವನ್ನು ಸಂಪೂರ್ಣ ಉಚಿತವಾಗಿ ಪಡೆಯಿರಿ.",
+      "subtitle": "ಯಾವುದೇ ಶುಲ್ಕವಿಲ್ಲದೆ ಆದ್ಯತೆಯ ಪ್ರೊಫೈಲ್ ಪರಿಶೀಲನೆ ಮತ್ತು ನೇರ ಸಂಬಂಧಗಳ ಸಂಪರ್ಕವನ್ನು ಇಂದೇ ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
       "step1": "ಮೂಲ ವಿವರಗಳು",
       "step2": "ವೈಯಕ್ತಿಕ & ಜಾತಕ",
       "step3": "ಆದ್ಯತೆಗಳು",
       "step4": "ಫೋಟೋ & ಸಲ್ಲಿಕೆ",
-      "registeringForLabel": "ಯಾರಿಗಾಗಿ ನೋಂದಾಯಿಸುತ್ತಿದ್ದೀರಿ? *",
-      "fullNameLabel": "ಅಭ್ಯರ್ಥಿಯ ಮೊದಲ ಮತ್ತು ಮಧ್ಯದ ಹೆಸರು *",
-      "fullNamePlaceholder": "ಉದಾ. ರೋಹಿತ್ ರಮೇಶ್",
-      "surnameLabel": "ಕುಟುಂಬದ ಉಪನಾಮ (ಆಡನಾವ್ / Surname) *",
-      "surnamePlaceholder": "(ಉದಾ., ಮೋರೆ, ಜಾಧವ್, ಇಂಗಳೆ, ಪಾಟೀಲ್, ಇತ್ಯಾದಿ)",
-      "casteLabel": "ಮರಾಠ ಜಾತಿ / ಉಪಜಾತಿ *",
+      "registeringForLabel": "ಪ್ರೊಫೈಲ್ ರಚಿಸುತ್ತಿರುವುದು *",
+      "fullNameLabel": "ಅಭ್ಯರ್ಥಿಯ ಪೂರ್ಣ ಹೆಸರು *",
+      "fullNamePlaceholder": "ಉದಾ: ರೋಹಿತ್ ರಮೇಶ್",
+      "surnameLabel": "ಕುಟುಂಬದ ಅಡ್ಡಹೆಸರು (ಆಡ್ನಾವ್ / Annav) *",
+      "surnamePlaceholder": "(ಉದಾ: ಮೋರೆ, ಜಾಧವ್, ಇಂಗಳೆ, ಪಾಟೀಲ್, ಇತ್ಯಾದಿ)",
+      "casteLabel": "ಮರಾಠ ಜಾತಿ / ಒಳಪಂಗಡ *",
       "genderLabel": "ಲಿಂಗ *",
       "mobileLabel": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (ಲಾಗಿನ್ ಮತ್ತು ಸಂದೇಶಗಳಿಗಾಗಿ) *",
       "mobilePlaceholder": "10-ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
       "whatsappLabel": "ವಾಟ್ಸಾಪ್ ಸಂಖ್ಯೆ *",
       "whatsappPlaceholder": "10-ಅಂಕಿಯ ವಾಟ್ಸಾಪ್ ಸಂಖ್ಯೆ",
-      "emailLabel": "ಇಮೇಲ್ ವಿಳಾಸ (VIP ಪಾಸ್ ಪಡೆಯಲು)",
+      "emailLabel": "ಇಮೇಲ್ ವಿಳಾಸ (ದೃಢೀಕರಣ ಪತ್ರಕ್ಕಾಗಿ)",
       "emailPlaceholder": "name@example.com",
       "districtLabel": "ಕರ್ನಾಟಕ ಜಿಲ್ಲೆ (ಸ್ಥಳೀಯ/ಪ್ರಸ್ತುತ) *",
-      "districtSelect": "ಜಿಲ್ಲೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-      "dobLabel": "ಹುಟ್ಟಿದ ದಿನಾಂಕ *",
-      "birthTimeLabel": "ಹುಟ್ಟಿದ ಸಮಯ (12-ಗಂಟೆ AM/PM) *",
-      "rashiLabel": "ರಾಶಿ (ಚಂದ್ರ ರಾಶಿ) *",
+      "districtSelect": "ಕರ್ನಾಟಕ ಜಿಲ್ಲೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+      "dobLabel": "ಜನ್ಮ ದಿನಾಂಕ *",
+      "birthTimeLabel": "ಜನನ ಸಮಯ (12-ಗಂಟೆ AM/PM) *",
+      "rashiLabel": "ರಾಶಿ *",
       "rashiSelect": "ರಾಶಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
       "nakshatraLabel": "ನಕ್ಷತ್ರ *",
       "nakshatraSelect": "ನಕ್ಷತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
       "maritalStatusLabel": "ವೈವಾಹಿಕ ಸ್ಥಿತಿ *",
       "heightLabel": "ಎತ್ತರ *",
       "heightSelect": "ಎತ್ತರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-      "educationLabel": "ಗರಿಷ್ಠ ಶಿಕ್ಷಣ / ಪದವಿ *",
-      "educationPlaceholder": "ಉದಾ. B.E., MBA, B.Com, Degree",
-      "professionLabel": "ಉದ್ಯೋಗ / ವೃತ್ತಿ *",
-      "professionPlaceholder": "ಉದಾ. ಸಾಫ್ಟ್‌ವೇರ್ ಇಂಜಿನಿಯರ್, ವ್ಯಾಪಾರ, ಸರ್ಕಾರಿ ಉದ್ಯೋಗಿ",
+      "educationLabel": "ಗರಿಷ್ಠ ವಿದ್ಯಾರ್ಹತೆ *",
+      "educationPlaceholder": "ಉದಾ: B.E. Computer Science, MBA, B.Com",
+      "professionLabel": "ವೃತ್ತಿ / ಉದ್ಯೋಗ *",
+      "professionPlaceholder": "ಉದಾ: ಸಾಫ್ಟ್‌ವೇರ್ ಎಂಜಿನಿಯರ್, ಉದ್ಯಮಿ, ಸರ್ಕಾರಿ ಅಧಿಕಾರಿ",
       "incomeLabel": "ವಾರ್ಷಿಕ ಆದಾಯ *",
-      "incomeSelect": "ಆದಾಯದ ಮಿತಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-      "agePrefLabel": "ಸಂಗಾತಿಯ ವಯಸ್ಸಿನ ಮಿತಿ",
-      "castePrefLabel": "ಉಪಜಾತಿ ಆದ್ಯತೆ",
-      "castePrefAny": "ಎಲ್ಲಾ ಮರಾಠ ಉಪಜಾತಿಗಳು (ಮುಕ್ತ)",
-      "castePrefSame": "ಸ್ವಂತ ಉಪಜಾತಿ ಮಾತ್ರ",
-      "eduPrefLabel": "ಸಂಗಾತಿಯ ಶಿಕ್ಷಣ ಆದ್ಯತೆ",
+      "incomeSelect": "ಆದಾಯದ ಶ್ರೇಣಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+      "agePrefLabel": "ಸಂಗಾತಿಯ ವಯಸ್ಸಿನ ಆದ್ಯತೆ",
+      "castePrefLabel": "ಒಳಪಂಗಡದ ಆದ್ಯತೆ",
+      "castePrefAny": "ಎಲ್ಲಾ ಮರಾಠ ಒಳಪಂಗಡಗಳು (ಮುಕ್ತ)",
+      "castePrefSame": "ಸ್ವಜಾತಿ / ಅದೇ ಒಳಪಂಗಡಕ್ಕೆ ಆದ್ಯತೆ",
+      "eduPrefLabel": "ಸಂಗಾತಿಯ ಶಿಕ್ಷಣದ ಆದ್ಯತೆ",
       "photoTitle": "ಅಭ್ಯರ್ಥಿಯ ಫೋಟೋ ಅಪ್‌ಲೋಡ್ (ಐಚ್ಛಿಕ)",
-      "photoDesc": "ನೀವು ಈಗಲೇ ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಬಹುದು ಅಥವಾ ನಂತರ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿ ಸೇರಿಸಬಹುದು. ಫೋಟೋ ಹೊಂದಿರುವ ಪ್ರೊಫೈಲ್‌ಗಳಿಗೆ 10 ಪಟ್ಟು ಹೆಚ್ಚು ಸ್ಪಂದನೆ ಸಿಗುತ್ತದೆ.",
+      "photoDesc": "ನೀವು ಈಗಲೇ ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಬಹುದು ಅಥವಾ ಲಾಂಚ್ ಆದ ನಂತರ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿ ಸೇರಿಸಬಹುದು.",
       "photoBtn": "ಸಾಧನದಿಂದ ಫೋಟೋ ಆಯ್ಕೆಮಾಡಿ",
       "photoAttached": "ಫೋಟೋ ಲಗತ್ತಿಸಲಾಗಿದೆ",
-      "photoOptimized": "ಆಟೋ-ಆಪ್ಟಿಮೈಸ್ಡ್",
+      "photoOptimized": "ಆಪ್ಟಿಮೈಸ್ ಮಾಡಲಾಗಿದೆ",
       "removeBtn": "ತೆಗೆದುಹಾಕಿ",
-      "photoOptionalNotice": "ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಐಚ್ಛಿಕವಾಗಿದೆ: ಫೋಟೋ ಇಲ್ಲದೆಯೂ ನೀವು ಈಗಲೇ ನೋಂದಾಯಿಸಬಹುದು. ಸಾಂಪ್ರದಾಯಿಕ ಅವತಾರ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ನಿಯೋಜಿಸಲ್ಪಡುತ್ತದೆ.",
-      "privacyGuarantee": "100% ಗೌಪ್ಯತೆ ಮತ್ತು ಭದ್ರತೆ: ಫೋಟೋ ಮತ್ತು ಮೊಬೈಲ್ ಸಂಖ್ಯೆಗಳನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ರಕ್ಷಿಸಲಾಗುತ್ತದೆ. ಎರಡೂ ಕುಟುಂಬಗಳ ಸಮ್ಮತಿಯ ನಂತರವೇ ವಿವರಗಳು ಲಭ್ಯವಾಗುತ್ತವೆ.",
-      "termsConsent": "ನಾನು ಮರಾಠ ಲಗ್ನ ಮ್ಯಾಟ್ರಿಮೋನಿಯ ನಿಯಮಗಳು ಮತ್ತು ಗೌಪ್ಯತಾ ನೀತಿಯನ್ನು ಒಪ್ಪುತ್ತೇನೆ ಹಾಗೂ ವಿವಾಹ ಸಂಬಂಧಗಳ ಕುರಿತು ನನ್ನನ್ನು ಸಂಪರ್ಕಿಸಲು ಸಮ್ಮತಿಸುತ್ತೇನೆ.",
+      "photoOptionalNotice": "ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಐಚ್ಛಿಕವಾಗಿದೆ: ನೀವು ಈಗಲೇ ಫೋಟೋ ಇಲ್ಲದೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಬಹುದು. ನಂತರ ಲಾಗಿನ್ ಆದ ಮೇಲೆ ಫೋಟೋ ಸೇರಿಸಬಹುದು.",
+      "privacyGuarantee": "100% ಗೌಪ್ಯತೆ & ಸುರಕ್ಷತೆ: ನಿಮ್ಮ ಫೋಟೋ ಮತ್ತು ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಸಂಪೂರ್ಣವಾಗಿ ರಕ್ಷಿಸಲಾಗುತ್ತದೆ.",
+      "termsConsent": "ನಾನು ಮರಾಠ ಲಗ್ನದ ನಿಯಮಗಳು & ಷರತ್ತುಗಳನ್ನು ಒಪ್ಪುತ್ತೇನೆ ಮತ್ತು ವೈವಾಹಿಕ ಸಂಬಂಧಗಳಿಗಾಗಿ ನನ್ನನ್ನು ಸಂಪರ್ಕಿಸಲು ಸಮ್ಮತಿಸುತ್ತೇನೆ.",
       "btnNext": "ಮುಂದಿನ ಹಂತಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ",
       "btnPrev": "ಹಿಂದಿನ ಹಂತ",
-      "btnSubmit": "VIP ಪೂರ್ವ ನೋಂದಣಿ ಪೂರ್ಣಗೊಳಿಸಿ ➔",
-      "btnSubmitting": "VIP ಪಾಸ್ ರಚಿಸಲಾಗುತ್ತಿದೆ...",
-      "successTitle": "ಪೂರ್ವ ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ!",
-      "successSubtitle": "ಅಭಿನಂದನೆಗಳು! ನಿಮ್ಮ VIP ಅರ್ಲಿ ಆಕ್ಸೆಸ್ ಪಾಸ್ ಅಧಿಕೃತವಾಗಿ ನೀಡಲಾಗಿದೆ.",
-      "vipPassId": "VIP ಪ್ರಿಯಾರಿಟಿ ಪಾಸ್ ಸಂಖ್ಯೆ",
-      "passNotice": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪಾಸ್ ಸಂಖ್ಯೆಯನ್ನು ಉಳಿಸಿಕೊಳ್ಳಿ. ನಮ್ಮ ಸಮುದಾಯ ತಂಡವು ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಲಿದೆ.",
+      "btnSubmit": "ಪೂರ್ವ-ನೋಂದಣಿ ಪೂರ್ಣಗೊಳಿಸಿ ➔",
+      "btnSubmitting": "ನೋಂದಣಿ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...",
+      "successTitle": "ಪೂರ್ವ-ನೋಂದಣಿ ದೃಢಪಟ್ಟಿದೆ!",
+      "successSubtitle": "ಅಭಿನಂದನೆಗಳು! ನಿಮ್ಮ ಆರಂಭಿಕ ಪ್ರವೇಶ ಪಾಸ್ ಯಶಸ್ವಿಯಾಗಿ ರಚನೆಯಾಗಿದೆ.",
+      "vipPassId": "ಆದ್ಯತಾ ಪಾಸ್ ಸಂಖ್ಯೆ",
+      "passNotice": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪಾಸ್ ಐಡಿಯನ್ನು ಕಾಯ್ದಿರಿಸಿ. ನಮ್ಮ ಸಮುದಾಯ ತಂಡವು ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ.",
       "btnRegisterAnother": "ಮತ್ತೊಂದು ಪ್ರೊಫೈಲ್ ನೋಂದಾಯಿಸಿ",
       "btnShareWhatsApp": "ಮರಾಠ ಸಮಾಜದೊಂದಿಗೆ ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ"
     },
     "whyPreRegister": {
-      "badge": "ಅರ್ಲಿ ಬರ್ಡ್ ಸವಲತ್ತುಗಳು",
-      "title": "ಪೂರ್ವ ನೋಂದಣಿ ಏಕೆ ಮಾಡಬೇಕು?",
-      "subtitle": "ಭವ್ಯ ಉದ್ಘಾಟನೆಗೂ ಮುನ್ನ ವಿಶೇಷ ಪ್ರಯೋಜನಗಳನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಈಗಲೇ ಸೇರಿಕೊಳ್ಳಿ.",
+      "badge": "ಆರಂಭಿಕ ನೋಂದಣಿಯ ಲಾಭಗಳು",
+      "title": "ನಾನು ಏಕೆ ಪೂರ್ವ-ನೋಂದಾಯಿಸಬೇಕು?",
+      "subtitle": "ಅಧಿಕೃತ ಲಾಂಚ್‌ಗೆ ಮುನ್ನವೇ ವಿಶೇಷ ಸೌಲಭ್ಯಗಳನ್ನು ಉಚಿತವಾಗಿ ಪಡೆದುಕೊಳ್ಳಿ.",
       "benefits": [
         {
-          "title": "ಉಚಿತ VIP ಸದಸ್ಯತ್ವ",
-          "subtitle": "(₹4,999 ಮೌಲ್ಯದ ಸದಸ್ಯತ್ವ ಪೂರ್ವ ನೋಂದಣಿಯೊಂದಿಗೆ 100% ಉಚಿತ)"
+          "title": "100% ಉಚಿತ ಪೂರ್ವ-ನೋಂದಣಿ",
+          "subtitle": "(ಯಾವುದೇ ಶುಲ್ಕ ಅಥವಾ ಗುಪ್ತ ವೆಚ್ಚಗಳಿಲ್ಲ)"
         },
         {
-          "title": "ತ್ವರಿತ ಪ್ರೊಫೈಲ್ ಪರಿಶೀಲನೆ",
-          "subtitle": "ನಮ್ಮ ಸಮುದಾಯ ಪರಿಶೀಲನಾ ತಂಡದಿಂದ ಆದ್ಯತೆಯ ಅನುಮೋದನೆ"
+          "title": "ಆದ್ಯತೆಯ ಪ್ರೊಫೈಲ್ ಪರಿಶೀಲನೆ",
+          "subtitle": "ನಮ್ಮ ಸಮುದಾಯ ತಂಡದಿಂದ ತ್ವರಿತ ಪರಿಶೀಲನೆ"
         },
         {
-          "title": "ಪರಿಶೀಲಿಸಿದ ಸಂಬಂಧಗಳ ಮೊದಲ ಪ್ರವೇಶ",
-          "subtitle": "ಕರ್ನಾಟಕದ ನೈಜ ಮರಾಠ ಕುಟುಂಬಗಳೊಂದಿಗೆ ಮೊದಲೇ ಸಂಪರ್ಕಿಸಿ"
+          "title": "ಪರಿಶೀಲಿತ ಪ್ರೊಫೈಲ್‌ಗಳ ಮುಂಚಿತ ಪ್ರವೇಶ",
+          "subtitle": "ಕರ್ನಾಟಕದಾದ್ಯಂತ ಹೊಂದಾಣಿಕೆಯಾಗುವ ಸಂಬಂಧಗಳನ್ನು ಮೊದಲು ನೋಡಿ"
         },
         {
-          "title": "ನೇರ ಸಂಪರ್ಕ ಸಂಖ್ಯೆ ಅನ್‌ಲಾಕ್",
-          "subtitle": "ಯಾವುದೇ ಗುಪ್ತ ಶುಲ್ಕಗಳಿಲ್ಲದೆ ಕುಟುಂಬಗಳ ನೇರ ಸಂಪರ್ಕ"
+          "title": "ನೇರ ಕುಟುಂಬ ಸಂಪರ್ಕದ ಅನುಕೂಲ",
+          "subtitle": "ಯಾವುದೇ ಮಿತಿಗಳಿಲ್ಲದೆ ನೇರ ಕುಟುಂಬ ಸಂಪರ್ಕ"
         },
         {
           "title": "ವೈಯಕ್ತಿಕ ವಾಟ್ಸಾಪ್ ಬೆಂಬಲ",
@@ -428,19 +426,19 @@ export const translations = {
     "whoCanRegister": {
       "badge": "ಎಲ್ಲಾ ಕುಟುಂಬಗಳಿಗೆ ಮುಕ್ತವಾಗಿದೆ",
       "title": "ಯಾರು ಪೂರ್ವ-ನೋಂದಾಯಿಸಬಹುದು?",
-      "subtitle": "ಎಲ್ಲಾ ಮರಾಠ ವಧು-ವರರು ಮತ್ತು ಗೌರವಾನ್ವಿತ ಕುಟುಂಬದ ಹಿರಿಯರಿಗೆ ಮುಕ್ತವಾಗಿದೆ.",
+      "subtitle": "ಕರ್ನಾಟಕದ ಎಲ್ಲಾ ಮರಾಠ ವಧು-ವರರು ಮತ್ತು ಗೌರವಾನ್ವಿತ ಕುಟುಂಬದ ಹಿರಿಯರಿಗೆ ಮುಕ್ತವಾಗಿದೆ.",
       "cards": [
         {
           "title": "ವಧುಗಳು (Brides)",
-          "desc": "ಉತ್ತಮ ಕುಟುಂಬಗಳಿಂದ ವಿದ್ಯಾವಂತ, ಸುಸಂಸ್ಕೃತ ವರಗಳನ್ನು ಹುಡುಕುತ್ತಿರುವ ಮರಾಠ ಕನ್ಯೆಯರು."
+          "desc": "ವಿದ್ಯಾವಂತ ಮತ್ತು ಸಂಸ್ಕಾರವಂತ ಮರಾಠ ಕನ್ಯೆಯರು."
         },
         {
           "title": "ವರಗಳು (Grooms)",
-          "desc": "ಉತ್ತಮ ಉದ್ಯೋಗ, ವ್ಯಾಪಾರ ಮತ್ತು ಕೃಷಿ ಹಿನ್ನೆಲೆಯುಳ್ಳ ಸುಶಿಕ್ಷಿತ ಮರಾಠ ಯುವಕರು."
+          "desc": "ಉದ್ಯೋಗಸ್ಥರು, ಉದ್ಯಮಿಗಳು ಮತ್ತು ಉತ್ತಮ ಮನೆತನದ ವರರು."
         },
         {
-          "title": "ಪಾಲಕರು & ಪೋಷಕರು",
-          "desc": "ತಮ್ಮ ಮಕ್ಕಳ ಭವಿಷ್ಯಕ್ಕಾಗಿ ವಿಶ್ವಾಸಾರ್ಹ ಸಂಬಂಧಗಳನ್ನು ಹುಡುಕುತ್ತಿರುವ ತಂದೆ-ತಾಯಿ ಮತ್ತು ಹಿರಿಯರು."
+          "title": "ಪೋಷಕರು & ಹಿರಿಯರು",
+          "desc": "ತಮ್ಮ ಮಕ್ಕಳಿಗಾಗಿ ಸೂಕ್ತ ಸಂಬಂಧವನ್ನು ಹುಡುಕುತ್ತಿರುವ ತಂದೆ-ತಾಯಿ ಅಥವಾ ಪೋಷಕರು."
         },
         {
           "title": "ಸಹೋದರರು & ಸಂಬಂಧಿಕರು",
@@ -461,16 +459,16 @@ export const translations = {
       ],
       "cards": [
         {
-          "title": "ನೈಜ ಪ್ರೊಫೈಲ್‌ಗಳು",
-          "desc": "ಕಟ್ಟುನಿಟ್ಟಾದ ಪರಿಶೀಲನೆಯು ಕೇವಲ ನೈಜ ವಿವಾಹ ಆಕಾಂಕ್ಷಿಗಳನ್ನು ಮಾತ್ರ ಖಚಿತಪಡಿಸುತ್ತದೆ."
+          "title": "ಮರಾಠ ಸಮಾಜಕ್ಕೆ ಮಾತ್ರ ಮೀಸಲು",
+          "desc": "ಕರ್ನಾಟಕದ ಮರಾಠ ಕುಟುಂಬಗಳ ಸಾಂಸ್ಕೃತಿಕ ಪರಂಪರೆಗೆ ಮೀಸಲಾದ ಏಕೈಕ ವೇದಿಕೆ."
         },
         {
-          "title": "ಸಂಪೂರ್ಣ ಗೌಪ್ಯತೆ",
-          "desc": "ಎರಡೂ ಕುಟುಂಬಗಳ ಸಮ್ಮತಿಯಿಲ್ಲದೆ ಫೋಟೋ ಮತ್ತು ಮೊಬೈಲ್ ಸಂಖ್ಯೆಗಳನ್ನು ಯಾರಿಗೂ ತೋರಿಸಲಾಗುವುದಿಲ್ಲ."
+          "title": "100% ಪರಿಶೀಲಿತ ಪ್ರೊಫೈಲ್‌ಗಳು",
+          "desc": "ಪ್ರತಿಯೊಂದು ಪ್ರೊಫೈಲ್ ಮೊಬೈಲ್ ಮತ್ತು ಗುರುತಿನ ಪರಿಶೀಲನೆಗೆ ಒಳಪಡುತ್ತದೆ."
         },
         {
-          "title": "ಸಮುದಾಯ ಕೇಂದ್ರಿತ",
-          "desc": "ಕರ್ನಾಟಕ ಮತ್ತು ಮಹಾರಾಷ್ಟ್ರ ಗಡಿಭಾಗದ ಮರಾಠ ಕುಟುಂಬಗಳಿಗಾಗಿಯೇ ಪ್ರತ್ಯೇಕವಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ."
+          "title": "ಸಂಪೂರ್ಣ ಗೌಪ್ಯತೆ ರಕ್ಷಣೆ",
+          "desc": "ಫೋಟೋಗಳು ಮತ್ತು ಮೊಬೈಲ್ ಸಂಖ್ಯೆಗಳು ಸುರಕ್ಷಿತವಾಗಿರುತ್ತವೆ."
         },
         {
           "title": "ದೇವಕ & ಜಾತಕ ನಿಯಮಗಳು",
@@ -489,24 +487,24 @@ export const translations = {
       "step3Title": "3. ಕುಟುಂಬಗಳ ನೇರ ಸಂಪರ್ಕ",
       "step3Desc": "ಹೊಂದಾಣಿಕೆಯಾಗುವ ಸಂಬಂಧಗಳನ್ನು ನೋಡಿ, 36 ಗುಣಗಳನ್ನು ತಾಳೆಹಾಕಿ ವಾಟ್ಸಾಪ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ."
     },
-        "aboutSection": {
-      "badge": "ಪವಿತ್ರ 96 ಕುಳಿ ಪರಂಪರೆ • Sacred Heritage",
+    "aboutSection": {
+      "badge": "ಪವಿತ್ರ ಪರಂಪರೆ • Sacred Heritage",
       "title": "ಕರ್ನಾಟಕದಲ್ಲಿ ಮರಾಠ ಸಂಸ್ಕೃತಿಯ ಸಂರಕ್ಷಣೆ",
       "subtitle": "ದಕ್ಷಿಣ ಭಾರತದ ಕ್ಷತ್ರಿಯ ಮರಾಠ ಸಮಾಜವನ್ನು ಗೌರವ, ಸಾಂಸ್ಕೃತಿಕ ನಿಷ್ಠೆ ಮತ್ತು ಆಧುನಿಕ ಭದ್ರತೆಯೊಂದಿಗೆ ಒಂದುಗೂಡಿಸುವ ಪವಿತ್ರ ವೇದಿಕೆ.",
-      "desc1": "ಮರಾಠ ಲಗ್ನವು ಒಂದು ಪವಿತ್ರ ಉದ್ದೇಶದೊಂದಿಗೆ ಸ್ಥಾಪಿತವಾಗಿದೆ: ಕರ್ನಾಟಕದ ಸಮಸ್ತ ಮರಾಠ ಕುಟುಂಬಗಳನ್ನು (ಬೆಳಗಾವಿ, ಬೆಂಗಳೂರು, ಧಾರವಾಡ, ಹುಬ್ಬಳ್ಳಿ, ಉತ್ತರ ಕನ್ನಡ, ಬಾಗಲಕೋಟೆ, ವಿಜಯಪುರ, ಬೀದರ್, ಕಲಬುರಗಿ) ಒಂದೇ ವಿಶ್ವಾಸಾರ್ಹ ವೇದಿಕೆಯಲ್ಲಿ ಒಂದುಗೂಡಿಸುವುದು.",
-      "desc2": "ನಾವು 96 ಕುಳಿ ಮರಾಠ ಪರಂಪರೆ, ಗೋತ್ರ, ದೇವಕ ಮತ್ತು ಕುಲದೈವತಗಳನ್ನು ಗೌರವಿಸುತ್ತಾ, ಹೊಸ ಪೀಳಿಗೆಗೆ ಅತ್ಯಾಧುನಿಕ ತಂತ್ರಜ್ಞಾನ, ಸಂಪೂರ್ಣ ಗೌಪ್ಯತೆ ಮತ್ತು 100% ಪರಿಶೀಲಿಸಿದ ಪ್ರೊಫೈಲ್‌ಗಳನ್ನು ನೀಡುತ್ತಿದ್ದೇವೆ.",
+      "desc1": "ಮರಾಠ ಲಗ್ನವು ಒಂದು ಪವಿತ್ರ ಉದ್ದೇಶದೊಂದಿಗೆ ಸ್ಥಾಪಿತವಾಗಿದೆ: ಕರ್ನಾಟಕದ ಸಮಸ್ತ ಮರಾಠ ಕುಟುಂಬಗಳನ್ನು (ಬೆಳಗಾವಿ, ಬೆಂಗಳೂರು, ಧಾರವಾಡ, ಹುಬ್ಬಳ್ಳಿ, ಉತ್ತರ ಕನ್ನಡ, ಬಾಗಲಕೋಟೆ, ವಿಜಯಪುರ, ಬೀದರ್, ಕಲಬುರಗಿ, ಇತ್ಯಾದಿ) ಒಂದೇ ವಿಶ್ವಾಸಾರ್ಹ ವೇದಿಕೆಯಲ್ಲಿ ಒಂದುಗೂಡಿಸುವುದು.",
+      "desc2": "ನಾವು ಮರಾಠ ಕುಟುಂಬದ ಮೌಲ್ಯಗಳು, ಗೋತ್ರ, ದೇವಕ ಮತ್ತು ಜಾತಕ ಹೊಂದಾಣಿಕೆಯನ್ನು ಗೌರವಿಸುತ್ತಾ, ಹೊಸ ಪೀಳಿಗೆಗೆ ಅತ್ಯಾಧುನಿಕ ತಂತ್ರಜ್ಞಾನ, ಸಂಪೂರ್ಣ ಗೌಪ್ಯತೆ ಮತ್ತು 100% ಪರಿಶೀಲಿಸಿದ ಪ್ರೊಫೈಲ್‌ಗಳನ್ನು ನೀಡುತ್ತಿದ್ದೇವೆ.",
       "founderTitle": "ಸಂಸ್ಥಾಪಕರು & ಸಮುದಾಯ ಸಂಘಟಕರು",
       "founderRole": "ಮರಾಠ ಲಗ್ನ ಸಮುದಾಯ ವೇದಿಕೆ",
       "founderQuote1": "ಮರಾಠ ಲಗ್ನದಲ್ಲಿ ನಮ್ಮ ಉದ್ದೇಶ ಸ್ಪಷ್ಟ — ಕರ್ನಾಟಕದ ಸಮಸ್ತ ಮರಾಠ ಕುಟುಂಬಗಳಿಗೆ ನಂಬಿಕೆ, ಪಾರದರ್ಶಕತೆ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಗೌರವದ ವಿಶ್ವಾಸಾರ್ಹ ವೇದಿಕೆಯನ್ನು ಒದಗಿಸುವುದು.",
       "founderQuote2": "ವಿವಾಹ ಎಂಬುದು ಕೇವಲ ಇಬ್ಬರು ವ್ಯಕ್ತಿಗಳ ಮಿಲನವಲ್ಲ, ಎರಡು ಕುಟುಂಬಗಳ ಪವಿತ್ರ ಬಂಧನ. ನಿಮ್ಮ ಮನಸ್ಸಿನ ನೆಮ್ಮದಿಯೊಂದಿಗೆ ಸೂಕ್ತ ಸಂಬಂಧವನ್ನು ನಿಗದಿಪಡಿಸಲು ನಾವು ಬದ್ಧರಾಗಿದ್ದೇವೆ.",
       "presenceTitle": "ಕರ್ನಾಟಕದಲ್ಲಿ ನಮ್ಮ ಸಮುದಾಯ ಜಾಲ",
       "presenceSubtitle": "ರಾಜ್ಯದ ಎಲ್ಲಾ ಪ್ರಮುಖ ಜಿಲ್ಲೆ ಮತ್ತು ತಾಲೂಕುಗಳಲ್ಲಿ ಮರಾಠ ಕುಟುಂಬಗಳ ಸಂಪರ್ಕ",
-      "districts": ["ಬೆಳಗಾವಿ", "ಬೆಂಗಳೂರು", "ಹುಬ್ಬಳ್ಳಿ", "ಧಾರವಾಡ", "ವಿಜಯಪುರ", "ಬಾಗಲಕೋಟೆ", "ಮೈಸೂರು", "ಶಿವಮೊಗ್ಗ", "ಉತ್ತರ ಕನ್ನಡ", "ಕಲಬುರಗಿ", "ಬೀದರ್", "ಪುಣೆ & ಮಹಾರಾಷ್ಟ್ರ"]
+      "districts": ["ಬೆಳಗಾವಿ", "ಬೆಂಗಳೂರು", "ಹುಬ್ಬಳ್ಳಿ", "ಧಾರವಾಡ", "ವಿಜಯಪುರ", "ಬಾಗಲಕೋಟೆ", "ಮೈಸೂರು", "ಶಿವಮೊಗ್ಗ", "ಉತ್ತರ ಕನ್ನಡ", "ಕಲಬುರಗಿ", "ಬೀದರ್", "+ ಇನ್ನಷ್ಟು ಜಿಲ್ಲೆಗಳು (ಇತ್ಯಾದಿ)"]
     },
     "contactSection": {
       "badge": "24/7 ಕುಟುಂಬ ಸಹಾಯವಾಣಿ • Contact Desk",
       "title": "ನಮ್ಮ ಕುಟುಂಬ ಸಂಬಂಧ ಬೆಂಬಲ ಕೇಂದ್ರ",
-      "subtitle": "ಪೂರ್ವ ನೋಂದಣಿ, ಜಾತಕ ಹೊಂದಾಣಿಕೆ ಮತ್ತು VIP ಸದಸ್ಯತ್ವದ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳಿದ್ದರೂ ನಮ್ಮ ತಂಡವನ್ನು ಸಂಪರ್ಕಿಸಿ.",
+      "subtitle": "ಪೂರ್ವ ನೋಂದಣಿ, ಜಾತಕ ಹೊಂದಾಣಿಕೆ ಮತ್ತು ಪ್ರೊಫೈಲ್ ಸಹಾಯಕ್ಕಾಗಿ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳಿದ್ದರೂ ನಮ್ಮ ತಂಡವನ್ನು ಸಂಪರ್ಕಿಸಿ.",
       "whatsappCardTitle": "ಅಧಿಕೃತ ವಾಟ್ಸಾಪ್ ಸಹಾಯವಾಣಿ",
       "whatsappCardSubtitle": "ಬಯೋಡೇಟಾ ಮತ್ತು ಪ್ರೊಫೈಲ್ ಪರಿಶೀಲನೆಗೆ ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆ",
       "whatsappBtnText": "ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಚಾಟ್ ಪ್ರಾರಂಭಿಸಿ",
@@ -517,10 +515,8 @@ export const translations = {
       "callBtnText": "ಕರೆ ಮಾಡಿ",
       "emailCardTitle": "ಅಧಿಕೃತ ಇಮೇಲ್ ಸಂಪರ್ಕ",
       "emailCardSubtitle": "ಪರಿಶೀಲನೆ ಮತ್ತು ಸಾಮಾನ್ಯ ವಿಚಾರಣೆಗಳಿಗೆ",
-      "emailAddress": "contact@marathalageen.com",
+      "emailAddress": "hello@marathalageen.com",
       "emailBtnText": "ಇಮೇಲ್ ಕಳುಹಿಸಿ",
-      "presenceTitle": "ಪ್ರಾದೇಶಿಕ ಸಮನ್ವಯ ಕೇಂದ್ರಗಳು",
-      "locations": "ಬೆಂಗಳೂರು • ಬೆಳಗಾವಿ • ಹುಬ್ಬಳ್ಳಿ • ಧಾರವಾಡ • ಪುಣೆ",
       "formTitle": "ತ್ವರಿತ ಕಾಲ್‌ಬ್ಯಾಕ್ ವಿನಂತಿಸಿ",
       "formSubtitle": "ಕೆಳಗಿನ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ, ನಮ್ಮ ಸಂಬಂಧ ನಿರ್ವಾಹಕರು ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತಾರೆ.",
       "nameLabel": "ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರು *",
@@ -545,11 +541,11 @@ export const translations = {
       "items": [
         {
           "q": "ಈ ವೇದಿಕೆ ಕೇವಲ ಮರಾಠ ಸಮುದಾಯಕ್ಕೆ ಮಾತ್ರ ಸೀಮಿತವಾಗಿದೆಯೇ?",
-          "a": "ಹೌದು, ಮರಾಠ ಲಗ್ನವು ಕರ್ನಾಟಕದ ಮರಾಠ ಕುಟುಂಬಗಳಿಗಾಗಿಯೇ (96 ಕುಳಿ ಮರಾಠ, ಕುಣಬಿ ಮರಾಠ, ದೇಶಸ್ಥ ಮರಾಠ ಮತ್ತು ಕ್ಷತ್ರಿಯ ಮರಾಠ) ಪ್ರತ್ಯೇಕವಾಗಿ ಮೀಸಲಾದ ವೇದಿಕೆಯಾಗಿದೆ."
+          "a": "ಹೌದು, ಮರಾಠ ಲಗ್ನವು ಕರ್ನಾಟಕದ ಮರಾಠ ಕುಟುಂಬಗಳಿಗಾಗಿಯೇ (ಕ್ಷತ್ರಿಯ ಮರಾಠ, ಆರ್ಯ ಮರಾಠ ಮತ್ತು ಸಮಸ್ತ ಮರಾಠ ಒಳಪಂಗಡಗಳಿಗೆ) ಪ್ರತ್ಯೇಕವಾಗಿ ಮೀಸಲಾದ ವೇದಿಕೆಯಾಗಿದೆ."
         },
         {
           "q": "ಇಂದು ಪೂರ್ವ-ನೋಂದಾಯಿಸಲು ಯಾವುದೇ ಶುಲ್ಕವಿದೆಯೇ?",
-          "a": "ಇಲ್ಲ, ಪೂರ್ವ ನೋಂದಣಿ 100% ಉಚಿತವಾಗಿದೆ. ನೋಂದಾಯಿಸಿಕೊಳ್ಳುವ ಮೊದಲ 5,000 ಕುಟುಂಬಗಳಿಗೆ ₹4,999 ಮೌಲ್ಯದ VIP ಸದಸ್ಯತ್ವ ಸಂಪೂರ್ಣ ಉಚಿತವಾಗಿ ಲಭ್ಯವಾಗುತ್ತದೆ."
+          "a": "ಇಲ್ಲ, ಕರ್ನಾಟಕದ ಸಮಸ್ತ ಮರಾಠ ಕುಟುಂಬಗಳಿಗೆ ಪೂರ್ವ ನೋಂದಣಿ 100% ಸಂಪೂರ್ಣ ಉಚಿತವಾಗಿದೆ."
         },
         {
           "q": "ಪೋಷಕರು ಅಥವಾ ಕುಟುಂಬದ ಸದಸ್ಯರು ಅಭ್ಯರ್ಥಿಯ ಪರವಾಗಿ ನೋಂದಾಯಿಸಬಹುದೇ?",
@@ -564,8 +560,8 @@ export const translations = {
           "a": "ನಮ್ಮ ತಂತ್ರಜ್ಞಾನವು ಸಾಂಪ್ರದಾಯಿಕ ದೇವಕ ಕುಲಗಳು ಮತ್ತು ಸಗೋತ್ರ ನಿಷೇಧ ನಿಯಮಗಳನ್ನು ಗೌರವಿಸಿ ಸಾಂಸ್ಕೃತಿಕವಾಗಿ ಸೂಕ್ತವಾದ ಸಂಬಂಧಗಳನ್ನು ಶಿಫಾರಸು ಮಾಡುತ್ತದೆ."
         },
         {
-          "q": "₹4,999 ಮೌಲ್ಯದ ಉಚಿತ VIP ಸದಸ್ಯತ್ವದಲ್ಲಿ ಏನೇನು ಸೌಲಭ್ಯಗಳಿವೆ?",
-          "a": "ನೇರ ವಾಟ್ಸಾಪ್ ಸಂಪರ್ಕ, ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಅನ್‌ಲಾಕ್, 36 ಗುಣಗಳ ವೈದಿಕ ಕುಂಡಲಿ ಮಿಲನ ಮತ್ತು ಶಿಫಾರಸುಗಳಲ್ಲಿ ಪ್ರಮುಖ ಆದ್ಯತೆ ಇದರಲ್ಲಿ ಒಳಗೊಂಡಿದೆ."
+          "q": "ಪೂರ್ವ ನೋಂದಣಿಯಲ್ಲಿ ಏನೇನು ಸೌಲಭ್ಯಗಳಿವೆ?",
+          "a": "ಪೂರ್ವ-ನೋಂದಾಯಿತ ಸದಸ್ಯರು ಆದ್ಯತೆಯ ಪ್ರೊಫೈಲ್ ಪರಿಶೀಲನೆ, ಲಾಂಚ್ ಆದ ತಕ್ಷಣ ನೇರ ಕುಟುಂಬ ಸಂಪರ್ಕ ಮತ್ತು ನಮ್ಮ ತಂಡದಿಂದ ವೈಯಕ್ತಿಕ ಮಾರ್ಗದರ್ಶನವನ್ನು ಪಡೆಯುತ್ತಾರೆ."
         },
         {
           "q": "ನೋಂದಣಿಯ ನಂತರ ಫೋಟೋ ಅಥವಾ ಜಾತಕ ವಿವರಗಳನ್ನು ನವೀಕರಿಸಬಹುದೇ?",
@@ -578,7 +574,7 @@ export const translations = {
       ]
     },
     "footer": {
-      "tagline": "ಕರ್ನಾಟಕ ಮತ್ತು ಮಹಾರಾಷ್ಟ್ರದ ಪ್ರಮುಖ ಮರಾಠ ಮ್ಯಾಟ್ರಿಮೋನಿಯಲ್ ನೆಟ್‌ವರ್ಕ್",
+      "tagline": "🚩 ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ • Jai Bhavani, Jai Shivaji",
       "copyright": "ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ • ಮರಾಠ ಲಗ್ನ",
       "contactHeading": "24/7 ಸಹಾಯವಾಣಿ ಬೆಂಬಲ",
       "linksHeading": "ಪ್ರಮುಖ ಲಿಂಕ್‌ಗಳು",

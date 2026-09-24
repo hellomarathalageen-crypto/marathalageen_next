@@ -26,7 +26,7 @@ const structuredData = {
     {
       "@type": "Organization",
       "@id": "https://marathalageen.com/#organization",
-      "name": "Maratha Matrimony (मराठा लागीन)",
+      "name": "Maratha Matrimony (ಮರಾಠ ಲಗ್ನ)",
       "alternateName": [
         "Maratha Lageen",
         "Maratha Matrimony Karnataka",
@@ -40,7 +40,7 @@ const structuredData = {
         "caption": "Maratha Matrimony Logo"
       },
       "image": "https://marathalageen.com/hero.webp",
-      "description": "Karnataka & Maharashtra premier Maratha Matrimony platform for 96 Kuli Maratha, Kunbi Maratha, Deshastha Maratha, and Kshatriya Maratha families.",
+      "description": "Karnataka premier Maratha Matrimony platform for 96 Kuli Maratha, Kunbi Maratha, Deshastha Maratha, and Kshatriya Maratha families.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Bengaluru",
@@ -88,8 +88,7 @@ const structuredData = {
       },
       "areaServed": [
         { "@type": "State", "name": "Karnataka" },
-        { "@type": "State", "name": "Maharashtra" },
-        { "@type": "Country", "name": "India" }
+                { "@type": "Country", "name": "India" }
       ],
       "offers": {
         "@type": "Offer",
@@ -187,7 +186,7 @@ export const metadata: Metadata = {
     ],
   },
   title: {
-    default: "Maratha Matrimony (मराठा लागीन) | Karnataka #1 Trusted Community Matchmaking",
+    default: "Maratha Matrimony (ಮರಾಠ ಲಗ್ನ) | Karnataka #1 Trusted Community Matchmaking",
     template: "%s | Maratha Matrimony",
   },
   description: "🚩 ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ! Karnataka premier Maratha Matrimony platform. Connect with 96 Kuli Maratha, Kunbi, Deshastha brides & grooms with authentic Devak, Gotra & Kundali matching. Claim ₹4,999 Free VIP access.",
@@ -213,8 +212,7 @@ export const metadata: Metadata = {
     canonical: "https://marathalageen.com",
     languages: {
       "en-IN": "https://marathalageen.com",
-      "mr-IN": "https://marathalageen.com",
-      "kn-IN": "https://marathalageen.com",
+            "kn-IN": "https://marathalageen.com",
     },
   },
   formatDetection: {
@@ -223,7 +221,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Maratha Matrimony (मराठा लागीन) | Karnataka #1 Trusted Community Matchmaking",
+    title: "Maratha Matrimony (ಮರಾಠ ಲಗ್ನ) | Karnataka #1 Trusted Community Matchmaking",
     description: "🚩 ಜೈ ಭವಾನಿ, ಜೈ ಶಿವಾಜಿ! Join Karnataka exclusive Maratha Matrimony network. Claim ₹4,999 VIP Premium completely Free during pre-registration.",
     url: "https://marathalageen.com",
     siteName: "Maratha Matrimony",
@@ -240,7 +238,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Maratha Matrimony (मराठा लागीन) | Karnataka",
+    title: "Maratha Matrimony (ಮರಾಠ ಲಗ್ನ) | Karnataka",
     description: "Karnataka #1 Exclusive Maratha Matrimony platform. Claim ₹4,999 VIP Free Premium.",
     images: ["/hero.webp"],
   },

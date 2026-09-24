@@ -45,7 +45,7 @@ export default function PreRegisterPage() {
     registeringFor: "Self",
     fullName: "",
     surname: "",
-    caste: "96 Kuli Maratha",
+    caste: "Kshatriya Maratha",
     gender: "",
     mobile: "",
     whatsapp: "",
@@ -531,7 +531,7 @@ export default function PreRegisterPage() {
                   </button>
                   <p className="text-base sm:text-lg font-bold drop-shadow-md">Watch Cultural Wedding Showcase</p>
                   <p className="text-xs sm:text-sm text-pink-200 mt-1 font-medium flex items-center gap-2">
-                    <span>96 Kuli Traditions</span> • <span>Sakharpuda</span> • <span>Mangalashtak</span> • <span>Saptapadi</span>
+                    <span>Kshatriya Maratha Culture</span> • <span>Sakharpuda</span> • <span>Mangalashtak</span> • <span>Saptapadi</span>
                   </p>
                 </div>
               ) : (
@@ -556,10 +556,10 @@ export default function PreRegisterPage() {
 
               <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
                 <span className="bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full text-[11px] font-semibold text-white/90 border border-white/20">
-                  🚩 Authentic 96 Kuli Culture
+                  {t.video.culturePill}
                 </span>
                 <span className="bg-[#DB1866]/80 backdrop-blur-md px-3 py-1.5 rounded-full text-[11px] font-bold text-white shadow-xs">
-                  Karnataka Samaj Exclusive
+                  {t.video.samajPill}
                 </span>
               </div>
             </div>
@@ -928,7 +928,7 @@ export default function PreRegisterPage() {
                               </div>
 
                               <div className="space-y-1.5">
-                                <Label className="text-xs font-bold text-[#2A3773]">Family Surname (Annav / आडनाव) *</Label>
+                                <Label className="text-xs font-bold text-[#2A3773]">{t.preregister.surnameLabel}</Label>
                                 <Input 
                                   name="surname" 
                                   value={formData.surname} 
@@ -948,11 +948,10 @@ export default function PreRegisterPage() {
                                   className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
                                   required
                                 >
-                                  <option value="96 Kuli Maratha">96 Kuli Maratha (९६ कुळी मराठा)</option>
-                                  <option value="Kunbi Maratha">Kunbi Maratha (कुणबी मराठा)</option>
-                                  <option value="Deshastha Maratha">Deshastha Maratha (देशस्थ मराठा)</option>
-                                  <option value="Kshatriya Maratha">Kshatriya Maratha (क्षत्रिय मराठा)</option>
-                                  <option value="Maratha (All / Other)">Maratha (All / Other)</option>
+                                  <option value="Kshatriya Maratha">Kshatriya Maratha (ಕ್ಷತ್ರಿಯ ಮರಾಠ)</option>
+                                  <option value="Maratha">Maratha (ಮರಾಠ)</option>
+                                  <option value="Arya Maratha">Arya Maratha (ಆರ್ಯ ಮರಾಠ)</option>
+                                  <option value="Maratha (All / Other)">Maratha (All / Other) (ಮರಾಠ - ಇತರ / ಎಲ್ಲಾ)</option>
                                 </select>
                               </div>
                               
@@ -1137,7 +1136,7 @@ export default function PreRegisterPage() {
                               </div>
 
                               <div className="space-y-1.5">
-                                <Label className="text-xs font-bold text-[#2A3773]">Rashi / Moon Sign (रास / राशी)</Label>
+                                <Label className="text-xs font-bold text-[#2A3773]">Rashi / Moon Sign (ರಾಶಿ)</Label>
                                 <select 
                                   name="rashi" 
                                   value={formData.rashi} 
@@ -1145,24 +1144,24 @@ export default function PreRegisterPage() {
                                   className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
                                 >
                                   <option value="">Select Rashi (12 Rashis)</option>
-                                  <option value="Mesha">1. Mesha / Aries (मेष)</option>
-                                  <option value="Vrishabha">2. Vrishabha / Taurus (वृषभ)</option>
-                                  <option value="Mithuna">3. Mithuna / Gemini (मिथुन)</option>
-                                  <option value="Karka">4. Karka / Cancer (कर्क)</option>
-                                  <option value="Simha">5. Simha / Leo (सिंह)</option>
-                                  <option value="Kanya">6. Kanya / Virgo (कन्या)</option>
-                                  <option value="Tula">7. Tula / Libra (तूळ)</option>
-                                  <option value="Vrishchika">8. Vrishchika / Scorpio (वृश्चिक)</option>
-                                  <option value="Dhanu">9. Dhanu / Sagittarius (धनु)</option>
-                                  <option value="Makara">10. Makara / Capricorn (मकर)</option>
-                                  <option value="Kumbha">11. Kumbha / Aquarius (कुंभ)</option>
-                                  <option value="Meena">12. Meena / Pisces (मीन)</option>
+                                  <option value="Mesha">1. Mesha / Aries (ಮೇಷ)</option>
+                                  <option value="Vrishabha">2. Vrishabha / Taurus (ವೃಷಭ)</option>
+                                  <option value="Mithuna">3. Mithuna / Gemini (ಮಿಥುನ)</option>
+                                  <option value="Karka">4. Karka / Cancer (ಕರ್ಕಾಟಕ)</option>
+                                  <option value="Simha">5. Simha / Leo (ಸಿಂಹ)</option>
+                                  <option value="Kanya">6. Kanya / Virgo (ಕನ್ಯಾ)</option>
+                                  <option value="Tula">7. Tula / Libra (ತುಲಾ)</option>
+                                  <option value="Vrishchika">8. Vrishchika / Scorpio (ವೃಶ್ಚಿಕ)</option>
+                                  <option value="Dhanu">9. Dhanu / Sagittarius (ಧನು)</option>
+                                  <option value="Makara">10. Makara / Capricorn (ಮಕರ)</option>
+                                  <option value="Kumbha">11. Kumbha / Aquarius (ಕುಂಭ)</option>
+                                  <option value="Meena">12. Meena / Pisces (ಮೀನ)</option>
                                   <option value="Don't Know / Not Sure">Don't Know / Not Sure</option>
                                 </select>
                               </div>
 
                               <div className="space-y-1.5">
-                                <Label className="text-xs font-bold text-[#2A3773]">Nakshatra / Birth Star (नक्षत्र)</Label>
+                                <Label className="text-xs font-bold text-[#2A3773]">Nakshatra / Birth Star (ನಕ್ಷತ್ರ)</Label>
                                 <select 
                                   name="nakshatra" 
                                   value={formData.nakshatra} 
@@ -1170,33 +1169,33 @@ export default function PreRegisterPage() {
                                   className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
                                 >
                                   <option value="">Select Nakshatra (All 27 Stars)</option>
-                                  <option value="Ashwini">1. Ashwini (अश्विनी)</option>
-                                  <option value="Bharani">2. Bharani (भरणी)</option>
-                                  <option value="Krittika">3. Krittika (कृत्तिका)</option>
-                                  <option value="Rohini">4. Rohini (रोहिणी)</option>
-                                  <option value="Mrigashira">5. Mrigashira (मृगशीर्ष)</option>
-                                  <option value="Ardra">6. Ardra (आर्द्रा)</option>
-                                  <option value="Punarvasu">7. Punarvasu (पुनर्वसु)</option>
-                                  <option value="Pushya">8. Pushya (पुष्य)</option>
-                                  <option value="Ashlesha">9. Ashlesha (आश्लेषा)</option>
-                                  <option value="Magha">10. Magha (मघा)</option>
-                                  <option value="Purva Phalguni">11. Purva Phalguni (पूर्वा फाल्गुनी)</option>
-                                  <option value="Uttara Phalguni">12. Uttara Phalguni (उत्तरा फाल्गुनी)</option>
-                                  <option value="Hasta">13. Hasta (हस्त)</option>
-                                  <option value="Chitra">14. Chitra (चित्रा)</option>
-                                  <option value="Swati">15. Swati (स्वाती)</option>
-                                  <option value="Vishakha">16. Vishakha (विशाखा)</option>
-                                  <option value="Anuradha">17. Anuradha (अनुराधा)</option>
-                                  <option value="Jyeshtha">18. Jyeshtha (ज्येष्ठा)</option>
-                                  <option value="Mula">19. Mula (मूळ)</option>
-                                  <option value="Purva Ashadha">20. Purva Ashadha (पूर्वाषाढा)</option>
-                                  <option value="Uttara Ashadha">21. Uttara Ashadha (उत्तराषाढा)</option>
-                                  <option value="Shravana">22. Shravana (श्रवण)</option>
-                                  <option value="Dhanishta">23. Dhanishta (धनिष्ठा)</option>
-                                  <option value="Shatabhisha">24. Shatabhisha (शतभिषा)</option>
-                                  <option value="Purva Bhadrapada">25. Purva Bhadrapada (पूर्वा भाद्रपदा)</option>
-                                  <option value="Uttara Bhadrapada">26. Uttara Bhadrapada (उत्तरा भाद्रपदा)</option>
-                                  <option value="Revati">27. Revati (रेवती)</option>
+                                  <option value="Ashwini">1. Ashwini (ಅಶ್ವಿನಿ)</option>
+                                  <option value="Bharani">2. Bharani (ಭರಣಿ)</option>
+                                  <option value="Krittika">3. Krittika (ಕೃತಿಕಾ)</option>
+                                  <option value="Rohini">4. Rohini (ರೋಹಿಣಿ)</option>
+                                  <option value="Mrigashira">5. Mrigashira (ಮೃಗಶಿರ)</option>
+                                  <option value="Ardra">6. Ardra (ಆರ್ದ್ರಾ)</option>
+                                  <option value="Punarvasu">7. Punarvasu (ಪುನರ್ವಸು)</option>
+                                  <option value="Pushya">8. Pushya (ಪುಷ್ಯ)</option>
+                                  <option value="Ashlesha">9. Ashlesha (ಆಶ್ಲೇಷಾ)</option>
+                                  <option value="Magha">10. Magha (ಮಘಾ)</option>
+                                  <option value="Purva Phalguni">11. Purva Phalguni (ಪೂರ್ವ ಫಲ್ಗುಣಿ)</option>
+                                  <option value="Uttara Phalguni">12. Uttara Phalguni (ಉತ್ತರ ಫಲ್ಗುಣಿ)</option>
+                                  <option value="Hasta">13. Hasta (ಹಸ್ತ)</option>
+                                  <option value="Chitra">14. Chitra (ಚಿತ್ರಾ)</option>
+                                  <option value="Swati">15. Swati (ಸ್ವಾತಿ)</option>
+                                  <option value="Vishakha">16. Vishakha (ವಿಶಾಖಾ)</option>
+                                  <option value="Anuradha">17. Anuradha (ಅನುರಾಧಾ)</option>
+                                  <option value="Jyeshtha">18. Jyeshtha (ಜ್ಯೇಷ್ಠಾ)</option>
+                                  <option value="Mula">19. Mula (ಮೂಲ)</option>
+                                  <option value="Purva Ashadha">20. Purva Ashadha (ಪೂರ್ವಾಷಾಢಾ)</option>
+                                  <option value="Uttara Ashadha">21. Uttara Ashadha (ಉತ್ತರಾಷಾಢಾ)</option>
+                                  <option value="Shravana">22. Shravana (ಶ್ರವಣ)</option>
+                                  <option value="Dhanishta">23. Dhanishta (ಧನಿಷ್ಠಾ)</option>
+                                  <option value="Shatabhisha">24. Shatabhisha (ಶತಭಿಷಾ)</option>
+                                  <option value="Purva Bhadrapada">25. Purva Bhadrapada (ಪೂರ್ವ ಭಾದ್ರಪದ)</option>
+                                  <option value="Uttara Bhadrapada">26. Uttara Bhadrapada (ಉತ್ತರ ಭಾದ್ರಪದ)</option>
+                                  <option value="Revati">27. Revati (ರೇವತಿ)</option>
                                   <option value="Don't Know / Not Sure">Don't Know / Not Sure</option>
                                 </select>
                               </div>
@@ -1369,10 +1368,11 @@ export default function PreRegisterPage() {
                                   onChange={handleChange} 
                                   className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
                                 >
-                                  <option value="Any">Any Maratha Sub-Community</option>
-                                  <option value="96 Kuli Maratha">96 Kuli Maratha</option>
-                                  <option value="Deshastha">Deshastha Maratha</option>
-                                  <option value="Kunbi">Kunbi Maratha</option>
+                                  <option value="Any">Any Maratha (ಎಲ್ಲಾ ಮರಾಠ)</option>
+                                  <option value="Kshatriya Maratha">Kshatriya Maratha (ಕ್ಷತ್ರಿಯ ಮರಾಠ)</option>
+                                  <option value="Maratha">Maratha (ಮರಾಠ)</option>
+                                  <option value="Arya Maratha">Arya Maratha (ಆರ್ಯ ಮರಾಠ)</option>
+                                  <option value="Maratha (All / Other)">Maratha (All / Other) (ಮರಾಠ - ಇತರ / ಎಲ್ಲಾ)</option>
                                 </select>
                               </div>
 
@@ -1902,15 +1902,7 @@ export default function PreRegisterPage() {
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-gray-100 flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold shrink-0 mt-0.5">
-                      <MapPin className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-[#2A3773]">{t.contactSection.presenceTitle}</h4>
-                      <p className="text-xs text-gray-500 font-medium mt-0.5">{t.contactSection.locations}</p>
-                    </div>
-                  </div>
+                  
                 </div>
 
               </div>

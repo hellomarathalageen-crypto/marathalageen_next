@@ -147,7 +147,7 @@ function generateMatrimonyEmailTemplate(payload: NotificationPayload): { subject
           <li>🌟 <strong>Direct WhatsApp Connects</strong> with verified Maratha families</li>
           <li>🛡️ <strong>100% Privacy Protection</strong> with photo & contact shields</li>
           <li>🔮 <strong>36 Gunas Vedic Kundali Milan</strong> with Devak & Gotra compatibility</li>
-          <li>👑 <strong>Priority Placement</strong> in match recommendations across Karnataka & Maharashtra</li>
+          <li>👑 <strong>Priority Placement</strong> in match recommendations across Karnataka</li>
         </ul>
         Our community relationship team will review your biodata and assist you in finding your destined life partner.
       `;
@@ -177,7 +177,7 @@ function generateMatrimonyEmailTemplate(payload: NotificationPayload): { subject
           <tr>
             <td align="center" style="background-color: #2A3773; padding: 30px 20px; border-bottom: 4px solid #DB1866;">
               <h2 style="color: #ffffff; margin: 0; font-size: 22px; letter-spacing: 0.5px;">🚩 Maratha Matrimony</h2>
-              <p style="color: #FADADF; margin: 6px 0 0 0; font-size: 13px;">Official Matrimonial Network for Karnataka & Maharashtra</p>
+              <p style="color: #FADADF; margin: 6px 0 0 0; font-size: 13px;">Official Matrimonial Network for Karnataka</p>
             </td>
           </tr>
 
@@ -211,7 +211,7 @@ function generateMatrimonyEmailTemplate(payload: NotificationPayload): { subject
           <tr>
             <td align="center" style="background-color: #FFF8FA; padding: 20px; border-top: 1px solid #FADADF; color: #6b7280; font-size: 12px;">
               © ${new Date().getFullYear()} Maratha Matrimony. All rights reserved.<br />
-              Belagavi • Pune • Kolhapur • Bengaluru
+              Belagavi • Bengaluru • Hubballi • Dharwad
             </td>
           </tr>
         </table>

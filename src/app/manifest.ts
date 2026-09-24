@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Maratha Lageen - Maratha Matrimony',
     short_name: 'MarathaLageen',
-    description: 'Karnataka & Maharashtra Maratha Community Matrimonial Network',
+    description: 'Karnataka Maratha Community Matrimonial Network',
     start_url: '/home',
     display: 'standalone',
     background_color: '#FFFDFB',
