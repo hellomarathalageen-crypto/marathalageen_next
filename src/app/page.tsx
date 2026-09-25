@@ -79,6 +79,7 @@ export default function PreRegisterPage() {
   const [formData, setFormData] = useState(initialFormState);
   const [priorityPass, setPriorityPass] = useState("ML-2026-VIP");
   const [emailNotice, setEmailNotice] = useState(false);
+  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [compressingPhoto, setCompressingPhoto] = useState(false);
@@ -193,11 +194,19 @@ export default function PreRegisterPage() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if (data?.priorityPass) {
-        setPriorityPass(data.priorityPass);
-      }
-      if (data?.emailSent) {
-        setEmailNotice(true);
+      if (data?.alreadyRegistered) {
+        setIsAlreadyRegistered(true);
+        if (data?.priorityPass) {
+          setPriorityPass(data.priorityPass);
+        }
+      } else {
+        setIsAlreadyRegistered(false);
+        if (data?.priorityPass) {
+          setPriorityPass(data.priorityPass);
+        }
+        if (data?.emailSent) {
+          setEmailNotice(true);
+        }
       }
     } catch (err) {
       console.warn("Pre-registration submission network fallback:", err);
@@ -211,6 +220,7 @@ export default function PreRegisterPage() {
     setFormData(initialFormState);
     setPhotoPreview(null);
     setIsSubmitted(false);
+    setIsAlreadyRegistered(false);
     setEmailNotice(false);
     setCurrentStep(1);
     try {
