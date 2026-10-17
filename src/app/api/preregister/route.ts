@@ -126,22 +126,64 @@ export async function POST(req: Request) {
     console.log(`Mobile: ${cleanMobile} | WhatsApp: ${cleanWhatsapp} | Email: ${email || "None"}`);
     console.log("--------------------------------------------------");
 
-    // ── 3. ATTEMPT EMAIL DISPATCH IF EMAIL PROVIDED ──
+    const candidateDisplayName = [fullName, surname].filter(Boolean).join(" ");
+    const leadMetadata = {
+      registeringFor,
+      fullName,
+      surname,
+      caste: caste || "Kshatriya Maratha",
+      gender: gender || "Not specified",
+      district: district || "Karnataka",
+      mobile: cleanMobile,
+      whatsapp: cleanWhatsapp,
+      email: email || "Not provided",
+      dob,
+      birthTime,
+      rashi,
+      nakshatra,
+      age,
+      height,
+      maritalStatus,
+      education,
+      profession,
+      annualIncome,
+      prefAgeMin,
+      prefAgeMax,
+      prefEducation,
+      prefSubCaste,
+      photoUploaded: Boolean(photoUrl),
+    };
+
+    // ── 3. DISPATCH INSTANT ALERT EMAIL TO ADMIN / CLIENT DESK ──
+    const adminAlertEmail = process.env.ADMIN_ALERT_EMAIL || "hello@marathalageen.com";
+    try {
+      await sendMatrimonyAlert({
+        type: "ADMIN_NEW_LEAD",
+        recipientEmail: adminAlertEmail,
+        recipientPhone: cleanMobile,
+        recipientName: candidateDisplayName,
+        customMessage: passNumber,
+        metadata: leadMetadata,
+      });
+    } catch (adminEmailErr) {
+      console.warn("Admin lead alert dispatch warning:", adminEmailErr);
+    }
+
+    // ── 4. DISPATCH VIP CONFIRMATION EMAIL TO CANDIDATE (IF EMAIL PROVIDED) ──
     let emailSent = false;
     if (email && email.includes("@")) {
       try {
-        const candidateDisplayName = [fullName, surname].filter(Boolean).join(" ");
-        const emailResult = await sendMatrimonyAlert({
+        const candidateResult = await sendMatrimonyAlert({
           type: "PRE_REGISTRATION_CONFIRMATION",
           recipientEmail: email,
           recipientPhone: cleanMobile,
           recipientName: candidateDisplayName,
           actorName: "Maratha Lageen Team",
-          customMessage: passNumber
+          customMessage: passNumber,
         });
-        emailSent = Boolean(emailResult.email);
-      } catch (emailErr) {
-        console.warn("Pre-registration email dispatch warning (non-blocking):", emailErr);
+        emailSent = Boolean(candidateResult.email);
+      } catch (candidateEmailErr) {
+        console.warn("Pre-registration candidate email dispatch warning:", candidateEmailErr);
       }
     }
 

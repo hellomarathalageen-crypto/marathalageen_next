@@ -18,7 +18,8 @@ import {
   UserX,
   FileText,
   RefreshCw,
-  Crown
+  Crown,
+  Download
 } from "lucide-react";
 
 export default function AdminDashboard() {
@@ -95,6 +96,40 @@ export default function AdminDashboard() {
             <ShieldAlert className="w-3.5 h-3.5" />
             <span>Verify Profiles</span>
           </Link>
+        </div>
+      </div>
+
+      {/* ── Pre-Registration Launch Spotlight Banner ── */}
+      <div className="bg-gradient-to-r from-[#1B2554] via-[#2A3773] to-[#121A3D] text-white p-6 sm:p-7 rounded-3xl shadow-xl relative overflow-hidden border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="space-y-2 text-center md:text-left z-10">
+          <div className="inline-flex items-center gap-2 bg-[#DB1866] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            <Crown className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+            <span>Vijayadashami Karnataka Launch (Oct 20th)</span>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+            Pre-Registration Registry & Candidate Leads
+          </h2>
+          <p className="text-xs sm:text-sm text-blue-200/90 max-w-xl">
+            Track incoming pre-registered Maratha candidates, access full family & astrological details, and export leads directly to Excel for matchmaking.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-3 shrink-0 z-10">
+          <Link
+            href="/admin/preregistrations"
+            className="flex items-center gap-2 bg-[#DB1866] hover:bg-[#B81456] text-white px-5 py-3 rounded-xl text-xs font-bold shadow-lg shadow-[#DB1866]/30 transition-all hover:scale-105"
+          >
+            <Crown className="w-4 h-4" />
+            <span>Manage Pre-Registrations ({stats.totalPreRegistrations || 0})</span>
+          </Link>
+          <a
+            href="/api/admin/preregistrations?format=csv"
+            target="_blank"
+            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-3 rounded-xl text-xs font-bold transition-all hover:scale-105"
+          >
+            <Download className="w-4 h-4 text-emerald-400" />
+            <span>Download Excel</span>
+          </a>
         </div>
       </div>
 

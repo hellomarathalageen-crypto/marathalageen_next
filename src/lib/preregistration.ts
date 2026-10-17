@@ -32,8 +32,34 @@ export interface PreRegistrationData {
   ip?: string;
 }
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const DATA_FILE = path.join(DATA_DIR, "preregistrations.json");
+// In-memory cache to ensure serverless instances maintain state
+let memoryCache: PreRegistrationData[] | null = null;
+
+// Determine best writable location (supports local dev + Vercel /tmp)
+function getDataFilePath(): string {
+  // 1. Try local data folder
+  const localDir = path.join(process.cwd(), "data");
+  const localFile = path.join(localDir, "preregistrations.json");
+
+  try {
+    if (!fs.existsSync(localDir)) {
+      fs.mkdirSync(localDir, { recursive: true });
+    }
+    fs.accessSync(localDir, fs.constants.W_OK);
+    return localFile;
+  } catch {
+    // 2. Fallback to /tmp which is always writable in serverless/AWS Lambda/Vercel
+    const tmpDir = path.join("/tmp", "maratha_data");
+    try {
+      if (!fs.existsSync(tmpDir)) {
+        fs.mkdirSync(tmpDir, { recursive: true });
+      }
+      return path.join(tmpDir, "preregistrations.json");
+    } catch {
+      return path.join("/tmp", "preregistrations.json");
+    }
+  }
+}
 
 export function normalizePhoneNumber(phone?: string | null): string {
   if (!phone) return "";
@@ -44,33 +70,85 @@ export function normalizePhoneNumber(phone?: string | null): string {
   return digits;
 }
 
-function ensureDataFile(): PreRegistrationData[] {
+function readDataFile(): PreRegistrationData[] {
+  if (memoryCache && memoryCache.length > 0) {
+    return memoryCache;
+  }
+
+  const filePath = getDataFilePath();
   try {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-    if (!fs.existsSync(DATA_FILE)) {
-      fs.writeFileSync(DATA_FILE, JSON.stringify([], null, 2), "utf8");
+    if (!fs.existsSync(filePath)) {
+      memoryCache = [];
       return [];
     }
-    const content = fs.readFileSync(DATA_FILE, "utf8");
-    if (!content.trim()) return [];
-    return JSON.parse(content) as PreRegistrationData[];
+    const content = fs.readFileSync(filePath, "utf8");
+    if (!content.trim()) {
+      memoryCache = [];
+      return [];
+    }
+    const parsed = JSON.parse(content) as PreRegistrationData[];
+    memoryCache = parsed;
+    return parsed;
   } catch (err) {
     console.error("Error reading preregistrations file:", err);
-    return [];
+    return memoryCache || [];
+  }
+}
+
+function writeDataFile(records: PreRegistrationData[]): boolean {
+  memoryCache = records;
+  const filePath = getDataFilePath();
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(records, null, 2), "utf8");
+    return true;
+  } catch (err) {
+    console.error("Error writing preregistrations file:", err);
+    return false;
   }
 }
 
 export function getAllPreRegistrations(): PreRegistrationData[] {
-  return ensureDataFile();
+  const records = readDataFile();
+  // Return sorted by newest first
+  return [...records].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+}
+
+export function getPreRegistrationStats() {
+  const records = getAllPreRegistrations();
+  const total = records.length;
+  
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0, 10);
+  const todayCount = records.filter(r => r.createdAt && r.createdAt.slice(0, 10) === todayStr).length;
+
+  const maleCount = records.filter(r => r.gender?.toLowerCase() === "male").length;
+  const femaleCount = records.filter(r => r.gender?.toLowerCase() === "female").length;
+
+  const districtCounts: Record<string, number> = {};
+  records.forEach(r => {
+    const dist = r.district || "Other";
+    districtCounts[dist] = (districtCounts[dist] || 0) + 1;
+  });
+
+  const topDistricts = Object.entries(districtCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([name, count]) => ({ name, count }));
+
+  return {
+    total,
+    todayCount,
+    maleCount,
+    femaleCount,
+    topDistricts
+  };
 }
 
 export function findPreRegistrationByPhone(phone?: string | null): PreRegistrationData | null {
   const norm = normalizePhoneNumber(phone);
   if (!norm || norm.length < 10) return null;
 
-  const records = ensureDataFile();
+  const records = readDataFile();
   return (
     records.find((r) => {
       const rMob = normalizePhoneNumber(r.mobile);
@@ -96,7 +174,7 @@ export function savePreRegistration(
     };
   }
 
-  const records = ensureDataFile();
+  const records = readDataFile();
   const passNumber =
     data.priorityPass ||
     `ML-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -109,18 +187,84 @@ export function savePreRegistration(
     createdAt: new Date().toISOString(),
   };
 
-  records.push(newRecord);
+  records.unshift(newRecord);
+  writeDataFile(records);
 
-  try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(records, null, 2), "utf8");
-    console.log(`✅ Saved new pre-registration for ${newRecord.fullName} (${newRecord.mobile}) with pass ${passNumber}`);
-  } catch (writeErr) {
-    console.error("Error saving preregistration to file:", writeErr);
-  }
+  console.log(`✅ Saved new pre-registration for ${newRecord.fullName} (${newRecord.mobile}) with pass ${passNumber}`);
 
   return {
     success: true,
     alreadyRegistered: false,
     record: newRecord,
   };
+}
+
+// Convert all registrations into CSV string with UTF-8 BOM
+export function generatePreRegistrationsCsv(records?: PreRegistrationData[]): string {
+  const data = records || getAllPreRegistrations();
+
+  const headers = [
+    "VIP Pass ID",
+    "Registration Date",
+    "Candidate Name",
+    "Surname",
+    "Gender",
+    "Caste / Sub-Caste",
+    "Mobile Number",
+    "WhatsApp Number",
+    "Email",
+    "District",
+    "Registered By",
+    "Age",
+    "Date of Birth",
+    "Birth Time",
+    "Rashi",
+    "Nakshatra",
+    "Height",
+    "Marital Status",
+    "Education",
+    "Profession",
+    "Annual Income",
+    "Partner Sub-Caste Pref",
+    "Partner Age Pref",
+    "Partner Education Pref",
+    "Photo Uploaded"
+  ];
+
+  const escapeCsv = (val?: any) => {
+    if (val === null || val === undefined) return '""';
+    const str = String(val).replace(/"/g, '""');
+    return `"${str}"`;
+  };
+
+  const rows = data.map((r) => [
+    escapeCsv(r.priorityPass),
+    escapeCsv(r.createdAt ? new Date(r.createdAt).toLocaleString("en-IN") : ""),
+    escapeCsv(r.fullName),
+    escapeCsv(r.surname),
+    escapeCsv(r.gender),
+    escapeCsv(r.caste),
+    escapeCsv(r.mobile),
+    escapeCsv(r.whatsapp),
+    escapeCsv(r.email),
+    escapeCsv(r.district),
+    escapeCsv(r.registeringFor),
+    escapeCsv(r.age),
+    escapeCsv(r.dob),
+    escapeCsv(r.birthTime),
+    escapeCsv(r.rashi),
+    escapeCsv(r.nakshatra),
+    escapeCsv(r.height),
+    escapeCsv(r.maritalStatus),
+    escapeCsv(r.education),
+    escapeCsv(r.profession),
+    escapeCsv(r.annualIncome),
+    escapeCsv(r.prefSubCaste),
+    escapeCsv(r.prefAgeMin && r.prefAgeMax ? `${r.prefAgeMin} - ${r.prefAgeMax} Yrs` : ""),
+    escapeCsv(r.prefEducation),
+    escapeCsv(r.photoUrl ? "YES" : "NO")
+  ]);
+
+  // UTF-8 BOM: \uFEFF ensures Excel and Numbers display Kannada & special characters perfectly
+  return "\uFEFF" + [headers.join(","), ...rows.map((row) => row.join(","))].join("\r\n");
 }

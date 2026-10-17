@@ -10,7 +10,8 @@ import {
   Calendar,
   Sparkles,
   BookOpen,
-  RefreshCw
+  RefreshCw,
+  Crown
 } from "lucide-react";
 
 export default function AdminExportPage() {
@@ -132,6 +133,34 @@ export default function AdminExportPage() {
 
       {/* Export Cards Matrix */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Card 0: Pre-Registration Launch Leads */}
+        <div className="md:col-span-2 bg-gradient-to-r from-[#1B2554] via-[#2A3773] to-[#121A3D] text-white p-6 sm:p-7 rounded-3xl shadow-xl relative overflow-hidden border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-left z-10">
+            <div className="inline-flex items-center gap-1.5 bg-[#DB1866] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              <Crown className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+              <span>Vijayadashami Karnataka Launch</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black text-white">
+              Pre-Registration Leads Export (Excel / CSV)
+            </h2>
+            <p className="text-xs sm:text-sm text-blue-200/90 max-w-xl">
+              Export all pre-registered candidates with complete phone numbers, WhatsApp, district, caste, age, education, and partner preferences with UTF-8 BOM encoding.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0 z-10">
+            <a
+              href="/api/admin/preregistrations?format=csv"
+              target="_blank"
+              className="flex items-center gap-2 bg-[#DB1866] hover:bg-[#B81456] text-white px-6 py-3.5 rounded-xl text-xs font-bold shadow-lg shadow-[#DB1866]/30 transition-all hover:scale-105 cursor-pointer"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download Live Pre-Registration CSV</span>
+            </a>
+          </div>
+        </div>
+
+
         
         {/* Card 1: Member Profiles Export */}
         <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xs space-y-4">

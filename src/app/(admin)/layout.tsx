@@ -26,6 +26,7 @@ import {
 
 const sidebarLinks = [
   { href: "/admin/dashboard", label: "Dashboard Overview", icon: LayoutDashboard },
+  { href: "/admin/preregistrations", label: "Pre-Registrations (Launch)", icon: Crown },
   { href: "/admin/users", label: "User Management", icon: Users },
   { href: "/admin/approvals", label: "Profile Approvals", icon: ShieldCheck },
   { href: "/admin/matchmaker", label: "Assisted Matchmaker", icon: Sparkles },
