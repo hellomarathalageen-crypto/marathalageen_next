@@ -73,7 +73,7 @@ export default async function DashboardPage() {
 
   if (!currentUser?.profile) {
     currentUser = {
-      id: session.user.id || "demo-user",
+      id: session.user.id || "member",
       name: session.user.name || "Maratha Member",
       email: session.user.email,
       role: (session.user as any)?.role || "USER",
@@ -85,7 +85,7 @@ export default async function DashboardPage() {
         community: "Kshatriya Maratha"
       }
     };
-    totalMatchingCount = 12;
+    totalMatchingCount = matches.length;
   }
 
   const formattedMatches = matches.map(m => {

@@ -52,8 +52,8 @@ export async function GET() {
     ]);
 
     // Calculate revenue
-    const totalRevenue = subscriptions.reduce((sum, s) => sum + (s.amount || 0), 0) || 48900;
-    const premiumUsersCount = subscriptions.filter(s => s.plan !== "FREE").length || 18;
+    const totalRevenue = subscriptions.reduce((sum, s) => sum + (s.amount || 0), 0);
+    const premiumUsersCount = subscriptions.filter(s => s.plan !== "FREE").length;
 
     const preregStats = getPreRegistrationStats();
     const allPreReg = getAllPreRegistrations();
@@ -96,16 +96,16 @@ export async function GET() {
         success: true,
         preregStats,
         stats: {
-          totalUsers: 1420,
-          totalProfiles: 1380,
-          verifiedProfiles: 1120,
-          unverifiedProfiles: 260,
-          maleProfiles: 780,
-          femaleProfiles: 600,
-          totalInterests: 450,
-          totalShortlists: 320,
-          premiumUsersCount: 85,
-          totalRevenue: 48900,
+          totalUsers: preregStats.total,
+          totalProfiles: preregStats.total,
+          verifiedProfiles: preregStats.total,
+          unverifiedProfiles: 0,
+          maleProfiles: preregStats.maleCount,
+          femaleProfiles: preregStats.femaleCount,
+          totalInterests: 0,
+          totalShortlists: 0,
+          premiumUsersCount: 0,
+          totalRevenue: 0,
           totalPreRegistrations: preregStats.total,
           todayPreRegistrations: preregStats.todayCount
         },

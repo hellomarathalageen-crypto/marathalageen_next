@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { 
-  Send, Heart, Smile, Image as ImageIcon, Phone, Video, 
+  Send, Heart, MessageSquare, Smile, Image as ImageIcon, Phone, Video, 
   Info, Check, CheckCheck, ChevronLeft, Search, Sparkles, 
   ShieldCheck, Crown, Lock, X, Mic, Calendar, ExternalLink
 } from "lucide-react";
@@ -86,62 +86,8 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
   const currentUserId = (session?.user as any)?.id || "current_user";
 
   // Conversations Directory
-  const [contacts, setContacts] = useState<ChatContact[]>([
-    {
-      id: "cm1-priya",
-      userId: "f1666400-0363-4a96-9ff8-8d3cc226c0c9",
-      name: "Priya Patil",
-      photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400",
-      verified: true,
-      community: "96 Kuli Maratha",
-      location: "Pune, Maharashtra",
-      profession: "Senior Software Engineer",
-      education: "B.Tech in Computer Science",
-      gotra: "Kashyap",
-      devak: "Panchpallav",
-      online: true,
-      lastMessage: "🚩 Pranam! Our family reviewed your profile.",
-      lastMessageTime: "2m",
-      unreadCount: 1,
-    },
-    {
-      id: "cm2-sneha",
-      userId: "user_sneha_deshmukh",
-      name: "Sneha Deshmukh",
-      photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400",
-      verified: true,
-      community: "96 Kuli Maratha",
-      location: "Belagavi, Karnataka",
-      profession: "Clinical Psychologist",
-      education: "M.Sc Psychology",
-      gotra: "Bharadwaj",
-      devak: "Kalamb",
-      online: true,
-      lastMessage: "Looking forward to speaking with elders.",
-      lastMessageTime: "1h",
-      unreadCount: 0,
-    },
-    {
-      id: "cm3-pooja",
-      userId: "user_pooja_jadhav",
-      name: "Pooja Jadhav",
-      photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400",
-      verified: true,
-      community: "96 Kuli Maratha",
-      location: "Bengaluru, Karnataka",
-      profession: "Financial Analyst (Goldman Sachs)",
-      education: "MBA Finance",
-      gotra: "Vasishtha",
-      devak: "Suryakant",
-      online: false,
-      lastSeen: "Active 3h ago",
-      lastMessage: "Sent horoscope for 36 Gunas check.",
-      lastMessageTime: "Yesterday",
-      unreadCount: 0,
-    },
-  ]);
-
-  const [activeContactId, setActiveContactId] = useState<string>(initialUserId || "f1666400-0363-4a96-9ff8-8d3cc226c0c9");
+  const [contacts, setContacts] = useState<ChatContact[]>([]);
+  const [activeContactId, setActiveContactId] = useState<string>(initialUserId || "");
   const [messages, setMessages] = useState<MessageItem[]>([]);
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -157,7 +103,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Active Contact Record
-  const activeContact = contacts.find(c => c.userId === activeContactId || c.id === activeContactId) || contacts[0];
+  const activeContact = contacts.find(c => c.userId === activeContactId || c.id === activeContactId) || (contacts.length > 0 ? contacts[0] : null);
 
   // Load Accepted Matches from API on mount
   useEffect(() => {
@@ -214,42 +160,14 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
   // Load Messages for Active Contact
   useEffect(() => {
     if (!activeContact) return;
+    const currentActive = activeContact;
 
-    // Load initial seed messages for realistic Instagram DM feel
-    const seedMessages: MessageItem[] = [
-      {
-        id: "m-1",
-        senderId: activeContact.userId,
-        receiverId: currentUserId,
-        content: `🚩 Pranam! Our family was very happy to see your profile on Maratha Matrimony.`,
-        createdAt: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
-        isRead: true,
-      },
-      {
-        id: "m-2",
-        senderId: currentUserId,
-        receiverId: activeContact.userId,
-        content: `Namaskar ${activeContact.name}! Thank you so much. My parents also reviewed your details and loved your family background.`,
-        createdAt: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
-        isRead: true,
-        isLiked: true,
-      },
-      {
-        id: "m-3",
-        senderId: activeContact.userId,
-        receiverId: currentUserId,
-        content: `We belong to the ${activeContact.community} (${activeContact.gotra} Gotra, ${activeContact.devak} Devak). Would you be open to exchanging Kundali charts this week?`,
-        createdAt: new Date(Date.now() - 1000 * 60 * 2).toISOString(),
-        isRead: true,
-      }
-    ];
-
-    setMessages(seedMessages);
+    setMessages([]);
 
     // Fetch live messages and live typing status every 1.5 seconds
     async function loadLiveMessages() {
       try {
-        const res = await fetch(`/api/chat?userId=${activeContact.userId}`);
+        const res = await fetch(`/api/chat?userId=${currentActive.userId}`);
         if (res.ok) {
           const data = await res.json();
           if (data.messages && data.messages.length > 0) {
@@ -266,7 +184,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
         }
 
         // Live check: is the other person currently typing?
-        const typingRes = await fetch(`/api/chat/typing?userId=${activeContact.userId}`);
+        const typingRes = await fetch(`/api/chat/typing?userId=${currentActive.userId}`);
         if (typingRes.ok) {
           const typingData = await typingRes.json();
           setIsTyping(Boolean(typingData.isTyping));
@@ -462,7 +380,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
           <div className="flex-1 min-h-0 overflow-y-auto divide-y divide-gray-50">
             {filteredContacts.length > 0 ? (
               filteredContacts.map((contact) => {
-                const isSelected = activeContact.userId === contact.userId;
+                const isSelected = activeContact?.userId === contact.userId;
                 return (
                   <div
                     key={contact.userId}
@@ -545,7 +463,24 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
         <div className={`flex-1 min-w-0 min-h-0 h-full flex flex-col bg-white overflow-hidden ${
           !activeContactId ? "hidden md:flex" : "flex"
         }`}>
-          
+          {!activeContact ? (
+            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-[#FAFBFD]">
+              <div className="w-16 h-16 rounded-3xl bg-[#FFF1F5] flex items-center justify-center text-[#DB1866] mb-4 shadow-xs">
+                <MessageSquare className="w-8 h-8" />
+              </div>
+              <h3 className="text-lg font-bold text-[#1B2559]">No Active Conversations Yet</h3>
+              <p className="text-xs text-gray-500 mt-1.5 max-w-sm">
+                Connect with verified Karnataka Maratha matches. Once mutual interest is accepted, your private end-to-end conversation room will open here.
+              </p>
+              <Link
+                href="/matches"
+                className="mt-6 px-6 py-2.5 rounded-full bg-[#DB1866] text-white text-xs font-bold hover:bg-[#B81456] transition-all shadow-md shadow-[#DB1866]/20"
+              >
+                Explore Matches
+              </Link>
+            </div>
+          ) : (
+            <>
           {/* Top Instagram Action Bar */}
           <div className="h-14 sm:h-16 px-3 sm:px-4 md:px-6 border-b border-gray-100 flex items-center justify-between shrink-0 bg-white/95 backdrop-blur-md z-10 w-full min-w-0">
             <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1 mr-2">
@@ -822,11 +757,13 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
               )}
             </form>
           </div>
+            </>
+          )}
 
         </div>
 
         {/* ════════════════ RIGHT SLIDE-OUT: PROFILE & KUNDALI PREVIEW ════════════════ */}
-        {showInfoDrawer && (
+        {showInfoDrawer && activeContact && (
           <div className="w-full md:w-80 lg:w-96 border-l border-gray-100 bg-[#FFFDFB] flex flex-col absolute md:static inset-y-0 right-0 z-30 shadow-2xl md:shadow-none animate-in slide-in-from-right-4">
             <div className="h-16 px-5 border-b border-gray-100 flex items-center justify-between shrink-0 bg-white">
               <h3 className="font-extrabold text-sm text-[#1B2559]">Candidate Biodata</h3>
@@ -915,7 +852,7 @@ export default function InstagramChatRoom({ initialUserId }: { initialUserId?: s
       </div>
 
       {/* ── Call / Video Modal ── */}
-      {showCallModal && (
+      {showCallModal && activeContact && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-6 max-w-md w-full text-center space-y-4 shadow-2xl border border-gray-100 animate-in zoom-in-95">
             <div className="w-16 h-16 rounded-full bg-[#FFF1F5] text-[#DB1866] flex items-center justify-center mx-auto shadow-sm">

@@ -36,7 +36,7 @@ export default function AdminPaymentsPage() {
     fetchSubscriptions();
   }, []);
 
-  const totalRevenue = subscriptions.reduce((sum, s) => sum + (s.amount || 0), 0) || 48900;
+  const totalRevenue = subscriptions.reduce((sum, s) => sum + (s.amount || 0), 0);
 
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
@@ -79,7 +79,7 @@ export default function AdminPaymentsPage() {
         <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs">
           <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Active VIP Subscriptions</span>
           <p className="text-3xl font-extrabold text-[#1B2559] mt-2">
-            {subscriptions.length || 18}
+            {subscriptions.length}
           </p>
           <p className="text-xs text-gray-500 font-medium mt-1">Paid members with direct contact unlock</p>
         </div>
@@ -87,7 +87,7 @@ export default function AdminPaymentsPage() {
         <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs">
           <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Average Order Value</span>
           <p className="text-3xl font-extrabold text-blue-600 mt-2">
-            ₹3,499
+            {subscriptions.length > 0 ? `₹${Math.round(totalRevenue / subscriptions.length).toLocaleString("en-IN")}` : "₹0"}
           </p>
           <p className="text-xs text-gray-500 font-medium mt-1">Across 3-Month &amp; 6-Month plans</p>
         </div>

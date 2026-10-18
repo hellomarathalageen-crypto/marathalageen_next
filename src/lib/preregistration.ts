@@ -71,7 +71,7 @@ export function normalizePhoneNumber(phone?: string | null): string {
 }
 
 function readDataFile(): PreRegistrationData[] {
-  if (memoryCache && memoryCache.length > 0) {
+  if (memoryCache !== null && Array.isArray(memoryCache)) {
     return memoryCache;
   }
 
@@ -79,13 +79,12 @@ function readDataFile(): PreRegistrationData[] {
   const bundledSeedPath = path.join(process.cwd(), "data", "preregistrations.json");
 
   try {
-    // 1. If writable path exists and has records, use it
     if (fs.existsSync(writablePath)) {
       const content = fs.readFileSync(writablePath, "utf8");
       if (content.trim()) {
         try {
           const parsed = JSON.parse(content) as PreRegistrationData[];
-          if (Array.isArray(parsed) && parsed.length > 0) {
+          if (Array.isArray(parsed)) {
             memoryCache = parsed;
             return parsed;
           }
@@ -95,21 +94,16 @@ function readDataFile(): PreRegistrationData[] {
       }
     }
 
-    // 2. Fallback to bundled repository seed file (crucial for Vercel/serverless)
     if (fs.existsSync(bundledSeedPath)) {
       const seedContent = fs.readFileSync(bundledSeedPath, "utf8");
       if (seedContent.trim()) {
-        const parsedSeed = JSON.parse(seedContent) as PreRegistrationData[];
-        if (Array.isArray(parsedSeed) && parsedSeed.length > 0) {
-          memoryCache = parsedSeed;
-          // Sync into writable location if possible
-          try {
-            fs.writeFileSync(writablePath, JSON.stringify(parsedSeed, null, 2), "utf8");
-          } catch {
-            // ignore if read-only
+        try {
+          const parsedSeed = JSON.parse(seedContent) as PreRegistrationData[];
+          if (Array.isArray(parsedSeed)) {
+            memoryCache = parsedSeed;
+            return parsedSeed;
           }
-          return parsedSeed;
-        }
+        } catch {}
       }
     }
 
@@ -117,7 +111,8 @@ function readDataFile(): PreRegistrationData[] {
     return [];
   } catch (err) {
     console.error("Error reading preregistrations file:", err);
-    return memoryCache || [];
+    memoryCache = [];
+    return [];
   }
 }
 
