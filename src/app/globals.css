@@ -167,6 +167,9 @@
   html, body {
     background: #FFFFFF !important;
     color: #121A3D !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -174,5 +177,13 @@
   /* Force hide any scrollbars or fixed sticky artifacts */
   ::-webkit-scrollbar {
     display: none !important;
+  }
+
+  /* Ensure biodata canvas fits strictly on 1 page without extra page breaks */
+  #biodata-canvas {
+    max-height: 100% !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    box-shadow: none !important;
   }
 }

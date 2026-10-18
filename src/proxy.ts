@@ -57,7 +57,6 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    "/biodata/:path*",
     "/matches/:path*",
     "/shortlist/:path*",
     "/inbox/:path*",

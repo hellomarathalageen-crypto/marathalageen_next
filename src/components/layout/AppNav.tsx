@@ -44,7 +44,7 @@ export default function AppNav() {
   const userName = session?.user?.name ? session.user.name.split(" ")[0] : null;
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs print:static print:border-none print:shadow-none print:bg-transparent print:h-auto print:py-2">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs print:hidden">
       <div className="container mx-auto max-w-7xl px-4 md:px-8 h-18 sm:h-20 flex items-center justify-between print:h-auto print:justify-center print:px-0">
         
         {/* Logo from landing page */}

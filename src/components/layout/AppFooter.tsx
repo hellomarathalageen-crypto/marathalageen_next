@@ -30,7 +30,7 @@ export function AppFooter() {
   }
 
   return (
-    <footer className="bg-gradient-to-b from-[#1E2756] via-[#161D42] to-[#0E132D] text-white pt-16 pb-12 border-t-4 border-[#DB1866] relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-[#1E2756] via-[#161D42] to-[#0E132D] text-white pt-16 pb-12 border-t-4 border-[#DB1866] relative overflow-hidden print:hidden">
       {/* Soft Ambient Glows */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#DB1866]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
