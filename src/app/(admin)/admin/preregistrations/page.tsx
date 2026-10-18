@@ -94,7 +94,7 @@ export default function AdminPreRegistrationsPage() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-300">
+    <div className="space-y-8 pb-16 sm:pb-24 animate-in fade-in duration-300">
       
       {/* ── Page Header ── */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-xs">
@@ -295,7 +295,7 @@ export default function AdminPreRegistrationsPage() {
             <p className="text-xs font-bold">Loading candidate registry...</p>
           </div>
         ) : records.length === 0 ? (
-          <div className="p-12 text-center">
+          <div className="py-16 px-6 text-center">
             <div className="w-14 h-14 rounded-2xl bg-pink-50 text-[#DB1866] flex items-center justify-center mx-auto mb-3">
               <Users className="w-7 h-7" />
             </div>
@@ -442,8 +442,48 @@ export default function AdminPreRegistrationsPage() {
                 })}
               </tbody>
             </table>
+            
+            {/* Table Bottom Bar */}
+            <div className="p-4 sm:p-5 bg-gray-50/80 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500 font-medium">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Showing <strong>{records.length}</strong> verified candidate profiles • Real-time live synchronization</span>
+              </div>
+              <button
+                onClick={handleExportCsv}
+                className="inline-flex items-center gap-1.5 text-[#DB1866] hover:text-[#B01351] font-bold cursor-pointer transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Export entire list to Excel</span>
+              </button>
+            </div>
           </div>
         )}
+      </div>
+
+      {/* ── Launch Registry Security & Sync Footer ── */}
+      <div className="bg-gradient-to-r from-blue-50/90 to-indigo-50/60 rounded-3xl p-5 sm:p-6 border border-blue-100/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-[#2A3773] text-white flex items-center justify-center font-bold shrink-0 shadow-sm">
+            <ShieldCheck className="w-6 h-6 text-amber-400" />
+          </div>
+          <div>
+            <p className="text-xs sm:text-sm font-extrabold text-[#2A3773]">
+              Karnataka Launch Registry • Real-Time Synchronization Active
+            </p>
+            <p className="text-[11px] sm:text-xs text-gray-500 mt-0.5">
+              Entries are automatically validated, deduplicated, and backed up across database storage and admin email notifications.
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto">
+          <button
+            onClick={fetchRecords}
+            className="flex-1 sm:flex-none text-xs font-bold text-[#2A3773] hover:text-[#DB1866] bg-white px-4 py-2.5 rounded-xl border border-gray-200 shadow-xs hover:shadow-sm transition-all text-center"
+          >
+            Check for New Leads
+          </button>
+        </div>
       </div>
 
       {/* ── Candidate Details Modal ── */}

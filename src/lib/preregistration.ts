@@ -75,20 +75,46 @@ function readDataFile(): PreRegistrationData[] {
     return memoryCache;
   }
 
-  const filePath = getDataFilePath();
+  const writablePath = getDataFilePath();
+  const bundledSeedPath = path.join(process.cwd(), "data", "preregistrations.json");
+
   try {
-    if (!fs.existsSync(filePath)) {
-      memoryCache = [];
-      return [];
+    // 1. If writable path exists and has records, use it
+    if (fs.existsSync(writablePath)) {
+      const content = fs.readFileSync(writablePath, "utf8");
+      if (content.trim()) {
+        try {
+          const parsed = JSON.parse(content) as PreRegistrationData[];
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            memoryCache = parsed;
+            return parsed;
+          }
+        } catch {
+          // invalid json, fallback
+        }
+      }
     }
-    const content = fs.readFileSync(filePath, "utf8");
-    if (!content.trim()) {
-      memoryCache = [];
-      return [];
+
+    // 2. Fallback to bundled repository seed file (crucial for Vercel/serverless)
+    if (fs.existsSync(bundledSeedPath)) {
+      const seedContent = fs.readFileSync(bundledSeedPath, "utf8");
+      if (seedContent.trim()) {
+        const parsedSeed = JSON.parse(seedContent) as PreRegistrationData[];
+        if (Array.isArray(parsedSeed) && parsedSeed.length > 0) {
+          memoryCache = parsedSeed;
+          // Sync into writable location if possible
+          try {
+            fs.writeFileSync(writablePath, JSON.stringify(parsedSeed, null, 2), "utf8");
+          } catch {
+            // ignore if read-only
+          }
+          return parsedSeed;
+        }
+      }
     }
-    const parsed = JSON.parse(content) as PreRegistrationData[];
-    memoryCache = parsed;
-    return parsed;
+
+    memoryCache = [];
+    return [];
   } catch (err) {
     console.error("Error reading preregistrations file:", err);
     return memoryCache || [];
