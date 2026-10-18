@@ -42,6 +42,25 @@ export const authOptions: NextAuthOptions = {
           };
         }
 
+        // 2. Demo candidate fallbacks for client testing & walkthroughs
+        if (cleanEmail === "demo@maratha.com" && (credentials.password === "Demo@123" || credentials.password === "demo123")) {
+          return {
+            id: "demo-groom",
+            name: "Rohit Patil",
+            email: "demo@maratha.com",
+            role: "USER"
+          };
+        }
+
+        if ((cleanEmail === "priya@maratha.com" || cleanEmail === "priya.test@maratha.com") && (credentials.password === "Demo@123" || credentials.password === "demo123" || credentials.password === "Priya@123")) {
+          return {
+            id: "demo-bride",
+            name: "Priya Deshmukh",
+            email: cleanEmail,
+            role: "USER"
+          };
+        }
+
 
 
         // 3. Database credentials check via Prisma
@@ -87,6 +106,8 @@ export const authOptions: NextAuthOptions = {
       // Master admin & demo users always have active profile
       if (
         token.id === "admin-master" || 
+        token.id === "demo-groom" || 
+        token.id === "demo-bride" || 
         (token as any).role === "ADMIN"
       ) {
         token.hasProfile = true;
