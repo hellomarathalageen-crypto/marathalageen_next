@@ -10,8 +10,6 @@ import {
   ShieldCheck, 
   CreditCard,
   Settings, 
-  Bell, 
-  Search,
   Menu, 
   X, 
   LogOut, 
@@ -52,7 +50,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (status === "loading") return;
 
     if (status === "unauthenticated" || !session?.user) {
-      router.replace(`/login?from=${encodeURIComponent(pathname)}`);
+      router.replace('/login?from=' + encodeURIComponent(pathname));
       return;
     }
 
@@ -64,7 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!mounted || status === "loading" || (session?.user as any)?.role !== "ADMIN") {
     return (
-      <div className="min-h-screen bg-[#121A3D] flex flex-col items-center justify-center text-white p-6 text-center font-sans">
+      <div className="h-screen w-screen bg-[#121A3D] flex flex-col items-center justify-center text-white p-6 text-center font-sans">
         <div className="w-16 h-16 rounded-3xl bg-white/10 flex items-center justify-center mb-4 text-[#DB1866] animate-pulse border border-white/20">
           <ShieldCheck className="w-8 h-8" />
         </div>
@@ -80,7 +78,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const adminEmail = session?.user?.email || "admin@marathalageen.com";
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex text-[#0F172A] font-sans">
+    <div className="h-screen w-screen overflow-hidden flex bg-[#F8FAFC] text-[#0F172A] font-sans">
       
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
@@ -90,28 +88,27 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         />
       )}
 
-      {/* ── Super Admin Sidebar ── */}
-      <aside className={`
-        fixed lg:sticky top-0 left-0 h-screen w-72 bg-[#121A3D] text-white z-50
-        transform transition-transform duration-300 ease-in-out flex flex-col shadow-2xl
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-      `}>
+      {/* ── Fixed Super Admin Sidebar ── */}
+      <aside className={
+        "fixed lg:static top-0 left-0 h-full w-64 lg:w-68 bg-[#121A3D] text-white z-50 shrink-0 transform transition-transform duration-300 ease-in-out flex flex-col shadow-2xl lg:shadow-none " +
+        (sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0")
+      }>
         
         {/* Logo Area */}
         <div className="h-16 flex items-center px-5 border-b border-white/10 shrink-0 justify-between">
           <Link href="/admin/dashboard" className="flex items-center gap-3">
-            <div className="bg-white px-3 py-1.5 rounded-xl shadow-md">
+            <div className="bg-white px-2.5 py-1 rounded-xl shadow-md">
               <img 
                 src="/logo.png" 
                 alt="Maratha Lageen Logo" 
-                className="h-9 w-auto object-contain" 
+                className="h-8 w-auto object-contain" 
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-[14px] font-bold leading-tight text-white flex items-center gap-1">
+              <span className="text-[13px] font-bold leading-tight text-white flex items-center gap-1">
                 <Crown className="w-3 h-3 text-amber-400 fill-amber-400" /> Admin Suite
               </span>
-              <span className="text-[10px] text-pink-300 tracking-widest uppercase font-bold">Control Center</span>
+              <span className="text-[9px] text-pink-300 tracking-widest uppercase font-bold">Control Center</span>
             </div>
           </Link>
           <button className="lg:hidden text-white/70 hover:text-white" onClick={() => setSidebarOpen(false)}>
@@ -120,8 +117,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-1 pb-6">
-          <div className="text-[11px] font-bold text-white/40 uppercase tracking-widest mb-3 px-3">
+        <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-0.5">
+          <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5 px-3">
             Core Modules
           </div>
           {sidebarLinks.map((link) => {
@@ -131,13 +128,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 key={link.href}
                 href={link.href}
                 onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2 rounded-xl font-bold text-xs transition-all group relative overflow-hidden ${
-                  isActive 
-                    ? 'text-white bg-[#DB1866] shadow-lg shadow-[#DB1866]/30' 
-                    : 'text-blue-200 hover:text-white hover:bg-white/10'
-                }`}
+                className={
+                  "flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs transition-all group " +
+                  (isActive 
+                    ? "text-white bg-[#DB1866] shadow-md shadow-[#DB1866]/30 font-bold" 
+                    : "text-blue-200 hover:text-white hover:bg-white/10 font-semibold")
+                }
               >
-                <link.icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-blue-300 group-hover:text-white'}`} />
+                <link.icon className={"w-4 h-4 shrink-0 " + (isActive ? "text-white" : "text-blue-300 group-hover:text-white")} />
                 <span className="truncate">{link.label}</span>
               </Link>
             );
@@ -148,24 +146,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
           <Link
             href="/home"
-            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-blue-200 hover:text-white hover:bg-white/10 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl font-medium text-xs text-blue-200 hover:text-white hover:bg-white/10 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 text-blue-300" />
+            <ArrowLeft className="w-3.5 h-3.5 text-blue-300" />
             <span>Return to Web App</span>
           </Link>
           <Link
             href="/dashboard"
-            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-blue-200 hover:text-white hover:bg-white/10 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl font-medium text-xs text-blue-200 hover:text-white hover:bg-white/10 transition-colors"
           >
-            <ExternalLink className="w-4 h-4 text-blue-300" />
+            <ExternalLink className="w-3.5 h-3.5 text-blue-300" />
             <span>Member Dashboard</span>
           </Link>
         </nav>
 
-        {/* Admin Profile & Logout */}
-        <div className="p-3 shrink-0 border-t border-white/10 space-y-2">
-          <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5 border border-white/5">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#DB1866] to-pink-400 flex items-center justify-center font-bold text-white text-xs shadow-inner">
+        {/* Admin Profile & Logout (Fixed at Bottom of Sidebar) */}
+        <div className="p-3 shrink-0 border-t border-white/10 space-y-1.5 bg-[#0E1533]">
+          <div className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/5">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#DB1866] to-pink-400 flex items-center justify-center font-bold text-white text-xs shadow-inner shrink-0">
               SA
             </div>
             <div className="flex-1 min-w-0">
@@ -176,18 +174,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="w-full flex items-center justify-center gap-2 py-2 rounded-xl bg-white/10 hover:bg-red-500/20 text-blue-200 hover:text-red-400 text-xs font-bold transition-colors"
+            className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/20 text-blue-200 hover:text-red-400 text-xs font-semibold transition-colors"
           >
-            <LogOut className="w-3.5 h-3.5" /> Logout of Admin
+            <LogOut className="w-3 h-3" /> Logout of Admin
           </button>
         </div>
       </aside>
 
       {/* ── Main Admin Content Surface ── */}
-      <main className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col h-full min-w-0 overflow-hidden">
         
-        {/* Top Header */}
-        <header className="h-18 bg-white/90 backdrop-blur-xl border-b border-gray-200 sticky top-0 z-30 flex items-center justify-between px-4 lg:px-8 shadow-xs">
+        {/* Top Header (Stays Fixed at Top) */}
+        <header className="h-14 sm:h-16 bg-white/95 backdrop-blur-xl border-b border-gray-200 shrink-0 flex items-center justify-between px-4 lg:px-8 shadow-2xs z-30">
           <div className="flex items-center gap-3">
             <button 
               className="lg:hidden p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
@@ -198,12 +196,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </button>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-bold text-gray-600">Production Node: Connected</span>
+              <span className="text-xs font-bold text-gray-700">Production Node: Connected</span>
             </div>
           </div>
           
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-2 bg-[#FFF1F5] text-[#DB1866] text-xs font-bold px-3 py-1.5 rounded-full border border-[#FADADF]">
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-1.5 bg-[#FFF1F5] text-[#DB1866] text-xs font-bold px-3 py-1.5 rounded-full border border-[#FADADF]">
               <ShieldCheck className="w-3.5 h-3.5" /> Super Admin Authenticated
             </div>
             <Link
@@ -215,11 +213,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </header>
 
-        {/* Child Pages */}
-        <div className="flex-1 p-4 sm:p-6 lg:p-8 pb-8 sm:pb-10 overflow-x-hidden">
+        {/* Scrollable Content Container (Smooth isolated scroll) */}
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-7">
           {children}
-        </div>
-      </main>
+        </main>
+      </div>
 
     </div>
   );

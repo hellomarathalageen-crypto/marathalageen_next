@@ -23,7 +23,8 @@ import {
   Heart,
   ChevronDown,
   X,
-  ExternalLink
+  ExternalLink,
+  Layers
 } from "lucide-react";
 
 export default function AdminPreRegistrationsPage() {
@@ -52,7 +53,7 @@ export default function AdminPreRegistrationsPage() {
       if (districtFilter !== "All") params.set("district", districtFilter);
       if (casteFilter !== "All") params.set("caste", casteFilter);
 
-      const res = await fetch(`/api/admin/preregistrations?${params.toString()}`);
+      const res = await fetch('/api/admin/preregistrations?' + params.toString());
       if (res.ok) {
         const json = await res.json();
         setRecords(json.records || []);
@@ -83,356 +84,335 @@ export default function AdminPreRegistrationsPage() {
     if (districtFilter !== "All") params.set("district", districtFilter);
     if (casteFilter !== "All") params.set("caste", casteFilter);
 
-    window.open(`/api/admin/preregistrations?${params.toString()}`, "_blank");
+    window.open('/api/admin/preregistrations?' + params.toString(), "_blank");
   };
 
   const getWhatsAppLink = (phone?: string, name?: string) => {
     if (!phone) return "#";
     const clean = phone.replace(/\D/g, "");
-    const text = encodeURIComponent(`Namaskara ${name || ""} ji, Greetings from Maratha Matrimony (Maratha Lageen). Regarding your pre-registration profile on our Karnataka platform, our relationship team is here to assist you.`);
-    return `https://wa.me/91${clean}?text=${text}`;
+    const text = encodeURIComponent('Namaskara ' + (name || "") + ' ji, Greetings from Maratha Matrimony (Maratha Lageen). Regarding your pre-registration profile on our Karnataka platform, our relationship team is here to assist you.');
+    return 'https://wa.me/91' + clean + '?text=' + text;
   };
 
   return (
-    <div className="space-y-6 pb-6 animate-in fade-in duration-300">
+    <div className="space-y-4 animate-in fade-in duration-300">
       
-      {/* ── Page Header ── */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-xs">
+      {/* ── 1. Compact Executive Top Header ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white px-5 py-4 rounded-2xl border border-gray-200/80 shadow-2xs">
         <div>
-          <div className="inline-flex items-center gap-2 bg-[#FFF1F5] text-[#DB1866] text-xs font-bold px-3 py-1.5 rounded-full mb-2 border border-[#FADADF]">
-            <Crown className="w-3.5 h-3.5" />
-            <span>Vijayadashami Karnataka Launch • Live Pre-Registration Registry</span>
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-black text-[#2A3773] tracking-tight">
+              Pre-Registration Leads
+            </h1>
+            <span className="bg-[#FFF1F5] text-[#DB1866] border border-[#FADADF] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+              <Crown className="w-3 h-3 text-[#DB1866]" /> Launch Registry
+            </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#2A3773] tracking-tight">
-            Pre-Registration Leads Management
-          </h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1 max-w-2xl">
-            Live database of verified Maratha families registered for Karnataka launch. Access contact details, Kundali, preferences, and download Excel reports.
+          <p className="text-xs text-gray-500 mt-0.5">
+            Verified Karnataka Maratha Samaj pre-registered families & biodatas.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 shrink-0">
           <button
             onClick={fetchRecords}
             disabled={refreshing}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 text-xs font-bold transition-all disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 text-xs font-bold transition-all disabled:opacity-50 cursor-pointer shadow-2xs"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin text-[#DB1866]" : ""}`} />
+            <RefreshCw className={"w-3.5 h-3.5 " + (refreshing ? "animate-spin text-[#DB1866]" : "")} />
             <span>Refresh</span>
           </button>
 
           <button
             onClick={handleExportCsv}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all hover:scale-102 cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white text-xs font-bold shadow-sm shadow-emerald-600/25 transition-all hover:scale-[1.02] cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>Download Excel / CSV</span>
+            <span>Download Excel</span>
           </button>
         </div>
       </div>
 
-      {/* ── Metric Cards Grid ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      {/* ── 2. Sleek Unified Executive KPI Strip ── */}
+      <div className="bg-white rounded-2xl border border-gray-200/80 shadow-2xs grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-gray-100 overflow-hidden">
         
-        {/* Total Leads */}
-        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xs relative overflow-hidden">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Pre-Registrations</span>
-            <div className="w-10 h-10 rounded-2xl bg-pink-50 text-[#DB1866] flex items-center justify-center font-bold">
-              <Users className="w-5 h-5" />
-            </div>
+        {/* KPI 1: Total Leads */}
+        <div className="p-4 sm:p-5 flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-pink-50 text-[#DB1866] flex items-center justify-center font-bold shrink-0">
+            <Users className="w-5 h-5" />
           </div>
-          <div className="text-3xl font-black text-[#2A3773]">{stats.total}</div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold mt-2">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>100% Free VIP Reserved</span>
-          </div>
-        </div>
-
-        {/* Today's Count */}
-        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xs relative overflow-hidden">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Registered Today</span>
-            <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-              <Clock className="w-5 h-5" />
-            </div>
-          </div>
-          <div className="text-3xl font-black text-[#2A3773]">{stats.todayCount}</div>
-          <div className="text-xs text-gray-500 mt-2 font-medium">New families registered in last 24h</div>
-        </div>
-
-        {/* Brides vs Grooms */}
-        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xs relative overflow-hidden">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Gender Demographics</span>
-            <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-              <Heart className="w-5 h-5" />
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div>
-              <p className="text-2xl font-black text-[#2A3773]">{stats.femaleCount}</p>
-              <p className="text-[11px] font-bold text-pink-500 uppercase">Brides</p>
-            </div>
-            <div className="h-8 w-px bg-gray-200" />
-            <div>
-              <p className="text-2xl font-black text-[#2A3773]">{stats.maleCount}</p>
-              <p className="text-[11px] font-bold text-blue-600 uppercase">Grooms</p>
+          <div>
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Total Leads</span>
+            <div className="flex items-baseline gap-2 mt-0.5">
+              <span className="text-2xl font-black text-[#2A3773]">{stats.total}</span>
+              <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded">100% Free VIP</span>
             </div>
           </div>
         </div>
 
-        {/* Top Districts */}
-        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xs relative overflow-hidden">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Top Districts</span>
-            <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-              <MapPin className="w-5 h-5" />
+        {/* KPI 2: Today Count */}
+        <div className="p-4 sm:p-5 flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold shrink-0">
+            <Clock className="w-5 h-5" />
+          </div>
+          <div>
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Registered Today</span>
+            <div className="flex items-baseline gap-2 mt-0.5">
+              <span className="text-2xl font-black text-[#2A3773]">{stats.todayCount}</span>
+              <span className="text-[10px] text-gray-500 font-medium">New in 24h</span>
             </div>
           </div>
-          <div className="flex flex-wrap gap-1.5 mt-2">
-            {stats.topDistricts?.length > 0 ? (
-              stats.topDistricts.map((d: any) => (
-                <span key={d.name} className="bg-gray-100 text-[#2A3773] text-[11px] font-bold px-2 py-0.5 rounded-md">
-                  {d.name} ({d.count})
-                </span>
-              ))
-            ) : (
-              <span className="text-xs text-gray-400">Belagavi, Bengaluru, Hubballi</span>
-            )}
+        </div>
+
+        {/* KPI 3: Demographics */}
+        <div className="p-4 sm:p-5 flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0">
+            <Heart className="w-5 h-5" />
+          </div>
+          <div>
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Demographics</span>
+            <div className="flex items-center gap-2 mt-1 text-xs font-bold">
+              <span className="text-pink-600">{stats.femaleCount} Brides</span>
+              <span className="text-gray-300">•</span>
+              <span className="text-blue-600">{stats.maleCount} Grooms</span>
+            </div>
+          </div>
+        </div>
+
+        {/* KPI 4: Top Districts */}
+        <div className="p-4 sm:p-5 flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold shrink-0">
+            <MapPin className="w-5 h-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Top Districts</span>
+            <div className="flex flex-wrap gap-1 mt-1">
+              {stats.topDistricts?.length > 0 ? (
+                stats.topDistricts.slice(0, 3).map((d: any) => (
+                  <span key={d.name} className="bg-gray-100 text-[#2A3773] text-[10px] font-bold px-1.5 py-0.2 rounded truncate">
+                    {d.name} ({d.count})
+                  </span>
+                ))
+              ) : (
+                <span className="text-xs text-gray-400 font-medium truncate">Belagavi, Bengaluru</span>
+              )}
+            </div>
           </div>
         </div>
 
       </div>
 
-      {/* ── Search & Filter Bar ── */}
-      <div className="bg-white p-4 sm:p-6 rounded-3xl border border-gray-100 shadow-xs space-y-4">
-        <form onSubmit={handleSearchSubmit} className="flex flex-col md:flex-row items-center gap-3">
-          <div className="relative flex-1 w-full">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+      {/* ── 3. Table Card with Integrated Toolbar ── */}
+      <div className="bg-white rounded-2xl border border-gray-200/80 shadow-2xs overflow-hidden">
+        
+        {/* Integrated Filter Toolbar */}
+        <div className="p-4 border-b border-gray-100 bg-gray-50/50 flex flex-col md:flex-row items-center justify-between gap-3">
+          
+          {/* Search Box */}
+          <form onSubmit={handleSearchSubmit} className="relative w-full md:w-80">
+            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by candidate name, mobile, VIP pass ID, or district..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:border-[#DB1866] outline-none text-xs sm:text-sm font-medium transition-all"
+              placeholder="Search candidate, mobile, VIP pass..."
+              className="w-full pl-9 pr-3 py-2 rounded-xl border border-gray-200 bg-white focus:border-[#DB1866] focus:ring-1 focus:ring-[#DB1866]/20 outline-none text-xs font-medium transition-all"
             />
-          </div>
+          </form>
 
-          <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
-            {/* Gender Select */}
+          {/* Filter Dropdowns */}
+          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
             <select
               value={genderFilter}
               onChange={(e) => setGenderFilter(e.target.value)}
-              className="px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50/50 text-xs font-bold text-[#2A3773] outline-none"
+              className="px-2.5 py-1.5 rounded-xl border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 cursor-pointer"
             >
               <option value="All">All Genders</option>
-              <option value="Female">Brides (Female)</option>
-              <option value="Male">Grooms (Male)</option>
+              <option value="Female">Brides</option>
+              <option value="Male">Grooms</option>
             </select>
 
-            {/* District Select */}
             <select
               value={districtFilter}
               onChange={(e) => setDistrictFilter(e.target.value)}
-              className="px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50/50 text-xs font-bold text-[#2A3773] outline-none"
+              className="px-2.5 py-1.5 rounded-xl border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 cursor-pointer max-w-[140px] truncate"
             >
               <option value="All">All Districts</option>
               <option value="Belagavi">Belagavi</option>
               <option value="Bengaluru Urban">Bengaluru</option>
               <option value="Dharwad">Dharwad</option>
               <option value="Hubballi">Hubballi</option>
-              <option value="Uttara Kannada">Uttara Kannada (Karwar)</option>
-              <option value="Vijayapura">Vijayapura (Bijapur)</option>
+              <option value="Uttara Kannada">Uttara Kannada</option>
+              <option value="Vijayapura">Vijayapura</option>
               <option value="Bagalkote">Bagalkote</option>
               <option value="Kalaburagi">Kalaburagi</option>
-              <option value="Shivamogga">Shivamogga</option>
+              <option value="Ballari">Ballari</option>
             </select>
 
-            {/* Caste Select */}
             <select
               value={casteFilter}
               onChange={(e) => setCasteFilter(e.target.value)}
-              className="px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50/50 text-xs font-bold text-[#2A3773] outline-none"
+              className="px-2.5 py-1.5 rounded-xl border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 cursor-pointer max-w-[150px] truncate"
             >
-              <option value="All">All Maratha Sub-Castes</option>
+              <option value="All">All Sub-Castes</option>
               <option value="Kshatriya Maratha">Kshatriya Maratha</option>
               <option value="Maratha">Maratha</option>
               <option value="Arya Maratha">Arya Maratha</option>
-              <option value="Maratha (All / Other)">Maratha (All / Other)</option>
+              <option value="Maratha (All / Other)">Other Maratha</option>
             </select>
 
-            <button
-              type="submit"
-              className="px-4 py-2.5 rounded-xl bg-[#2A3773] hover:bg-[#1B2554] text-white text-xs font-bold transition-all shadow-sm cursor-pointer"
-            >
-              Apply Filter
-            </button>
+            <div className="bg-[#FFF1F5] text-[#DB1866] border border-[#FADADF] text-xs font-bold px-2.5 py-1.5 rounded-xl shrink-0">
+              {records.length} Profiles
+            </div>
           </div>
-        </form>
-      </div>
-
-      {/* ── Data Table ── */}
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-xs overflow-hidden">
-        <div className="p-4 sm:p-6 border-b border-gray-100 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <h3 className="font-extrabold text-[#2A3773] text-sm sm:text-base">
-              Candidate Registry
-            </h3>
-            <span className="bg-[#FFF1F5] text-[#DB1866] text-xs font-bold px-2.5 py-0.5 rounded-full">
-              {records.length} Records
-            </span>
-          </div>
-
-          <span className="text-xs text-gray-500 font-medium hidden sm:inline">
-            Click any candidate row to view full biodata & astrological details
-          </span>
         </div>
 
+        {/* Data Table */}
         {loading ? (
-          <div className="p-12 text-center text-gray-400">
+          <div className="py-16 text-center text-gray-400">
             <RefreshCw className="w-8 h-8 animate-spin mx-auto text-[#DB1866] mb-3" />
-            <p className="text-xs font-bold">Loading candidate registry...</p>
+            <p className="text-xs font-bold text-gray-600">Loading verified candidate leads...</p>
           </div>
         ) : records.length === 0 ? (
           <div className="py-16 px-6 text-center">
             <div className="w-14 h-14 rounded-2xl bg-pink-50 text-[#DB1866] flex items-center justify-center mx-auto mb-3">
               <Users className="w-7 h-7" />
             </div>
-            <h4 className="text-base font-bold text-[#2A3773]">No Pre-Registrations Found</h4>
+            <h4 className="text-base font-bold text-[#2A3773]">No Candidate Leads Found</h4>
             <p className="text-xs text-gray-500 mt-1 max-w-sm mx-auto">
               {search || genderFilter !== "All" || districtFilter !== "All"
-                ? "No candidates matched your search criteria. Try resetting the filters."
+                ? "No candidates matched your filter criteria. Try resetting the filters."
                 : "New pre-registration submissions will appear here live in real-time."}
             </p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-gray-50/80 text-gray-500 font-bold uppercase text-[10px] tracking-wider border-b border-gray-100">
+              <thead className="bg-gray-50/90 text-gray-500 font-bold uppercase text-[10px] tracking-wider border-b border-gray-100">
                 <tr>
-                  <th className="py-3.5 px-4">VIP Pass ID</th>
-                  <th className="py-3.5 px-4">Candidate & Family</th>
-                  <th className="py-3.5 px-4">Gender / Age</th>
-                  <th className="py-3.5 px-4">Sub-Caste</th>
-                  <th className="py-3.5 px-4">District</th>
-                  <th className="py-3.5 px-4">Contact Channels</th>
-                  <th className="py-3.5 px-4">Profession / Income</th>
-                  <th className="py-3.5 px-4 text-right">Actions</th>
+                  <th className="py-3 px-4">VIP Pass ID</th>
+                  <th className="py-3 px-4">Candidate & Family</th>
+                  <th className="py-3 px-4">Gender / Age</th>
+                  <th className="py-3 px-4">Sub-Caste & Kundali</th>
+                  <th className="py-3 px-4">District</th>
+                  <th className="py-3 px-4">Contact Channels</th>
+                  <th className="py-3 px-4">Profession / Income</th>
+                  <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {records.map((r) => {
-                  const displayName = `${r.fullName || "Candidate"} ${r.surname || ""}`.trim();
+                  const displayName = (r.fullName || "Candidate") + " " + (r.surname || "");
                   return (
                     <tr 
                       key={r.priorityPass || r.mobile} 
-                      className="hover:bg-pink-50/30 transition-colors cursor-pointer group"
+                      className="hover:bg-pink-50/20 transition-colors cursor-pointer group"
                       onClick={() => setSelectedCandidate(r)}
                     >
-                      {/* Pass ID */}
-                      <td className="py-4 px-4 font-mono font-bold text-[#DB1866]">
-                        <span className="bg-[#FFF1F5] border border-[#FADADF] px-2 py-1 rounded-md">
+                      {/* Pass ID (Guaranteed single line, never wraps!) */}
+                      <td className="py-3.5 px-4 whitespace-nowrap">
+                        <span className="font-mono font-bold text-xs bg-[#FFF1F5] border border-[#FADADF] text-[#DB1866] px-2.5 py-1 rounded-md inline-block">
                           {r.priorityPass || "ML-2026-VIP"}
                         </span>
-                        <div className="text-[10px] text-gray-400 font-normal mt-1">
+                        <div className="text-[10px] text-gray-400 font-normal mt-0.5">
                           {r.createdAt ? new Date(r.createdAt).toLocaleDateString("en-IN") : "Recent"}
                         </div>
                       </td>
 
-                      {/* Name & Photo */}
-                      <td className="py-4 px-4">
-                        <div className="flex items-center gap-3">
+                      {/* Name & Avatar */}
+                      <td className="py-3.5 px-4">
+                        <div className="flex items-center gap-2.5">
                           {r.photoUrl ? (
-                            <img src={r.photoUrl} alt={displayName} className="w-9 h-9 rounded-xl object-cover border border-gray-200" />
+                            <img src={r.photoUrl} alt={displayName} className="w-8 h-8 rounded-xl object-cover border border-gray-200 shrink-0" />
                           ) : (
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#DB1866] to-pink-400 text-white flex items-center justify-center font-bold text-xs">
+                            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#DB1866] to-pink-400 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs">
                               {displayName.charAt(0).toUpperCase()}
                             </div>
                           )}
-                          <div>
-                            <p className="font-bold text-[#2A3773] text-[13px] group-hover:text-[#DB1866] transition-colors">
+                          <div className="min-w-0">
+                            <p className="font-bold text-[#2A3773] text-[13px] group-hover:text-[#DB1866] transition-colors truncate">
                               {displayName}
                             </p>
-                            <p className="text-[10px] text-gray-500 font-medium">
-                              By {r.registeringFor || "Self"} {r.surname ? `(${r.surname})` : ""}
+                            <p className="text-[10px] text-gray-500 font-medium truncate">
+                              By {r.registeringFor || "Self"}
                             </p>
                           </div>
                         </div>
                       </td>
 
-                      {/* Gender / Age */}
-                      <td className="py-4 px-4">
-                        <span className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                      {/* Gender & Age */}
+                      <td className="py-3.5 px-4 whitespace-nowrap">
+                        <span className={"inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold " + (
                           r.gender?.toLowerCase() === "female" ? "bg-pink-100 text-pink-700" : "bg-blue-100 text-blue-700"
-                        }`}>
-                          {r.gender || "Not specified"}
+                        )}>
+                          {r.gender || "Candidate"}
                         </span>
-                        <div className="text-gray-600 font-medium mt-1">
-                          {r.age ? `${r.age} Yrs` : (r.dob || "N/A")}
+                        <div className="text-gray-700 font-semibold text-xs mt-0.5">
+                          {r.age ? r.age + " Yrs" : (r.dob || "N/A")}
                         </div>
                       </td>
 
-                      {/* Sub-Caste */}
-                      <td className="py-4 px-4">
-                        <span className="font-bold text-gray-800">{r.caste || "Kshatriya Maratha"}</span>
+                      {/* Sub-Caste & Kundali */}
+                      <td className="py-3.5 px-4">
+                        <span className="font-bold text-gray-800 text-xs block">{r.caste || "Kshatriya Maratha"}</span>
                         {r.rashi && (
-                          <div className="text-[10px] text-purple-700 font-medium">
-                            {r.rashi} • {r.nakshatra || ""}
+                          <div className="text-[10px] text-purple-700 font-medium truncate max-w-[160px] mt-0.5">
+                            {r.rashi} {r.nakshatra ? "• " + r.nakshatra : ""}
                           </div>
                         )}
                       </td>
 
                       {/* District */}
-                      <td className="py-4 px-4 font-bold text-[#2A3773]">
-                        📍 {r.district || "Karnataka"}
+                      <td className="py-3.5 px-4 whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1 font-bold text-[#2A3773] text-xs">
+                          <MapPin className="w-3.5 h-3.5 text-red-500 shrink-0" />
+                          {r.district || "Karnataka"}
+                        </span>
                       </td>
 
                       {/* Contact Channels */}
-                      <td className="py-4 px-4" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex items-center gap-2">
-                          <a
-                            href={`tel:+91${r.mobile}`}
-                            className="p-1.5 bg-gray-100 hover:bg-[#FFF1F5] hover:text-[#DB1866] rounded-lg text-gray-700 transition-colors"
-                            title={`Call +91 ${r.mobile}`}
-                          >
-                            <Phone className="w-3.5 h-3.5" />
-                          </a>
+                      <td className="py-3.5 px-4" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex items-center gap-1.5 whitespace-nowrap">
                           <a
                             href={getWhatsAppLink(r.whatsapp || r.mobile, displayName)}
                             target="_blank"
                             rel="noreferrer"
-                            className="p-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg transition-colors"
-                            title={`WhatsApp +91 ${r.whatsapp || r.mobile}`}
+                            className="p-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg transition-colors inline-flex items-center gap-1 font-bold text-[11px]"
+                            title="Chat on WhatsApp"
                           >
-                            <MessageCircle className="w-3.5 h-3.5" />
+                            <MessageCircle className="w-3.5 h-3.5 fill-emerald-600 text-emerald-600" />
+                            <span>{r.mobile}</span>
                           </a>
-                          <span className="font-mono text-xs font-bold text-gray-800">
-                            {r.mobile}
-                          </span>
+                          <a
+                            href={"tel:+91" + r.mobile}
+                            className="p-1.5 bg-gray-100 hover:bg-[#FFF1F5] hover:text-[#DB1866] rounded-lg text-gray-700 transition-colors"
+                            title={"Call +91 " + r.mobile}
+                          >
+                            <Phone className="w-3.5 h-3.5" />
+                          </a>
                         </div>
                         {r.email && (
-                          <div className="text-[10px] text-gray-500 truncate max-w-[140px] mt-0.5">
+                          <div className="text-[10px] text-gray-400 truncate max-w-[150px] mt-0.5">
                             {r.email}
                           </div>
                         )}
                       </td>
 
                       {/* Profession / Income */}
-                      <td className="py-4 px-4">
-                        <p className="font-bold text-gray-800 truncate max-w-[160px]">
+                      <td className="py-3.5 px-4">
+                        <p className="font-bold text-gray-800 truncate max-w-[180px]">
                           {r.profession || r.education || "N/A"}
                         </p>
-                        <p className="text-[10px] text-emerald-700 font-bold">
+                        <p className="text-[10px] text-emerald-700 font-bold mt-0.5">
                           {r.annualIncome || "Income Not Disclosed"}
                         </p>
                       </td>
 
-                      {/* Actions */}
-                      <td className="py-4 px-4 text-right" onClick={(e) => e.stopPropagation()}>
+                      {/* Action Button */}
+                      <td className="py-3.5 px-4 text-right whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                         <button
                           onClick={() => setSelectedCandidate(r)}
-                          className="px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-[#DB1866] hover:text-white text-[#2A3773] text-[11px] font-bold transition-all cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-[#DB1866] hover:text-white text-[#2A3773] text-[11px] font-bold transition-all cursor-pointer shadow-2xs"
                         >
                           View Biodata
                         </button>
@@ -442,12 +422,12 @@ export default function AdminPreRegistrationsPage() {
                 })}
               </tbody>
             </table>
-            
-            {/* Table Bottom Bar */}
-            <div className="p-4 sm:p-5 bg-gray-50/80 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500 font-medium">
+
+            {/* Clean Table Bottom Bar */}
+            <div className="px-5 py-3 bg-gray-50/80 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500 font-medium">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Showing <strong>{records.length}</strong> verified candidate profiles • Real-time live synchronization</span>
+                <span>Showing <strong>{records.length}</strong> verified pre-registration leads • Live sync</span>
               </div>
               <button
                 onClick={handleExportCsv}
@@ -461,8 +441,6 @@ export default function AdminPreRegistrationsPage() {
         )}
       </div>
 
-
-
       {/* ── Candidate Details Modal ── */}
       {selectedCandidate && (
         <div 
@@ -470,7 +448,7 @@ export default function AdminPreRegistrationsPage() {
           onClick={() => setSelectedCandidate(null)}
         >
           <div 
-            className="bg-white w-full max-w-2xl rounded-3xl p-6 sm:p-8 shadow-2xl relative my-8 animate-in zoom-in-95 duration-200 border border-gray-100"
+            className="bg-white w-full max-w-2xl rounded-3xl p-6 sm:p-7 shadow-2xl relative my-8 animate-in zoom-in-95 duration-200 border border-gray-100"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -485,30 +463,27 @@ export default function AdminPreRegistrationsPage() {
                   </h3>
                   <div className="flex items-center gap-2 mt-0.5">
                     <span className="text-xs font-mono font-bold text-[#DB1866] bg-[#FFF1F5] px-2 py-0.5 rounded">
-                      Pass ID: {selectedCandidate.priorityPass || "ML-2026-VIP"}
+                      VIP PASS: {selectedCandidate.priorityPass || "ML-2026-VIP"}
                     </span>
-                    <span className="text-xs text-gray-500 font-medium">
-                      Managed by {selectedCandidate.registeringFor || "Self"}
-                    </span>
+                    <span className="text-xs text-gray-400">Registered by {selectedCandidate.registeringFor || "Self"}</span>
                   </div>
                 </div>
               </div>
-
               <button 
                 onClick={() => setSelectedCandidate(null)}
-                className="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors"
+                className="p-2 rounded-xl text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Quick Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 py-4 border-b border-gray-100">
+            {/* Quick Contact Bar */}
+            <div className="py-3 flex flex-wrap items-center gap-3 border-b border-gray-100">
               <a
-                href={`tel:+91${selectedCandidate.mobile}`}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-xl font-bold text-xs hover:bg-blue-100 transition-colors"
+                href={"tel:+91" + selectedCandidate.mobile}
+                className="flex items-center gap-2 px-4 py-2 bg-pink-50 text-[#DB1866] rounded-xl font-bold text-xs hover:bg-pink-100 transition-colors"
               >
-                <Phone className="w-4 h-4" /> Call Candidate (+91 {selectedCandidate.mobile})
+                <Phone className="w-4 h-4" /> Call +91 {selectedCandidate.mobile}
               </a>
 
               <a
@@ -522,7 +497,7 @@ export default function AdminPreRegistrationsPage() {
 
               {selectedCandidate.email && (
                 <a
-                  href={`mailto:${selectedCandidate.email}`}
+                  href={"mailto:" + selectedCandidate.email}
                   className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-xl font-bold text-xs hover:bg-gray-200 transition-colors"
                 >
                   <Mail className="w-4 h-4" /> Send Email
@@ -539,7 +514,7 @@ export default function AdminPreRegistrationsPage() {
                 </p>
                 <p><span className="text-gray-500">Gender:</span> <strong>{selectedCandidate.gender}</strong></p>
                 <p><span className="text-gray-500">Sub-Caste:</span> <strong>{selectedCandidate.caste}</strong></p>
-                <p><span className="text-gray-500">Age / DOB:</span> <strong>{selectedCandidate.age ? `${selectedCandidate.age} Yrs` : ""} ({selectedCandidate.dob || "N/A"})</strong></p>
+                <p><span className="text-gray-500">Age / DOB:</span> <strong>{selectedCandidate.age ? selectedCandidate.age + " Yrs" : ""} ({selectedCandidate.dob || "N/A"})</strong></p>
                 <p><span className="text-gray-500">Height:</span> <strong>{selectedCandidate.height || "N/A"}</strong></p>
                 <p><span className="text-gray-500">Marital Status:</span> <strong>{selectedCandidate.maritalStatus || "Never Married"}</strong></p>
                 <p><span className="text-gray-500">District:</span> <strong>{selectedCandidate.district}, Karnataka</strong></p>
@@ -569,7 +544,7 @@ export default function AdminPreRegistrationsPage() {
                   <Heart className="w-4 h-4 text-[#DB1866]" /> Partner Expectations
                 </p>
                 <p><span className="text-gray-500">Sub-Caste Pref:</span> <strong>{selectedCandidate.prefSubCaste || "Any"}</strong></p>
-                <p><span className="text-gray-500">Age Range:</span> <strong>{selectedCandidate.prefAgeMin && selectedCandidate.prefAgeMax ? `${selectedCandidate.prefAgeMin} to ${selectedCandidate.prefAgeMax} Yrs` : "Any"}</strong></p>
+                <p><span className="text-gray-500">Age Range:</span> <strong>{selectedCandidate.prefAgeMin && selectedCandidate.prefAgeMax ? selectedCandidate.prefAgeMin + " to " + selectedCandidate.prefAgeMax + " Yrs" : "Any"}</strong></p>
                 <p><span className="text-gray-500">Education Pref:</span> <strong>{selectedCandidate.prefEducation || "Any"}</strong></p>
               </div>
 
