@@ -91,7 +91,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* ── World-Class Unified Admin Sidebar (Light Luxury Edition) ── */}
       <aside className={
-        "fixed lg:static top-0 left-0 h-full w-64 bg-white border-r border-gray-200/90 z-50 shrink-0 transform transition-transform duration-300 ease-in-out flex flex-col shadow-xl lg:shadow-none " +
+        "fixed lg:static top-0 left-0 h-full w-72 bg-white border-r border-gray-200/90 z-50 shrink-0 transform transition-transform duration-300 ease-in-out flex flex-col shadow-xl lg:shadow-none " +
         (sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0")
       }>
         
@@ -118,8 +118,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-0.5">
-          <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 px-3">
+        <nav className="flex-1 overflow-y-auto py-3.5 px-3.5 space-y-1.5">
+          <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 px-3.5">
             Core Modules
           </div>
           {sidebarLinks.map((link) => {
@@ -130,39 +130,44 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={link.href}
                 onClick={() => setSidebarOpen(false)}
                 className={
-                  "flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs transition-all group " +
+                  "group relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs transition-all " +
                   (isActive 
-                    ? "bg-[#FFF1F5] text-[#DB1866] font-extrabold border-r-3 border-[#DB1866] shadow-2xs" 
-                    : "text-gray-600 hover:text-[#1B2559] hover:bg-gray-50/80 font-semibold")
+                    ? "bg-[#FFF1F5] text-[#DB1866] font-bold shadow-2xs" 
+                    : "text-gray-600 hover:text-[#1B2559] hover:bg-gray-100/70 font-semibold")
                 }
               >
                 <link.icon className={"w-4 h-4 shrink-0 transition-transform group-hover:scale-105 " + (isActive ? "text-[#DB1866]" : "text-gray-400 group-hover:text-[#1B2559]")} />
-                <span className="truncate">{link.label}</span>
+                <span className="truncate flex-1 tracking-tight">{link.label}</span>
+                {isActive && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#DB1866] shrink-0" />
+                )}
               </Link>
             );
           })}
 
-          <div className="pt-3 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 px-3">
+          <div className="pt-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 px-3.5">
             Quick Navigation
           </div>
-          <Link
-            href="/home"
-            className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl font-medium text-xs text-gray-500 hover:text-[#1B2559] hover:bg-gray-50 transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5 text-gray-400" />
-            <span>Return to Web App</span>
-          </Link>
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl font-medium text-xs text-gray-500 hover:text-[#1B2559] hover:bg-gray-50 transition-colors"
-          >
-            <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
-            <span>Member Dashboard</span>
-          </Link>
+          <div className="space-y-1">
+            <Link
+              href="/home"
+              className="flex items-center gap-3 px-3.5 py-2 rounded-xl font-medium text-xs text-gray-500 hover:text-[#1B2559] hover:bg-gray-100/70 transition-colors"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 text-gray-400" />
+              <span>Return to Web App</span>
+            </Link>
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-3 px-3.5 py-2 rounded-xl font-medium text-xs text-gray-500 hover:text-[#1B2559] hover:bg-gray-100/70 transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+              <span>Member Dashboard</span>
+            </Link>
+          </div>
 
           {/* Launch Status Card (Fills gap seamlessly & gives purposeful context) */}
-          <div className="pt-3">
-            <div className="p-3 rounded-2xl bg-gradient-to-br from-[#FFF8FA] via-[#FFF1F5] to-pink-50/40 border border-[#FADADF]/80 shadow-2xs">
+          <div className="pt-4 pb-1">
+            <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#FFF8FA] via-[#FFF1F5] to-pink-50/40 border border-[#FADADF]/80 shadow-2xs">
               <div className="flex items-center gap-1.5 mb-1">
                 <Crown className="w-3.5 h-3.5 text-[#DB1866] fill-[#DB1866]" />
                 <span className="text-[11px] font-extrabold text-[#1B2559]">Vijayadashami Launch</span>
@@ -179,7 +184,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Admin Profile & Logout Bar */}
-        <div className="p-3 shrink-0 border-t border-gray-100 bg-gray-50/60">
+        <div className="p-3.5 shrink-0 border-t border-gray-100 bg-gray-50/70">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#DB1866] to-pink-400 flex items-center justify-center font-bold text-white text-xs shadow-inner shrink-0">
