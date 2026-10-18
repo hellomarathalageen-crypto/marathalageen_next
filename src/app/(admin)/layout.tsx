@@ -98,7 +98,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       `}>
         
         {/* Logo Area */}
-        <div className="h-20 flex items-center px-6 border-b border-white/10 shrink-0 justify-between">
+        <div className="h-16 flex items-center px-5 border-b border-white/10 shrink-0 justify-between">
           <Link href="/admin/dashboard" className="flex items-center gap-3">
             <div className="bg-white px-3 py-1.5 rounded-xl shadow-md">
               <img 
@@ -120,7 +120,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-1.5">
+        <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-1 pb-6">
           <div className="text-[11px] font-bold text-white/40 uppercase tracking-widest mb-3 px-3">
             Core Modules
           </div>
@@ -131,7 +131,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 key={link.href}
                 href={link.href}
                 onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 px-3.5 py-3 rounded-xl font-bold text-xs transition-all group relative overflow-hidden ${
+                className={`flex items-center gap-3 px-3 py-2 rounded-xl font-bold text-xs transition-all group relative overflow-hidden ${
                   isActive 
                     ? 'text-white bg-[#DB1866] shadow-lg shadow-[#DB1866]/30' 
                     : 'text-blue-200 hover:text-white hover:bg-white/10'
@@ -143,7 +143,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             );
           })}
 
-          <div className="pt-6 text-[11px] font-bold text-white/40 uppercase tracking-widest mb-3 px-3">
+          <div className="pt-3 text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5 px-3">
             Quick Navigation
           </div>
           <Link
@@ -163,7 +163,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Admin Profile & Logout */}
-        <div className="p-4 shrink-0 border-t border-white/10 space-y-2">
+        <div className="p-3 shrink-0 border-t border-white/10 space-y-2">
           <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5 border border-white/5">
             <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#DB1866] to-pink-400 flex items-center justify-center font-bold text-white text-xs shadow-inner">
               SA
@@ -216,7 +216,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </header>
 
         {/* Child Pages */}
-        <div className="flex-1 p-4 sm:p-6 lg:p-8 pb-20 sm:pb-28 lg:pb-36 overflow-x-hidden">
+        <div className="flex-1 p-4 sm:p-6 lg:p-8 pb-8 sm:pb-10 overflow-x-hidden">
           {children}
         </div>
       </main>
