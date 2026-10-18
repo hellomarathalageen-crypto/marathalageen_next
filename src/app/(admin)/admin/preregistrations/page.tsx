@@ -222,46 +222,55 @@ export default function AdminPreRegistrationsPage() {
 
           {/* Filter Dropdowns */}
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
-            <select
-              value={genderFilter}
-              onChange={(e) => setGenderFilter(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 cursor-pointer"
-            >
-              <option value="All">All Genders</option>
-              <option value="Female">Brides</option>
-              <option value="Male">Grooms</option>
-            </select>
+            <div className="relative inline-flex items-center">
+              <select
+                value={genderFilter}
+                onChange={(e) => setGenderFilter(e.target.value)}
+                className="appearance-none pl-3.5 pr-8 py-2 rounded-full border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 focus:border-[#DB1866] focus:ring-1 focus:ring-[#DB1866]/20 cursor-pointer transition-all shadow-xs"
+              >
+                <option value="All">All Genders</option>
+                <option value="Female">Brides</option>
+                <option value="Male">Grooms</option>
+              </select>
+              <ChevronDown className="w-3.5 h-3.5 text-gray-400 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
+            </div>
 
-            <select
-              value={districtFilter}
-              onChange={(e) => setDistrictFilter(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 cursor-pointer max-w-[140px] truncate"
-            >
-              <option value="All">All Districts</option>
-              <option value="Belagavi">Belagavi</option>
-              <option value="Bengaluru Urban">Bengaluru</option>
-              <option value="Dharwad">Dharwad</option>
-              <option value="Hubballi">Hubballi</option>
-              <option value="Uttara Kannada">Uttara Kannada</option>
-              <option value="Vijayapura">Vijayapura</option>
-              <option value="Bagalkote">Bagalkote</option>
-              <option value="Kalaburagi">Kalaburagi</option>
-              <option value="Ballari">Ballari</option>
-            </select>
+            <div className="relative inline-flex items-center">
+              <select
+                value={districtFilter}
+                onChange={(e) => setDistrictFilter(e.target.value)}
+                className="appearance-none pl-3.5 pr-8 py-2 rounded-full border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 focus:border-[#DB1866] focus:ring-1 focus:ring-[#DB1866]/20 cursor-pointer max-w-[145px] truncate transition-all shadow-xs"
+              >
+                <option value="All">All Districts</option>
+                <option value="Belagavi">Belagavi</option>
+                <option value="Bengaluru Urban">Bengaluru</option>
+                <option value="Dharwad">Dharwad</option>
+                <option value="Hubballi">Hubballi</option>
+                <option value="Uttara Kannada">Uttara Kannada</option>
+                <option value="Vijayapura">Vijayapura</option>
+                <option value="Bagalkote">Bagalkote</option>
+                <option value="Kalaburagi">Kalaburagi</option>
+                <option value="Ballari">Ballari</option>
+              </select>
+              <ChevronDown className="w-3.5 h-3.5 text-gray-400 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
+            </div>
 
-            <select
-              value={casteFilter}
-              onChange={(e) => setCasteFilter(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 cursor-pointer max-w-[150px] truncate"
-            >
-              <option value="All">All Sub-Castes</option>
-              <option value="Kshatriya Maratha">Kshatriya Maratha</option>
-              <option value="Maratha">Maratha</option>
-              <option value="Arya Maratha">Arya Maratha</option>
-              <option value="Maratha (All / Other)">Other Maratha</option>
-            </select>
+            <div className="relative inline-flex items-center">
+              <select
+                value={casteFilter}
+                onChange={(e) => setCasteFilter(e.target.value)}
+                className="appearance-none pl-3.5 pr-8 py-2 rounded-full border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 focus:border-[#DB1866] focus:ring-1 focus:ring-[#DB1866]/20 cursor-pointer max-w-[155px] truncate transition-all shadow-xs"
+              >
+                <option value="All">All Sub-Castes</option>
+                <option value="Kshatriya Maratha">Kshatriya Maratha</option>
+                <option value="Maratha">Maratha</option>
+                <option value="Arya Maratha">Arya Maratha</option>
+                <option value="Maratha (All / Other)">Other Maratha</option>
+              </select>
+              <ChevronDown className="w-3.5 h-3.5 text-gray-400 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
+            </div>
 
-            <div className="bg-[#FFF1F5] text-[#DB1866] border border-[#FADADF] text-xs font-bold px-2.5 py-1.5 rounded-xl shrink-0">
+            <div className="bg-[#FFF1F5] text-[#DB1866] border border-[#FADADF] text-xs font-bold px-3.5 py-2 rounded-full shrink-0 shadow-xs">
               {records.length} Profiles
             </div>
           </div>
