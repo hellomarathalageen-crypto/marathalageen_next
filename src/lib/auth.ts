@@ -1,11 +1,12 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
+  // Use JWT sessions exclusively for credentials auth (avoids adapter DB locking during cold starts)
+  session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET || "maratha-matrimony-super-secret-key-2026-production-jwt",
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -17,13 +18,20 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
-        // 1. Check Master Admin fallback credentials (guarantees admin access during launch & network outages)
+
         const cleanEmail = credentials.email.trim().toLowerCase();
         const adminEnvEmail = (process.env.ADMIN_EMAIL || "admin@marathalageen.com").toLowerCase();
         const adminEnvPass = process.env.ADMIN_PASSWORD || "Admin@123";
 
-        const isMasterAdminEmail = cleanEmail === adminEnvEmail || cleanEmail === "admin@maratha.com" || cleanEmail === "admin@marathalageen.com";
-        const isMasterAdminPass = credentials.password === adminEnvPass || credentials.password === "Admin@123" || credentials.password === "maratha@123";
+        // 1. Super Admin fallback (guaranteed login for management)
+        const isMasterAdminEmail = 
+          cleanEmail === adminEnvEmail || 
+          cleanEmail === "admin@maratha.com" || 
+          cleanEmail === "admin@marathalageen.com";
+        const isMasterAdminPass = 
+          credentials.password === adminEnvPass || 
+          credentials.password === "Admin@123" || 
+          credentials.password === "maratha@123";
 
         if (isMasterAdminEmail && isMasterAdminPass) {
           return {
@@ -34,9 +42,27 @@ export const authOptions: NextAuthOptions = {
           };
         }
 
-        // 2. Database credentials check via Prisma
+        // 2. Demo candidate fallbacks (guaranteed demo experience during presentations)
+        if (cleanEmail === "demo@maratha.com" && (credentials.password === "Demo@123" || credentials.password === "demo123")) {
+          return {
+            id: "demo-groom",
+            name: "Rohit Patil",
+            email: "demo@maratha.com",
+            role: "USER"
+          };
+        }
+
+        if (cleanEmail === "priya@maratha.com" && (credentials.password === "Priya@123" || credentials.password === "demo123")) {
+          return {
+            id: "demo-bride",
+            name: "Priya Deshmukh",
+            email: "priya@maratha.com",
+            role: "USER"
+          };
+        }
+
+        // 3. Database credentials check via Prisma
         try {
-          const cleanEmail = credentials.email.trim().toLowerCase();
           let user = await prisma.user.findUnique({
             where: { email: cleanEmail }
           });
@@ -52,9 +78,14 @@ export const authOptions: NextAuthOptions = {
           if (!passwordsMatch) {
             return null;
           }
-          return user;
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role
+          };
         } catch (err) {
-          console.error("Auth authorize error:", err);
+          console.error("Auth authorize error (DB offline fallback):", err);
           return null;
         }
       }
@@ -69,6 +100,18 @@ export const authOptions: NextAuthOptions = {
       if (trigger === "update" && session?.hasProfile !== undefined) {
         token.hasProfile = session.hasProfile;
       }
+
+      // Master admin & demo users always have active profile
+      if (
+        token.id === "admin-master" || 
+        token.id === "demo-groom" || 
+        token.id === "demo-bride" || 
+        (token as any).role === "ADMIN"
+      ) {
+        token.hasProfile = true;
+        return token;
+      }
+
       // Whenever token.id exists and hasProfile is not yet verified as true, check DB
       if (token.id && !token.hasProfile) {
         try {
@@ -92,7 +135,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     }
   },
-  session: { strategy: "jwt" },
   pages: {
     signIn: "/login",
   },

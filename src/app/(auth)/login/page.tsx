@@ -36,8 +36,18 @@ export default function LoginPage() {
         setLoading(false);
         setQuickLoggingIn(null);
       } else {
-        if (cleanEmail === "admin@marathalageen.com") {
-          window.location.href = "/admin/dashboard";
+        const urlParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+        const fromParam = urlParams?.get("from");
+
+        const isAdmin = 
+          cleanEmail.includes("admin") || 
+          cleanEmail === "admin@marathalageen.com" || 
+          cleanEmail === "admin@maratha.com";
+
+        if (fromParam && fromParam.startsWith("/")) {
+          window.location.href = fromParam;
+        } else if (isAdmin) {
+          window.location.href = "/admin/preregistrations";
         } else {
           window.location.href = "/dashboard";
         }
