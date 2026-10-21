@@ -5,9 +5,9 @@
 export const SUPPORT_CONFIG = {
   // Dedicated phone number for WhatsApp and Customer Support
   WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919844295369",
-  PHONE_NUMBER: "+91 88619 62026",
-  EMAIL: "hello@marathalageen.com",
-  SUPPORT_EMAIL: "hello@marathalageen.com",
+  PHONE_NUMBER: "+91 98442 95369",
+  EMAIL: "hello.marathalageen@gmail.com",
+  SUPPORT_EMAIL: "hello.marathalageen@gmail.com",
   OFFICE_LOCATIONS: "Bengaluru • Belagavi • Hubballi • Dharwad",
 };
 

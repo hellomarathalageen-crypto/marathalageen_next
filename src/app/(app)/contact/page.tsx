@@ -75,7 +75,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase">Email Inquiries</p>
-                  <p className="text-base font-bold text-[#2A3773]">support@marathamarry.com</p>
+                  <p className="text-base font-bold text-[#2A3773]">hello.marathalageen@gmail.com</p>
                 </div>
               </div>
             </div>

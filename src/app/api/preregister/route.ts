@@ -155,7 +155,7 @@ export async function POST(req: Request) {
     };
 
     // ── 3. DISPATCH INSTANT ALERT EMAIL TO ADMIN / CLIENT DESK ──
-    const adminAlertEmail = process.env.ADMIN_ALERT_EMAIL || "hello@marathalageen.com";
+    const adminAlertEmail = process.env.ADMIN_ALERT_EMAIL || "hello.marathalageen@gmail.com";
     try {
       await sendMatrimonyAlert({
         type: "ADMIN_NEW_LEAD",

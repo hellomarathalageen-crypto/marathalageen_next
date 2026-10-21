@@ -24,7 +24,7 @@ export default function RefundPolicyPage() {
 
           <h3 className="text-xl font-bold text-[#2A3773]">Refund Eligibility</h3>
           <p className="text-sm">
-            To be eligible for a refund, submit a request to <code>support@marathamarry.com</code> within 7 calendar days of your payment transaction.
+            To be eligible for a refund, submit a request to <code>hello.marathalageen@gmail.com</code> within 7 calendar days of your payment transaction.
           </p>
         </div>
       </div>

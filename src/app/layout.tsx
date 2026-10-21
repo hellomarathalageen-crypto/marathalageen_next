@@ -49,7 +49,7 @@ const structuredData = {
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+91-8861962026",
+        "telephone": "+91-9844295369",
         "contactType": "customer service",
         "areaServed": ["IN", "KA", "MH"],
         "availableLanguage": ["English", "Marathi", "Kannada", "Hindi"]

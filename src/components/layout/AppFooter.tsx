@@ -71,11 +71,11 @@ export function AppFooter() {
               <span>+91 98442 95369</span>
             </a>
             <a
-              href="mailto:hello@marathalageen.com"
+              href="mailto:hello.marathalageen@gmail.com"
               className="bg-[#DB1866] hover:bg-[#B81456] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-[#DB1866]/30 flex items-center gap-2 hover:scale-102"
             >
               <Mail className="w-3.5 h-3.5" />
-              <span>hello@marathalageen.com</span>
+              <span>hello.marathalageen@gmail.com</span>
             </a>
           </div>
         </div>

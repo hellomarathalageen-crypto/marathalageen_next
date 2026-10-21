@@ -262,10 +262,12 @@ export default function AdminPreRegistrationsPage() {
                 className="appearance-none pl-3.5 pr-8 py-2 rounded-full border border-gray-200 bg-white text-xs font-semibold text-[#2A3773] outline-none hover:border-gray-300 focus:border-[#DB1866] focus:ring-1 focus:ring-[#DB1866]/20 cursor-pointer max-w-[155px] truncate transition-all shadow-xs"
               >
                 <option value="All">All Sub-Castes</option>
-                <option value="Kshatriya Maratha">Kshatriya Maratha</option>
-                <option value="Maratha">Maratha</option>
-                <option value="Arya Maratha">Arya Maratha</option>
-                <option value="Maratha (All / Other)">Other Maratha</option>
+                <option value="Shivaji">Shivaji</option>
+                <option value="Bhavsar">Bhavsar</option>
+                <option value="Pattegar">Pattegar</option>
+                <option value="96 kuli">96 kuli</option>
+                <option value="Kshatriya">Kshatriya</option>
+                <option value="Maratha ( All / Others )">Maratha ( All / Others )</option>
               </select>
               <ChevronDown className="w-3.5 h-3.5 text-gray-400 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
             </div>

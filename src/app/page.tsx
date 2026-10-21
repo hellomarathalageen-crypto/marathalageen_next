@@ -45,7 +45,7 @@ export default function PreRegisterPage() {
     registeringFor: "Self",
     fullName: "",
     surname: "",
-    caste: "Kshatriya Maratha",
+    caste: "Shivaji",
     gender: "",
     mobile: "",
     whatsapp: "",
@@ -436,9 +436,11 @@ export default function PreRegisterPage() {
                     <Button onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#DB1866] hover:bg-[#B81456] text-white rounded-xl px-8 h-14 font-bold text-base shadow-lg shadow-[#DB1866]/30 hover:scale-105 transition-transform cursor-pointer">
                       {t.hero.claimVipCta}
                     </Button>
+                    {/* Video CTA temporarily hidden
                     <Button onClick={() => document.getElementById('heritage-video')?.scrollIntoView({ behavior: 'smooth' })} variant="ghost" className="text-[#2A3773] hover:text-[#DB1866] font-semibold h-14 px-5 rounded-xl border border-gray-200 hover:border-[#DB1866] transition-colors cursor-pointer">
                       <PlayCircle className="w-5 h-5 mr-2 text-[#DB1866]" /> {t.hero.watchVideoCta}
                     </Button>
+                    */}
                   </div>
 
                   {/* Desktop Trust Strip */}
@@ -505,7 +507,8 @@ export default function PreRegisterPage() {
         </section>
 
         
-        {/* ──────────── ITEM 5: HORIZONTAL MARATHA WEDDING & HERITAGE VIDEO SHOWCASE ──────────── */}
+        {/* ──────────── ITEM 5: HORIZONTAL MARATHA WEDDING & HERITAGE VIDEO SHOWCASE (TEMPORARILY INVISIBLE) ──────────── */}
+        {false && (
         <section className="py-14 sm:py-18 bg-gradient-to-b from-white via-[#FFF8FA] to-[#fdf5f8] border-b border-pink-100/60 w-full overflow-hidden" id="heritage-video">
           <div className="container mx-auto px-4 max-w-5xl text-center">
             
@@ -578,6 +581,7 @@ export default function PreRegisterPage() {
 
           </div>
         </section>
+        )}
 
         {/* ──────────── WHO CAN PRE-REGISTER? (CLIENT FEEDBACK 1) ──────────── */}
         
@@ -958,10 +962,12 @@ export default function PreRegisterPage() {
                                   className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
                                   required
                                 >
-                                  <option value="Kshatriya Maratha">Kshatriya Maratha (ಕ್ಷತ್ರಿಯ ಮರಾಠ)</option>
-                                  <option value="Maratha">Maratha (ಮರಾಠ)</option>
-                                  <option value="Arya Maratha">Arya Maratha (ಆರ್ಯ ಮರಾಠ)</option>
-                                  <option value="Maratha (All / Other)">Maratha (All / Other) (ಮರಾಠ - ಇತರ / ಎಲ್ಲಾ)</option>
+                                  <option value="Shivaji">Shivaji</option>
+                                  <option value="Bhavsar">Bhavsar</option>
+                                  <option value="Pattegar">Pattegar</option>
+                                  <option value="96 kuli">96 kuli</option>
+                                  <option value="Kshatriya">Kshatriya</option>
+                                  <option value="Maratha ( All / Others )">Maratha ( All / Others )</option>
                                 </select>
                               </div>
                               
@@ -1121,7 +1127,7 @@ export default function PreRegisterPage() {
                                     className="h-12 px-2 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-xs font-bold"
                                     required
                                   >
-                                    {['00','05','10','15','20','25','30','35','40','45','50','55'].map(m => (
+                                    {Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0')).map(m => (
                                       <option key={m} value={m}>{m} Min</option>
                                     ))}
                                   </select>
@@ -1378,11 +1384,13 @@ export default function PreRegisterPage() {
                                   onChange={handleChange} 
                                   className="w-full h-12 px-3 border border-gray-200 rounded-xl bg-gray-50 focus:border-[#DB1866] focus:bg-white outline-none text-sm font-medium"
                                 >
-                                  <option value="Any">Any Maratha (ಎಲ್ಲಾ ಮರಾಠ)</option>
-                                  <option value="Kshatriya Maratha">Kshatriya Maratha (ಕ್ಷತ್ರಿಯ ಮರಾಠ)</option>
-                                  <option value="Maratha">Maratha (ಮರಾಠ)</option>
-                                  <option value="Arya Maratha">Arya Maratha (ಆರ್ಯ ಮರಾಠ)</option>
-                                  <option value="Maratha (All / Other)">Maratha (All / Other) (ಮರಾಠ - ಇತರ / ಎಲ್ಲಾ)</option>
+                                  <option value="Any">Any Maratha Sub-Caste</option>
+                                  <option value="Shivaji">Shivaji</option>
+                                  <option value="Bhavsar">Bhavsar</option>
+                                  <option value="Pattegar">Pattegar</option>
+                                  <option value="96 kuli">96 kuli</option>
+                                  <option value="Kshatriya">Kshatriya</option>
+                                  <option value="Maratha ( All / Others )">Maratha ( All / Others )</option>
                                 </select>
                               </div>
 
@@ -1885,15 +1893,9 @@ export default function PreRegisterPage() {
                   <div className="flex flex-col sm:flex-row gap-2 pt-2">
                     <a 
                       href="tel:+919844295369" 
-                      className="flex-1 bg-white hover:bg-[#FFF1F5] border border-gray-200 hover:border-[#DB1866] text-[#2A3773] hover:text-[#DB1866] font-bold text-xs py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
+                      className="w-full bg-white hover:bg-[#FFF1F5] border border-gray-200 hover:border-[#DB1866] text-[#2A3773] hover:text-[#DB1866] font-bold text-xs py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
                     >
-                      <Phone className="w-3.5 h-3.5 text-[#DB1866]" /> {t.contactSection.phone1}
-                    </a>
-                    <a 
-                      href="tel:+918861962026" 
-                      className="flex-1 bg-white hover:bg-[#FFF1F5] border border-gray-200 hover:border-[#DB1866] text-[#2A3773] hover:text-[#DB1866] font-bold text-xs py-2.5 px-3 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5"
-                    >
-                      <Phone className="w-3.5 h-3.5 text-[#DB1866]" /> {t.contactSection.phone2}
+                      <Phone className="w-3.5 h-3.5 text-[#DB1866]" /> +91 98442 95369
                     </a>
                   </div>
                 </div>
