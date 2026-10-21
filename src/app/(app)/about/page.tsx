@@ -64,7 +64,7 @@ export default function AboutPage() {
               "At Maratha Lageen, our mission is simple - to bring Maratha families of Karnataka onto a trusted platform built on values, transparency and respect."
             </p>
             <p className="font-bold text-white text-base">— Rishabh Narayan, Founder</p>
-            <p className="text-xs text-blue-200">Maratha Matrimony Services</p>
+            <p className="text-xs text-blue-200">Maratha Lageen</p>
           </div>
         </div>
 

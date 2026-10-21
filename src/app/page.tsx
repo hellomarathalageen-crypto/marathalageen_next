@@ -1785,7 +1785,7 @@ export default function PreRegisterPage() {
                     <div>
                       <p className="text-xs font-bold text-pink-300 uppercase tracking-widest">{t.aboutSection.founderRole}</p>
                       <h4 className="text-lg font-bold font-sans text-white">{t.aboutSection.founderTitle}</h4>
-                      <p className="text-xs text-blue-200">Karnataka &amp; South India Maratha Samaj</p>
+                      <p className="text-xs text-blue-200">Maratha Lageen</p>
                     </div>
                   </div>
 
